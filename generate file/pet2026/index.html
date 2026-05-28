@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BI 中国宠物药竞品生态报告 2026</title>
+<style>
+  :root {
+    --bi-green: #00A651;
+    --bi-dark: #1a3a2a;
+    --bg: #0e1a14;
+    --card-bg: #1a2e22;
+    --text: #e0f0e8;
+    --text-muted: #8aaa98;
+    --border: #2a4a38;
+    --red: #e74c3c;
+    --yellow: #f39c12;
+    --green: #2ecc71;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 40px 20px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 50px 30px 40px;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, var(--bi-dark) 0%, #0d2e1d 100%);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--bi-green);
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+  }
+  .header .date {
+    margin-top: 12px;
+    display: inline-block;
+    background: rgba(0,166,81,0.15);
+    color: var(--bi-green);
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+
+  /* BI own products */
+  .section { margin-bottom: 40px; }
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bi-green);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 12px;
+    background: var(--bi-green);
+    color: #fff;
+  }
+
+  /* Product card */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .product-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .product-card .name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .product-card .en { font-size: 12px; color: var(--text-muted); }
+  .product-card .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .product-card .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.06);
+    color: var(--text-muted);
+  }
+  .tag.green { background: rgba(46,204,113,0.15); color: #2ecc71; }
+  .tag.blue { background: rgba(52,152,219,0.15); color: #3498db; }
+  .tag.purple { background: rgba(155,89,182,0.15); color: #9b59b6; }
+
+  /* Competitor company card */
+  .company-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 18px;
+  }
+  .company-card .company-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .company-card .company-name {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .company-card .threat {
+    font-size: 13px;
+    padding: 3px 12px;
+    border-radius: 14px;
+    font-weight: 600;
+  }
+  .threat.high { background: rgba(231,76,60,0.2); color: #e74c3c; }
+  .threat.med { background: rgba(243,156,18,0.2); color: #f39c12; }
+  .threat.low { background: rgba(46,204,113,0.2); color: #2ecc71; }
+
+  .company-card .desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .company-card .note {
+    font-size: 13px;
+    color: var(--yellow);
+    padding: 10px 14px;
+    background: rgba(243,156,18,0.08);
+    border-radius: 8px;
+    border-left: 3px solid var(--yellow);
+    margin-top: 10px;
+  }
+
+  /* Comparison table */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  .comp-table th, .comp-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .comp-table th {
+    background: var(--bi-dark);
+    color: var(--bi-green);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .comp-table tr:hover { background: rgba(255,255,255,0.02); }
+  .comp-table .bi-row { background: rgba(0,166,81,0.05); }
+
+  /* Threat matrix */
+  .matrix-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .matrix-table th, .matrix-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .matrix-table th {
+    background: var(--bi-dark);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .threat-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .threat-dot.red { background: #e74c3c; }
+  .threat-dot.yellow { background: #f39c12; }
+  .threat-dot.green { background: #2ecc71; }
+
+  .footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 30px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>🐾 BI 中国宠物药竞品生态报告</h1>
+  <div class="subtitle">Boehringer Ingelheim — Pet Health Competitive Intelligence</div>
+  <div class="date">📅 2026 年 5 月 28 日 · 数据截至 2026Q1</div>
+</div>
+
+<!-- BI Products -->
+<div class="section">
+  <div class="section-title">🔵 勃林格殷格翰 — 中国宠物药产品线 <span class="badge">BI</span></div>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="name">超可信 <span class="en">NexGard Spectra®</span></div>
+      <div class="meta">
+        <span class="tag green">内外同驱</span>
+        <span class="tag blue">口服咀嚼片</span>
+        <span class="tag purple">每月</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:6px;">阿福拉纳+米尔贝肟 · 犬用 · BI 驱虫旗舰产品</div>
+    </div>
+    <div class="product-card">
+      <div class="name">福味恩 <span class="en">FrontPro®</span></div>
+      <div class="meta">
+        <span class="tag">外驱</span>
+        <span class="tag blue">口服咀嚼片</span>
+        <span class="tag green">2025新上市</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:6px;">阿福拉纳 · 犬用 · 牛肉口味 · 亚宠展首发</div>
+    </div>
+    <div class="product-card">
+      <div class="name">尼可信 <span class="en">NexGard®</span></div>
+      <div class="meta">
+        <span class="tag">外驱</span>
+        <span class="tag blue">口服咀嚼片</span>
+        <span class="tag purple">每月</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:6px;">阿福拉纳 · 犬用 · 2025年新获批螨虫适应症</div>
+    </div>
+    <div class="product-card">
+      <div class="name">福来恩 <span class="en">Frontline®</span></div>
+      <div class="meta">
+        <span class="tag">外驱</span>
+        <span class="tag">滴剂</span>
+        <span class="tag purple">每月</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:6px;">非泼罗尼 · 经典外用 · 品牌知名度极高</div>
+    </div>
+    <div class="product-card">
+      <div class="name">博来恩 <span class="en">Broadline®</span></div>
+      <div class="meta">
+        <span class="tag green">内外同驱</span>
+        <span class="tag">滴剂</span>
+        <span class="tag">猫用</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:6px;">复方非泼罗尼+吡喹酮 · 猫专用 · 四维成分黄金组合</div>
+    </div>
+    <div class="product-card">
+      <div class="name">犬心保 <span class="en">Heartgard Plus®</span></div>
+      <div class="meta">
+        <span class="tag">内驱</span>
+        <span class="tag blue">口服咀嚼片</span>
+        <span class="tag purple">每月</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:6px;">伊维菌素+双羟萘酸噻嘧啶 · 预防心丝虫</div>
+    </div>
+    <div class="product-card">
+      <div class="name">勃欣定 <span class="en">Vetmedin®</span></div>
+      <div class="meta">
+        <span class="tag">心脏治疗</span>
+        <span class="tag">口服</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:6px;">匹莫苯丹 · 犬充血性心力衰竭</div>
+    </div>
+  </div>
+</div>
+
+<!-- Zoetis -->
+<div class="section">
+  <div class="section-title">🥇 硕腾 Zoetis <span style="font-size:13px;color:var(--text-muted);font-weight:400;">— 最大竞争对手</span> <span class="badge" style="background:#e74c3c;">🔴 正面全线竞争</span></div>
+  <div class="company-card">
+    <div class="company-header">
+      <div>
+        <div class="company-name">硕腾 Zoetis (NYSE: ZTS)</div>
+        <div style="font-size:13px;color:var(--text-muted);">2025 年营收 $94.67 亿 · 中国宠物驱虫份额 #2</div>
+      </div>
+      <span class="threat high">🔴 高威胁</span>
+    </div>
+    <div class="desc">硕腾是 BI 在中国驱虫市场最全面的对标者，产品线几乎覆盖 BI 每条驱虫管线。2026年1月复方沙罗拉纳（汪宠爱）中国获批，三合一内外同驱直接对标超可信。</div>
+    <table class="comp-table">
+      <tr><th>BI 产品</th><th>硕腾竞品</th><th>竞争关系</th></tr>
+      <tr class="bi-row"><td>超可信</td><td><strong>汪宠爱®</strong> Simparica Trio<br><span style="font-size:11px;color:var(--text-muted);">沙罗拉纳+莫昔克丁+噻嘧啶 · 三合一内外同驱</span></td><td><span style="color:#e74c3c;">⚠️ 2026.1 新获批 · 直接对标</span></td></tr>
+      <tr><td>博来恩(猫)</td><td><strong>妙宠爱</strong> Revolution Plus</td><td><span style="color:#f39c12;">猫驱虫正面竞争</span></td></tr>
+      <tr class="bi-row"><td>福味恩/尼可信</td><td><strong>欣宠克</strong> Simparica</td><td><span style="color:#f39c12;">口服外驱直接竞争</span></td></tr>
+      <tr><td>犬心保</td><td><strong>大宠爱</strong> Revolution</td><td><span style="color:#2ecc71;">有部分重叠</span></td></tr>
+    </table>
+    <div class="note">
+      ⚠️ <strong>汪宠爱®（复方沙罗拉纳）</strong>2026年1月29日获批，6种规格（4-200mg），硕腾在中国驱虫市场的重大升级。<br>
+      但刚获证，铺货+医生教育仍需时间，短期尚不构成实质性威胁。
+    </div>
+  </div>
+</div>
+
+<!-- Elanco -->
+<div class="section">
+  <div class="section-title">🥈 礼蓝 Elanco <span style="font-size:13px;color:var(--text-muted);font-weight:400;">— 第二竞争对手</span> <span class="badge" style="background:#3498db;">🟡 非驱虫主要战场</span></div>
+  <div class="company-card">
+    <div class="company-header">
+      <div>
+        <div class="company-name">礼蓝 Elanco (NYSE: ELAN)</div>
+        <div style="font-size:13px;color:var(--text-muted);">2025 年 $47.15 亿 · 宠物占 49% · 2026Q1 增速王 +15%</div>
+      </div>
+      <span class="threat med">🟡 中威胁</span>
+    </div>
+    <div class="desc">主要竞争领域为心血管和体外驱虫。虽然全球增速王，但驱虫王牌 Credelio Quattro 尚未入华，夫速宁为皮肤病药非驱虫药，短期内礼蓝在中国驱虫市场对 BI 不构成直接竞争。</div>
+    <table class="comp-table">
+      <tr><th>BI 产品</th><th>礼蓝竞品</th><th>竞争关系</th></tr>
+      <tr class="bi-row"><td>福来恩(外驱)</td><td><strong>拜宠爽</strong> Advantix</td><td><span style="color:#f39c12;">体外驱虫直接竞争</span></td></tr>
+      <tr><td>勃欣定(心脏)</td><td><strong>活心宁</strong> Cardalis</td><td><span style="color:#f39c12;">心脏治疗直接竞争</span></td></tr>
+      <tr class="bi-row"><td>犬心保</td><td><strong>爱沃克</strong> Advocate</td><td><span style="color:#2ecc71;">有部分重叠</span></td></tr>
+      <tr><td style="color:var(--text-muted);">—</td><td><strong>可立奥</strong> Credelio</td><td><span style="color:#f39c12;">单方口服外驱</span></td></tr>
+    </table>
+    <div class="note">
+      ⚠️ <strong>关键情报：</strong>礼蓝 2026Q1 全球增速 +15%（行业最高），但 Credelio Quattro（四合一驱虫）<strong>尚未进入中国</strong>；夫速宁（Zenrelia）是 JAK 皮肤病药，非驱虫药。<br>
+      <strong>结论：礼蓝目前在中国驱虫市场不对 BI 构成直接威胁。</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Haizheng -->
+<div class="section">
+  <div class="section-title">🥉 海正动保 <span style="font-size:13px;color:var(--text-muted);font-weight:400;">— 国产替代第一名</span> <span class="badge" style="background:#9b59b6;">🟠 国产追赶</span></div>
+  <div class="company-card">
+    <div class="company-header">
+      <div>
+        <div class="company-name">海正动保（海正药业旗下）</div>
+        <div style="font-size:13px;color:var(--text-muted);">首个销售额破亿国产驱虫药 · 2025天猫双11宠物药品 Top10 占5席</div>
+      </div>
+      <span class="threat high">🔴 高威胁（内驱领域）</span>
+    </div>
+    <table class="comp-table">
+      <tr><th>BI 产品</th><th>海正竞品</th><th>竞争关系</th></tr>
+      <tr class="bi-row"><td>犬心保(内驱)</td><td><strong>海乐妙</strong>（年销4500万片）</td><td><span style="color:#e74c3c;">内驱出货量碾压</span></td></tr>
+      <tr><td>超可信</td><td><strong>赛乐滴</strong>（首款国产内外同驱滴剂）</td><td><span style="color:#f39c12;">国产替代追赶中</span></td></tr>
+      <tr class="bi-row"><td>福来恩</td><td><strong>海乐旺</strong>（已出口越南）</td><td><span style="color:#f39c12;">外驱价格竞争</span></td></tr>
+    </table>
+    <div class="desc">2025年宠物业务电商业绩破亿（5年翻11倍），猫三联疫苗海妙哆已上市。国产替代已完成市占率登顶。</div>
+  </div>
+</div>
+
+<!-- MSD -->
+<div class="section">
+  <div class="section-title">🟤 默沙东 MSD 动保 <span style="font-size:13px;color:var(--text-muted);font-weight:400;">— 差异化竞争者</span> <span class="badge" style="background:#2ecc71;">🟢 非正面竞争</span></div>
+  <div class="company-card">
+    <div class="company-header">
+      <div>
+        <div class="company-name">默沙东 MSD Animal Health</div>
+        <div style="font-size:13px;color:var(--text-muted);">2025年Q1 动保营收 $17.91 亿 · +13%</div>
+      </div>
+      <span class="threat med">🟡 中威胁</span>
+    </div>
+    <div class="desc">不走正面对标路线，靠 12 周长效 + 疫苗组合 + 数字化生态打造差异化。贝卫多系列低频给药（一季度一次）分流了部分嫌麻烦的宠主。</div>
+    <table class="comp-table">
+      <tr><th>BI 产品</th><th>默沙东竞品</th><th>竞争关系</th></tr>
+      <tr class="bi-row"><td>超可信</td><td><strong>贝卫多®</strong> Bravecto（12周长效）</td><td><span style="color:#f39c12;">差异化分流，不正面硬刚</span></td></tr>
+      <tr><td>福来恩</td><td>贝卫多滴剂（犬猫双剂型）</td><td><span style="color:#f39c12;">长效剂型竞争</span></td></tr>
+      <tr class="bi-row"><td>—</td><td>宠必威®系列疫苗</td><td><span style="color:#2ecc71;">BI无宠物疫苗，不同赛道</span></td></tr>
+    </table>
+    <div class="note">
+      ⚠️ 默沙东 Q1 伴侣动物 +9%（Bravecto +16%），验证12周长效策略有效。但驱虫管线不如 BI 和硕腾丰富。
+    </div>
+  </div>
+</div>
+
+<!-- Competitive Matrix -->
+<div class="section">
+  <div class="section-title">📊 竞品威胁矩阵</div>
+  <table class="matrix-table">
+    <tr><th>BI 产品</th><th>主要竞品</th><th>威胁等级</th><th>说明</th></tr>
+    <tr>
+      <td>超可信</td>
+      <td><strong>汪宠爱®</strong>（硕腾）<br>海乐妙（海正）<br>赛乐滴（海正）</td>
+      <td><span class="threat-dot red"></span>高<br><span class="threat-dot yellow"></span>中<br><span class="threat-dot green"></span>低</td>
+      <td>汪宠爱2026.1新获批三合一内外同驱，是直接威胁；海乐妙内驱出货量大</td>
+    </tr>
+    <tr>
+      <td>博来恩（猫）</td>
+      <td><strong>妙宠爱</strong>（硕腾）<br>爱沃克（礼蓝）</td>
+      <td><span class="threat-dot red"></span>高<br><span class="threat-dot yellow"></span>中</td>
+      <td>硕腾猫驱虫第一竞争对手；爱沃克有部分重叠</td>
+    </tr>
+    <tr>
+      <td>福来恩</td>
+      <td>拜宠爽（礼蓝）<br>贝卫多（默沙东）<br>欣宠克（硕腾）</td>
+      <td><span class="threat-dot yellow"></span>中</td>
+      <td>经典外驱竞争格局成熟；贝卫多12周长效差异化分流</td>
+    </tr>
+    <tr>
+      <td>尼可信/福味恩</td>
+      <td><strong>欣宠克</strong>（硕腾）</td>
+      <td><span class="threat-dot yellow"></span>中</td>
+      <td>单方口服外驱，硕腾欣宠克2021年先发优势</td>
+    </tr>
+    <tr>
+      <td>犬心保</td>
+      <td><strong>海乐妙</strong>（海正）<br>大宠爱（硕腾）</td>
+      <td><span class="threat-dot red"></span>高（海正）<br><span class="threat-dot yellow"></span>中（硕腾）</td>
+      <td>海乐妙年销4500万片、首个破亿国产驱虫药，出货量碾压</td>
+    </tr>
+    <tr>
+      <td>勃欣定（心脏）</td>
+      <td><strong>活心宁</strong>（礼蓝）</td>
+      <td><span class="threat-dot yellow"></span>中</td>
+      <td>心血管竞争，礼蓝主攻方向之一</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Key Insights -->
+<div class="section">
+  <div class="section-title">💡 核心洞察</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;">
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:16px;border-left:4px solid var(--red);">
+      <div style="font-weight:600;color:var(--red);margin-bottom:6px;">🔴 最大威胁</div>
+      <div style="font-size:13px;color:var(--text);">硕腾 <strong>汪宠爱®</strong>（复方沙罗拉纳）2026年1月中国获批，三合一内外同驱是超可信的最直接对标产品。虽然铺货需时间，但长期是对驱虫王座的最大挑战。</div>
+    </div>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:16px;border-left:4px solid var(--green);">
+      <div style="font-weight:600;color:var(--green);margin-bottom:6px;">🟢 短期不构成威胁</div>
+      <div style="font-size:13px;color:var(--text);">礼蓝 Credelio Quattro（四合一驱虫）<strong>未进入中国</strong>；夫速宁（Zenrelia）是皮肤病药非驱虫药。礼蓝虽全球增速王，但中国驱虫市场暂不构成直接竞争。</div>
+    </div>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:16px;border-left:4px solid var(--yellow);">
+      <div style="font-weight:600;color:var(--yellow);margin-bottom:6px;">🟡 国产替代加速</div>
+      <div style="font-size:13px;color:var(--text);">2025年国产宠物驱虫药市占率已登顶，海正动保海乐妙4500万片/年成首款破亿国产驱虫药。2026年国产企业转向高端生物药+疫苗赛道。</div>
+    </div>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:16px;border-left:4px solid #3498db;">
+      <div style="font-weight:600;color:#3498db;margin-bottom:6px;">🔵 BI 优势</div>
+      <div style="font-size:13px;color:var(--text);">BI 驱虫药2025年重夺市场#1（+3pts份额），硕腾-3pts。福味恩（2025年9月新上市）+ 全价位产品矩阵（超可信/尼可信/福来恩/犬心保）覆盖最全。</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>🐾 BI 中国宠物药竞品生态报告 | 勃林格殷格翰 药品市场营销</p>
+  <p>数据来源：公司财报、中国兽药信息网、公开市场情报 | 更新至 2026年5月28日</p>
+</div>
+
+</div>
+</body>
+</html>
