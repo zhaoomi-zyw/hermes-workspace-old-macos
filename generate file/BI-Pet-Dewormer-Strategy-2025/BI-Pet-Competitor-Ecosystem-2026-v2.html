@@ -95,12 +95,12 @@
   .priority-row .p-score { font-size: 0.75rem; color: var(--text-light); width: 30px; text-align: right; flex-shrink: 0; }
 
   /* COMPETITOR CARDS */
-  .comp-card { border-radius: var(--radius); padding: 24px; border-left: 5px solid; position: relative; }
-  .comp-card.zoetis { border-color: #1565c0; background: #e3f2fd; }
-  .comp-card.elanco { border-color: #7b1fa2; background: #f3e5f5; }
-  .comp-card.msd { border-color: #2e7d32; background: #e8f5e9; }
-  .comp-card.haizheng { border-color: var(--accent-orange); background: #fff3e0; }
   .comp-card.bi { border-color: var(--bi-green); background: #e8f5e9; }
+  .comp-card.zoetis { border-color: #E15523; background: #FFF0EB; }
+  .comp-card.elanco { border-color: #6FAD24; background: #F4FBE8; }
+  .comp-card.msd { border-color: #004C9B; background: #EBF2FB; }
+  .comp-card.haizheng { border-color: #D9000B; background: #FFF0F0; }
+  .comp-card.ruipu { border-color: #D9001A; background: #FFF0F0; }
   .comp-card .comp-name { font-size: 1rem; font-weight: 800; margin-bottom: 4px; }
   .comp-card .comp-revenue { font-size: 1.6rem; font-weight: 800; line-height: 1; }
   .comp-card .comp-growth { font-size: 0.8rem; margin-top: 4px; }
@@ -327,8 +327,8 @@
   <div class="grid-2" style="gap:20px;">
     <div class="comp-card zoetis">
       <div class="comp-name">硕腾 Zoetis</div>
-      <div class="comp-revenue" style="color:#1565c0;">22.62亿美元</div>
-      <div class="comp-growth" style="color:#1565c0;">Q1 · +3% YoY | 国际+17% 美国-11%</div>
+      <div class="comp-revenue" style="color:#E15523;">22.62亿美元</div>
+      <div class="comp-growth" style="color:#E15523;">Q1 · +3% YoY | 国际+17% 美国-11%</div>
       <div class="comp-tags">
         <span class="comp-tag">全球龙头</span>
         <span class="comp-tag">犬猫滴剂心智</span>
@@ -339,8 +339,8 @@
     </div>
     <div class="comp-card elanco">
       <div class="comp-name">礼蓝 Elanco</div>
-      <div class="comp-revenue" style="color:#7b1fa2;">13.71亿美元</div>
-      <div class="comp-growth" style="color:#7b1fa2;">Q1 · +15% YoY | Zenrelia/Credelio放量</div>
+      <div class="comp-revenue" style="color:#6FAD24;">13.71亿美元</div>
+      <div class="comp-growth" style="color:#6FAD24;">Q1 · +15% YoY | Zenrelia/Credelio放量</div>
       <div class="comp-tags">
         <span class="comp-tag">创新驱动</span>
         <span class="comp-tag">多剂型覆盖</span>
@@ -350,8 +350,8 @@
     </div>
     <div class="comp-card msd">
       <div class="comp-name">默沙东 MSD Animal Health</div>
-      <div class="comp-revenue" style="color:#2e7d32;">18亿美元</div>
-      <div class="comp-growth" style="color:#2e7d32;">Q1 · +13% YoY | 动物保健稳健</div>
+      <div class="comp-revenue" style="color:#004C9B;">18亿美元</div>
+      <div class="comp-growth" style="color:#004C9B;">Q1 · +13% YoY | 动物保健稳健</div>
       <div class="comp-tags">
         <span class="comp-tag">稳健多元</span>
         <span class="comp-tag">贝卫多长效</span>
@@ -401,22 +401,22 @@
         <!-- BI -->
         <div class="q-dot bi" style="width:56px;height:56px;top:90px;left:260px;font-size:0.7rem;line-height:56px;text-align:center;">BI</div>
         <!-- Zoetis -->
-        <div class="q-dot zoetis" style="width:64px;height:64px;top:80px;left:310px;font-size:0.7rem;line-height:64px;text-align:center;">硕腾</div>
+        <div class="q-dot zoetis" style="width:64px;height:64px;top:80px;left:310px;font-size:0.7rem;line-height:64px;text-align:center;background:#E15523;">硕腾</div>
         <!-- MSD -->
-        <div class="q-dot msd" style="width:50px;height:50px;top:110px;left:290px;font-size:0.7rem;line-height:50px;text-align:center;">默沙东</div>
+        <div class="q-dot msd" style="width:50px;height:50px;top:110px;left:290px;font-size:0.7rem;line-height:50px;text-align:center;background:#004C9B;">默沙东</div>
         <!-- Elanco -->
-        <div class="q-dot elanco" style="width:46px;height:46px;top:130px;left:250px;font-size:0.65rem;line-height:46px;text-align:center;">礼蓝</div>
+        <div class="q-dot elanco" style="width:46px;height:46px;top:130px;left:250px;font-size:0.65rem;line-height:46px;text-align:center;background:#6FAD24;">礼蓝</div>
         <!-- Haizheng -->
-        <div class="q-dot haizheng" style="width:48px;height:48px;top:200px;left:170px;font-size:0.65rem;line-height:48px;text-align:center;">海正</div>
+        <div class="q-dot haizheng" style="width:48px;height:48px;top:200px;left:170px;font-size:0.65rem;line-height:48px;text-align:center;background:#D9000B;">海正</div>
         <!-- Ruipuy -->
-        <div class="q-dot ruipuy" style="width:36px;height:36px;top:230px;left:140px;font-size:0.6rem;line-height:36px;text-align:center;">瑞普</div>
+        <div class="q-dot ruipuy" style="width:36px;height:36px;top:230px;left:140px;font-size:0.6rem;line-height:36px;text-align:center;background:#78909c;">瑞普</div>
       </div>
       <div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;"><div style="width:12px;height:12px;border-radius:50%;background:var(--bi-dark);border:2px solid var(--bi-green);"></div> BI</div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;"><div style="width:12px;height:12px;border-radius:50%;background:#1565c0;"></div> 硕腾 Zoetis</div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;"><div style="width:12px;height:12px;border-radius:50%;background:#2e7d32;"></div> 默沙东 MSD</div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;"><div style="width:12px;height:12px;border-radius:50%;background:#7b1fa2;"></div> 礼蓝 Elanco</div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;"><div style="width:12px;height:12px;border-radius:50%;background:var(--accent-orange);"></div> 海正动保</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;"><div style="width:12px;height:12px;border-radius:50%;background:#E15523;"></div> 硕腾 Zoetis</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;"><div style="width:12px;height:12px;border-radius:50%;background:#004C9B;"></div> 默沙东 MSD</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;"><div style="width:12px;height:12px;border-radius:50%;background:#6FAD24;"></div> 礼蓝 Elanco</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;"><div style="width:12px;height:12px;border-radius:50%;background:#D9000B;"></div> 海正动保</div>
         <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;"><div style="width:12px;height:12px;border-radius:50%;background:#78909c;"></div> 瑞普/普莱柯</div>
       </div>
     </div>
@@ -937,7 +937,7 @@ new Chart(document.getElementById('revenueBar'), {
   data: {
     labels: ['硕腾 Zoetis\n(Q1 2026)', '礼蓝 Elanco\n(Q1 2026)', '默沙东 MSD\n(Q1 2026)'],
     datasets: [
-      { label: 'Q1营收（亿美元）', data: [22.62, 13.71, 18.0], backgroundColor: [BLUE, PURPLE, '#2e7d32'], borderRadius: 8 }
+      { label: 'Q1营收（亿美元）', data: [22.62, 13.71, 18.0], backgroundColor: ['#E15523', '#6FAD24', '#004C9B'], borderRadius: 8 }
     ]
   },
   options: {
@@ -954,7 +954,7 @@ new Chart(document.getElementById('growthChart'), {
   data: {
     labels: ['硕腾 国际', '硕腾 美国', '礼蓝 Elanco', '默沙东 MSD'],
     datasets: [
-      { label: 'YoY增速 (%)', data: [17, -11, 15, 13], backgroundColor: ['#2e7d32', '#e53935', PURPLE, BLUE], borderRadius: 6 }
+      { label: 'YoY增速 (%)', data: [17, -11, 15, 13], backgroundColor: ['#2e7d32', '#e53935', '#6FAD24', '#004C9B'], borderRadius: 6 }
     ]
   },
   options: {
