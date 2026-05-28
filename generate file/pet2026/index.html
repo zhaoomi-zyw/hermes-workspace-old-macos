@@ -8,14 +8,14 @@
   :root {
     --bi-green: #00A651;
     --bi-dark: #1a3a2a;
-    --bg: #0e1a14;
-    --card-bg: #1a2e22;
-    --text: #e0f0e8;
-    --text-muted: #8aaa98;
-    --border: #2a4a38;
+    --bg: #f5f7f5;
+    --card-bg: #ffffff;
+    --text: #2c3e2d;
+    --text-muted: #6b8a76;
+    --border: #d4dfd4;
     --red: #e74c3c;
-    --yellow: #f39c12;
-    --green: #2ecc71;
+    --yellow: #d4a017;
+    --green: #27ae60;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -32,7 +32,7 @@
     text-align: center;
     padding: 50px 30px 40px;
     margin-bottom: 40px;
-    background: linear-gradient(135deg, var(--bi-dark) 0%, #0d2e1d 100%);
+    background: linear-gradient(135deg, var(--bi-dark) 0%, #2a5a3e 100%);
     border-radius: 16px;
     border: 1px solid var(--border);
   }
@@ -94,7 +94,7 @@
   .product-card .name {
     font-size: 15px;
     font-weight: 600;
-    color: #fff;
+    color: var(--text);
   }
   .product-card .en { font-size: 12px; color: var(--text-muted); }
   .product-card .meta {
@@ -107,12 +107,12 @@
     font-size: 11px;
     padding: 2px 8px;
     border-radius: 8px;
-    background: rgba(255,255,255,0.06);
+    background: rgba(0,0,0,0.04);
     color: var(--text-muted);
   }
-  .tag.green { background: rgba(46,204,113,0.15); color: #2ecc71; }
-  .tag.blue { background: rgba(52,152,219,0.15); color: #3498db; }
-  .tag.purple { background: rgba(155,89,182,0.15); color: #9b59b6; }
+  .tag.green { background: rgba(46,204,113,0.12); color: #1a8a4a; }
+  .tag.blue { background: rgba(52,152,219,0.12); color: #2471a3; }
+  .tag.purple { background: rgba(155,89,182,0.12); color: #7d3c98; }
 
   /* Competitor company card */
   .company-card {
@@ -138,9 +138,9 @@
     border-radius: 14px;
     font-weight: 600;
   }
-  .threat.high { background: rgba(231,76,60,0.2); color: #e74c3c; }
-  .threat.med { background: rgba(243,156,18,0.2); color: #f39c12; }
-  .threat.low { background: rgba(46,204,113,0.2); color: #2ecc71; }
+  .threat.high { background: rgba(231,76,60,0.1); color: #c0392b; }
+  .threat.med { background: rgba(243,156,18,0.1); color: #b7950b; }
+  .threat.low { background: rgba(46,204,113,0.1); color: #1a8a4a; }
 
   .company-card .desc {
     font-size: 13px;
@@ -149,14 +149,14 @@
   }
   .company-card .note {
     font-size: 13px;
-    color: var(--yellow);
     padding: 10px 14px;
-    background: rgba(243,156,18,0.08);
+    background: rgba(243,156,18,0.06);
     border-radius: 8px;
     border-left: 3px solid var(--yellow);
     margin-top: 10px;
+    line-height: 1.8;
+    color: var(--text);
   }
-
   /* Comparison table */
   .comp-table {
     width: 100%;
@@ -177,8 +177,8 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
-  .comp-table tr:hover { background: rgba(255,255,255,0.02); }
-  .comp-table .bi-row { background: rgba(0,166,81,0.05); }
+  .comp-table tr:hover { background: rgba(0,0,0,0.02); }
+  .comp-table .bi-row { background: rgba(0,166,81,0.06); }
 
   /* Threat matrix */
   .matrix-table { width: 100%; border-collapse: collapse; font-size: 13px; }
