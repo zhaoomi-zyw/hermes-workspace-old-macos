@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>综合日语语法笔记</title>
+<style>
+  :root {
+    --bg: #faf9f6;
+    --card-bg: #fff;
+    --text: #2c3e50;
+    --accent: #bc002d;
+    --accent2: #3a6b5b;
+    --border: #e8e0d5;
+    --tag-bg: #fdf2f4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Sans GB", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .container { max-width: 1060px; margin: 0 auto; padding: 24px 20px 60px; }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding: 48px 20px 36px;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 36px;
+  }
+  header h1 { font-size: 2rem; color: var(--accent); letter-spacing: 0.05em; }
+  header p { color: #999; margin-top: 8px; font-size: 0.95rem; }
+
+  /* Nav */
+  nav {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-bottom: 36px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
+  }
+  nav h2 { font-size: 1rem; color: var(--accent2); margin-bottom: 12px; }
+  nav ol { columns: 2; column-gap: 32px; list-style-position: inside; }
+  nav li { margin-bottom: 4px; }
+  nav a { color: var(--text); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  nav a:hover { color: var(--accent); }
+  @media (max-width: 700px) { nav ol { columns: 1; } }
+
+  /* Sections */
+  section { margin-bottom: 44px; }
+  .section-title {
+    font-size: 1.35rem;
+    color: var(--accent2);
+    border-left: 4px solid var(--accent);
+    padding-left: 14px;
+    margin-bottom: 20px;
+  }
+  .lesson {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
+  }
+  .lesson-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent2);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th {
+    background: #f8f5f0;
+    color: var(--accent);
+    font-weight: 600;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  .grammar-name { font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .note { color: #999; font-size: 0.82rem; white-space: pre-line; }
+  .conj { white-space: pre-line; font-size: 0.84rem; color: #555; }
+  .example { white-space: pre-line; font-size: 0.85rem; }
+
+  /* Keigo two-column */
+  .keigo-section { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 700px) { .keigo-section { grid-template-columns: 1fr; } }
+  .keigo-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+  }
+  .keigo-card h3 { color: var(--accent); margin-bottom: 14px; font-size: 1.05rem; }
+
+  /* Verb table */
+  .verb-wrap { overflow-x: auto; }
+  .verb-table { min-width: 1100px; }
+  .verb-table th, .verb-table td { font-size: 0.83rem; text-align: center; white-space: nowrap; padding: 9px 12px; }
+  .verb-table td:first-child { text-align: left; font-weight: 600; color: var(--accent); }
+
+  /* Comparison */
+  .comparison-table td:first-child { font-weight: 600; white-space: nowrap; color: var(--accent2); }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 32px 0 20px;
+    color: #bbb;
+    font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>📖 综合日语语法笔记</h1>
+  <p>第一册 〜 第三册 &nbsp;·&nbsp; 敬语 &nbsp;·&nbsp; 推量表达比较 &nbsp;·&nbsp; 动词变形表</p>
+</header>
+
+<nav>
+  <h2>📑 目录</h2>
+  <ol>
+    <li><a href="#sec1">第一册 — 第14・15课</a></li>
+    <li><a href="#sec2-1">第二册 第1课</a></li>
+    <li><a href="#sec2-2">第二册 第2课</a></li>
+    <li><a href="#sec2-3">第二册 第3课</a></li>
+    <li><a href="#sec2-4">第二册 第4课</a></li>
+    <li><a href="#sec2-5">第二册 第5课</a></li>
+    <li><a href="#sec2-6">第二册 第6课 — 授受关系</a></li>
+    <li><a href="#sec2-7">第二册 第7课 — 授受表达</a></li>
+    <li><a href="#sec2-8">第二册 第8课 — 被动</a></li>
+    <li><a href="#sec2-9">第二册 第9课</a></li>
+    <li><a href="#sec2-10">第二册 第10课</a></li>
+    <li><a href="#sec2-11">第二册 第11课</a></li>
+    <li><a href="#sec2-12">第二册 第12课</a></li>
+    <li><a href="#sec3-1">第三册 第1课</a></li>
+    <li><a href="#sec3-2">第三册 第2课</a></li>
+    <li><a href="#sec3-3">第三册 第3课</a></li>
+    <li><a href="#sec3-4">第三册 第4课</a></li>
+    <li><a href="#sec-keigo">敬语（尊他 · 自谦）</a></li>
+    <li><a href="#sec-like">推量表达比较</a></li>
+    <li><a href="#sec-verb">动词变形表</a></li>
+  </ol>
+</nav>
+
+<!-- ==================== 第一册 ==================== -->
+<section id="sec1">
+  <h2 class="section-title">一、第一册（初级）</h2>
+
+  <div class="lesson">
+    <div class="lesson-title">第十四课</div>
+    <table>
+      <thead><tr><th style="width:14%">语法</th><th style="width:16%">用法</th><th style="width:18%">接续</th><th>例句</th><th style="width:16%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">に</td><td>基准</td><td class="conj">N/A</td>
+          <td class="example">一週間に三回ジムに行きます。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">で</td><td>原因</td><td class="conj">N/A</td>
+          <td class="example">お腹が空いたのでたくさんご飯を食べました。
+遠くで、新幹線で行きます。
+病気で家で休みます</td>
+          <td class="note">很容易变成「ので」
+感觉不常用</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ようだ</td><td>比喻・比况・推测</td><td></td>
+          <td class="example">どうも王さんが日本人のようです</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ても（でも）いい</td><td>可以，…也没关系</td><td></td>
+          <td class="example">勉強できなくても大丈夫ですか</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">も</td>
+          <td>肯定：数量之多<br>否定：数量之少</td><td></td>
+          <td class="example">今日は日本語10時間も勉強します。
+昨日は30分も走りませんでした</td>
+          <td class="note">今天竟然要学习日语10小时</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">でも</td><td>举例</td><td></td>
+          <td class="example">喉が渇いたので、何か飲み物でもありますか</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜と〜と、どちらが〜ですか<br>〜のほうが〜</td>
+          <td>两个或以上事物的比较</td><td></td>
+          <td class="example">コーヒーと抹茶と、どちらがいいですか。
+コーヒーのほうがいいです</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="lesson">
+    <div class="lesson-title">第十五课</div>
+    <table>
+      <thead><tr><th style="width:14%">语法</th><th style="width:16%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:16%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">ために</td><td>目的，为了…</td>
+          <td class="conj">名词 + の + ために
+动词原型 + ために</td>
+          <td class="example">日本に仕事するために、日本語を頑張ります。
+生活のために、毎日働いています。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">できる</td><td>可能性・能力・许可</td>
+          <td class="conj">1. 动作性名词 + できる
+2. 动词原型 + ことができる
+3. 名词 + ができる</td>
+          <td class="example">このお手洗いが利用できます
+この薬が飲むことができる
+スキーができる</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">て（で）も</td><td>即使</td>
+          <td class="conj">一类形容词 → 词干 + くて
+二类形容词 → 词干 + で
+名词 → で
+动词 → て形</td>
+          <td class="example">たとえ雪が降っても、行きたいと思います</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第1课 ==================== -->
+<section id="sec2-1">
+  <h2 class="section-title">二、第二册</h2>
+  <div class="lesson">
+    <div class="lesson-title">第1课</div>
+    <table>
+      <thead><tr><th style="width:15%">语法</th><th style="width:16%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">てから</td><td>先…后…</td>
+          <td class="conj">动词て形 + から</td>
+          <td class="example">仕事を終わってからビールを飲みました</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜しか〜ない</td><td>只有…、只…</td>
+          <td class="conj">动词ない形</td>
+          <td class="example">私はコーヒーしか飲まない
+私はコーヒーしか飲みません</td>
+          <td class="note">对比：私はパンだけ食べる
+私はパンしか食べません</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ようになる</td><td>变得…（从不可能到可能）</td>
+          <td class="conj">基本形 + ようになる
+否定：ない形 + なくなる</td>
+          <td class="example">彼は日本語が上手になるようになりました
+学校に行かなくなりました</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜（の）ほかに</td><td>除…之外</td>
+          <td class="conj">基本形 + ほかに
+名词 + の + ほかに</td>
+          <td class="example">日本のほかに、どこにも行きません。
+お酒を飲むほかに、タバコを吸います</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ていく</td>
+          <td>空间：由近及远（做完去）<br>时间：从现在持续到未来</td>
+          <td class="conj">て形 + いく</td>
+          <td class="example">コーヒーを飲んで行ってください。
+天気が暑くていく</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜つもり</td><td>打算…</td>
+          <td class="conj">动词原型 + つもり</td>
+          <td class="example">寿司を食べるつもりです</td>
+          <td class="note">ないつもり：不打算（语气温和）
+つもりはありません：不打算（语气强烈）
+つもりではありません：澄清辩解</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">动词意志形</td><td>决定要做什么</td>
+          <td class="conj">サ変：掃除する → 掃除しよう
+カ変：来る → 来よう
+一段：食べる → 食べよう
+五段：買う→買おう、書く→書こう
+遊ぶ→遊ぼう、休む→休もう</td><td></td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">意志形 + と思う／思っている</td>
+          <td>我打算…</td>
+          <td class="conj">意志形 + と思う（我想）
+意志形 + 思っている（别人想 / 我一直想）</td>
+          <td class="example">日本で焼鳥を食べようと思います
+日本で焼鳥を食べようと思っています
+王さんは日本で焼鳥を食べようと思っています。</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第2课 ==================== -->
+<section id="sec2-2">
+  <div class="lesson">
+    <div class="lesson-title">第2课</div>
+    <table>
+      <thead><tr><th style="width:18%">语法</th><th style="width:16%">含义</th><th style="width:16%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">形容词性动词<br>（優れる・富む・溢れる）<br>〜た形 + 名词</td>
+          <td>表示完成（无过去义）</td>
+          <td class="conj">〜た形 + 名词</td>
+          <td class="example">優れた成績</td>
+          <td class="note">形容词性动词た形修饰名词，没有过去式含义。
+单独使用时多以「ている」出现，表稳定状态。</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ている</td><td>稳定性</td><td class="conj">ている</td>
+          <td class="example">王さんの成績が優れています</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜らしい</td>
+          <td>具有〜性的（本身特点）</td>
+          <td class="conj">名词 + らしい</td>
+          <td class="example">男らしい人
+夏らしい日</td>
+          <td class="note">否定：らしくない
+君らしくないね</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜らしい</td>
+          <td>客观推测（有根据）</td>
+          <td class="conj">动词／形容词简体终止形
+名词／形容动词词干 + らしい</td>
+          <td class="example">雨が降ったらしいです</td>
+          <td class="note">否定：ないらしい
+常用：どうも〜らしい</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ように見える</td><td>看起来像</td>
+          <td class="conj">名词 + の + ように見える</td>
+          <td class="example">日本人のように見える</td>
+          <td class="note">否定：ようには見えない</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜中（ちゅう）</td><td>动作进行中</td><td class="conj">名词 + 中</td>
+          <td class="example">電話中・食事中・授業中</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜し</td><td>又…又…（列举）</td>
+          <td class="conj">句子（敬体 / 简体）</td>
+          <td class="example">日本語を勉強したし、ゲームを遊んだし、疲れた</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜がする</td><td>感觉到…（五感）</td>
+          <td class="conj">五感名词 + がする
+寒気・吐き気 + がする</td>
+          <td class="example">甘い匂いがする
+寒気がする</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜たほうがいい</td><td>最好…（个人建议）</td>
+          <td class="conj">た形 + ほうがいい
+否定：ない + ほうがいい</td>
+          <td class="example">タバコをやめたほうがいいね
+無理しないほうがいいね</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ないでください</td><td>请不要…</td>
+          <td class="conj">动词否定 + ないでください</td>
+          <td class="example">ここでタバコを吸わないでください</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">めったに〜ない</td><td>几乎不…</td><td></td>
+          <td class="example">めったに空いていないようです</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第3课 ==================== -->
+<section id="sec2-3">
+  <div class="lesson">
+    <div class="lesson-title">第3课 — 自动词・他动词</div>
+    <table>
+      <thead><tr><th style="width:16%">语法</th><th style="width:18%">含义</th><th style="width:16%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">自动词・他动词</td>
+          <td>自动词：现象/状态（着）<br>他动词：把/让…（动作）</td>
+          <td class="conj">名詞が…（自动）<br>名詞を…（他动）</td>
+          <td class="example">ドアが開く（自动）
+ドアを開ける（他动）</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ている</td>
+          <td>1. 正在做某事<br>2. 状态<br>3. 习惯</td>
+          <td class="conj">动词 + ている</td>
+          <td class="example">1. 王さんはご飯を食べている
+2. ドアが開いている
+3. 毎日運動している</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">てある</td>
+          <td>有意图的结果（人为形成）</td>
+          <td class="conj">…が + 他动词 + てある</td>
+          <td class="example">換気のために、ドアが開けてあります</td>
+          <td class="note">强调目的性：门被打开是有原因的</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">さ</td><td>事物的程度</td>
+          <td class="conj">形容词词干 + さ</td>
+          <td class="example">高い → 高さ　富士山の高さは日本で一番です
+静か → 静かさ　暑い → 暑さ</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">にする</td><td>选择、决定</td>
+          <td class="conj">选的东西 + にする</td>
+          <td class="example">ケーキにする／ビールにする
+お昼は何にしますか → ラーメンにする
+どちらにしますか</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">そうだ</td>
+          <td>视觉直觉判断（样态）<br>可能性很大（好像要）</td>
+          <td class="conj">形容词：去い + そう
+形容动词：直接 + そう
+动词：去ます + そう</td>
+          <td class="example">雨が降りそうです
+このケーキは美味しそうです</td>
+          <td class="note">否定：降りそうにない
+降りそうもない
+降りそうにもない</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">みたいだ</td>
+          <td>「ようだ」的口语<br>1. 推测<br>2. 像什么一样</td>
+          <td class="conj">前接续：名词词干／形容动词词干
+形容词简体／动词简体
+后接续：な + 名词／に + 句子
+です结句（多用于推测）</td>
+          <td class="example">子どもみたいだね
+静かみたいだ／寒いみたいだ
+雨が降るみたいだ</td>
+          <td class="note">和「ようだ」的前接续区别：
+ようだ → 名词 + の、形容动词 + な</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第4课 ==================== -->
+<section id="sec2-4">
+  <div class="lesson">
+    <div class="lesson-title">第4课</div>
+    <table>
+      <thead><tr><th style="width:18%">语法</th><th style="width:16%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">に</td><td>作为</td>
+          <td class="conj">名词 + に</td>
+          <td class="example">プレゼントに花をあげる</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜によると〜そうだ</td><td>听说、据说（传闻）</td>
+          <td class="conj">简体句 + そうだ</td>
+          <td class="example">新聞によると、明日は台風が来るそうです
+この店のラーメンはおいしいそうだ。
+彼は元気だそうだ。／あの人は先生だそうだ。</td>
+          <td class="note">注意与样态「そうだ」的区别：
+によると／王さんの話では + 句子 + そうだ</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">そうだ（样态）</td><td>好像（眼前判断）</td>
+          <td class="conj">一类形容词去い + そう
+二类形容词去だ + そう
+动词去ます + そう</td>
+          <td class="example">このケーキはおいしそうです
+この部屋は静かそうです
+雨が降りそうです</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ちょうど〜ているところだ</td>
+          <td>现在：正在…的时候<br>过去：刚刚结束</td>
+          <td class="conj">動詞ている + ところです
+動詞た形 + ところです</td>
+          <td class="example">ちょうど走っているところです
+宿題を終わったところです</td>
+          <td class="note">食べるところ（马上要吃）
+食べたところ（刚吃完）
+食べているところ（正在吃）</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜たがる</td><td>想…（第三人称）</td>
+          <td class="conj">动词ます形去ます + たがる</td>
+          <td class="example">王さんは走りたがっています
+子供は遊びたがっています</td>
+          <td class="note">注意：たがらない
+食べたいと言っています</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜たい</td><td>想…（第一人称）</td>
+          <td class="conj">动词ます形去ます + たい</td>
+          <td class="example">この映画をみたいね</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜のに</td><td>目的：为了、对于</td>
+          <td class="conj">动词原型 + のに</td>
+          <td class="example">ゲームをするのに、PS5を買いました</td>
+          <td class="note">和「ために」基本用法一致
+另有「明明…却」的意思</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第5课 ==================== -->
+<section id="sec2-5">
+  <div class="lesson">
+    <div class="lesson-title">第5课 — 可能态</div>
+    <table>
+      <thead><tr><th style="width:18%">语法</th><th style="width:16%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">〜とは〜（こと）です<br>〜というのは〜（こと）です</td>
+          <td>下定义：所谓…就是…</td>
+          <td class="conj">简体句子 + ということです
+名词 + のことです</td>
+          <td class="example">才能とは、自分を信じることです。
+留学とは、外国へ行って、そこで勉強するということです</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">可能态（れる・られる）</td><td>能、能够、可能性</td>
+          <td class="conj">一段动词：去る + られる
+サ変：去する + できる
+カ変：くる → こられる
+五段：末假名変え段 + る</td>
+          <td class="example">食べられる／掃除できる／こられる
+書ける、使える、見える、飲める</td>
+          <td class="note">⚠️ 无可能态的动词：
+存在动词、見える／聞こえる／分かる
+咲く、晴れる、降る
+⚠️ 可能态后全部变自动词（が）</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">見える vs 見られる<br>聞こえる vs 聞ける</td>
+          <td>見える／聞こえる：自动映入<br>見られる／聞ける：需条件才能</td>
+          <td></td>
+          <td class="example">天気がいいから、月食が見られる
+猫は夜も目が見える</td>
+          <td class="note">お腹が悪いから、食べられません。</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜てくる</td><td>时间空间由远及近</td><td></td>
+          <td class="example">ビールを買ってくる（买酒来）
+ちょっと手紙を出してくる（我去寄个信就来）</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ていく</td><td>时间空间由近及远</td><td></td>
+          <td class="example">お弁当を使って行きます。（做了便当就去）
+薬を買っていきます。（买了药再去）</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜まで</td><td>直到…为止</td><td></td>
+          <td class="example">病気が治るまで、家で休みます</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜てくださいませんか</td><td>请…好吗（尊敬）</td><td></td>
+          <td class="example">窓を開けてくださいませんか</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">少しも〜ない</td><td>一点也不…</td><td></td>
+          <td class="example">少しも暑くない
+英語が少しもわからない。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">なんとか</td><td>好歹、总算</td><td></td>
+          <td class="example">なんとか間に合った。（总算赶上了）
+彼はなんとか試験に合格した。</td>
+          <td class="note">「なんとかなるよ」= 总会有办法的</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第6课 ==================== -->
+<section id="sec2-6">
+  <div class="lesson">
+    <div class="lesson-title">第6课 — 授受关系（恩惠的转移）</div>
+    <table>
+      <thead><tr><th style="width:12%">动词</th><th style="width:10%">主语</th><th style="width:10%">对象</th><th>例句</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">あげる／さしあげる／やる</td><td>我</td><td>对方</td>
+          <td class="example">我给小李钱 → 私は李さんにお金をあげる</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">くれる／くださる</td><td>对方</td><td>我</td>
+          <td class="example">小李给我钱 → 李さんは私にお金をくれる</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">もらう／いただく</td><td>我</td><td>对方</td>
+          <td class="example">我收到小李的钱 → 私は李さんに（から）お金をもらう</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <table>
+      <thead><tr><th style="width:18%">语法</th><th style="width:16%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">〜てばかりいる</td><td>老是…、总是…（负面）</td>
+          <td class="conj">动词て形 + ばかりいる</td>
+          <td class="example">テレビを見てばかりいる。
+→ 总是看电视（暗示不学习）</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">がほしい</td><td>想要某物</td>
+          <td class="conj">名词 + がほしい</td>
+          <td class="example">お茶がほしいです</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜てほしい</td><td>希望别人做某事</td>
+          <td class="conj">动词て形 + ほしい</td>
+          <td class="example">早く帰ってほしい。
+もっと勉強してほしい。
+静かにしてほしい。</td>
+          <td class="note">主语通常是"我"，动作执行者是对方</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">たい／たがる</td><td>想要做…</td>
+          <td class="conj">ます形去ます + たい（第一人称）
+ます形去ます + たがる（第三人称）</td>
+          <td class="example">休みたい
+李さんは休みたがる</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">なければいけない</td><td>必须…</td>
+          <td class="conj">动词ない形 + ければいけない</td>
+          <td class="example">行かなければいけない（必须去）
+食べなければいけない（必须吃）
+勉強しなければいけない（必须学习）</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第7课 ==================== -->
+<section id="sec2-7">
+  <div class="lesson">
+    <div class="lesson-title">第7课 — 授受表达 + 接续</div>
+    <table>
+      <thead><tr><th style="width:18%">语法</th><th style="width:18%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">〜てあげる</td><td>我给别人做…</td>
+          <td class="conj">AはBに〜てあげる／さしあげる／やる</td>
+          <td class="example">私はお母さんに掃除してあげました</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜てくれる</td><td>别人给我做…</td>
+          <td class="conj">AはBに〜てくれる／くださる</td>
+          <td class="example">王さんは私に授業を教えてくれました</td>
+          <td class="note">てくれますか = 你为我做…吗？</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜てもらう</td><td>我收到别人做…的恩惠</td>
+          <td class="conj">AはBに〜てもらう／いただく</td>
+          <td class="example">王さんに授業を教えてもらいました</td>
+          <td class="note">てもらえますか = （我能得到）你为我做…吗？</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ないで</td><td>没…就…</td>
+          <td class="conj">ないで + 动词</td>
+          <td class="example">学校に行かないで、ずっと家で寝ています</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">までに</td><td>动作的期限（一次性）</td><td></td>
+          <td class="example">試験は九時までに始まります</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">まで</td><td>持续到…（持续）</td><td></td>
+          <td class="example">試験は九時まで続きました</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">のに</td><td>明明…却…</td>
+          <td class="conj">动词／形容词简体 + のに
+名词／形容动词词干 + な + のに</td>
+          <td class="example">雨が降っているのに出かけました</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">それとも</td><td>A还是B（选择）</td><td></td>
+          <td class="example">コーヒーにしますか？それとも紅茶がいいですか</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">なくて vs ないで</td>
+          <td>なくて：因果<br>ないで：状态下做某事</td><td></td><td></td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第8课 ==================== -->
+<section id="sec2-8">
+  <div class="lesson">
+    <div class="lesson-title">第8课 — 被动态</div>
+    <table>
+      <thead><tr><th style="width:20%">语法</th><th style="width:16%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:16%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">〜ことがある</td><td>有时候会、偶尔</td>
+          <td class="conj">动词原型 + ことがある</td>
+          <td class="example">食べることがある</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜たことがある</td><td>有某种经历</td>
+          <td class="conj">动词た形 + ことがある</td>
+          <td class="example">食べたことがある</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">によって（被动句）</td>
+          <td>由…（创造性的对象）<br>書く、作る、建てる、発明する、設計する</td>
+          <td class="conj">…は…によって〜られる</td>
+          <td class="example">この本は私によって書かれました
+この建物は有名な建築家によって設計されました</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">被动省略主语</td>
+          <td>活动举行一般用被动</td>
+          <td></td>
+          <td class="example">コンサートが公園で開かれました</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">持ち主の受身</td>
+          <td>我的…被别人…</td>
+          <td class="conj">私は〜に〜を〜</td>
+          <td class="example">王さんは私に足を踏まれた。（我的脚被小王踩了）</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">迷惑の受身</td>
+          <td>受到动作造成的影响</td>
+          <td></td>
+          <td class="example">私は子供に泣かれた。（小孩哭，我被影响）
+家の前に高いビルを建てられた。
+雨が降られた。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜てもらいたい</td>
+          <td>想让别人为自己做…</td>
+          <td></td>
+          <td class="example">明日来てもらいたい（我想你明天来）</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">かどうか</td>
+          <td>是不是…、是否…</td>
+          <td class="conj">动词／形容词简体 + かどうか
+名词／形容动词词干 + かどうか</td>
+          <td class="example">学生かどうか
+王さんが日本へ行くかどうか</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第9课 ==================== -->
+<section id="sec2-9">
+  <div class="lesson">
+    <div class="lesson-title">第9课 — 目的・样态</div>
+    <table>
+      <thead><tr><th style="width:18%">语法</th><th style="width:16%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">〜ように</td>
+          <td>① 目的：为了…、为了使得…<br>② 看起来好像（实际不是）<br>③ 像…一样</td>
+          <td class="conj">① 动词简体／可能态 + ように<br>② 普通形 + ように見える<br>③ 名词 + の + ように<br>&nbsp;&nbsp;&nbsp;动词简体 + ように</td>
+          <td class="example">① 遅れないように早く家を出ました
+日本語が話せるように毎日練習しています
+② 彼女は冷たいように見えるが、本当は優しい人だ
+③ 鳥のように飛ぶ／鳥が飛ぶように走った</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ために</td><td>为了…（明确目的）</td>
+          <td class="conj">动词简体 + ために</td>
+          <td class="example">試験に合格するためにメモする</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜たまま</td><td>保持原样不变</td>
+          <td class="conj">动词た形 + まま</td>
+          <td class="example">テレビをつけたまま寝てしまった</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ように言う</td><td>转述命令/请求/劝告</td>
+          <td class="conj">动词普通形 + ように言う</td>
+          <td class="example">母は私に野菜を食べるように言った</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ておく</td><td>事先准备</td>
+          <td class="conj">动词て形 + おく</td>
+          <td class="example">会議の資料をコピーしておいてください</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜なんか</td><td>列举（类似「など」）</td>
+          <td class="conj">名词 + なんか</td>
+          <td class="example">寿司なんかどう？</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第10课 ==================== -->
+<section id="sec2-10">
+  <div class="lesson">
+    <div class="lesson-title">第10课 — 条件・假定</div>
+    <table>
+      <thead><tr><th style="width:18%">语法</th><th style="width:16%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">〜として</td><td>作为…</td>
+          <td class="conj">名词 + として</td>
+          <td class="example">山田さんは詩人として有名です</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜と</td><td>一…就…</td>
+          <td class="conj">动词普通形 + と + 结果</td>
+          <td class="example">春になると、桜が咲きます</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜たばかり</td><td>刚刚…</td>
+          <td class="conj">动词た形 + ばかり</td>
+          <td class="example">日本に来たばかりの頃は、何もわかりませんでした</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">別に〜ない</td><td>并不特别…、没什么…</td>
+          <td class="conj">別に + 否定形式</td>
+          <td class="example">別に困っていない</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">いくら〜ても</td><td>无论怎么…也…</td>
+          <td class="conj">いくら + 动词／形容词て形 + も</td>
+          <td class="example">いくら勉強しても、漢字が覚えられない</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ば</td>
+          <td>假如…、如果…</td>
+          <td class="conj">五段動詞：え段 + ば
+い形容詞：去い + ければ
+な形容詞／名詞：なら（ば）</td>
+          <td class="example">飲めれば、乾杯しましょう。
+忙しければ、無理しないでください。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">疑问词 + 动词か</td>
+          <td>是否…／什么…（间接疑问）</td>
+          <td class="conj">疑问词 + 简体句 + か</td>
+          <td class="example">彼がどこに行ったか知りません。
+何を食べたいか教えてください。
+彼女がいつ来るかはまだ決まっていない。
+どうすればいいか分からない。</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第11课 ==================== -->
+<section id="sec2-11">
+  <div class="lesson">
+    <div class="lesson-title">第11课 — 命令・禁止・推测</div>
+    <table>
+      <thead><tr><th style="width:18%">语法</th><th style="width:16%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">〜ぬ</td><td>否定（古语/惯用）</td>
+          <td class="conj">ます形去ます + ぬ</td>
+          <td class="example">言わぬが花（不说才是美）
+知らぬが仏（不知者为佛）</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜なさい</td><td>必须…（上对下，比てください严肃）</td>
+          <td class="conj">ます形去ます + なさい</td>
+          <td class="example">早く寝なさい</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ないでいる</td><td>故意不做…</td>
+          <td class="conj">动词ない形 + ている</td>
+          <td class="example">言わないでいる（故意不说）
+その問題を考えないでいると、解決できない</td>
+          <td class="note">⚠️ 今年は雪が降らないでいる 是不对的</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">动词命令形</td>
+          <td>1. 命令（上对下）<br>2. 提醒或引起注意</td>
+          <td></td>
+          <td class="example">出来ているかどうか、よく確かめろ。
+早く寝ろ！</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">への</td><td>给…的…</td>
+          <td class="conj">名词 + への + 名词</td>
+          <td class="example">母への手紙（给妈妈的信）</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">かもしれない</td><td>表推测（主观）</td>
+          <td class="conj">名词・形容动词词干 + かもしれない
+动词／形容词简体 + かもしれない</td>
+          <td class="example">彼は病気かもしれない。（他可能生病了→主观）</td>
+          <td class="note">🆚 推测表达对比：
+有客观依据 → らしい／ようだ
+寻求认同 → だろう／でしょう
+随便说说 → かもしれない
+正式 → かもしれません</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜な</td><td>禁止：请不要…</td>
+          <td class="conj">动词简体 + な</td>
+          <td class="example">落とすな（禁止扔）</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜てはいけない</td><td>禁止：不可以…</td>
+          <td class="conj">动词て形 + はいけない</td>
+          <td class="example">ここで食べてはいけません
+この部屋に入ってはいけない</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ほど〜ない</td>
+          <td>A没有B那么…</td>
+          <td class="conj">AはBほど〜ない</td>
+          <td class="example">日本語は中国語ほど難しくない
+台北は東京ほど寒くない</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第二册 第12课 ==================== -->
+<section id="sec2-12">
+  <div class="lesson">
+    <div class="lesson-title">第12课 — 条件・建议</div>
+    <table>
+      <thead><tr><th style="width:18%">语法</th><th style="width:16%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">〜だけでなく〜も</td><td>不仅…还…</td>
+          <td class="conj">名词・形容词・动词简体 + だけでなく</td>
+          <td class="example">勉強するだけでなく運動も
+肉だけでなく野菜も／静かだけでなく綺麗も
+高いだけでなく便利も</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜うちに</td><td>趁着…的时候<br>在…期间</td>
+          <td class="conj">動詞ている + うちに
+形容詞词干 + うちに
+名詞 + の + うちに</td>
+          <td class="example">雨が降っているうちに、洗濯物を取り込んだ方がいいよ
+空が明るいうちに、写真をたくさん撮っておこう
+学生のうちに、いろいろな経験をしておくべきだ</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">なら</td>
+          <td>① 既然…那就…（承接）
+② 如果是…的话（评价建议）</td>
+          <td class="conj">动词普通形 + なら
+形容词词干 + なら
+名词 + なら</td>
+          <td class="example">眠いなら寝ればいい。
+ビールなら、生ビール</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">たら</td>
+          <td>如果…就…、…之后就…</td>
+          <td class="conj">动词た形 + ら</td>
+          <td class="example">食べたら、寝る。
+父は帰ってきたら、相談しよう
+向こうに着いたら、ラインで連絡しよう。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜まで</td>
+          <td>甚至连…／竟然到…地步</td>
+          <td class="conj">名词 + まで</td>
+          <td class="example">彼まで泣いた。／納豆まで好き。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜といい</td><td>要是…就好了（愿望）</td>
+          <td class="conj">动词普通形 + といい</td>
+          <td class="example">明日雨が降らないといいですね。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">AかB</td><td>A或者B</td>
+          <td class="conj">名词A + か + 名词B</td>
+          <td class="example">電車かバスで行きましょう</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜たら（どうですか）</td><td>建议：要不要…？</td>
+          <td class="conj">动词た形 + ら + どうですか</td>
+          <td class="example">そんなに疲れているなら、少し休んだら？</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜た（想起）</td><td>原来…（突然想起）</td>
+          <td class="conj">动词た形</td>
+          <td class="example">確か今日は会議があったな（我记得今天有会议来着）</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ながら</td><td>一边…一边…</td>
+          <td class="conj">ます形去ます + ながら</td>
+          <td class="example">ラジオを聞きながら、仕事をする</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第三册 第1课 ==================== -->
+<section id="sec3-1">
+  <h2 class="section-title">三、第三册（中高级）</h2>
+  <div class="lesson">
+    <div class="lesson-title">第1课</div>
+    <table>
+      <thead><tr><th style="width:18%">语法</th><th style="width:16%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">ほど</td><td>程度：达到…的程度</td>
+          <td class="conj">名词／动词简体形 + ほど</td>
+          <td class="example">忙しくて食事をする時間もないほどだ
+字が読めないほど部屋が暗いです</td>
+          <td class="note">数量程度 → ほど／くらい都能用
+比较变化 → 用ほど
+轻蔑语气 → 用くらい</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">を〜にする</td><td>把…作为…／把…变成…</td>
+          <td class="conj">名詞 + を + 名詞 + にする</td>
+          <td class="example">わたしは日本語の勉強を一番大切なことにします
+箱を椅子にして座る（把箱子当椅子坐）</td>
+          <td class="note">AをBとして = 把…作为…</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">意向形 + と思う</td><td>我打算…</td>
+          <td class="conj">动词意向形 + と思う</td>
+          <td class="example">日本語をもっと勉強しようと思う。
+今日は早く寝ようと思う。
+彼に電話しようと思ったが、やめた。</td>
+          <td class="note">第三人称要用「〜と思っている」转述</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">意向形 + とする</td><td>打算做…（正要…）</td>
+          <td class="conj">动词意向形 + とする</td>
+          <td class="example">ドアを開けようとしたが、開かなかった。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">けれど（けれども／けど）</td><td>虽然…但是…</td>
+          <td></td>
+          <td class="example">雨が降っているけれど、試合は続けられる。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ことになる</td><td>外部决定／客观结果</td>
+          <td></td>
+          <td class="example">来月から大阪に転勤することになりました。</td>
+          <td class="note">对比：〜にする = 主动决定</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">それで</td>
+          <td>① 因果关系（客观）<br>② 推进对话（那么…）</td>
+          <td></td>
+          <td class="example">李さんは病気で、それで私は代わりに来ました。
+昨日彼と試合をしました。ーそれで、どちらが勝ちましたか？</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">た形 + あと（に）</td><td>…之后…</td>
+          <td class="conj">动词た形 + あと + 后续动作</td>
+          <td class="example">ご飯を食べたあとで散歩しました</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">辞書形 + ように</td><td>希望…实现（祈祷）</td>
+          <td class="conj">動詞辞書形 + ように</td>
+          <td class="example">合格しますように。
+病気が早く治るように祈っています。</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第三册 第2课 ==================== -->
+<section id="sec3-2">
+  <div class="lesson">
+    <div class="lesson-title">第2课</div>
+    <table>
+      <thead><tr><th style="width:20%">语法</th><th style="width:18%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:16%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">〜に伴って</td><td>伴随着…、随着…</td>
+          <td></td>
+          <td class="example">交通量が増えるに伴って、事故も増加した。
+科学技術の進歩に伴って、生活が便利になった。
+留学生活に慣れるに伴って、よく眠るようになった。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜となる</td><td>成为…（= 〜になる）</td>
+          <td></td>
+          <td class="example">時代となる／事実となる
+問題となる／話題となる</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ずに</td><td>不…而…（= ないで）</td>
+          <td class="conj">动词未然形 + ずに</td>
+          <td class="example">朝ごはんを食べずに学校へ行った。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">あたかも〜かのように</td><td>仿佛就像…一样</td>
+          <td class="conj">あたかも + 句子 + かのように</td>
+          <td class="example">あたかも夢を見ているかのように感じた。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">使役被动态</td><td>被迫做…</td>
+          <td class="conj">食べる → 食べさせられる
+飲む → 飲まされる／飲ませられる</td>
+          <td class="example">母に野菜を食べさせられた。
+先生に宿題をやらされる。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ということ</td><td>…这件事／…的意思</td>
+          <td></td>
+          <td class="example">彼が来るということを聞いた。
+試験に合格したということが分かった。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜を通して</td><td>通过…、借由…</td>
+          <td class="conj">名词 + を通して</td>
+          <td class="example">友人を通して彼女と知り合った。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ます形 + 始める</td><td>开始做…</td>
+          <td class="conj">ます形 + 始める</td>
+          <td class="example">家に帰ったとたん、雨が降り始めた。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">かねない</td><td>很可能会…（负面）</td>
+          <td class="conj">ます形 + かねない</td>
+          <td class="example">こんな大雪では交通事故が起こりかねない。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ことに</td><td>令人…的是</td>
+          <td class="conj">形い + ことに
+形动な + ことに
+动た形 + ことに</td>
+          <td class="example">嬉しいことに、彼女は今度のパーティに出席してくれた。
+残念なことに、みんなと一緒に行けないのだ。
+驚いたことに、彼はもうその話を知っていた。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜とはいえ</td><td>虽说…但是…</td>
+          <td class="conj">名词／句子 + とはいえ</td>
+          <td class="example">冬とはいえ、今日は暖かい。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜だけに</td><td>正因为…到底是…</td>
+          <td class="conj">名词・形容词・形容动词な形・动词简体 + だけに</td>
+          <td class="example">初めての海外旅行だけに、かなり心配です</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第三册 第3课 ==================== -->
+<section id="sec3-3">
+  <div class="lesson">
+    <div class="lesson-title">第3课</div>
+    <table>
+      <thead><tr><th style="width:20%">语法</th><th style="width:18%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:16%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">〜というのは〜ことだ<br>〜とは〜ことだ</td>
+          <td>所谓的…就是…</td>
+          <td class="conj">名词 + というのは + 名词 + ことだ</td>
+          <td class="example">良い教師というのは、学生のことを理解してあげられる教師のことだ。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ず（に）</td><td>不…就…（= ないで）</td>
+          <td class="conj">动词未然形 + ず（に）</td>
+          <td class="example">傘を持たず（に）、出かけてしまった。
+昨日、風呂に入らずに寝てしまった。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜づめ（詰め）</td>
+          <td>① 装入、填满<br>② 一直…、始终…</td>
+          <td class="conj">名詞 + づめ
+動詞ます + づめ</td>
+          <td class="example">りんご20個詰め一箱
+駅までずっと立ちづめだった
+今週はずっと働き詰めだった</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜のこと</td><td>关于…、…本身</td>
+          <td class="conj">名词 + のこと</td>
+          <td class="example">卒業でも、みんなのことを忘れない。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜であってほしい</td><td>希望…保持…状态</td>
+          <td></td>
+          <td class="example">君は元気であってほしい。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">単に〜だけ</td><td>仅仅…只是…</td>
+          <td></td>
+          <td class="example">単に塩を入れるだけで、こんなに美味しくなる</td><td class="note">常搭配使用「単に〜だけ」</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 第三册 第4课 ==================== -->
+<section id="sec3-4">
+  <div class="lesson">
+    <div class="lesson-title">第4课</div>
+    <table>
+      <thead><tr><th style="width:20%">语法</th><th style="width:18%">含义</th><th style="width:18%">接续</th><th>例句</th><th style="width:18%">备注</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="grammar-name">とは</td><td>所谓的…（= というのは）</td>
+          <td class="conj">名词 + とは</td>
+          <td class="example">「友情」とは、互いに信頼し合う関係のことです</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">において</td><td>在…（场所/时间/领域）= で</td>
+          <td class="conj">名词 + において</td>
+          <td class="example">会議において新しい方針が決定された。</td>
+          <td class="note">〜においても：即使在…也
+〜においては：在…方面
+〜においての：在…中的</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜を始めとする</td><td>以…为首／以…为代表</td>
+          <td class="conj">名词 + を始めとする + 名词</td>
+          <td class="example">サッカーを始めとするスポーツが若者に人気だ</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜にかかわる</td><td>与…有关／关系到…</td>
+          <td class="conj">名词 + にかかわる</td>
+          <td class="example">命にかかわる病気（危及生命的疾病）
+環境にかかわる問題</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜とともに</td><td>随着…同时发生</td>
+          <td class="conj">名词 + とともに</td>
+          <td class="example">社会の発展とともに人々の生活も豊かになった</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜とする／〜とされる</td>
+          <td>把…当作…／被认为是…</td>
+          <td class="conj">名詞 + とする／とされる</td>
+          <td class="example">安全を第一とする。（安全作为第一位）
+この薬は効果が高いとされる。（这种药被认为效果很好）</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜という</td><td>传闻：据说…</td>
+          <td class="conj">普通形（简体句）+ という</td>
+          <td class="example">彼は来月結婚するという。
+この店のラーメンはとても美味しいという。</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ものですから</td><td>因为…所以…（= ので，更口语化）</td>
+          <td class="conj">动词：辞書形／た形／ない形 + ものですから
+い形：〜い + ものですから
+な形：〜な + ものですから
+名詞：〜な + ものですから</td>
+          <td class="example">子どもが熱を出したものですから、会社を休みました。</td><td class="note">常用于解释自己的情况</td>
+        </tr>
+        <tr>
+          <td class="grammar-name">ですもの</td>
+          <td>因为嘛…、毕竟…</td>
+          <td class="conj">动词：辞書形／た形／ない形 + ですもの
+い形：〜い + ですもの
+な形：〜だ + ですもの
+名詞：〜だ + ですもの</td>
+          <td class="example">寒いですもの、外に出たくない</td><td></td>
+        </tr>
+        <tr>
+          <td class="grammar-name">〜ばかりか</td>
+          <td>不仅…而且…</td>
+          <td class="conj">普通形 + ばかりか</td>
+          <td class="example">彼女は日本語ばかりか、中国語も話せる。</td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 敬语 ==================== -->
+<section id="sec-keigo">
+  <h2 class="section-title">四、敬语</h2>
+  <div class="keigo-section">
+    <!-- 尊他 -->
+    <div class="keigo-card">
+      <h3>🙇 尊他语（尊敬語）</h3>
+      <table>
+        <thead><tr><th style="width:32%">尊他语动词</th><th style="width:28%">对应普通动词</th><th>例句</th></tr></thead>
+        <tbody>
+          <tr><td class="grammar-name">いらっしゃる</td><td>来る・行く・いる</td><td class="example">先生は今日いらっしゃいません。（老师今天不在）<br>お客様がいらっしゃいます。（有客人来了）</td></tr>
+          <tr><td class="grammar-name">おいでになる</td><td>来る・行く・いる</td><td class="example">社長はもう会議室においでになっています。（社长已经在会议室了）</td></tr>
+          <tr><td class="grammar-name">見える</td><td>来る</td><td class="example">課長は明日いつ見えますか（课长明天什么时候来？）</td></tr>
+          <tr><td class="grammar-name">おっしゃる</td><td>言う・話す</td><td class="example">先生は何とおっしゃいましたか（老师说了什么？）</td></tr>
+          <tr><td class="grammar-name">なさる</td><td>する・やる</td><td class="example">先生は日曜日にはどんなことをなさいますか</td></tr>
+          <tr><td class="grammar-name">召し上がる</td><td>食べる・飲む</td><td class="example">そのまま召し上がってください。（请就这样享用吧）</td></tr>
+          <tr><td class="grammar-name">ご覧になる</td><td>見る・読む</td><td class="example">部長、今朝のテレビのニュースをご覧になりましたか</td></tr>
+          <tr><td class="grammar-name">ご存知だ</td><td>知っている</td><td class="example">社長、山田さんをご存知ですか。</td></tr>
+          <tr><td class="grammar-name">くださる</td><td>くれる</td><td class="example">校長先生は新しい本をくださいました。（校长送了我一本新书）</td></tr>
+        </tbody>
+      </table>
+      <br>
+      <h4 style="color:var(--accent2);font-size:0.9rem;margin-bottom:8px;">尊他句型</h4>
+      <table>
+        <thead><tr><th>句型</th><th>例</th></tr></thead>
+        <tbody>
+          <tr><td class="conj">お + 動詞ます形去ます + です<br>ご + サ変詞幹 + です</td><td>お出かけですか？</td></tr>
+          <tr><td class="conj">お + 動詞ます形去ます + になる<br>ご + サ変詞幹 + になる</td><td>先生はもうお帰りになりました。</td></tr>
+          <tr><td class="conj">お + 動詞ます形去ます + なさる<br>ご + サ変詞幹 + なさる</td><td>先生はもうお帰りなさいました。</td></tr>
+          <tr><td class="conj">お + 動詞ます形去ます + ください<br>ご + サ変詞幹 + ください</td><td>皆さん、どうぞお座りください</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 自谦 -->
+    <div class="keigo-card">
+      <h3>🙏 自谦语（謙譲語）</h3>
+      <table>
+        <thead><tr><th style="width:32%">自谦语动词</th><th style="width:28%">对应普通动词</th><th>例句</th></tr></thead>
+        <tbody>
+          <tr><td class="grammar-name">致す（いたす）</td><td>する・やる</td><td class="example">それじゃ、私がいたしましょう<br>入学のご紹介を致します</td></tr>
+          <tr><td class="grammar-name">参る・伺う</td><td>来る・行く</td><td class="example">私が自分で参ります</td></tr>
+          <tr><td class="grammar-name">申す・申し上げる</td><td>言う</td><td class="example">私は田中と申します（在下田中）</td></tr>
+          <tr><td class="grammar-name">拝見する</td><td>見る・読む</td><td class="example">お手紙を拝見しました。（我拜读了您的来信）</td></tr>
+          <tr><td class="grammar-name">存じる</td><td>知る・思う・考える</td><td class="example">そのことについては、私も少し存じます</td></tr>
+          <tr><td class="grammar-name">伺う</td><td>聞く・尋ねる・訪ねる</td><td class="example">先生に分からないところを伺いました</td></tr>
+          <tr><td class="grammar-name">拝借する</td><td>借りる</td><td class="example">先生、この本は拝借してもいいですか</td></tr>
+          <tr><td class="grammar-name">いただく</td><td>食べる・飲む・もらう</td><td class="example">もう十分いただきました。<br>お茶をいただきたいんですが。</td></tr>
+          <tr><td class="grammar-name">差し上げる</td><td>やる・あげる</td><td class="example">これは先生に差し上げるお土産です</td></tr>
+          <tr><td class="grammar-name">おる</td><td>いる</td><td class="example">はい、おります。少々お待ちください。</td></tr>
+          <tr><td class="grammar-name">お目にかかる</td><td>会う</td><td class="example">昨日張先生にお目にかかりました</td></tr>
+        </tbody>
+      </table>
+      <br>
+      <h4 style="color:var(--accent2);font-size:0.9rem;margin-bottom:8px;">自谦句型</h4>
+      <table>
+        <thead><tr><th>句型</th><th>例</th></tr></thead>
+        <tbody>
+          <tr><td class="conj">お + 動詞ます形去ます + する<br>ご + サ変詞幹 + する</td><td>先生、私がその荷物をお持ちします。</td></tr>
+          <tr><td class="conj">お + 動詞ます形去ます + いたす<br>ご + サ変詞幹 + いたす</td><td>私からご説明いたします。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 推量表达比较 ==================== -->
+<section id="sec-like">
+  <h2 class="section-title">五、推量表达比较 — ようだ・みたいだ・そうだ・らしい</h2>
+  <div class="lesson">
+    <table class="comparison-table">
+      <thead>
+        <tr><th style="width:10%">区别</th><th style="width:19%">ようだ</th><th style="width:19%">みたいだ</th><th style="width:24%">そうだ</th><th style="width:28%">らしい</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>含义</td>
+          <td>像什么一样、推测</td>
+          <td>「ようだ」的口语</td>
+          <td>视觉直觉判断<br>可能性很大（好像要…）</td>
+          <td>具有〜性的（本身特点）<br>客观迹象的客观推测</td>
+        </tr>
+        <tr>
+          <td>接续</td>
+          <td class="conj">动词简体<br>形容词原型<br>形容动词 + な<br>名词 + の</td>
+          <td class="conj">动词简体<br>形容词原型<br>形容动词词干<br>名词词干</td>
+          <td class="conj">动词ます形<br>形容词（去い）<br>形容动词词干<br>名词（✗）</td>
+          <td class="conj">动词简体<br>形容词原型<br>形容动词词干<br>名词词干</td>
+        </tr>
+        <tr>
+          <td>对比</td>
+          <td>偏书面语<br>接续需加「の」「な」</td>
+          <td>更口语化<br>日常表达</td>
+          <td>眼前信息<br>直观判断<br>"看起来好像"</td>
+          <td>有事实依据<br>客观推测</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <table class="comparison-table">
+      <thead><tr><th style="width:14%">表达</th><th>例句</th><th>中文释义</th></tr></thead>
+      <tbody>
+        <tr><td class="grammar-name">ようだ</td><td class="example">彼は先生のようだ。</td><td>他似乎是老师（书面）</td></tr>
+        <tr><td class="grammar-name">みたいだ</td><td class="example">彼は先生みたいだ。</td><td>他像老师一样（口语）</td></tr>
+        <tr><td class="grammar-name">そうだ</td><td class="example">雨が降りそうだ。</td><td>看起来快要下雨了</td></tr>
+        <tr><td class="grammar-name">らしい</td><td class="example">雨が降るらしい。</td><td>好像听说要下雨了</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== 动词变形表 ==================== -->
+<section id="sec-verb">
+  <h2 class="section-title">六、动词变形表</h2>
+  <div class="lesson">
+    <div class="verb-wrap">
+      <table class="verb-table">
+        <thead>
+          <tr>
+            <th style="text-align:left">原型</th><th>敬体 ます</th><th>否定 ない</th><th>て形</th><th>过去形 た</th>
+            <th>意志形</th><th>可能形</th><th>被动</th><th>假定ば形</th><th>命令形</th>
+            <th>使役态</th><th>使役被动态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>食べる</td><td>食べます</td><td>食べない</td><td>食べて</td><td>食べた</td><td>食べよう</td><td>食べられる</td><td>食べられる</td><td>食べれば</td><td>食べよう</td><td>食べさせる</td><td>食べさせられる</td></tr>
+          <tr><td>飲む</td><td>飲みます</td><td>飲まない</td><td>飲んで</td><td>飲んだ</td><td>飲もう</td><td>飲める</td><td>飲まれる</td><td>飲めば</td><td>飲もう</td><td>飲ませる</td><td>飲ませられる／飲まされる</td></tr>
+          <tr><td>行く</td><td>行きます</td><td>行かない</td><td>行って</td><td>行った</td><td>行こう</td><td>行ける</td><td>行かれる</td><td>行けば</td><td>行こう</td><td>行かせる</td><td>行かせられる／行かされる</td></tr>
+          <tr><td>来る</td><td>来ます</td><td>来ない</td><td>来て</td><td>来た</td><td>来よう</td><td>来られる</td><td>来られる</td><td>来れば</td><td>来よう</td><td>来させる</td><td>来させられる</td></tr>
+          <tr><td>勉強する</td><td>勉強します</td><td>勉強しない</td><td>勉強して</td><td>勉強した</td><td>勉強しよう</td><td>勉強できる</td><td>勉強される</td><td>勉強すれば</td><td>勉強しよう</td><td>勉強させる</td><td>勉強させられる</td></tr>
+          <tr><td style="font-weight:700;color:var(--accent2)">遅い（参考）</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>遅ければ</td><td></td><td></td><td></td></tr>
+          <tr><td style="font-weight:700;color:var(--accent2)">いい（参考）</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>よければ</td><td></td><td></td><td></td></tr>
+          <tr><td style="font-weight:700;color:var(--accent2)">取れる（一段）</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>取れれば</td><td></td><td></td><td></td></tr>
+          <tr><td style="font-weight:700;color:var(--accent2)">覚える（一段）</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>覚えれば</td><td></td><td></td><td></td></tr>
+          <tr><td style="font-weight:700;color:var(--accent2)">帰る（五段）</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>帰れば</td><td></td><td></td><td></td></tr>
+          <tr><td style="font-weight:700;color:var(--accent2)">積む（五段）</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>積めば</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>📖 综合日语语法笔记 — 整理自个人学习 Excel</p>
+</footer>
+</div>
+</body>
+</html>
