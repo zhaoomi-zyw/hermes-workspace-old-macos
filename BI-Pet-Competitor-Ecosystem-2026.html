@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BI 宠物竞争者生态 2026</title>
+<style>
+  :root {
+    --bi-dark: #08312A;
+    --bi-green: #00E47C;
+    --bi-light: #FAF9F8;
+    --bi-gray: #f5f5f5;
+    --text-dark: #1a1a1a;
+    --text-mid: #444;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: var(--bi-light); color: var(--text-dark); line-height: 1.6; }
+  .slide { min-height: 100vh; padding: 60px 40px; border-bottom: 1px solid #e0e0e0; background: var(--bi-light); }
+  .slide:nth-child(even) { background: #ffffff; }
+  .slide-num { font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+  h1.slide-title { font-size: 2.2rem; font-weight: 700; color: var(--bi-dark); margin-bottom: 8px; }
+  h2.slide-subtitle { font-size: 1.1rem; color: var(--bi-green); font-weight: 500; margin-bottom: 32px; }
+  .tag { display: inline-block; background: var(--bi-dark); color: white; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-right: 6px; margin-bottom: 6px; }
+  .tag-green { background: var(--bi-green); color: var(--bi-dark); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border-left: 4px solid var(--bi-green); }
+  .card.dark { background: var(--bi-dark); color: white; border-left: 4px solid var(--bi-green); }
+  .card.dark h3 { color: var(--bi-green); }
+  .card h3 { font-size: 1rem; color: var(--bi-dark); margin-bottom: 12px; }
+  .big-num { font-size: 3rem; font-weight: 800; color: var(--bi-dark); line-height: 1; }
+  .big-num.green { color: var(--bi-green); }
+  .label { font-size: 0.85rem; color: #666; margin-top: 4px; }
+  .label.white { color: rgba(255,255,255,0.7); }
+  .section-header { font-size: 1.2rem; font-weight: 700; color: var(--bi-dark); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--bi-green); }
+  .insight { background: #fff9e6; border-left: 4px solid #ffc107; padding: 16px 20px; border-radius: 8px; margin: 20px 0; font-size: 0.95rem; }
+  .insight strong { color: var(--bi-dark); }
+  ul { list-style: none; padding-left: 0; }
+  ul li { padding: 6px 0; padding-left: 20px; position: relative; }
+  ul li::before { content: "›"; position: absolute; left: 0; color: var(--bi-green); font-weight: 700; }
+  .flex-row { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+  .stat-box { background: white; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); flex: 1; min-width: 140px; }
+  .risk-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.9rem; }
+  .risk-table th { background: var(--bi-dark); color: white; padding: 10px 14px; text-align: left; }
+  .risk-table td { padding: 10px 14px; border-bottom: 1px solid #eee; vertical-align: top; }
+  .risk-table tr:nth-child(even) td { background: #f9f9f9; }
+  .badge-H { background: #e53935; color: white; font-size: 11px; padding: 1px 6px; border-radius: 3px; }
+  .badge-M { background: #fb8c00; color: white; font-size: 11px; padding: 1px 6px; border-radius: 3px; }
+  .badge-L { background: #43a047; color: white; font-size: 11px; padding: 1px 6px; border-radius: 3px; }
+  .p0 { border-left: 5px solid #e53935; }
+  .p1 { border-left: 5px solid #fb8c00; }
+  .p2 { border-left: 5px solid #43a047; }
+  .priority { font-size: 0.8rem; font-weight: 700; display: inline-block; margin-bottom: 8px; }
+  .priority.P0 { color: #e53935; }
+  .priority.P1 { color: #fb8c00; }
+  .priority.P2 { color: #43a047; }
+  .cover { background: var(--bi-dark) !important; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 100vh; }
+  .cover h1 { font-size: 3.5rem; color: var(--bi-green); margin-bottom: 16px; }
+  .cover .subtitle { font-size: 1.3rem; color: rgba(255,255,255,0.8); margin-bottom: 32px; }
+  .cover .meta { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 40px; }
+  .cover .tags-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
+  .cover .tag { background: rgba(0,228,124,0.15); color: var(--bi-green); border: 1px solid rgba(0,228,124,0.3); }
+  .footer-note { font-size: 11px; color: #aaa; margin-top: 40px; padding-top: 16px; border-top: 1px solid #eee; }
+  .emoji-row { font-size: 1.5rem; margin-bottom: 12px; }
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .slide { padding: 40px 20px; }
+    .cover h1 { font-size: 2.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 第1页：封面 -->
+<div class="slide cover">
+  <div class="emoji-row">🐾 🐱 🐕</div>
+  <h1>BI 宠物竞争者生态 2026</h1>
+  <p class="subtitle">Boehringer Ingelheim Pet Competitor Ecosystem</p>
+  <p class="subtitle" style="font-size:1rem; color:rgba(255,255,255,0.6);">市场趋势 · 竞品动态 · BI对策 · 行业洞察</p>
+  <div class="tags-row">
+    <span class="tag">2026年5月竞品池确认</span>
+    <span class="tag">国产替代深化</span>
+    <span class="tag">渠道与数字化机会</span>
+    <span class="tag">BI行动建议</span>
+  </div>
+  <p class="meta">数据截至：2026年5月13日 | 非官方披露数据仅供内部使用</p>
+</div>
+
+<!-- 第2页：市场概览 -->
+<div class="slide">
+  <div class="slide-num">第 2 页</div>
+  <h1 class="slide-title">市场概览</h1>
+  <h2 class="slide-subtitle">Market Overview — 猫狗增长趋势 & 核心数据</h2>
+
+  <div class="grid-3" style="margin-bottom:32px;">
+    <div class="stat-box">
+      <div class="big-num">3,100+</div>
+      <div class="label">亿元 CNY 中国宠物市场规模</div>
+    </div>
+    <div class="stat-box">
+      <div class="big-num">840</div>
+      <div class="label">亿元 CNY 宠物医疗消费</div>
+    </div>
+    <div class="stat-box">
+      <div class="big-num">300</div>
+      <div class="label">亿元 CNY 宠物药品市场规模</div>
+    </div>
+    <div class="stat-box">
+      <div class="big-num green">5%</div>
+      <div class="label">CAGR 宠物药品市场增速 2026-31</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🐱 猫咪市场 | Cat Market — 最大增量来源</h3>
+      <ul>
+        <li>猫数量7,200万只，增速CAGR ~8%，已超越狗成为最大宠物品类</li>
+        <li>室内猫比例>70%，"不出门不驱虫"误区→最大认知缺口，教育空间大</li>
+        <li>国产猫三联疫苗突破：海正「海妙哆」填补国产高端空白，2025年2月上市</li>
+        <li>猫用滴剂最优剂型（优于口服），猫咪喂药难→滴剂依从性更高</li>
+        <li>BI猫用：NexGard COMBO（首个且唯一获批治疗绦虫），博来恩（猫用）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🐕 狗狗市场 | Dog Market — 高价值处方药</h3>
+      <ul>
+        <li>狗数量5,800万只，增速CAGR ~3%，整体消费能力高于猫（年消费4,000-6,000元）</li>
+        <li>户外暴露场景多，驱虫频次需求更高（蜱虫、心丝虫高发区）</li>
+        <li>超可信中国率先获批治疗犬疥螨、蠕形螨（异恶唑啉类）</li>
+        <li>宠物医院+电商双渠道布局深化，兽医推荐影响力大</li>
+        <li>BI产品：超可信、福来恩、福味恩、尼可信、犬心保</li>
+      </ul>
+    </div>
+  </div>
+  <p class="footer-note">数据来源：艾媒咨询、前瞻网、中国畜牧业协会宠物产业分会、派读宠物行业大数据平台 | Data: May 2026</p>
+</div>
+
+<!-- 第3页：中国宠物驱虫竞争格局 -->
+<div class="slide">
+  <div class="slide-num">第 3 页</div>
+  <h1 class="slide-title">中国宠物驱虫竞争格局 2026 Q1</h1>
+  <h2 class="slide-subtitle">China Pet Dewormer Competitive Snapshot</h2>
+
+  <div class="grid-3" style="margin-bottom:32px;">
+    <div class="card">
+      <h3>硕腾 Zoetis</h3>
+      <div class="big-num" style="font-size:2rem;">22.62亿美元</div>
+      <div class="label">Q1营收 / +3% YoY</div>
+      <ul style="margin-top:12px;">
+        <li>▲ 国际+17% / +10% organic</li>
+        <li>▼美国伴侣动物-11%</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>礼蓝 Elanco</h3>
+      <div class="big-num" style="font-size:2rem;">13.71亿美元</div>
+      <div class="label">Q1营收 / +15% YoY</div>
+      <ul style="margin-top:12px;">
+        <li>▲ Zenrelia/Credelio Quattro放量</li>
+        <li>▼ 净负债约33亿美元</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>默沙东 MSD</h3>
+      <div class="big-num" style="font-size:2rem;">18亿美元</div>
+      <div class="label">Q1营收 / +13% YoY</div>
+      <ul style="margin-top:12px;">
+        <li>▲ 多元化组合稳健</li>
+        <li>▼ 宠物线相对平淡</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <h3>01</h3>
+      <p><strong>消费分层与价格敏感</strong></p>
+      <p style="margin-top:8px;font-size:0.9rem;color:#555;">宠主比价、复购和大促行为增强，高端外资品牌需要用专业价值抵御价格战</p>
+    </div>
+    <div class="card">
+      <h3>02</h3>
+      <p><strong>创新与便利性共同驱动</strong></p>
+      <p style="margin-top:8px;font-size:0.9rem;color:#555;">长效、省心、内外同驱、猫友好剂型成为差异化表达核心</p>
+    </div>
+    <div class="card">
+      <h3>03</h3>
+      <p><strong>中国市场进入运营战</strong></p>
+      <p style="margin-top:8px;font-size:0.9rem;color:#555;">医院专业背书、电商搜索卡位、私域复购提醒需要形成闭环</p>
+    </div>
+  </div>
+  <p class="footer-note">数据来源：Zoetis / Elanco / Merck Q1 2026官方财报；公开资料与市场观察 | Data: May 2026</p>
+</div>
+
+<!-- 第4页：竞品分析硕腾 -->
+<div class="slide">
+  <div class="slide-num">第 4 页</div>
+  <h1 class="slide-title">竞品分析：硕腾 Zoetis 驱虫药</h1>
+  <h2 class="slide-subtitle">Zoetis Parasiticide Portfolio</h2>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card">
+      <h3>关键指标</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;">
+        <div><div class="big-num" style="font-size:1.8rem;">96.8-99.6亿</div><div class="label">美元 2026收入指引</div></div>
+        <div><div class="big-num" style="font-size:1.8rem;">22.62亿</div><div class="label">美元 Q1营收 / +3% YoY</div></div>
+        <div><div class="big-num" style="font-size:1.8rem;color:#e53935;">-11%</div><div class="label">美国伴侣动物同比下滑</div></div>
+        <div><div class="big-num" style="font-size:1.8rem;color:#43a047;">+17%</div><div class="label">国际市场增长关键引擎</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>主要产品</h3>
+      <ul style="margin-top:12px;">
+        <li><strong>大宠爱 Revolution</strong> — 犬猫 | 外用滴剂 | 内外驱 | 赛拉菌素；体内外寄生虫及心丝虫预防</li>
+        <li><strong>妙宠爱 Revolution Plus</strong> — 猫 | 外用滴剂 | 内外驱 | 赛拉菌素+沙罗拉纳；跳蚤、蜱虫、耳螨等</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="insight">
+    <strong>⚠️ 驱虫药市场挑战</strong><br>
+    利润预警：宠主削减开支、减少就诊，高端宠物护理承压<br>
+    中国驱虫药市场国产品牌性价比优势持续蚕食外资份额<br>
+    大宠爱/妙宠爱在中国核心是犬猫滴剂心智
+  </div>
+
+  <div class="insight" style="background:#e8f5e9;border-left-color:#43a047;">
+    <strong>💡 洞察</strong>：硕腾在中国驱虫核心资产是大宠爱/妙宠爱的犬猫滴剂心智。BI犬端应突出超可信口服内外同驱与高阶预防；猫端重点对标滴剂便利性与猫主接受度。
+  </div>
+  <p class="footer-note">数据来源：Zoetis Q1 2026官方财报、Zoetis中国大宠爱/妙宠爱公开资料 | Data: May 2026</p>
+</div>
+
+<!-- 第5页：BI产品清单 -->
+<div class="slide">
+  <div class="slide-num">第 5 页</div>
+  <h1 class="slide-title">BI 宠物药品清单 — 非处方药</h1>
+  <h2 class="slide-subtitle">BIAH Pet Product List (Non-Rx)</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🐕 犬用 Dog</h3>
+      <ul style="margin-top:12px;">
+        <li><strong>超可信 NexGard</strong> — 口服咀嚼片 | 内外同驱 | 氟虫腈+阿巴美丁；蜱虫、跳蚤、蠕形螨、疥螨、心丝虫预防</li>
+        <li><strong>福来恩 Frontline</strong> — 外用滴剂 | 跳蚤、蜱虫</li>
+        <li><strong>福味恩</strong> — 外用滴剂</li>
+        <li><strong>尼可信</strong> — 口服 | 跳蚤、蜱虫</li>
+        <li><strong>犬心保 Heartgard</strong> — 口服 | 心丝虫预防</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🐱 猫用 Cat</h3>
+      <ul style="margin-top:12px;">
+        <li><strong>博来恩 Broadline</strong> — 外用滴剂 | 内外同驱 | 跳蚤、蜱虫、绦虫、蛔虫、钩虫</li>
+        <li><strong>NexGard COMBO</strong> — 外用滴剂 | 猫用内外同驱（含治疗绦虫，BI唯一获批治疗绦虫产品）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="insight" style="background:#fff3e0;border-left-color:#fb8c00;margin-top:24px;">
+    <strong>注：</strong>以上数据基于市场调研和行业估算，非官方披露数据
+  </div>
+  <p class="footer-note" style="color:#e53935;">INTERNAL USE ONLY</p>
+</div>
+
+<!-- 第6页：竞争格局全景 -->
+<div class="slide">
+  <div class="slide-num">第 6 页</div>
+  <h1 class="slide-title">竞争格局全景</h1>
+  <h2 class="slide-subtitle">Competitive Landscape Overview</h2>
+
+  <p style="background:var(--bi-dark);color:var(--bi-green);padding:16px 20px;border-radius:8px;margin-bottom:24px;font-weight:600;">
+    竞争不再只是产品谱系，而是专业信任、价格带与复购能力的竞争
+  </p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>硕腾 Zoetis <span class="tag" style="font-size:10px;">全球龙头</span></h3>
+      <ul>
+        <li>大宠爱/妙宠爱构成强猫狗驱虫心智</li>
+        <li>兽医教育与慢病布局长期强势</li>
+        <li>Q1 2026国际业务增长、美国宠物线承压</li>
+        <li>需持续关注其医生教育和会员化能力</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>礼蓝 Elanco <span class="tag" style="font-size:10px;">创新驱动</span></h3>
+      <ul>
+        <li>可立奥、索来多项圈、拜宠清覆盖不同剂型</li>
+        <li>Zenrelia/Credelio Quattro为美国/海外新品动态</li>
+        <li>美国覆盖诊所份额数据不可直接外推中国</li>
+        <li>新兴市场压力与新品放量并存</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>默沙东 MSD <span class="tag" style="font-size:10px;">稳健多元</span></h3>
+      <ul>
+        <li>贝卫多以长效省心定位形成清晰差异化</li>
+        <li>医院渠道深耕，多元化组合稳健</li>
+        <li>Q1 2026动物保健业务增长</li>
+        <li>宠物驱虫在中国仍以长效心智和专业推荐为核心</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>海正动保 <span class="tag tag-green" style="font-size:10px;">⭐重点</span></h3>
+      <ul>
+        <li>海乐妙、海乐旺等形成国产矩阵</li>
+        <li>公开销量/市占需以审计或电商数据确认</li>
+        <li>电商与下沉渠道价格压力明显</li>
+        <li>出海、处方粮与"药粮联动"为长期观察项</li>
+      </ul>
+    </div>
+    <div class="card" style="grid-column:1/-1;">
+      <h3>瑞普/普莱柯 <span class="tag" style="font-size:10px;">国产替代</span></h3>
+      <div class="grid-2" style="margin-top:12px;">
+        <ul>
+          <li>恩倍多/倍宠恩等以性价比切入</li>
+          <li>电商速度和下沉渠道形成持续压力</li>
+        </ul>
+        <ul>
+          <li>价格竞争激烈</li>
+          <li>主要短板：高端品牌信任、兽医背书、长期复购管理</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:24px;">
+    竞争焦点从单品疗效转向<strong>专业信任、渠道效率、价盘管理和复购管理</strong>。外资守医院与品牌信任，国产品牌抢价格带和下沉渠道。
+  </div>
+  <p class="footer-note">数据来源：各公司2026公开财报/新闻稿、2026中国宠物行业白皮书、用户确认竞品池 | Data: May 2026</p>
+</div>
+
+<!-- 第7页：BI策略优先级 -->
+<div class="slide">
+  <div class="slide-num">第 7 页</div>
+  <h1 class="slide-title">BI策略优先级</h1>
+  <h2 class="slide-subtitle">Product & Channel Strategy Priorities</h2>
+
+  <p style="background:var(--bi-dark);color:var(--bi-green);padding:16px 20px;border-radius:8px;margin-bottom:24px;font-weight:600;">
+    犬猫分化下，猫端做教育突破，犬端做高阶预防规模化
+  </p>
+
+  <div class="card p0" style="margin-bottom:20px;">
+    <span class="priority P0">P0 ★★★★★</span>
+    <h3 style="font-size:1.2rem;margin-bottom:12px;">猫用内外同驱滴剂</h3>
+    <ul>
+      <li>猫数量高于犬，且猫端仍有驱虫认知缺口</li>
+      <li>2025年城镇猫约7289万只、犬约5343万只；猫消费市场增速高于犬</li>
+      <li>室内猫仍有跳蚤、螨虫及肠道寄生虫风险，便利滴剂更适合"喂药难"场景</li>
+    </ul>
+    <p style="margin-top:10px;font-size:0.9rem;color:#555;"><strong>BI行动：</strong>博来恩围绕室内猫、多猫家庭、幼猫首次驱虫做教育与多支装复购</p>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:20px;">
+    <div class="card p1">
+      <span class="priority P1">P1 ★★★★☆</span>
+      <h3>犬用超可信咀嚼片</h3>
+      <ul>
+        <li>犬端单宠年消费更高，医院端专业信任更强</li>
+        <li>超可信具备犬用口服内外同驱优势，适合建立高阶预防心智</li>
+        <li>户外场景（蜱虫、心丝虫等）需求明确</li>
+      </ul>
+      <p style="margin-top:10px;font-size:0.9rem;"><strong>BI行动：</strong>医院推荐+电商搜索词防守，强化年度预防方案</p>
+    </div>
+    <div class="card p1">
+      <span class="priority P1">P1 ★★★★☆</span>
+      <h3>猫用单方滴剂（室内猫）</h3>
+      <ul>
+        <li>入门教育与体验装承接，适合室内猫、幼猫首购和价格敏感人群</li>
+        <li>多宠家庭：「多支装/周期装」提升复购确定性</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card p2">
+    <span class="priority P2">P2 ★★★☆☆</span>
+    <h3>犬用口服/咀嚼片（单方）</h3>
+    <p>稳定支撑，更多承担防守和补充角色 | 以场景教育和渠道SKU管理维持价盘</p>
+  </div>
+
+  <div class="insight" style="margin-top:20px;">
+    <strong>核心结论：</strong>猫用滴剂是认知突破口，犬用超可信是规模与专业支撑；内外同驱应作为未来教育主线，而非仅靠价格竞争
+  </div>
+  <p class="footer-note">数据来源：2026中国宠物行业白皮书、各公司公开信息、公开电商观察 | Strategy view: May 2026</p>
+</div>
+
+<!-- 第8页：渠道策略 -->
+<div class="slide">
+  <div class="slide-num">第 8 页</div>
+  <h1 class="slide-title">渠道策略核心框架</h1>
+  <h2 class="slide-subtitle">Channel Strategy Framework</h2>
+
+  <p style="background:var(--bi-dark);color:var(--bi-green);padding:16px 20px;border-radius:8px;margin-bottom:24px;font-weight:600;">
+    医院建立信任，电商承接转化，宠物店与O2O负责复购
+  </p>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card">
+      <h3>🏥 宠物医院</h3>
+      <p style="font-size:0.85rem;color:#555;margin-bottom:10px;">专业入口 | 首购教育</p>
+      <ul>
+        <li>教育主阵地×医生背书</li>
+        <li>兽医产品培训</li>
+        <li>幼宠首购合作</li>
+        <li>数字化驱虫档案</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🛒 电商平台</h3>
+      <p style="font-size:0.85rem;color:#555;margin-bottom:10px;">重要渠道 | 搜索/复购入口</p>
+      <ul>
+        <li>搜索比价×内容转化</li>
+        <li>内容种草（小红书/抖音）</li>
+        <li>搜索卡位（关键词投放+内容优化）</li>
+        <li>会员复购体系 | 多宠家庭精准推送</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🏪 宠物店</h3>
+      <p style="font-size:0.85rem;color:#555;margin-bottom:10px;">补充渠道 | 社区触点</p>
+      <ul>
+        <li>即时购买×社区覆盖</li>
+        <li>店员教育</li>
+        <li>社区覆盖 | 即时购买场景</li>
+        <li>配合O2O配送</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>⚡ O2O平台</h3>
+      <p style="font-size:0.85rem;color:#555;margin-bottom:10px;">增长场景 | 即时履约</p>
+      <ul>
+        <li>即时需求×本地复购</li>
+        <li>美团/饿了么等接入</li>
+        <li>急用补购 | 本地库存可视化</li>
+        <li>下沉市场补充触达</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card dark">
+    <h3>渠道策略核心逻辑</h3>
+    <ul style="margin-top:12px;">
+      <li><strong>教育渠道（兽医）：</strong>建立信任和专业背书 → 首购转化</li>
+      <li><strong>转化渠道（电商）：</strong>内容种草 + 搜索卡位 → 合规销售</li>
+      <li><strong>复购渠道（电商+O2O+私域）：</strong>会员积分 + 数字提醒 + 即时履约 → 用户留存</li>
+    </ul>
+  </div>
+  <p class="footer-note">注：公开资料可支持渠道角色判断，具体份额需以电商审计/医院进销存/内部销售数据校准 | Strategy view: May 2026</p>
+</div>
+
+<!-- 第9页：产品组合与定价 -->
+<div class="slide">
+  <div class="slide-num">第 9 页</div>
+  <h1 class="slide-title">产品组合与定价策略</h1>
+  <h2 class="slide-subtitle">Product Portfolio & Pricing Strategy</h2>
+
+  <p style="background:var(--bi-dark);color:var(--bi-green);padding:16px 20px;border-radius:8px;margin-bottom:24px;font-weight:600;">
+    BI应避免价格战，用产品组合和服务权益守住高端价盘
+  </p>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card">
+      <h3>产品组合策略</h3>
+      <ul>
+        <li><strong>优先推动「内外同驱」</strong> — 一次解决多重寄生虫防护诉求，降低选择复杂度</li>
+        <li><strong>猫用滴剂为突破口</strong> — 博来恩猫用滴剂围绕室内猫、多猫家庭、幼猫首驱与周期装复购设计话术</li>
+        <li><strong>兽医端学术教育</strong> — CVTD赞助×产品培训×临床资料支持×数字化建档工具</li>
+        <li><strong>消费者复购闭环</strong> — 小程序驱虫日历×电商会员×季度复购提醒×多宠家庭周期装</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>定价带布局</h3>
+      <table class="risk-table" style="margin-top:8px;">
+        <tr><th>定价带</th><th>策略</th></tr>
+        <tr><td><strong>高端 &gt;300元/3支</strong></td><td>维持溢价，以服务、赠品和会员权益替代直接降价</td></tr>
+        <tr><td><strong>中高端 200-300元/3支</strong></td><td>限时权益、组合装和医院会员价，避免公开价盘失控</td></tr>
+        <tr><td><strong>中端 100-200元/3支</strong></td><td>首购体验装+小规格入门，承接价格敏感但不牺牲主品牌价值</td></tr>
+        <tr><td><strong>经济型 &lt;100元/3支</strong></td><td>作为价格监测对象，不建议BI正面价格战；以渠道SKU和防窜货管理隔离</td></tr>
+      </table>
+    </div>
+  </div>
+  <p class="footer-note">数据来源：公开电商观察、公司公开资料、内部策略假设 | Strategy view: May 2026</p>
+</div>
+
+<!-- 第10页：风险矩阵 -->
+<div class="slide">
+  <div class="slide-num">第 10 页</div>
+  <h1 class="slide-title">风险矩阵</h1>
+  <h2 class="slide-subtitle">Risk Matrix</h2>
+
+  <p style="background:#ffebee;color:#c62828;padding:16px 20px;border-radius:8px;margin-bottom:24px;font-weight:600;">
+    最大风险不是单一竞品，而是价格失控、渠道窜货和专业话语权被稀释
+  </p>
+
+  <table class="risk-table">
+    <tr>
+      <th style="width:40%;">风险 Risk</th>
+      <th>可能性</th>
+      <th>影响</th>
+      <th>应对策略</th>
+    </tr>
+    <tr>
+      <td>本土品牌低价抢占下沉市场</td>
+      <td><span class="badge-H">高</span></td>
+      <td><span class="badge-M">中</span></td>
+      <td>不正面参与价格战，聚焦品质、专业教育和小规格体验；下沉渠道用SKU隔离</td>
+    </tr>
+    <tr>
+      <td>消费者价格敏感度上升</td>
+      <td><span class="badge-M">中</span></td>
+      <td><span class="badge-H">高</span></td>
+      <td>用会员权益、周期装和首购体验降低门槛，避免破坏高端品牌价盘</td>
+    </tr>
+    <tr>
+      <td>兽医渠道话语权下降</td>
+      <td><span class="badge-M">中</span></td>
+      <td><span class="badge-M">中</span></td>
+      <td>强化兽医专业教育价值，同时用私域和AI科普承接院外触达</td>
+    </tr>
+    <tr>
+      <td>电商平台流量成本持续上涨</td>
+      <td><span class="badge-H">高</span></td>
+      <td><span class="badge-M">中</span></td>
+      <td>发展微信小程序、会员体系和Pet GPT内容入口，降低对付费流量依赖</td>
+    </tr>
+    <tr>
+      <td>AI问答和内容合规边界</td>
+      <td><span class="badge-M">中</span></td>
+      <td><span class="badge-M">中</span></td>
+      <td>建立合规话术库、医学审核流程和导流兽医机制，避免诊疗承诺风险</td>
+    </tr>
+    <tr>
+      <td>经销商窜货/电商乱价</td>
+      <td><span class="badge-M">中</span></td>
+      <td><span class="badge-H">高</span></td>
+      <td>建立一物一码追踪、渠道分级授权、异常价监测和返利挂钩机制</td>
+    </tr>
+  </table>
+  <p class="footer-note">数据来源：公开市场观察、公司公开资料、内部渠道管理经验 | Strategy view: May 2026</p>
+</div>
+
+<!-- 第11页：数字化机会 -->
+<div class="slide">
+  <div class="slide-num">第 11 页</div>
+  <h1 class="slide-title">数字化机会</h1>
+  <h2 class="slide-subtitle">Digital Opportunities</h2>
+
+  <p style="background:var(--bi-dark);color:var(--bi-green);padding:16px 20px;border-radius:8px;margin-bottom:24px;font-weight:600;">
+    从一次性驱虫购买变成年周期预防管理
+  </p>
+
+  <div class="grid-3">
+    <div class="card">
+      <h3>🔔 寄生虫风险地图</h3>
+      <p style="font-size:0.9rem;color:#555;margin-bottom:12px;">Risk Map + Reminder</p>
+      <ul>
+        <li>按城市/季节/犬猫/生活方式分层风险</li>
+        <li>生成个性化驱虫周期提醒</li>
+        <li>南方蜱虫季、户外犬、多猫家庭重点教育</li>
+        <li>提醒后承接医院咨询或电商复购</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>❓ 兽医KOC内容矩阵</h3>
+      <p style="font-size:0.9rem;color:#555;margin-bottom:12px;">Vet KOC Content Engine</p>
+      <ul>
+        <li>医生短视频模板与合规话术库</li>
+        <li>小红书/抖音/视频号场景化科普</li>
+        <li>围绕竞品对比词、症状词和场景词做搜索防守</li>
+        <li>从内容引导到医院问诊</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>📊 医院会员工具</h3>
+      <p style="font-size:0.9rem;color:#555;margin-bottom:12px;">Clinic CRM + AI Q&A + Traceability</p>
+      <ul>
+        <li>扫码建档：体重、用药、下次提醒</li>
+        <li>企业微信自动复购与随访</li>
+        <li>AI问答设置医疗边界并导流兽医</li>
+        <li>结合一物一码沉淀合规一方数据与渠道流向</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:24px;">
+    <strong>💡 核心价值：</strong>建立「风险识别—专业教育—医院咨询—电商/私域复购—渠道追踪」闭环，让BI从驱虫药品牌升级为<strong>宠物预防医学管理入口</strong>
+  </div>
+  <p class="footer-note" style="color:#e53935;">INTERNAL USE ONLY | 勃林格殷格翰中国宠物团队 | Data: May 2026</p>
+</div>
+
+<!-- 第12页：BI下一步 -->
+<div class="slide">
+  <div class="slide-num">第 12 页</div>
+  <h1 class="slide-title">BI下一步：守专业、控价盘、建复购、抓一方数据</h1>
+  <h2 class="slide-subtitle">BI Action Items</h2>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card p0">
+      <span class="priority P0">P0 ★★★★★</span>
+      <h3>建立年度驱虫管理心智</h3>
+      <p>把超可信/博来恩等从单次购买升级为全生命周期预防方案</p>
+    </div>
+    <div class="card p0">
+      <span class="priority P0">P0 ★★★★★</span>
+      <h3>搭建数字化复购与渠道闭环</h3>
+      <p>风险地图+提醒+AI问答+医院会员工具+一物一码追踪，沉淀合规一方数据</p>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card p1">
+      <span class="priority P1">P1 ★★★★☆</span>
+      <h3>强化犬猫产品组合分工</h3>
+      <p>犬端突出高阶内外同驱和户外风险；猫端强调便利性、安全感和专业推荐</p>
+    </div>
+    <div class="card p1">
+      <span class="priority P1">P1 ★★★★☆</span>
+      <h3>电商搜索与内容防守</h3>
+      <p>围绕竞品对比词、场景词、症状词建设合规内容和转化链路</p>
+    </div>
+    <div class="card p1">
+      <span class="priority P1">P1 ★★★★☆</span>
+      <h3>关注国产替代与价盘管理</h3>
+      <p>持续监测海正/瑞普/普莱柯价格、渠道、上新与医院端渗透，并联动防窜货机制</p>
+    </div>
+    <div class="card p2">
+      <span class="priority P2">P2 ★★★☆☆</span>
+      <h3>医生KOC共创</h3>
+      <p>把兽医教育升级为短视频内容、私域触达和到店咨询线索</p>
+    </div>
+  </div>
+
+  <div class="card dark">
+    <h3>竞争格局快照</h3>
+    <ul style="margin-top:12px;">
+      <li><strong>硕腾：</strong>大宠爱/妙宠爱构成强猫狗驱虫心智，医生教育和慢病布局长期强势</li>
+      <li><strong>礼蓝：</strong>可立奥、索来多项圈、拜宠清覆盖不同剂型；海外新品需与中国在售区分</li>
+      <li><strong>默沙东：</strong>贝卫多以长效省心定位形成差异化</li>
+      <li><strong>海正/瑞普/普莱柯：</strong>以国产矩阵、性价比和下沉渠道形成压力</li>
+    </ul>
+    <p style="margin-top:12px;font-size:0.9rem;color:rgba(255,255,255,0.7);">竞争焦点从单品疗效转向专业信任、渠道效率、价盘管理和复购管理</p>
+  </div>
+  <p class="footer-note" style="color:#e53935;">数据截至：2026年5月25日 | 非官方披露数据仅供内部策略讨论 | INTERNAL USE ONLY</p>
+</div>
+
+</body>
+</html>
