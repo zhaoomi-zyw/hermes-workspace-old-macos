@@ -9,818 +9,792 @@
   --bg: #FAF9F8;
   --dark: #08312A;
   --green: #00E47C;
-  --green-dim: #00c46a;
   --text: #1a1a1a;
   --text-light: #555;
   --border: #e0ddd8;
   --card: #fff;
   --red: #e74c3c;
   --orange: #f39c12;
-  --blue: #2980b9;
-  --purple: #8e44ad;
-  --slide-w: 960px;
-  --slide-h: 540px;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  background: #e8e6e1;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  min-height:100vh; padding:20px;
+  background: var(--bg); color: var(--text); line-height:1.6;
 }
-#deck { position:relative; width:var(--slide-w); height:var(--slide-h); }
-.slide {
-  position:absolute; top:0; left:0; width:100%; height:100%;
-  background:var(--bg); border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,.12);
-  padding:48px 56px; overflow:hidden;
-  display:none; flex-direction:column;
-  transition:opacity .3s;
-}
-.slide.active { display:flex; }
-.slide.cover, .slide.end {
+
+/* Sections */
+section { padding: 64px 0; }
+section:nth-child(even) { background: #fff; }
+section:nth-child(odd) { background: var(--bg); }
+section.cover, section.end {
   background: linear-gradient(135deg, var(--dark) 0%, #0a4a3e 50%, #08312A 100%);
-  color:#fff; justify-content:center; align-items:flex-start; text-align:left;
+  color: #fff; padding: 100px 0;
 }
-.slide.end { align-items:center; text-align:center; }
+
+.container { max-width: 1024px; margin: 0 auto; padding: 0 40px; }
+.cover .container, .end .container { text-align: center; }
 
 /* Typography */
-h1 { font-size:36px; font-weight:700; line-height:1.2; margin-bottom:12px; }
-h2 { font-size:26px; font-weight:700; color:var(--dark); margin-bottom:20px; }
-h3 { font-size:18px; font-weight:600; color:var(--dark); margin-bottom:8px; }
-.cover h1 { font-size:40px; margin-bottom:16px; color:#fff; }
-.cover .sub { font-size:18px; color:var(--green); font-weight:500; margin-bottom:32px; }
-.cover .meta { font-size:13px; color:rgba(255,255,255,.6); }
+h1 { font-size: 40px; font-weight:700; line-height:1.2; margin-bottom:12px; }
+h2 { font-size: 28px; font-weight:700; color: var(--dark); margin-bottom: 28px; padding-bottom: 12px; border-bottom: 3px solid var(--green); display: inline-block; }
+h3 { font-size: 17px; font-weight:600; color: var(--dark); margin-bottom: 8px; }
+.cover h1 { font-size: 44px; margin-bottom: 16px; color:#fff; }
+.cover .sub { font-size: 18px; color: var(--green); font-weight:500; margin-bottom: 40px; }
+.cover .meta { font-size: 13px; color: rgba(255,255,255,.5); }
 .end h1 { color:#fff; }
-.end .sub { color:var(--green); font-size:18px; margin-top:8px; }
+.end .sub { color: var(--green); font-size: 18px; margin-top: 8px; }
 
 /* Components */
 .tag {
-  display:inline-block; padding:3px 10px; border-radius:12px; font-size:11px;
-  font-weight:600; margin-right:6px; margin-bottom:4px;
+  display:inline-block; padding: 4px 12px; border-radius: 14px; font-size: 12px;
+  font-weight:600; margin-right: 6px; margin-bottom: 4px;
 }
-.tag-green { background:var(--green); color:var(--dark); }
-.tag-dark { background:var(--dark); color:#fff; }
-.tag-outline { border:1.5px solid var(--dark); color:var(--dark); background:transparent; }
+.tag-green { background: var(--green); color: var(--dark); }
+.tag-dark { background: var(--dark); color: #fff; }
+.tag-outline { border:1.5px solid var(--dark); color: var(--dark); background: transparent; }
 
-.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; flex:1; }
-.grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; flex:1; }
-.grid4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:10px; flex:1; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+.grid4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:14px; }
 
 .card {
-  background:var(--card); border-radius:8px; padding:16px;
-  border:1px solid var(--border); box-shadow:0 1px 3px rgba(0,0,0,.04);
+  background: var(--card); border-radius: 10px; padding: 20px;
+  border: 1px solid var(--border); box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  transition: box-shadow .2s;
 }
-.card-accent { border-left:3px solid var(--green); }
-.card-dark { border-left:3px solid var(--dark); }
-.card-warn { border-left:3px solid var(--orange); }
+.card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+.card-accent { border-left: 4px solid var(--green); }
+.card-dark { border-left: 4px solid var(--dark); }
+.card-warn { border-left: 4px solid var(--orange); }
 
-.num { font-size:32px; font-weight:800; color:var(--green); line-height:1; }
-.label { font-size:12px; color:var(--text-light); margin-top:2px; }
+.num { font-size: 36px; font-weight:800; color: var(--green); line-height:1; }
+.label { font-size: 12px; color: var(--text-light); margin-top: 4px; }
 
 /* Tables */
-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:8px; }
-th { background:var(--dark); color:#fff; padding:6px 8px; text-align:left; font-weight:500; font-size:11px; }
-td { padding:5px 8px; border-bottom:1px solid var(--border); }
-tr:nth-child(even) td { background:rgba(0,228,124,.04); }
-.highlight td { background:rgba(0,228,124,.12) !important; font-weight:600; }
+table { width:100%; border-collapse:collapse; font-size: 13px; margin-top: 12px; border-radius: 8px; overflow: hidden; }
+th { background: var(--dark); color: #fff; padding: 10px 12px; text-align:left; font-weight:500; font-size: 12px; text-transform: uppercase; letter-spacing: .5px; }
+td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+tr:last-child td { border-bottom: none; }
+.highlight td { background: rgba(0,228,124,.10) !important; font-weight:600; }
 
-/* Matrix dots */
-.dot-row { display:flex; gap:4px; align-items:center; margin:2px 0; }
-.dot { width:10px; height:10px; border-radius:50%; }
-.dot-fill { background:var(--green); }
-.dot-empty { background:#ddd; }
+/* Bars */
+.bar-wrap { display:flex; align-items:center; gap:10px; margin:4px 0; }
+.bar-label { font-size: 12px; width: 80px; text-align:right; color: var(--text-light); }
+.bar { height: 20px; border-radius: 5px; background: var(--green); min-width:2px; }
+.bar-val { font-size: 11px; color: var(--text-light); width: 40px; }
 
-/* Radar / graph */
-.bar-wrap { display:flex; align-items:center; gap:8px; margin:3px 0; }
-.bar-label { font-size:11px; width:70px; text-align:right; color:var(--text-light); }
-.bar { height:18px; border-radius:4px; background:var(--green); min-width:2px; transition:width .5s; }
-.bar-val { font-size:10px; color:var(--text-light); width:36px; }
+/* Timeline */
+.timeline { display:flex; gap:20px; margin-top: 16px; }
+.t-phase { flex:1; padding: 24px 16px; border-radius: 10px; text-align:center; position:relative; }
+.t-phase:not(:last-child)::after { content:"→"; position:absolute; right:-16px; top:50%; font-size: 24px; color: var(--green); transform:translateY(-50%); z-index:1; }
+.t-phase.q1 { background: rgba(0,228,124,.07); border: 1px solid rgba(0,228,124,.2); }
+.t-phase.q2 { background: rgba(0,228,124,.12); border: 1px solid rgba(0,228,124,.3); }
+.t-phase.q3 { background: rgba(0,228,124,.17); border: 1px solid rgba(0,228,124,.4); }
+.t-phase.q4 { background: rgba(0,228,124,.22); border: 1px solid rgba(0,228,124,.5); }
 
-/* Roadmap */
-.timeline { display:flex; gap:0; flex:1; align-items:stretch; margin-top:12px; }
-.t-phase { flex:1; padding:16px 12px; border-radius:8px; text-align:center; position:relative; }
-.t-phase:not(:last-child)::after { content:"→"; position:absolute; right:-12px; top:50%; font-size:20px; color:var(--green); transform:translateY(-50%); }
-.t-phase.q1 { background:rgba(0,228,124,.08); border:1px solid rgba(0,228,124,.2); }
-.t-phase.q2 { background:rgba(0,228,124,.14); border:1px solid rgba(0,228,124,.3); }
-.t-phase.q3 { background:rgba(0,228,124,.20); border:1px solid rgba(0,228,124,.4); }
-.t-phase.q4 { background:rgba(0,228,124,.26); border:1px solid rgba(0,228,124,.5); }
+/* Priority Matrix */
+.pmatrix { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; max-width: 500px; }
+.pmatrix > div { border-radius: 10px; padding: 20px; text-align: center; }
+.pm-p0 { background: rgba(0,228,124,.15); }
+.pm-p1 { background: rgba(0,228,124,.06); }
+.pm-p2 { background: rgba(0,0,0,.02); }
 
-/* Priority matrix */
-.matrix { display:grid; grid-template-columns:80px 1fr 1fr; grid-template-rows:auto 1fr 1fr; gap:2px; flex:1; }
-.matrix > div { padding:10px; display:flex; align-items:center; justify-content:center; text-align:center; font-size:12px; }
-.mx-label { font-weight:600; color:var(--text-light); font-size:11px; }
-.mx-hi { background:rgba(0,228,124,.15); border-radius:6px; }
-.mx-mid { background:rgba(0,228,124,.06); border-radius:6px; }
-
-/* Nav */
-#nav { display:flex; gap:8px; margin-top:16px; align-items:center; }
-#nav button {
-  background:var(--card); border:1px solid var(--border); border-radius:6px;
-  padding:6px 14px; cursor:pointer; font-size:13px; color:var(--text);
-  transition:all .15s;
+/* Stat bar */
+.stat-bar {
+  background: var(--dark); color: #fff; border-radius: 10px;
+  padding: 20px 28px; font-size: 15px; text-align: center; margin-top: 20px;
 }
-#nav button:hover { background:var(--dark); color:#fff; border-color:var(--dark); }
-#dots { display:flex; gap:4px; margin:0 12px; }
-#dots span { width:7px; height:7px; border-radius:50%; background:#ccc; cursor:pointer; transition:all .2s; }
-#dots span.active { background:var(--green); transform:scale(1.4); }
-#counter { font-size:12px; color:var(--text-light); min-width:50px; text-align:center; }
+.stat-bar strong { color: var(--green); }
 
-/* Print */
-@media print {
-  body { background:#fff; padding:0; }
-  #deck { position:static; width:100%; height:auto; }
-  .slide { position:static; display:flex !important; break-after:page; border-radius:0; box-shadow:none; margin-bottom:0; page-break-after:always; width:100%; height:100vh; }
-  #nav { display:none; }
+/* Lists */
+ul { padding-left: 20px; }
+li { font-size: 13px; color: var(--text-light); line-height:2; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+  .timeline { flex-direction: column; }
+  .t-phase::after { display:none; }
+  .container { padding: 0 24px; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 22px; }
 }
 
-/* Anim */
-@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
-.slide.active > * { animation:fadeUp .4s ease-out; }
+/* Section header with number */
+.sec-num { 
+  font-size: 12px; color: var(--green); letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 8px; font-weight: 600;
+}
+
+/* Separator between deep-dive sections */
+section.deep-dive { border-top: 1px solid var(--border); }
 </style>
 </head>
 <body>
 
-<div id="deck">
-
-<!-- S1: Cover -->
-<div class="slide cover active">
-  <div style="max-width:700px">
-    <div style="font-size:13px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;">Boehringer Ingelheim China · Pet Health</div>
+<!-- ═══════════════  COVER  ═══════════════ -->
+<section class="cover">
+  <div class="container">
+    <div style="font-size:13px;color:var(--green);letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;">
+      Boehringer Ingelheim China · Pet Health
+    </div>
     <h1>中国宠物驱虫药<br>竞争者生态与<br>IT 数字化机会</h1>
     <div class="sub">从产品竞争到产品组合 × 渠道触点 × 宠主复购 × 兽医教育 × 数据运营</div>
     <div class="meta">2026年6月 · 内部战略分析 · Confidential</div>
   </div>
-</div>
+</section>
 
-<!-- S2: Executive Summary -->
-<div class="slide">
-  <h2>Executive Summary · 三个核心判断</h2>
-  <div class="grid3">
-    <div class="card card-accent">
-      <div class="num">01</div>
-      <h3>竞争升维</h3>
-      <p style="font-size:13px;color:var(--text-light);line-height:1.6;">驱虫药竞争已从"谁有产品"转向"谁能管理宠主全生命周期"。<strong>产品组合 + 渠道触点 + 复购运营</strong> 决定未来份额。</p>
-    </div>
-    <div class="card card-accent">
-      <div class="num">02</div>
-      <h3>数字化窗口期</h3>
-      <p style="font-size:13px;color:var(--text-light);line-height:1.6;">竞品仍在传统渠道竞争。BI 率先用 IT 把驱虫药从 <strong>一次性购买</strong> 变成 <strong>周期性健康管理</strong>，是结构性优势。</p>
-    </div>
-    <div class="card card-accent">
-      <div class="num">03</div>
-      <h3>6 个产品机会</h3>
-      <p style="font-size:13px;color:var(--text-light);line-height:1.6;">驱虫提醒 → 宠主CRM → 兽医助手 → 渠道看板 → 竞品雷达 → 小程序。<strong>12 个月可分三阶段落地。</strong></p>
-    </div>
-  </div>
-</div>
-
-<!-- S3: Market Growth Logic -->
-<div class="slide">
-  <h2>中国宠物驱虫药市场增长逻辑</h2>
-  <div class="grid4" style="margin-bottom:16px;">
-    <div class="card" style="text-align:center;">
-      <div class="num" style="font-size:28px;">🐱</div>
-      <h3 style="margin-top:4px;">猫经济爆发</h3>
-      <p style="font-size:11px;color:var(--text-light);">猫数量增速超犬，猫用驱虫需求激增</p>
-    </div>
-    <div class="card" style="text-align:center;">
-      <div class="num" style="font-size:28px;">🔄</div>
-      <h3 style="margin-top:4px;">内外同驱</h3>
-      <p style="font-size:11px;color:var(--text-light);">一站式驱虫方案成主流，咀嚼片份额上升</p>
-    </div>
-    <div class="card" style="text-align:center;">
-      <div class="num" style="font-size:28px;">📅</div>
-      <h3 style="margin-top:4px;">规律驱虫</h3>
-      <p style="font-size:11px;color:var(--text-light);">从"有病才驱"到月度/季度预防，市场扩容</p>
-    </div>
-    <div class="card" style="text-align:center;">
-      <div class="num" style="font-size:28px;">📱</div>
-      <h3 style="margin-top:4px;">线上迁移</h3>
-      <p style="font-size:11px;color:var(--text-light);">电商增速超线下，内容种草→下单闭环形成</p>
-    </div>
-  </div>
-  <div style="background:var(--dark);color:#fff;border-radius:8px;padding:16px 20px;font-size:14px;text-align:center;">
-    中国宠物市场 <strong style="color:var(--green);">3,126 亿元（+4.1%）</strong> · 1.26 亿只宠物 · 宠物医疗 863 亿 · 驱虫药~300 亿
-  </div>
-</div>
-
-<!-- S4: Competitor Ecosystem -->
-<div class="slide">
-  <h2>竞争者生态图</h2>
-  <div class="grid2" style="flex:1;">
-    <div>
-      <h3 style="font-size:14px;margin-bottom:10px;">🏢 跨国药企</h3>
-      <div class="card card-accent" style="margin-bottom:8px;">
-        <strong style="color:var(--dark);">🟢 BI 勃林格殷格翰</strong>
-        <p style="font-size:12px;color:var(--text-light);">中国驱虫药 No.1 · 6款产品 · 咀嚼片+滴剂全覆盖</p>
+<!-- ═══════════════  EXECUTIVE SUMMARY  ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>Executive Summary · 三个核心判断</h2>
+    <div class="grid3">
+      <div class="card card-accent">
+        <div class="num">01</div>
+        <h3 style="margin-top:8px;">竞争升维</h3>
+        <p style="font-size:14px;color:var(--text-light);">驱虫药竞争已从"谁有产品"转向"谁能管理宠主全生命周期"。<strong>产品组合 + 渠道触点 + 复购运营</strong> 决定未来份额。</p>
       </div>
-      <div class="card" style="margin-bottom:8px;">
-        <strong style="color:var(--dark);">🔵 Zoetis 硕腾</strong>
-        <p style="font-size:12px;color:var(--text-light);">全球最大动保 · 大宠爱/妙宠爱 · 仅滴剂</p>
+      <div class="card card-accent">
+        <div class="num">02</div>
+        <h3 style="margin-top:8px;">数字化窗口期</h3>
+        <p style="font-size:14px;color:var(--text-light);">竞品仍在传统渠道竞争。BI 率先用 IT 把驱虫药从 <strong>一次性购买</strong> 变成 <strong>周期性健康管理</strong>，是结构性优势。</p>
       </div>
-      <div class="card" style="margin-bottom:8px;">
-        <strong style="color:var(--dark);">🟣 MSD 默沙东</strong>
-        <p style="font-size:12px;color:var(--text-light);">贝卫多 BRAVECTO · 12周长效 · 单一驱虫产品</p>
-      </div>
-      <div class="card" style="margin-bottom:8px;">
-        <strong style="color:var(--dark);">🟠 Elanco 礼蓝</strong>
-        <p style="font-size:12px;color:var(--text-light);">可立奥+索来多(项圈)+拜宠清 · 剂型最全</p>
-      </div>
-    </div>
-    <div>
-      <h3 style="font-size:14px;margin-bottom:10px;">🇨🇳 国产药企</h3>
-      <div class="card card-warn" style="margin-bottom:8px;">
-        <strong style="color:var(--dark);">🔴 海正药业</strong>
-        <p style="font-size:12px;color:var(--text-light);">6款产品 · 海乐妙~2亿/年 · 产品线与BI持平</p>
-      </div>
-      <div class="card" style="margin-bottom:8px;">
-        <strong style="color:var(--dark);">⚪ 瑞普生物</strong>
-        <p style="font-size:12px;color:var(--text-light);">疫苗为主 · 驱虫药布局中</p>
-      </div>
-      <div class="card" style="margin-bottom:8px;">
-        <strong style="color:var(--dark);">🟤 普莱柯</strong>
-        <p style="font-size:12px;color:var(--text-light);">倍宠恩 · 新兴力量</p>
+      <div class="card card-accent">
+        <div class="num">03</div>
+        <h3 style="margin-top:8px;">6 个产品机会</h3>
+        <p style="font-size:14px;color:var(--text-light);">驱虫提醒 → 宠主CRM → 兽医助手 → 渠道看板 → 竞品雷达 → 小程序。<strong>12 个月可分三阶段落地。</strong></p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- S5: Product Portfolio -->
-<div class="slide">
-  <h2>产品组合对比 · 21 款驱虫药全景</h2>
-  <table>
-    <tr><th style="width:80px;">公司</th><th>产品</th><th style="width:70px;">剂型</th><th style="width:100px;">覆盖</th><th>核心卖点</th></tr>
-    <tr class="highlight"><td rowspan="6"><strong>BI</strong></td><td>超可信</td><td>咀嚼片</td><td>内外同驱</td><td>旗舰，犬猫双用</td></tr>
-    <tr class="highlight"><td>博来恩</td><td>滴剂</td><td>内外同驱</td><td>猫用</td></tr>
-    <tr class="highlight"><td>福来恩</td><td>滴剂</td><td>体外</td><td>经典品牌</td></tr>
-    <tr class="highlight"><td>福味恩</td><td>咀嚼片</td><td>体内</td><td>—</td></tr>
-    <tr class="highlight"><td>尼可信</td><td>咀嚼片</td><td>体外</td><td>—</td></tr>
-    <tr class="highlight"><td>犬心保</td><td>咀嚼片</td><td>心丝虫</td><td>—</td></tr>
-    <tr><td rowspan="2"><strong>Zoetis</strong></td><td>大宠爱</td><td>滴剂</td><td>内外同驱</td><td>中国 No.1 单品</td></tr>
-    <tr><td>妙宠爱</td><td>滴剂</td><td>内外同驱</td><td>升级版</td></tr>
-    <tr><td><strong>MSD</strong></td><td>贝卫多</td><td>咀嚼片</td><td>体外</td><td>12周长效 ⚡</td></tr>
-    <tr><td rowspan="3"><strong>Elanco</strong></td><td>可立奥</td><td>咀嚼片</td><td>体外</td><td>新一代异噁唑啉</td></tr>
-    <tr><td>索来多</td><td>项圈</td><td>体外</td><td>8个月保护 🎯</td></tr>
-    <tr><td>拜宠清</td><td>片剂</td><td>体内</td><td>拜耳遗产</td></tr>
-    <tr class="highlight"><td rowspan="6"><strong>海正</strong></td><td>海乐妙</td><td>片剂</td><td>内外同驱</td><td>~2亿/年 国产明星</td></tr>
-    <tr class="highlight"><td>海乐旺</td><td>咀嚼片</td><td>内外同驱</td><td>越南获批</td></tr>
-    <tr class="highlight"><td>莫爱佳</td><td>滴剂</td><td>内外同驱</td><td>对标大宠爱</td></tr>
-    <tr class="highlight"><td>喜倍安</td><td>滴剂</td><td>体外</td><td>—</td></tr>
-    <tr class="highlight"><td>赛乐滴</td><td>滴剂</td><td>体外</td><td>2025新品</td></tr>
-    <tr class="highlight"><td>海妙哆</td><td>—</td><td>—</td><td>2025新品</td></tr>
-    <tr><td><strong>普莱柯</strong></td><td>倍宠恩</td><td>—</td><td>体外</td><td>单产品</td></tr>
-  </table>
-</div>
-
-<!-- S6: Dosage Form & Scenario Matrix -->
-<div class="slide">
-  <h2>剂型 × 场景矩阵</h2>
-  <div class="grid2" style="flex:1;">
-    <div>
-      <h3 style="font-size:14px;">剂型覆盖</h3>
-      <table>
-        <tr><th>公司</th><th>咀嚼片</th><th>滴剂</th><th>项圈</th><th>片剂</th><th>总计</th></tr>
-        <tr class="highlight"><td><strong>BI</strong></td><td>4 ✅</td><td>2</td><td>—</td><td>—</td><td><strong>6</strong></td></tr>
-        <tr><td>Zoetis</td><td>—</td><td>2</td><td>—</td><td>—</td><td>2</td></tr>
-        <tr><td>MSD</td><td>1</td><td>—</td><td>—</td><td>—</td><td>1</td></tr>
-        <tr><td>Elanco</td><td>1</td><td>—</td><td>1 🎯</td><td>1</td><td>3</td></tr>
-        <tr class="highlight"><td>海正</td><td>1</td><td>4</td><td>—</td><td>1</td><td>6</td></tr>
-      </table>
+<!-- ═══════════════  MARKET GROWTH LOGIC  ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>中国宠物驱虫药市场增长逻辑</h2>
+    <div class="grid4">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:36px;">🐱</div>
+        <h3 style="margin-top:8px;">猫经济爆发</h3>
+        <p style="font-size:12px;color:var(--text-light);">猫数量增速超犬，猫用驱虫需求激增</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:36px;">🔄</div>
+        <h3 style="margin-top:8px;">内外同驱</h3>
+        <p style="font-size:12px;color:var(--text-light);">一站式驱虫方案成主流，咀嚼片份额上升</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:36px;">📅</div>
+        <h3 style="margin-top:8px;">规律驱虫</h3>
+        <p style="font-size:12px;color:var(--text-light);">从"有病才驱"到月度/季度预防，市场扩容</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:36px;">📱</div>
+        <h3 style="margin-top:8px;">线上迁移</h3>
+        <p style="font-size:12px;color:var(--text-light);">电商增速超线下，内容种草→下单闭环形成</p>
+      </div>
     </div>
-    <div>
-      <h3 style="font-size:14px;">关键洞察</h3>
-      <div class="card card-accent" style="margin-bottom:8px;">
-        <strong>咀嚼片趋势</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">BI 4款领先，宠主偏好从滴剂向咀嚼片迁移</span>
+    <div class="stat-bar">
+      中国宠物市场 <strong>3,126 亿元（+4.1%）</strong> · 1.26 亿只宠物 · 宠物医疗 863 亿 · 驱虫药 ~300 亿
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════  COMPETITOR ECOSYSTEM  ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>竞争者生态图</h2>
+    <div class="grid2">
+      <div>
+        <h3 style="font-size:15px;margin-bottom:12px;">🏢 跨国药企</h3>
+        <div class="card card-accent" style="margin-bottom:10px;">
+          <strong>🟢 BI 勃林格殷格翰</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">中国驱虫药 No.1 · 6款产品 · 咀嚼片+滴剂全覆盖</p>
+        </div>
+        <div class="card" style="margin-bottom:10px;">
+          <strong>🔵 Zoetis 硕腾</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">全球最大动保 · 大宠爱/妙宠爱 · 仅滴剂</p>
+        </div>
+        <div class="card" style="margin-bottom:10px;">
+          <strong>🟣 MSD 默沙东</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">贝卫多 BRAVECTO · 12周长效 · 单一驱虫产品</p>
+        </div>
+        <div class="card">
+          <strong>🟠 Elanco 礼蓝</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">可立奥+索来多(项圈)+拜宠清 · 剂型最全</p>
+        </div>
       </div>
-      <div class="card card-warn" style="margin-bottom:8px;">
-        <strong>Zoetis 剂型风险</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">仅滴剂，在咀嚼片趋势下可能份额流失</span>
+      <div>
+        <h3 style="font-size:15px;margin-bottom:12px;">🇨🇳 国产药企</h3>
+        <div class="card card-warn" style="margin-bottom:10px;">
+          <strong>🔴 海正药业</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">6款产品 · 海乐妙~2亿/年 · 产品线与BI持平</p>
+        </div>
+        <div class="card" style="margin-bottom:10px;">
+          <strong>⚪ 瑞普生物</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">疫苗为主 · 驱虫药布局中</p>
+        </div>
+        <div class="card">
+          <strong>🟤 普莱柯</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">倍宠恩 · 新兴力量</p>
+        </div>
       </div>
-      <div class="card" style="margin-bottom:8px;">
-        <strong>项圈差异化</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">Elanco 索来多 8 个月保护，独特但小众</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════  PRODUCT PORTFOLIO  ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>产品组合对比 · 21 款驱虫药全景</h2>
+    <table>
+      <tr><th style="width:80px;">公司</th><th>产品</th><th style="width:80px;">剂型</th><th style="width:110px;">覆盖</th><th>核心卖点</th></tr>
+      <tr class="highlight"><td rowspan="6"><strong>BI</strong></td><td>超可信</td><td>咀嚼片</td><td>内外同驱</td><td>旗舰，犬猫双用</td></tr>
+      <tr class="highlight"><td>博来恩</td><td>滴剂</td><td>内外同驱</td><td>猫用</td></tr>
+      <tr class="highlight"><td>福来恩</td><td>滴剂</td><td>体外</td><td>经典品牌</td></tr>
+      <tr class="highlight"><td>福味恩</td><td>咀嚼片</td><td>体内</td><td>—</td></tr>
+      <tr class="highlight"><td>尼可信</td><td>咀嚼片</td><td>体外</td><td>—</td></tr>
+      <tr class="highlight"><td>犬心保</td><td>咀嚼片</td><td>心丝虫</td><td>—</td></tr>
+      <tr><td rowspan="2"><strong>Zoetis</strong></td><td>大宠爱</td><td>滴剂</td><td>内外同驱</td><td>中国 No.1 单品</td></tr>
+      <tr><td>妙宠爱</td><td>滴剂</td><td>内外同驱</td><td>升级版</td></tr>
+      <tr><td><strong>MSD</strong></td><td>贝卫多</td><td>咀嚼片</td><td>体外</td><td>12周长效 ⚡</td></tr>
+      <tr><td rowspan="3"><strong>Elanco</strong></td><td>可立奥</td><td>咀嚼片</td><td>体外</td><td>新一代异噁唑啉</td></tr>
+      <tr><td>索来多</td><td>项圈</td><td>体外</td><td>8个月保护 🎯</td></tr>
+      <tr><td>拜宠清</td><td>片剂</td><td>体内</td><td>拜耳遗产</td></tr>
+      <tr class="highlight"><td rowspan="6"><strong>海正</strong></td><td>海乐妙</td><td>片剂</td><td>内外同驱</td><td>~2亿/年 国产明星</td></tr>
+      <tr class="highlight"><td>海乐旺</td><td>咀嚼片</td><td>内外同驱</td><td>越南获批</td></tr>
+      <tr class="highlight"><td>莫爱佳</td><td>滴剂</td><td>内外同驱</td><td>对标大宠爱</td></tr>
+      <tr class="highlight"><td>喜倍安</td><td>滴剂</td><td>体外</td><td>—</td></tr>
+      <tr class="highlight"><td>赛乐滴</td><td>滴剂</td><td>体外</td><td>2025新品</td></tr>
+      <tr class="highlight"><td>海妙哆</td><td>—</td><td>—</td><td>2025新品</td></tr>
+      <tr><td><strong>普莱柯</strong></td><td>倍宠恩</td><td>—</td><td>体外</td><td>单产品</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════  DOSAGE MATRIX  ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>剂型 × 场景矩阵</h2>
+    <div class="grid2">
+      <div>
+        <h3 style="font-size:15px;margin-bottom:12px;">剂型覆盖对比</h3>
+        <table>
+          <tr><th>公司</th><th>咀嚼片</th><th>滴剂</th><th>项圈</th><th>片剂</th><th style="width:50px;">总计</th></tr>
+          <tr class="highlight"><td><strong>BI</strong></td><td>4 ✅</td><td>2</td><td>—</td><td>—</td><td><strong>6</strong></td></tr>
+          <tr><td>Zoetis</td><td>—</td><td>2</td><td>—</td><td>—</td><td>2</td></tr>
+          <tr><td>MSD</td><td>1</td><td>—</td><td>—</td><td>—</td><td>1</td></tr>
+          <tr><td>Elanco</td><td>1</td><td>—</td><td>1 🎯</td><td>1</td><td>3</td></tr>
+          <tr class="highlight"><td>海正</td><td>1</td><td>4</td><td>—</td><td>1</td><td>6</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3 style="font-size:15px;margin-bottom:12px;">关键洞察</h3>
+        <div class="card card-accent" style="margin-bottom:10px;">
+          <strong>咀嚼片趋势 🚀</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">BI 4款领先，宠主偏好从滴剂向咀嚼片迁移</p>
+        </div>
+        <div class="card card-warn" style="margin-bottom:10px;">
+          <strong>Zoetis 剂型风险 ⚠️</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">仅滴剂，在咀嚼片趋势下可能份额流失</p>
+        </div>
+        <div class="card" style="margin-bottom:10px;">
+          <strong>项圈差异化 🎯</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">Elanco 索来多 8 个月保护，独特但小众</p>
+        </div>
+        <div class="card card-dark">
+          <strong>海正追赶 🔴</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">产品数 = BI，剂型接近，价格优势明显</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════  THREAT ASSESSMENT  ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>竞争者威胁判断</h2>
+    <div class="grid2">
+      <div>
+        <div class="card card-accent" style="margin-bottom:14px;">
+          <h3>🔵 硕腾 · 明星产品威胁</h3>
+          <p style="font-size:13px;color:var(--text-light);">大宠爱品牌力强，医院渠道深耕。但仅滴剂，咀嚼片趋势下存在结构性风险。股价跌 21.5% 反映市场担忧。</p>
+          <div class="bar-wrap"><span class="bar-label">医院渠道</span><div class="bar" style="width:200px;background:#e74c3c;"></div><span class="bar-val">85%</span></div>
+          <div class="bar-wrap"><span class="bar-label">剂型全面</span><div class="bar" style="width:60px;background:#f39c12;"></div><span class="bar-val">25%</span></div>
+        </div>
+        <div class="card card-warn">
+          <h3>🔴 海正 · 国产替代威胁</h3>
+          <p style="font-size:13px;color:var(--text-light);">6款产品+价格优势+政策红利。海乐妙年销~2亿。对有价格敏感的中低端市场形成直接冲击。</p>
+          <div class="bar-wrap"><span class="bar-label">产品数</span><div class="bar" style="width:190px;background:#e74c3c;"></div><span class="bar-val">6款</span></div>
+          <div class="bar-wrap"><span class="bar-label">电商增速</span><div class="bar" style="width:200px;background:#f39c12;"></div><span class="bar-val">85%</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <h3>🟣 MSD · 长效差异化威胁</h3>
+          <p style="font-size:13px;color:var(--text-light);">贝卫多 12 周长效是独特卖点。$379M Q1(+16%)增长强劲。但仅一款驱虫药，产品线最薄。</p>
+          <div class="bar-wrap"><span class="bar-label">长效优势</span><div class="bar" style="width:220px;background:var(--green);"></div><span class="bar-val">12周</span></div>
+          <div class="bar-wrap"><span class="bar-label">产品线</span><div class="bar" style="width:36px;background:#f39c12;"></div><span class="bar-val">1款</span></div>
+        </div>
+        <div class="card">
+          <h3>🟠 礼蓝 · 组合遗产威胁</h3>
+          <p style="font-size:13px;color:var(--text-light);">可立奥+索来多(项圈)+拜宠清。唯一有项圈的跨国竞品。Q1 +15% 超预期，拜耳整合完成。</p>
+          <div class="bar-wrap"><span class="bar-label">剂型覆盖</span><div class="bar" style="width:165px;background:var(--green);"></div><span class="bar-val">3种</span></div>
+          <div class="bar-wrap"><span class="bar-label">中国份额</span><div class="bar" style="width:70px;background:#f39c12;"></div><span class="bar-val">较小</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════  GROWTH BOTTLENECKS  ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>当前增长卡点 · 5 大瓶颈</h2>
+    <div class="grid2">
+      <div class="card card-dark">
+        <div style="font-size:28px;">😴</div>
+        <h3>宠主忘记驱虫</h3>
+        <p style="font-size:13px;color:var(--text-light);">驱虫是低频行为（月/季），宠主容易遗忘。缺乏有效的提醒和复购触发机制。</p>
       </div>
       <div class="card card-dark">
-        <strong>海正追赶</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">产品数 = BI，剂型接近，价格优势明显</span>
+        <div style="font-size:28px;">🐱</div>
+        <h3>室内猫误区</h3>
+        <p style="font-size:13px;color:var(--text-light);">"不出门不用驱虫"观念普遍。需要宠主教育，但触达效率低。</p>
+      </div>
+      <div class="card card-dark">
+        <div style="font-size:28px;">🔄</div>
+        <h3>复购链路断裂</h3>
+        <p style="font-size:13px;color:var(--text-light);">医院→药店→电商，渠道割裂。宠主在哪买、何时买，品牌不可见。</p>
+      </div>
+      <div class="card card-dark">
+        <div style="font-size:28px;">📊</div>
+        <h3>渠道数据不透明</h3>
+        <p style="font-size:13px;color:var(--text-light);">经销层级多，动销/库存不可实时查看。决策依赖滞后报表而非实时数据。</p>
+      </div>
+      <div class="card card-dark">
+        <div style="font-size:28px;">🏥</div>
+        <h3>兽医教育分散</h3>
+        <p style="font-size:13px;color:var(--text-light);">医生需要产品对比、适应症、剂型选择参考，但信息散落在不同渠道，缺乏系统化工具。</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- S7: Threat Assessment -->
-<div class="slide">
-  <h2>竞争者威胁判断</h2>
-  <div class="grid2" style="flex:1;">
-    <div>
-      <div class="card card-accent" style="margin-bottom:12px;">
-        <h3>🔵 硕腾 · 明星产品威胁</h3>
-        <p style="font-size:12px;color:var(--text-light);">大宠爱品牌力强，医院渠道深耕。但仅滴剂，咀嚼片趋势下存在结构性风险。股价跌 21.5% 反映市场担忧。</p>
-        <div class="bar-wrap"><span class="bar-label">医院渠道</span><div class="bar" style="width:85%;background:#e74c3c;"></div><span class="bar-val">85%</span></div>
-        <div class="bar-wrap"><span class="bar-label">剂型全面</span><div class="bar" style="width:25%;background:#f39c12;"></div><span class="bar-val">25%</span></div>
-      </div>
-      <div class="card card-warn" style="margin-bottom:12px;">
-        <h3>🔴 海正 · 国产替代威胁</h3>
-        <p style="font-size:12px;color:var(--text-light);">6款产品+价格优势+政策红利。海乐妙年销~2亿。对有价格敏感的中低端市场形成直接冲击。</p>
-        <div class="bar-wrap"><span class="bar-label">产品数</span><div class="bar" style="width:80%;background:#e74c3c;"></div><span class="bar-val">6款</span></div>
-        <div class="bar-wrap"><span class="bar-label">电商增速</span><div class="bar" style="width:85%;background:#f39c12;"></div><span class="bar-val">85%</span></div>
-      </div>
-    </div>
-    <div>
-      <div class="card" style="margin-bottom:12px;">
-        <h3>🟣 MSD · 长效差异化威胁</h3>
-        <p style="font-size:12px;color:var(--text-light);">贝卫多 12 周长效是独特卖点。$379M Q1(+16%)增长强劲。但仅一款驱虫药，产品线最薄。</p>
-        <div class="bar-wrap"><span class="bar-label">长效优势</span><div class="bar" style="width:90%;background:var(--green);"></div><span class="bar-val">12周</span></div>
-        <div class="bar-wrap"><span class="bar-label">产品线</span><div class="bar" style="width:15%;background:#f39c12;"></div><span class="bar-val">1款</span></div>
-      </div>
-      <div class="card" style="margin-bottom:12px;">
-        <h3>🟠 礼蓝 · 组合遗产威胁</h3>
-        <p style="font-size:12px;color:var(--text-light);">可立奥+索来多(项圈)+拜宠清。唯一有项圈的跨国竞品。Q1 +15% 超预期，拜耳整合完成。</p>
-        <div class="bar-wrap"><span class="bar-label">剂型覆盖</span><div class="bar" style="width:70%;background:var(--green);"></div><span class="bar-val">3种</span></div>
-        <div class="bar-wrap"><span class="bar-label">中国份额</span><div class="bar" style="width:30%;background:#f39c12;"></div><span class="bar-val">较小</span></div>
-      </div>
-    </div>
+<!-- ═══════════════  IT OPPORTUNITY MAP  ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>IT 数字化机会地图 · 从痛点到产品</h2>
+    <table>
+      <tr><th style="width:160px;">业务痛点</th><th style="width:200px;">数字化机会</th><th>产品形态</th></tr>
+      <tr>
+        <td>宠主忘记驱虫</td>
+        <td><span class="tag tag-green">复购触发</span> 驱虫日历+智能提醒</td>
+        <td>小程序 / 短信 / 微信模板消息</td>
+      </tr>
+      <tr>
+        <td>复购链路断裂</td>
+        <td><span class="tag tag-green">生命周期管理</span> 宠主CRM分层运营</td>
+        <td>CRM 系统 + 自动化营销</td>
+      </tr>
+      <tr>
+        <td>兽医教育分散</td>
+        <td><span class="tag tag-green">决策支持</span> 驱虫方案推荐助手</td>
+        <td>Web / 小程序工具</td>
+      </tr>
+      <tr>
+        <td>渠道数据不透明</td>
+        <td><span class="tag tag-green">实时可见</span> 渠道动销看板</td>
+        <td>数据看板 Dashboard</td>
+      </tr>
+      <tr>
+        <td>竞品动态盲区</td>
+        <td><span class="tag tag-green">情报监测</span> 竞品价格/内容雷达</td>
+        <td>自动化爬虫 + 告警</td>
+      </tr>
+      <tr>
+        <td>触达效率低</td>
+        <td><span class="tag tag-green">超级触点</span> 微信小程序</td>
+        <td>教育+提醒+复购+会员一站式</td>
+      </tr>
+    </table>
   </div>
-</div>
+</section>
 
-<!-- S8: Growth Bottlenecks -->
-<div class="slide">
-  <h2>当前增长卡点 · 5 大瓶颈</h2>
-  <div class="grid2" style="flex:1;">
-    <div class="card card-dark">
-      <h3>😴 宠主忘记驱虫</h3>
-      <p style="font-size:12px;color:var(--text-light);">驱虫是低频行为（月/季），宠主容易遗忘。<br>缺乏有效的提醒和复购触发机制。</p>
-    </div>
-    <div class="card card-dark">
-      <h3>🐱 室内猫误区</h3>
-      <p style="font-size:12px;color:var(--text-light);">"不出门不用驱虫"观念普遍。<br>需要宠主教育，但触达效率低。</p>
-    </div>
-    <div class="card card-dark">
-      <h3>🔄 复购链路断裂</h3>
-      <p style="font-size:12px;color:var(--text-light);">医院→药店→电商，渠道割裂。<br>宠主在哪买、何时买，品牌不可见。</p>
-    </div>
-    <div class="card card-dark">
-      <h3>📊 渠道数据不透明</h3>
-      <p style="font-size:12px;color:var(--text-light);">经销层级多，动销/库存不可实时查看。<br>决策依赖滞后报表而非实时数据。</p>
-    </div>
-    <div class="card card-dark" style="grid-column:1/-1;">
-      <h3>🏥 兽医教育分散</h3>
-      <p style="font-size:12px;color:var(--text-light);">医生需要产品对比、适应症、剂型选择参考，但信息散落在不同渠道。BI 缺乏系统化的兽医数字化工具。</p>
-    </div>
-  </div>
-</div>
-
-<!-- S9: IT Opportunity Map -->
-<div class="slide">
-  <h2>IT 数字化机会地图 · 从痛点到产品</h2>
-  <table>
-    <tr><th style="width:140px;">业务痛点</th><th style="width:200px;">数字化机会</th><th>产品形态</th></tr>
-    <tr>
-      <td>宠主忘记驱虫</td>
-      <td><span class="tag tag-green">复购触发</span> 驱虫日历+智能提醒</td>
-      <td>小程序 / 短信 / 微信模板消息</td>
-    </tr>
-    <tr>
-      <td>复购链路断裂</td>
-      <td><span class="tag tag-green">生命周期管理</span> 宠主CRM分层运营</td>
-      <td>CRM 系统 + 自动化营销</td>
-    </tr>
-    <tr>
-      <td>兽医教育分散</td>
-      <td><span class="tag tag-green">决策支持</span> 驱虫方案推荐助手</td>
-      <td>Web / 小程序工具</td>
-    </tr>
-    <tr>
-      <td>渠道数据不透明</td>
-      <td><span class="tag tag-green">实时可见</span> 渠道动销看板</td>
-      <td>数据看板 Dashboard</td>
-    </tr>
-    <tr>
-      <td>竞品动态盲区</td>
-      <td><span class="tag tag-green">情报监测</span> 竞品价格/内容雷达</td>
-      <td>自动化爬虫 + 告警</td>
-    </tr>
-    <tr>
-      <td>触达效率低</td>
-      <td><span class="tag tag-green">超级触点</span> 微信小程序</td>
-      <td>教育+提醒+复购+会员一站式</td>
-    </tr>
-  </table>
-</div>
-
-<!-- S10: Digital Product Portfolio -->
-<div class="slide">
-  <h2>可落地数字化产品组合</h2>
-  <div class="grid3">
-    <div class="card card-accent" style="text-align:center;">
-      <div style="font-size:36px;">⏰</div>
-      <h3>Deworming Reminder</h3>
-      <p style="font-size:11px;color:var(--text-light);">驱虫提醒工具<br>解决"忘记驱虫"</p>
-      <span class="tag tag-green">P0 优先</span>
-    </div>
-    <div class="card card-accent" style="text-align:center;">
-      <div style="font-size:36px;">👤</div>
-      <h3>Pet Owner CRM</h3>
-      <p style="font-size:11px;color:var(--text-light);">宠主分层运营<br>按猫狗/年龄/地区</p>
-      <span class="tag tag-green">P0 优先</span>
-    </div>
-    <div class="card" style="text-align:center;">
-      <div style="font-size:36px;">🩺</div>
-      <h3>Vet Advisor</h3>
-      <p style="font-size:11px;color:var(--text-light);">兽医推荐助手<br>适应症+竞品对比</p>
-      <span class="tag tag-outline">P1 扩展</span>
-    </div>
-    <div class="card" style="text-align:center;">
-      <div style="font-size:36px;">📊</div>
-      <h3>Channel Cockpit</h3>
-      <p style="font-size:11px;color:var(--text-light);">渠道动销看板<br>城市/医院/电商</p>
-      <span class="tag tag-outline">P1 扩展</span>
-    </div>
-    <div class="card" style="text-align:center;">
-      <div style="font-size:36px;">📡</div>
-      <h3>Competitor Radar</h3>
-      <p style="font-size:11px;color:var(--text-light);">竞品雷达<br>价格/促销/内容</p>
-      <span class="tag tag-outline">P2 闭环</span>
-    </div>
-    <div class="card card-dark" style="text-align:center;">
-      <div style="font-size:36px;">📱</div>
-      <h3>Mini Program</h3>
-      <p style="font-size:11px;color:var(--text-light);">微信小程序<br>一站式承接</p>
-      <span class="tag tag-outline">P1 扩展</span>
-    </div>
-  </div>
-</div>
-
-<!-- S11: Priority Matrix -->
-<div class="slide">
-  <h2>优先级矩阵 · 价值 × 落地难度</h2>
-  <div style="display:flex;flex:1;gap:16px;">
-    <div style="flex:1;display:flex;flex-direction:column;">
-      <div style="text-align:center;font-size:11px;color:var(--text-light);margin-bottom:4px;">↑ 高价值</div>
-      <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;position:relative;">
-        <!-- Top-left: High Value, Low Difficulty = P0 -->
-        <div style="background:rgba(0,228,124,.15);border-radius:8px;padding:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
-          <strong style="font-size:14px;">⏰ 驱虫提醒</strong>
-          <span class="tag tag-green" style="margin-top:4px;">P0</span>
-        </div>
-        <!-- Top-right: High Value, High Difficulty -->
-        <div style="background:rgba(0,228,124,.06);border-radius:8px;padding:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
-          <strong style="font-size:14px;">👤 宠主CRM</strong>
-          <span class="tag tag-outline" style="margin-top:4px;">P0</span>
-        </div>
-        <!-- Bottom-left: Lower Value, Low Difficulty -->
-        <div style="background:rgba(0,0,0,.02);border-radius:8px;padding:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
-          <strong style="font-size:14px;">📡 竞品雷达</strong>
-          <span class="tag tag-outline" style="margin-top:4px;">P2</span>
-        </div>
-        <!-- Bottom-right: Lower Value, Higher Difficulty -->
-        <div style="background:rgba(0,0,0,.02);border-radius:8px;padding:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
-          <strong style="font-size:14px;">📊 渠道看板</strong>
-          <span class="tag tag-outline" style="margin-top:4px;">P1</span>
-        </div>
+<!-- ═══════════════  DIGITAL PRODUCT PORTFOLIO  ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>可落地数字化产品组合</h2>
+    <div class="grid3">
+      <div class="card card-accent" style="text-align:center;">
+        <div style="font-size:40px;">⏰</div>
+        <h3>Deworming Reminder</h3>
+        <p style="font-size:12px;color:var(--text-light);">驱虫提醒工具 · 解决"忘记驱虫"</p>
+        <span class="tag tag-green" style="margin-top:8px;">P0 优先</span>
       </div>
-      <div style="text-align:center;font-size:11px;color:var(--text-light);margin-top:4px;">落地难度低 ← → 落地难度高</div>
-    </div>
-    <div style="width:180px;display:flex;flex-direction:column;gap:8px;justify-content:center;">
-      <div class="card card-accent">
-        <strong>P0 优先</strong><br>
-        <span style="font-size:11px;color:var(--text-light);">驱虫提醒 + CRM<br>第1-4个月</span>
+      <div class="card card-accent" style="text-align:center;">
+        <div style="font-size:40px;">👤</div>
+        <h3>Pet Owner CRM</h3>
+        <p style="font-size:12px;color:var(--text-light);">宠主分层运营 · 按猫狗/年龄/地区</p>
+        <span class="tag tag-green" style="margin-top:8px;">P0 优先</span>
       </div>
-      <div class="card">
-        <strong>P1 扩展</strong><br>
-        <span style="font-size:11px;color:var(--text-light);">Vet Advisor + 小程序<br>+ 渠道看板<br>第4-8个月</span>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:40px;">🩺</div>
+        <h3>Vet Advisor</h3>
+        <p style="font-size:12px;color:var(--text-light);">兽医推荐助手 · 适应症+竞品对比</p>
+        <span class="tag tag-outline" style="margin-top:8px;">P1 扩展</span>
       </div>
-      <div class="card">
-        <strong>P2 闭环</strong><br>
-        <span style="font-size:11px;color:var(--text-light);">竞品雷达<br>第8-12个月</span>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:40px;">📊</div>
+        <h3>Channel Cockpit</h3>
+        <p style="font-size:12px;color:var(--text-light);">渠道动销看板 · 城市/医院/电商</p>
+        <span class="tag tag-outline" style="margin-top:8px;">P1 扩展</span>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- S12: 12-Month Roadmap -->
-<div class="slide">
-  <h2>12 个月路线图</h2>
-  <div class="timeline" style="flex:1;">
-    <div class="t-phase q1">
-      <div style="font-size:13px;font-weight:700;color:var(--dark);">Q1-2</div>
-      <div style="font-size:11px;color:var(--text-light);margin:6px 0;">MVP</div>
-      <div style="font-size:12px;">⏰ 驱虫提醒<br>小程序 MVP</div>
-      <div style="font-size:10px;color:var(--text-light);margin-top:4px;">微信模板消息<br>驱虫日历<br>一键复购</div>
-      <span class="tag tag-green" style="margin-top:6px;">1-4月</span>
-    </div>
-    <div class="t-phase q2">
-      <div style="font-size:13px;font-weight:700;color:var(--dark);">Q3</div>
-      <div style="font-size:11px;color:var(--text-light);margin:6px 0;">扩展</div>
-      <div style="font-size:12px;">👤 宠主CRM<br>🩺 Vet Advisor<br>📱 小程序完善</div>
-      <div style="font-size:10px;color:var(--text-light);margin-top:4px;">分层标签<br>自动化触达<br>产品查询</div>
-      <span class="tag tag-outline" style="margin-top:6px;">4-8月</span>
-    </div>
-    <div class="t-phase q3">
-      <div style="font-size:13px;font-weight:700;color:var(--dark);">Q4</div>
-      <div style="font-size:11px;color:var(--text-light);margin:6px 0;">闭环</div>
-      <div style="font-size:12px;">📊 渠道看板<br>📡 竞品雷达</div>
-      <div style="font-size:10px;color:var(--text-light);margin-top:4px;">动销可视化<br>价格监测<br>内容声量</div>
-      <span class="tag tag-outline" style="margin-top:6px;">8-12月</span>
-    </div>
-    <div class="t-phase q4">
-      <div style="font-size:13px;font-weight:700;color:var(--dark);">Q5+</div>
-      <div style="font-size:11px;color:var(--text-light);margin:6px 0;">数据闭环</div>
-      <div style="font-size:12px;">🔄 全链路打通</div>
-      <div style="font-size:10px;color:var(--text-light);margin-top:4px;">提醒→复购→CRM<br>→看板→竞品<br>数据驱动增长</div>
-      <span class="tag tag-dark" style="margin-top:6px;">持续</span>
-    </div>
-  </div>
-</div>
-
-<!-- S13-S18: IT Product Deep Dives -->
-<div class="slide">
-  <h2>⏰ Deworming Reminder · 驱虫提醒工具</h2>
-  <div class="grid2" style="flex:1;">
-    <div>
-      <h3 style="font-size:14px;">解决什么</h3>
-      <div class="card card-accent" style="margin-bottom:8px;">
-        <strong>核心痛点</strong>：宠主忘记驱虫 → 复购断点 → 品牌流失
-      </div>
-      <h3 style="font-size:14px;margin-top:12px;">关键功能</h3>
-      <ul style="font-size:12px;color:var(--text-light);padding-left:16px;line-height:1.8;">
-        <li>📅 驱虫日历（月/季度自动提醒）</li>
-        <li>📱 微信模板消息推送</li>
-        <li>🛒 一键跳转复购链接</li>
-        <li>🐕 按宠物体重/品种推荐剂量</li>
-        <li>📝 驱虫记录时间线</li>
-        <li>👨‍👩‍👧 多宠管理</li>
-      </ul>
-    </div>
-    <div>
-      <h3 style="font-size:14px;">产品逻辑</h3>
-      <div style="font-size:12px;color:var(--text-light);line-height:1.8;">
-        <strong>输入</strong>：宠主注册 → 宠物档案（种类/体重/年龄）→ 上次驱虫日期<br>
-        <strong>计算</strong>：推荐驱虫周期 → 下次驱虫日期<br>
-        <strong>触发</strong>：提前 3 天微信提醒 → 驱虫日当天提醒 → 逾期 3 天再提醒<br>
-        <strong>转化</strong>：提醒页 → 产品详情 → 电商/医院购买
-      </div>
-      <h3 style="font-size:14px;margin-top:12px;">成功指标</h3>
-      <div class="bar-wrap"><span class="bar-label">提醒打开率</span><div class="bar" style="width:50%;"></div><span class="bar-val">&gt;40%</span></div>
-      <div class="bar-wrap"><span class="bar-label">复购转化</span><div class="bar" style="width:30%;"></div><span class="bar-val">&gt;15%</span></div>
-      <div class="bar-wrap"><span class="bar-label">留存率</span><div class="bar" style="width:60%;"></div><span class="bar-val">&gt;60%</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="slide">
-  <h2>👤 Pet Owner CRM · 宠主分层运营</h2>
-  <div class="grid2" style="flex:1;">
-    <div>
-      <h3 style="font-size:14px;">分层维度</h3>
-      <table>
-        <tr><th>维度</th><th>分层</th><th>运营策略</th></tr>
-        <tr><td>宠物种类</td><td>犬 / 猫</td><td>不同产品推荐</td></tr>
-        <tr><td>年龄</td><td>幼年 / 成年 / 老年</td><td>剂量+频率差异</td></tr>
-        <tr><td>体重</td><td>&lt;5kg / 5-15 / &gt;15kg</td><td>产品规格匹配</td></tr>
-        <tr><td>地区</td><td>一线 / 新一线 / 其他</td><td>渠道偏好差异</td></tr>
-        <tr><td>购买周期</td><td>规律 / 偶发 / 流失</td><td>激活 vs 挽留策略</td></tr>
-        <tr><td>渠道偏好</td><td>医院 / 电商 / 宠物店</td><td>差异化触达</td></tr>
-      </table>
-    </div>
-    <div>
-      <h3 style="font-size:14px;">自动化触达</h3>
-      <div class="card card-accent" style="margin-bottom:8px;">
-        <strong>🐶 新犬主</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">Day 1: 欢迎 + 驱虫科普 → Day 7: 产品推荐 → Day 30: 首驱提醒</span>
-      </div>
-      <div class="card card-accent" style="margin-bottom:8px;">
-        <strong>😴 沉睡用户</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">逾期 15 天: 优惠券 → 30 天: 兽医科普 → 60 天: 竞品对比</span>
-      </div>
-      <div class="card" style="margin-bottom:8px;">
-        <strong>⭐ 忠实用户</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">会员权益 + 新品优先 + 社区活动</span>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:40px;">📡</div>
+        <h3>Competitor Radar</h3>
+        <p style="font-size:12px;color:var(--text-light);">竞品雷达 · 价格/促销/内容</p>
+        <span class="tag tag-outline" style="margin-top:8px;">P2 闭环</span>
       </div>
       <div class="card card-dark" style="text-align:center;">
-        <strong>技术方案</strong><br>
-        <span style="font-size:11px;color:var(--text-light);">微信小程序 + CDP + MA 自动化引擎 + 数据分析看板</span>
+        <div style="font-size:40px;">📱</div>
+        <h3>Mini Program</h3>
+        <p style="font-size:12px;color:var(--text-light);">微信小程序 · 一站式承接</p>
+        <span class="tag tag-outline" style="margin-top:8px;">P1 扩展</span>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="slide">
-  <h2>🩺 Vet Advisor · 兽医驱虫方案助手</h2>
-  <div class="grid2" style="flex:1;">
-    <div>
-      <h3 style="font-size:14px;">医生需要什么</h3>
-      <div class="card card-accent" style="margin-bottom:8px;">
-        <strong>🔍 快速选品</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">输入：犬/猫 + 体重 + 场景 → 输出：推荐 BI 产品+剂量</span>
+<!-- ═══════════════  PRIORITY MATRIX  ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>优先级矩阵 · 价值 × 落地难度</h2>
+    <div class="grid2">
+      <div>
+        <div style="text-align:center;font-size:12px;color:var(--text-light);margin-bottom:8px;">↑ 高价值</div>
+        <div class="pmatrix">
+          <div class="pm-p0">
+            <strong style="font-size:15px;">⏰ 驱虫提醒</strong>
+            <span class="tag tag-green" style="margin-top:6px;">P0</span>
+          </div>
+          <div class="pm-p1">
+            <strong style="font-size:15px;">👤 宠主CRM</strong>
+            <span class="tag tag-outline" style="margin-top:6px;">P0</span>
+          </div>
+          <div class="pm-p2">
+            <strong style="font-size:15px;">📡 竞品雷达</strong>
+            <span class="tag tag-outline" style="margin-top:6px;">P2</span>
+          </div>
+          <div class="pm-p1">
+            <strong style="font-size:15px;">📊 渠道看板</strong>
+            <span class="tag tag-outline" style="margin-top:6px;">P1</span>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:12px;color:var(--text-light);margin-top:8px;">落地难度低 ← → 落地难度高</div>
       </div>
-      <div class="card card-accent" style="margin-bottom:8px;">
-        <strong>📋 竞品对比</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">BI vs Zoetis vs MSD vs Elanco vs 海正，一表对比</span>
-      </div>
-      <div class="card" style="margin-bottom:8px;">
-        <strong>📚 适应症查询</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">虫谱覆盖、用法用量、禁忌症、不良反应</span>
-      </div>
-      <div class="card">
-        <strong>📖 病例参考</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">典型驱虫方案 + 临床研究数据</span>
-      </div>
-    </div>
-    <div>
-      <h3 style="font-size:14px;">产品形态</h3>
-      <div style="font-size:12px;color:var(--text-light);line-height:1.8;">
-        <strong>Web 端</strong>（桌面优先）：<br>
-        · 医院内网可访问<br>
-        · 响应式设计，平板可用<br>
-        · 离线缓存核心数据<br><br>
-        <strong>微信小程序</strong>（移动端）：<br>
-        · 医生随时随地查阅<br>
-        · 扫码即用，无需安装<br><br>
-        <strong>核心数据</strong>：<br>
-        · BI 全系产品说明书<br>
-        · 竞品对比表（自动更新）<br>
-        · 临床指南 & 文献摘要
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="slide">
-  <h2>📊 Channel Cockpit · 渠道动销看板</h2>
-  <div class="grid2" style="flex:1;">
-    <div>
-      <h3 style="font-size:14px;">看板模块</h3>
-      <div style="font-size:12px;color:var(--text-light);line-height:1.8;">
-        <strong>🏙️ 城市维度</strong><br>
-        · 各城市销量排名 & 趋势<br>
-        · 渗透率 vs 竞品对比<br>
-        · 增长/下降预警<br><br>
-        <strong>🏥 医院维度</strong><br>
-        · Top 医院动销排行<br>
-        · 处方偏好分析<br>
-        · 流失/新增医院<br><br>
-        <strong>📦 经销商维度</strong><br>
-        · 库存水位 & 周转天数<br>
-        · 订货频率 & 批量<br>
-        · 窜货预警
-      </div>
-    </div>
-    <div>
-      <h3 style="font-size:14px;">技术架构</h3>
-      <div style="font-size:12px;color:var(--text-light);line-height:1.8;">
-        <strong>数据源</strong>：<br>
-        · 经销商 DMS 系统对接<br>
-        · 电商平台 API（天猫/京东）<br>
-        · 医院 HIS 抽样数据<br>
-        · BI 内部销售系统<br><br>
-        <strong>技术栈</strong>：<br>
-        · 数据仓库：数仓 ETL<br>
-        · 可视化：BI 工具（Tableau/PowerBI/自研）<br>
-        · 告警：钉钉/企微自动推送
-      </div>
-      <div class="card card-accent" style="margin-top:8px;text-align:center;">
-        <strong>🎯 目标</strong>：从"季度报表"到"实时决策"
+      <div style="display:flex;flex-direction:column;gap:12px;justify-content:center;">
+        <div class="card card-accent">
+          <strong>P0 · 优先启动</strong>
+          <p style="font-size:13px;color:var(--text-light);">驱虫提醒 + CRM — 第 1-4 个月</p>
+        </div>
+        <div class="card">
+          <strong>P1 · 扩展建设</strong>
+          <p style="font-size:13px;color:var(--text-light);">Vet Advisor + 小程序 + 渠道看板 — 第 4-8 个月</p>
+        </div>
+        <div class="card">
+          <strong>P2 · 数据闭环</strong>
+          <p style="font-size:13px;color:var(--text-light);">竞品雷达 — 第 8-12 个月</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="slide">
-  <h2>📡 Competitor Radar · 竞品监测雷达</h2>
-  <div class="grid2" style="flex:1;">
-    <div>
-      <h3 style="font-size:14px;">监测维度</h3>
-      <table>
-        <tr><th>维度</th><th>监测内容</th><th>频率</th></tr>
-        <tr><td>💰 价格</td><td>天猫/京东/拼多多零售价</td><td>每日</td></tr>
-        <tr><td>🎁 促销</td><td>满减/赠品/组合优惠</td><td>每日</td></tr>
-        <tr><td>🆕 上新</td><td>新品上市、新剂型、新规格</td><td>实时</td></tr>
-        <tr><td>📢 内容</td><td>公众号/小红书/抖音声量</td><td>每周</td></tr>
-        <tr><td>⭐ 评价</td><td>电商评论情感分析</td><td>每周</td></tr>
-        <tr><td>🏥 医院</td><td>医院合作动态、学术活动</td><td>每周</td></tr>
-      </table>
-    </div>
-    <div>
-      <h3 style="font-size:14px;">告警规则</h3>
-      <div class="card card-accent" style="margin-bottom:8px;">
-        <strong>🚨 价格突变</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">竞品降价 &gt;15% → 即时告警 → 策略响应</span>
+<!-- ═══════════════  12-MONTH ROADMAP  ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>12 个月路线图</h2>
+    <div class="timeline">
+      <div class="t-phase q1">
+        <div style="font-size:15px;font-weight:700;color:var(--dark);">M1-M4</div>
+        <div style="font-size:12px;color:var(--text-light);margin:8px 0;">MVP 阶段</div>
+        <div style="font-size:14px;">⏰ 驱虫提醒<br>小程序 MVP</div>
+        <div style="font-size:11px;color:var(--text-light);margin-top:6px;">微信模板消息<br>驱虫日历<br>一键复购</div>
+        <span class="tag tag-green" style="margin-top:10px;">P0</span>
       </div>
-      <div class="card card-warn" style="margin-bottom:8px;">
-        <strong>📢 内容爆发</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">竞品单篇内容 &gt;10万阅读 → KOL投放预警</span>
+      <div class="t-phase q2">
+        <div style="font-size:15px;font-weight:700;color:var(--dark);">M4-M8</div>
+        <div style="font-size:12px;color:var(--text-light);margin:8px 0;">扩展阶段</div>
+        <div style="font-size:14px;">👤 宠主CRM<br>🩺 Vet Advisor<br>📱 小程序完善</div>
+        <div style="font-size:11px;color:var(--text-light);margin-top:6px;">分层标签<br>自动化触达<br>产品查询</div>
+        <span class="tag tag-outline" style="margin-top:10px;">P1</span>
       </div>
-      <div class="card" style="margin-bottom:8px;">
-        <strong>🆕 新品上市</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">竞品新 SKU 上线 → 立即通知产品团队</span>
+      <div class="t-phase q3">
+        <div style="font-size:15px;font-weight:700;color:var(--dark);">M8-M12</div>
+        <div style="font-size:12px;color:var(--text-light);margin:8px 0;">闭环阶段</div>
+        <div style="font-size:14px;">📊 渠道看板<br>📡 竞品雷达</div>
+        <div style="font-size:11px;color:var(--text-light);margin-top:6px;">动销可视化<br>价格监测<br>内容声量</div>
+        <span class="tag tag-outline" style="margin-top:10px;">P2</span>
       </div>
-      <div class="card card-dark" style="text-align:center;">
-        <strong>对比 BI 自身</strong><br>
-        <span style="font-size:11px;color:var(--text-light);">竞品价格指数 vs BI 价格指数 · 声量份额趋势</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="slide">
-  <h2>📱 Mini Program · 微信小程序</h2>
-  <div class="grid2" style="flex:1;">
-    <div>
-      <h3 style="font-size:14px;">小程序功能架构</h3>
-      <div style="font-size:12px;color:var(--text-light);line-height:2;">
-        <strong>🏠 首页</strong>：宠物档案 + 下次驱虫倒计时<br>
-        <strong>📚 教育</strong>：驱虫科普、室内猫误区、虫谱百科<br>
-        <strong>🛒 复购</strong>：产品推荐 → 电商/医院跳转<br>
-        <strong>👤 会员</strong>：积分、优惠券、驱虫打卡<br>
-        <strong>🔍 查询</strong>：产品说明书、剂量计算器<br>
-        <strong>💬 客服</strong>：在线咨询 + AI 问答
-      </div>
-    </div>
-    <div>
-      <h3 style="font-size:14px;">为什么是超级触点</h3>
-      <div class="card card-accent" style="margin-bottom:8px;">
-        <strong>📱 12 亿用户</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">微信覆盖所有宠主，无需下载安装</span>
-      </div>
-      <div class="card card-accent" style="margin-bottom:8px;">
-        <strong>🔄 闭环</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">教育 → 提醒 → 复购 → 会员，一个入口</span>
-      </div>
-      <div class="card" style="margin-bottom:8px;">
-        <strong>📊 数据沉淀</strong><br>
-        <span style="font-size:12px;color:var(--text-light);">每个行为可追踪，驱动 CRM 策略优化</span>
-      </div>
-      <div class="card card-dark" style="text-align:center;">
-        <strong>连接一切</strong><br>
-        <span style="font-size:11px;color:var(--text-light);">提醒工具 + CRM + 兽医助手 + 产品查询 = 小程序</span>
+      <div class="t-phase q4">
+        <div style="font-size:15px;font-weight:700;color:var(--dark);">M12+</div>
+        <div style="font-size:12px;color:var(--text-light);margin:8px 0;">持续迭代</div>
+        <div style="font-size:14px;">🔄 全链路打通</div>
+        <div style="font-size:11px;color:var(--text-light);margin-top:6px;">提醒→复购→CRM<br>→看板→竞品<br>数据驱动增长</div>
+        <span class="tag tag-dark" style="margin-top:10px;">持续</span>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- S19: End -->
-<div class="slide end">
-  <h1>Thank You</h1>
-  <div class="sub">从驱虫药产品竞争 → 宠主健康管理平台</div>
-  <div style="margin-top:24px;font-size:14px;color:rgba(255,255,255,.6);">
-    Boehringer Ingelheim China · Pet Health<br>
-    2026年6月 · 内部战略分析
+<!-- ═══════════════  6 PRODUCT DEEP-DIVES  ═══════════════ -->
+
+<section class="deep-dive">
+  <div class="container">
+    <div class="sec-num">IT 产品机会 ①</div>
+    <h2>⏰ Deworming Reminder · 驱虫提醒工具</h2>
+    <div class="grid2">
+      <div>
+        <h3 style="font-size:15px;">解决什么</h3>
+        <div class="card card-accent" style="margin-bottom:14px;">
+          <strong>核心痛点</strong>：宠主忘记驱虫 → 复购断点 → 品牌流失
+        </div>
+        <h3 style="font-size:15px;margin-top:14px;">关键功能</h3>
+        <ul>
+          <li>📅 驱虫日历（月/季度自动提醒）</li>
+          <li>📱 微信模板消息推送</li>
+          <li>🛒 一键跳转复购链接</li>
+          <li>🐕 按宠物体重/品种推荐剂量</li>
+          <li>📝 驱虫记录时间线</li>
+          <li>👨‍👩‍👧 多宠管理</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:15px;">产品逻辑</h3>
+        <p style="font-size:13px;color:var(--text-light);line-height:1.9;">
+          <strong>输入</strong>：宠主注册 → 宠物档案（种类/体重/年龄）→ 上次驱虫日期<br>
+          <strong>计算</strong>：推荐驱虫周期 → 下次驱虫日期<br>
+          <strong>触发</strong>：提前 3 天微信提醒 → 驱虫日当天提醒 → 逾期 3 天再提醒<br>
+          <strong>转化</strong>：提醒页 → 产品详情 → 电商/医院购买
+        </p>
+        <h3 style="font-size:15px;margin-top:14px;">成功指标</h3>
+        <div class="bar-wrap"><span class="bar-label">提醒打开率</span><div class="bar" style="width:200px;"></div><span class="bar-val">&gt;40%</span></div>
+        <div class="bar-wrap"><span class="bar-label">复购转化</span><div class="bar" style="width:120px;"></div><span class="bar-val">&gt;15%</span></div>
+        <div class="bar-wrap"><span class="bar-label">留存率</span><div class="bar" style="width:240px;"></div><span class="bar-val">&gt;60%</span></div>
+      </div>
+    </div>
   </div>
-  <div style="margin-top:32px;">
-    <span class="tag tag-green" style="font-size:13px;padding:6px 16px;">⏰ 驱虫提醒</span>
-    <span class="tag tag-green" style="font-size:13px;padding:6px 16px;">👤 宠主CRM</span>
-    <span class="tag tag-green" style="font-size:13px;padding:6px 16px;">🩺 Vet Advisor</span>
-    <span class="tag tag-green" style="font-size:13px;padding:6px 16px;">📊 渠道看板</span>
-    <span class="tag tag-green" style="font-size:13px;padding:6px 16px;">📡 竞品雷达</span>
-    <span class="tag tag-green" style="font-size:13px;padding:6px 16px;">📱 小程序</span>
+</section>
+
+<section class="deep-dive">
+  <div class="container">
+    <div class="sec-num">IT 产品机会 ②</div>
+    <h2>👤 Pet Owner CRM · 宠主分层运营</h2>
+    <div class="grid2">
+      <div>
+        <h3 style="font-size:15px;">分层维度</h3>
+        <table>
+          <tr><th>维度</th><th>分层</th><th>运营策略</th></tr>
+          <tr><td>宠物种类</td><td>犬 / 猫</td><td>不同产品推荐</td></tr>
+          <tr><td>年龄</td><td>幼年 / 成年 / 老年</td><td>剂量+频率差异</td></tr>
+          <tr><td>体重</td><td>&lt;5kg / 5-15 / &gt;15kg</td><td>产品规格匹配</td></tr>
+          <tr><td>地区</td><td>一线 / 新一线 / 其他</td><td>渠道偏好差异</td></tr>
+          <tr><td>购买周期</td><td>规律 / 偶发 / 流失</td><td>激活 vs 挽留策略</td></tr>
+          <tr><td>渠道偏好</td><td>医院 / 电商 / 宠物店</td><td>差异化触达</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3 style="font-size:15px;">自动化触达</h3>
+        <div class="card card-accent" style="margin-bottom:10px;">
+          <strong>🐶 新犬主</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:2px;">Day 1: 欢迎 + 驱虫科普 → Day 7: 产品推荐 → Day 30: 首驱提醒</p>
+        </div>
+        <div class="card card-accent" style="margin-bottom:10px;">
+          <strong>😴 沉睡用户</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:2px;">逾期 15 天: 优惠券 → 30 天: 兽医科普 → 60 天: 竞品对比</p>
+        </div>
+        <div class="card" style="margin-bottom:10px;">
+          <strong>⭐ 忠实用户</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:2px;">会员权益 + 新品优先 + 社区活动</p>
+        </div>
+        <div class="card card-dark" style="text-align:center;margin-top:12px;">
+          <strong>技术方案</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:4px;">微信小程序 + CDP + MA 自动化引擎 + 数据分析看板</p>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
-</div><!-- /deck -->
+<section class="deep-dive">
+  <div class="container">
+    <div class="sec-num">IT 产品机会 ③</div>
+    <h2>🩺 Vet Advisor · 兽医驱虫方案助手</h2>
+    <div class="grid2">
+      <div>
+        <h3 style="font-size:15px;">医生需要什么</h3>
+        <div class="card card-accent" style="margin-bottom:10px;">
+          <strong>🔍 快速选品</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:2px;">输入：犬/猫 + 体重 + 场景 → 输出：推荐 BI 产品+剂量</p>
+        </div>
+        <div class="card card-accent" style="margin-bottom:10px;">
+          <strong>📋 竞品对比</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:2px;">BI vs Zoetis vs MSD vs Elanco vs 海正，一表对比</p>
+        </div>
+        <div class="card" style="margin-bottom:10px;">
+          <strong>📚 适应症查询</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:2px;">虫谱覆盖、用法用量、禁忌症、不良反应</p>
+        </div>
+        <div class="card">
+          <strong>📖 病例参考</strong>
+          <p style="font-size:13px;color:var(--text-light);margin-top:2px;">典型驱虫方案 + 临床研究数据</p>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:15px;">产品形态</h3>
+        <p style="font-size:13px;color:var(--text-light);line-height:2;">
+          <strong>Web 端</strong>（桌面优先）：<br>
+          · 医院内网可访问 · 响应式设计，平板可用 · 离线缓存核心数据<br><br>
+          <strong>微信小程序</strong>（移动端）：<br>
+          · 医生随时随地查阅 · 扫码即用，无需安装<br><br>
+          <strong>核心数据</strong>：<br>
+          · BI 全系产品说明书 · 竞品对比表（自动更新） · 临床指南 & 文献摘要
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div id="nav">
-  <button onclick="prev()">← 上一页</button>
-  <div id="dots"></div>
-  <button onclick="next()">下一页 →</button>
-  <span id="counter"></span>
-</div>
+<section class="deep-dive">
+  <div class="container">
+    <div class="sec-num">IT 产品机会 ④</div>
+    <h2>📊 Channel Cockpit · 渠道动销看板</h2>
+    <div class="grid2">
+      <div>
+        <h3 style="font-size:15px;">看板模块</h3>
+        <p style="font-size:13px;color:var(--text-light);line-height:2;">
+          <strong>🏙️ 城市维度</strong><br>
+          · 各城市销量排名 & 趋势 · 渗透率 vs 竞品对比 · 增长/下降预警<br><br>
+          <strong>🏥 医院维度</strong><br>
+          · Top 医院动销排行 · 处方偏好分析 · 流失/新增医院<br><br>
+          <strong>📦 经销商维度</strong><br>
+          · 库存水位 & 周转天数 · 订货频率 & 批量 · 窜货预警
+        </p>
+      </div>
+      <div>
+        <h3 style="font-size:15px;">技术架构</h3>
+        <p style="font-size:13px;color:var(--text-light);line-height:2;">
+          <strong>数据源</strong>：经销商 DMS · 电商平台 API（天猫/京东）· 医院 HIS 抽样 · BI 内部销售系统<br><br>
+          <strong>技术栈</strong>：数据仓库 ETL · 可视化 BI 工具 · 钉钉/企微自动推送
+        </p>
+        <div class="card card-accent" style="margin-top:12px;text-align:center;">
+          <strong>🎯 目标</strong>：从"季度报表"到"实时决策"
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<script>
-let idx = 0;
-const slides = document.querySelectorAll('.slide');
-const dotsEl = document.getElementById('dots');
-const counterEl = document.getElementById('counter');
+<section class="deep-dive">
+  <div class="container">
+    <div class="sec-num">IT 产品机会 ⑤</div>
+    <h2>📡 Competitor Radar · 竞品监测雷达</h2>
+    <div class="grid2">
+      <div>
+        <h3 style="font-size:15px;">监测维度</h3>
+        <table>
+          <tr><th>维度</th><th>监测内容</th><th>频率</th></tr>
+          <tr><td>💰 价格</td><td>天猫/京东/拼多多零售价</td><td>每日</td></tr>
+          <tr><td>🎁 促销</td><td>满减/赠品/组合优惠</td><td>每日</td></tr>
+          <tr><td>🆕 上新</td><td>新品上市、新剂型、新规格</td><td>实时</td></tr>
+          <tr><td>📢 内容</td><td>公众号/小红书/抖音声量</td><td>每周</td></tr>
+          <tr><td>⭐ 评价</td><td>电商评论情感分析</td><td>每周</td></tr>
+          <tr><td>🏥 医院</td><td>医院合作动态、学术活动</td><td>每周</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3 style="font-size:15px;">告警规则</h3>
+        <div class="card card-accent" style="margin-bottom:10px;">
+          <strong>🚨 价格突变</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:2px;">竞品降价 &gt;15% → 即时告警 → 策略响应</p>
+        </div>
+        <div class="card card-warn" style="margin-bottom:10px;">
+          <strong>📢 内容爆发</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:2px;">竞品单篇内容 &gt;10万阅读 → KOL投放预警</p>
+        </div>
+        <div class="card" style="margin-bottom:10px;">
+          <strong>🆕 新品上市</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:2px;">竞品新 SKU 上线 → 立即通知产品团队</p>
+        </div>
+        <div class="card card-dark" style="text-align:center;">
+          <strong>对比 BI 自身</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:4px;">竞品价格指数 vs BI 价格指数 · 声量份额趋势</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-// build dots
-slides.forEach((_,i) => {
-  const d = document.createElement('span');
-  d.onclick = () => go(i);
-  dotsEl.appendChild(d);
-});
+<section class="deep-dive">
+  <div class="container">
+    <div class="sec-num">IT 产品机会 ⑥</div>
+    <h2>📱 Mini Program · 微信小程序</h2>
+    <div class="grid2">
+      <div>
+        <h3 style="font-size:15px;">小程序功能架构</h3>
+        <p style="font-size:13px;color:var(--text-light);line-height:2.2;">
+          <strong>🏠 首页</strong>：宠物档案 + 下次驱虫倒计时<br>
+          <strong>📚 教育</strong>：驱虫科普、室内猫误区、虫谱百科<br>
+          <strong>🛒 复购</strong>：产品推荐 → 电商/医院跳转<br>
+          <strong>👤 会员</strong>：积分、优惠券、驱虫打卡<br>
+          <strong>🔍 查询</strong>：产品说明书、剂量计算器<br>
+          <strong>💬 客服</strong>：在线咨询 + AI 问答
+        </p>
+      </div>
+      <div>
+        <h3 style="font-size:15px;">为什么是超级触点</h3>
+        <div class="card card-accent" style="margin-bottom:10px;">
+          <strong>📱 12 亿用户</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:2px;">微信覆盖所有宠主，无需下载安装</p>
+        </div>
+        <div class="card card-accent" style="margin-bottom:10px;">
+          <strong>🔄 闭环</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:2px;">教育 → 提醒 → 复购 → 会员，一个入口</p>
+        </div>
+        <div class="card" style="margin-bottom:10px;">
+          <strong>📊 数据沉淀</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:2px;">每个行为可追踪，驱动 CRM 策略优化</p>
+        </div>
+        <div class="card card-dark" style="text-align:center;margin-top:12px;">
+          <strong>连接一切</strong>
+          <p style="font-size:12px;color:var(--text-light);margin-top:4px;">提醒工具 + CRM + 兽医助手 + 产品查询 = 小程序</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-function go(i) {
-  slides[idx].classList.remove('active');
-  idx = i;
-  slides[idx].classList.add('active');
-  updateUI();
-}
+<!-- ═══════════════  END  ═══════════════ -->
+<section class="end">
+  <div class="container">
+    <h1>Thank You</h1>
+    <div class="sub">从驱虫药产品竞争 → 宠主健康管理平台</div>
+    <div style="margin-top:28px;font-size:14px;color:rgba(255,255,255,.5);">
+      Boehringer Ingelheim China · Pet Health<br>
+      2026年6月 · 内部战略分析
+    </div>
+    <div style="margin-top:36px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
+      <span class="tag tag-green" style="font-size:14px;padding:8px 18px;">⏰ 驱虫提醒</span>
+      <span class="tag tag-green" style="font-size:14px;padding:8px 18px;">👤 宠主CRM</span>
+      <span class="tag tag-green" style="font-size:14px;padding:8px 18px;">🩺 Vet Advisor</span>
+      <span class="tag tag-green" style="font-size:14px;padding:8px 18px;">📊 渠道看板</span>
+      <span class="tag tag-green" style="font-size:14px;padding:8px 18px;">📡 竞品雷达</span>
+      <span class="tag tag-green" style="font-size:14px;padding:8px 18px;">📱 小程序</span>
+    </div>
+  </div>
+</section>
 
-function next() { if (idx < slides.length-1) go(idx+1); }
-function prev() { if (idx > 0) go(idx-1); }
-
-function updateUI() {
-  document.querySelectorAll('#dots span').forEach((d,i) => d.classList.toggle('active', i===idx));
-  counterEl.textContent = `${idx+1} / ${slides.length}`;
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prev();
-});
-
-go(0);
-</script>
 </body>
 </html>
