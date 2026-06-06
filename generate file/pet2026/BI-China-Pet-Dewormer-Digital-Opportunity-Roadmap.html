@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BI China Pet Dewormer Competitor Ecosystem & IT/Digital Opportunity Roadmap</title>
+  <style>
+    :root {
+      --bi-blue: #003b5c;
+      --bi-teal: #00a7a5;
+      --ink: #17212b;
+      --muted: #5d6b78;
+      --line: #d9e1e7;
+      --soft: #f5f8fa;
+      --green: #2d8f62;
+      --amber: #c9861a;
+      --red: #bf4a42;
+      --violet: #6654b8;
+      --paper: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e9eef2;
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, "Microsoft YaHei", sans-serif;
+      line-height: 1.35;
+    }
+
+    .deck {
+      width: 100%;
+      display: grid;
+      gap: 28px;
+      padding: 28px;
+    }
+
+    .slide {
+      position: relative;
+      width: min(1280px, calc(100vw - 56px));
+      aspect-ratio: 16 / 9;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 45px rgba(22, 32, 42, .12);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 42px 54px 34px;
+    }
+
+    .cover {
+      background:
+        linear-gradient(110deg, rgba(0, 59, 92, .96), rgba(0, 167, 165, .82)),
+        radial-gradient(circle at 80% 18%, rgba(255,255,255,.22), transparent 30%),
+        #003b5c;
+      color: white;
+    }
+
+    .eyebrow {
+      color: var(--bi-teal);
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+    .cover .eyebrow { color: #baf2ef; }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 {
+      font-size: 54px;
+      line-height: 1.06;
+      max-width: 860px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 31px;
+      line-height: 1.12;
+      margin-top: 8px;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 17px;
+      margin-top: 8px;
+    }
+    .cover .subtitle { color: #d8f5f2; max-width: 800px; font-size: 22px; }
+
+    .content {
+      align-self: stretch;
+      display: grid;
+      gap: 18px;
+      margin-top: 22px;
+      min-height: 0;
+    }
+
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .rows-2 { grid-template-rows: 1fr 1fr; }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: #fff;
+      min-width: 0;
+    }
+    .card.soft { background: var(--soft); }
+    .card.dark {
+      background: var(--bi-blue);
+      color: white;
+      border-color: var(--bi-blue);
+    }
+    .card.teal {
+      background: #e5f7f6;
+      border-color: #a9dcda;
+    }
+
+    .metric {
+      font-size: 34px;
+      font-weight: 760;
+      color: var(--bi-blue);
+      line-height: 1;
+    }
+    .metric small {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .label {
+      font-size: 15px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .dark .label { color: #cde2ed; }
+    .dark .metric { color: white; }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li {
+      margin: 7px 0;
+      font-size: 16px;
+    }
+    .small li { font-size: 14px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 9px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      color: var(--bi-blue);
+      font-size: 13px;
+      background: #f1f6f8;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 9px;
+      background: #eaf3f8;
+      color: var(--bi-blue);
+      font-size: 12px;
+      font-weight: 700;
+      margin: 2px 4px 2px 0;
+      white-space: nowrap;
+    }
+    .tag.p0 { background: #dff2e8; color: var(--green); }
+    .tag.p1 { background: #fff1d6; color: var(--amber); }
+    .tag.p2 { background: #ece9ff; color: var(--violet); }
+    .tag.p3 { background: #f4e7e5; color: var(--red); }
+
+    .ecosystem {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .pillar {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: var(--soft);
+    }
+    .node {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .node strong { color: var(--bi-blue); }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+      min-height: 0;
+    }
+    .quad {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 15px;
+      background: white;
+    }
+    .quad h3 {
+      font-size: 17px;
+      color: var(--bi-blue);
+      margin-bottom: 8px;
+    }
+    .axis {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .phase {
+      border-top: 6px solid var(--bi-teal);
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 18px;
+      min-width: 0;
+    }
+    .phase h3 {
+      color: var(--bi-blue);
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .product-map {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .product {
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 14px;
+    }
+    .product h3 {
+      font-size: 16px;
+      color: var(--bi-blue);
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      margin-top: 16px;
+    }
+    .cover .footer {
+      color: #d8f5f2;
+      border-color: rgba(255,255,255,.25);
+    }
+
+    .headline {
+      font-size: 24px;
+      line-height: 1.22;
+      font-weight: 760;
+      color: var(--bi-blue);
+    }
+    .en {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    .cover .en { color: #d8f5f2; }
+
+    @media print {
+      body { background: white; }
+      .deck { padding: 0; gap: 0; }
+      .slide {
+        width: 100vw;
+        height: 100vh;
+        box-shadow: none;
+        border: none;
+        break-after: page;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide cover">
+      <div>
+        <div class="eyebrow">IT/Digital Strategy Deck · Bilingual</div>
+        <h1>BI 中国宠物驱虫药竞争者生态与数字化机会路线图</h1>
+        <p class="subtitle">BI China Pet Dewormer Competitor Ecosystem & IT/Digital Opportunity Roadmap</p>
+      </div>
+      <div class="content grid-3">
+        <div class="card dark">
+          <div class="metric">7</div>
+          <div class="label">家主要竞争公司<br>Key companies covered</div>
+        </div>
+        <div class="card dark">
+          <div class="metric">21</div>
+          <div class="label">款驱虫产品<br>Dewormer products mapped</div>
+        </div>
+        <div class="card dark">
+          <div class="metric">12</div>
+          <div class="label">个月落地路线图<br>Month implementation roadmap</div>
+        </div>
+      </div>
+      <div class="footer">
+        <span>Source: zhaoomi-zyw/pet-knowledge-vault · internal working draft</span>
+        <span>01 / 12</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Executive Summary</div>
+        <h2>竞争已经从“药品对药品”升级为“产品组合 + 渠道触点 + 数据运营”的系统竞争</h2>
+        <p class="subtitle">Competition is shifting from product-by-product battles to portfolio, touchpoint and data-operation systems.</p>
+      </div>
+      <div class="content grid-3">
+        <div class="card teal">
+          <p class="headline">BI 产品线强，但数字化闭环需要补齐</p>
+          <p class="en">BI has broad portfolio coverage, but needs a stronger digital closed loop.</p>
+          <ul>
+            <li>BI 与海正各有 6 款产品，产品数量领先。</li>
+            <li>数字化差距不在产品本身，而在触达、提醒、复购和数据反馈。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="headline">竞品压力来自四类差异化</p>
+          <p class="en">Competitor pressure comes from four differentiated plays.</p>
+          <ul>
+            <li>硕腾：大宠爱/妙宠爱明星滴剂。</li>
+            <li>MSD：贝卫多 12 周长效。</li>
+            <li>礼蓝：项圈与拜耳遗产。</li>
+            <li>海正：国产替代和价格压力。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="headline">IT/Digital 的核心任务是经营周期</p>
+          <p class="en">The digital mission is to operationalize prevention cycles.</p>
+          <ul>
+            <li>把“买一次”变成“定期驱虫”。</li>
+            <li>把“渠道销售”变成“用户生命周期运营”。</li>
+            <li>把“竞品观察”变成“持续雷达”。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><span>Key message for IT/Digital</span><span>02 / 12</span></div>
+    </section>
+
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Market Context</div>
+        <h2>驱虫药增长的数字化抓手来自猫增长、预防化、电商化和复购周期</h2>
+        <p class="subtitle">Digital levers are tied to cat growth, preventive care, e-commerce adoption and recurring purchase cycles.</p>
+      </div>
+      <div class="content grid-4">
+        <div class="card">
+          <div class="metric">3,126亿</div>
+          <div class="label">中国宠物市场规模<br>China pet market size</div>
+        </div>
+        <div class="card">
+          <div class="metric">863亿</div>
+          <div class="label">宠物医疗市场<br>Pet medical market</div>
+        </div>
+        <div class="card">
+          <div class="metric">40-50%</div>
+          <div class="label">城市宠物规律驱虫率估算<br>Regular deworming penetration</div>
+        </div>
+        <div class="card">
+          <div class="metric">20%+</div>
+          <div class="label">电商渠道增长势能<br>E-commerce growth momentum</div>
+        </div>
+      </div>
+      <div class="content grid-2" style="margin-top: 4px;">
+        <div class="card soft">
+          <p class="headline">业务含义 / Business implication</p>
+          <ul>
+            <li>驱虫药正在从“治”转向“防”，提醒和教育比单次转化更重要。</li>
+            <li>猫主人更年轻、更线上化，适合小程序、内容平台和 CRM 标签运营。</li>
+            <li>周期性耗材属性意味着复购率是关键经营指标。</li>
+          </ul>
+        </div>
+        <div class="card soft">
+          <p class="headline">数字化含义 / Digital implication</p>
+          <ul>
+            <li>需要统一产品主数据、宠主标签、驱虫周期和渠道交易数据。</li>
+            <li>以“医院首购 → 电商复购 → 订阅预防”设计数据闭环。</li>
+            <li>把市场变化转成自动化监控，而不是手工周报。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><span>Vault sources: 市场规模、战略分析</span><span>03 / 12</span></div>
+    </section>
+
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Competitor Ecosystem</div>
+        <h2>IT/Digital 应连接五类生态节点：品牌、医院、电商、内容平台与数据基础设施</h2>
+        <p class="subtitle">Digital infrastructure should connect brands, clinics, commerce, content platforms and data capabilities.</p>
+      </div>
+      <div class="content ecosystem">
+        <div class="pillar">
+          <p class="headline">品牌与产品<br><span class="en">Brands & products</span></p>
+          <div class="node"><strong>BI</strong>：6 款产品，滴剂 + 咀嚼片覆盖</div>
+          <div class="node"><strong>Zoetis</strong>：大宠爱/妙宠爱明星滴剂</div>
+          <div class="node"><strong>MSD</strong>：贝卫多 12 周长效</div>
+          <div class="node"><strong>Elanco</strong>：索来多项圈差异化</div>
+          <div class="node"><strong>海正</strong>：国产替代与价格压力</div>
+        </div>
+        <div class="pillar" style="background:#e9f7f7;">
+          <p class="headline">核心运营闭环<br><span class="en">Operating loop</span></p>
+          <div class="node"><strong>教育</strong>：室内猫、看不见虫、周期预防</div>
+          <div class="node"><strong>首购</strong>：医院、内容种草、电商搜索</div>
+          <div class="node"><strong>提醒</strong>：周期日历、体重/年龄/城市风险</div>
+          <div class="node"><strong>复购</strong>：会员、优惠、订阅、家庭装</div>
+          <div class="node"><strong>反馈</strong>：动销、价格、内容声量、用户留存</div>
+        </div>
+        <div class="pillar">
+          <p class="headline">数字化能力<br><span class="en">Digital capabilities</span></p>
+          <div class="node"><strong>CRM</strong>：宠主与宠物标签</div>
+          <div class="node"><strong>Vet tools</strong>：兽医推荐与教育</div>
+          <div class="node"><strong>Channel cockpit</strong>：医院/经销/电商动销</div>
+          <div class="node"><strong>Competitor radar</strong>：价格、促销、内容监测</div>
+          <div class="node"><strong>Marketing automation</strong>：提醒与复购触达</div>
+        </div>
+      </div>
+      <div class="footer"><span>From ecosystem view to product roadmap</span><span>04 / 12</span></div>
+    </section>
+
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Product Portfolio Comparison</div>
+        <h2>BI 和海正产品数量领先，但竞品各有单点差异化，需要数字化产品强化粘性</h2>
+        <p class="subtitle">BI and Hisun lead in product count, while competitors own sharp differentiation points that require digital stickiness.</p>
+      </div>
+      <div class="content">
+        <table>
+          <thead>
+            <tr>
+              <th>公司 Company</th>
+              <th>核心驱虫产品 Key products</th>
+              <th>产品数量 Count</th>
+              <th>竞争特点 Competitive read</th>
+              <th>IT/Digital 启发 Digital implication</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>BI 勃林格</strong></td>
+              <td>超可信、博来恩、福来恩、福味恩、尼可信、犬心保</td>
+              <td>6</td>
+              <td>产品线完整，滴剂 + 咀嚼片双覆盖</td>
+              <td>可围绕全产品组合做生命周期运营和交叉推荐</td>
+            </tr>
+            <tr>
+              <td><strong>Zoetis 硕腾</strong></td>
+              <td>大宠爱、妙宠爱</td>
+              <td>2</td>
+              <td>明星滴剂，中国市场认知强</td>
+              <td>需要在猫用滴剂、复购提醒和教育内容上正面竞争</td>
+            </tr>
+            <tr>
+              <td><strong>MSD 默沙东</strong></td>
+              <td>贝卫多 BRAVECTO</td>
+              <td>1</td>
+              <td>12 周长效形成清晰心智</td>
+              <td>提醒周期必须按产品差异化配置，避免一刀切</td>
+            </tr>
+            <tr>
+              <td><strong>Elanco 礼蓝</strong></td>
+              <td>可立奥、索来多、拜宠清</td>
+              <td>3</td>
+              <td>项圈 8 个月长效，拜耳遗产</td>
+              <td>内容和 CRM 应覆盖长效保护与传统片剂场景</td>
+            </tr>
+            <tr>
+              <td><strong>海正</strong></td>
+              <td>海乐妙、海乐旺、莫爱佳、喜倍安、赛乐滴、海妙哆</td>
+              <td>6</td>
+              <td>国产替代、价格优势、产品线接近 BI</td>
+              <td>竞品价格/促销/渠道监测应作为常态能力</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="footer"><span>Vault source: 宠物驱虫药竞品清单</span><span>05 / 12</span></div>
+    </section>
+
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Dosage Form & Use-Case Matrix</div>
+        <h2>剂型差异决定数字化提醒周期、教育内容和复购路径</h2>
+        <p class="subtitle">Dosage forms define reminder cadence, education content and repurchase journey design.</p>
+      </div>
+      <div class="content grid-4">
+        <div class="card">
+          <p class="headline">咀嚼片<br><span class="en">Chewables</span></p>
+          <span class="tag">BI 强项</span><span class="tag">犬用</span>
+          <ul class="small">
+            <li>代表：超可信、贝卫多、可立奥、海乐旺。</li>
+            <li>数字化重点：按体重规格、犬种、户外风险做提醒。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="headline">滴剂<br><span class="en">Spot-on</span></p>
+          <span class="tag">猫用关键</span><span class="tag">内外同驱</span>
+          <ul class="small">
+            <li>代表：博来恩、大宠爱、妙宠爱、莫爱佳。</li>
+            <li>数字化重点：室内猫教育、操作指导、月度复购。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="headline">项圈<br><span class="en">Collar</span></p>
+          <span class="tag">Elanco 差异化</span>
+          <ul class="small">
+            <li>代表：索来多，8 个月长效。</li>
+            <li>数字化重点：长周期提醒、替换提示、长效价值教育。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="headline">片剂<br><span class="en">Tablets</span></p>
+          <span class="tag">传统剂型</span>
+          <ul class="small">
+            <li>代表：拜宠清、海乐妙。</li>
+            <li>数字化重点：价格敏感人群、组合购买、升级转化。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content grid-2" style="margin-top: 4px;">
+        <div class="card soft">
+          <p class="headline">关键判断 / Key read</p>
+          <ul>
+            <li>BI 在咀嚼片数量上领先，适合围绕犬用高依从性建立 CRM 场景。</li>
+            <li>猫用增长更依赖滴剂、内容教育和线上复购，数字化产品应优先覆盖。</li>
+          </ul>
+        </div>
+        <div class="card soft">
+          <p class="headline">产品设计原则 / Product design principle</p>
+          <ul>
+            <li>不要只按“产品”建提醒，要按“宠物 + 剂型 + 风险 + 渠道”建提醒。</li>
+            <li>不同剂型需要不同教育素材、复购间隔和营销自动化规则。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><span>Vault source: 产品剂型矩阵</span><span>06 / 12</span></div>
+    </section>
+
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Digital Capability Hypothesis</div>
+        <h2>从可见渠道推断：竞品数字化竞争会集中在触达、复购、教育和监测能力</h2>
+        <p class="subtitle">Based on visible go-to-market patterns, digital competition likely centers on reach, repurchase, education and monitoring.</p>
+      </div>
+      <div class="content">
+        <table>
+          <thead>
+            <tr>
+              <th>能力 Capability</th>
+              <th>当前竞争信号 Competitive signal</th>
+              <th>BI 风险 Risk</th>
+              <th>数字化响应 Digital response</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>宠主触达 Owner reach</td>
+              <td>电商、内容平台、O2O 正在重塑决策路径</td>
+              <td>只依赖渠道销售会失去宠主关系</td>
+              <td>微信小程序 + CRM + 内容标签</td>
+            </tr>
+            <tr>
+              <td>兽医教育 Vet education</td>
+              <td>医院仍是专业背书和首购场景</td>
+              <td>推荐话术和方案不统一</td>
+              <td>Vet Advisor + 教育内容库 + CME 跟踪</td>
+            </tr>
+            <tr>
+              <td>复购运营 Repurchase</td>
+              <td>驱虫药是周期性耗材，用户容易遗忘</td>
+              <td>首购后流失，LTV 被竞品截留</td>
+              <td>驱虫日历 + 自动提醒 + 电商复购</td>
+            </tr>
+            <tr>
+              <td>渠道透明 Channel visibility</td>
+              <td>国产品牌和电商渠道增速快</td>
+              <td>动销、库存和区域机会不可视</td>
+              <td>Channel Cockpit + 分层看板</td>
+            </tr>
+            <tr>
+              <td>竞品监测 CI radar</td>
+              <td>价格、促销、上新、内容声量变化快</td>
+              <td>响应慢，周报滞后</td>
+              <td>Competitor Radar + alerts</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="footer"><span>Note: competitor digital capabilities are inferred from visible market signals, not internal competitor data</span><span>07 / 12</span></div>
+    </section>
+
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Pain Points to Digital Needs</div>
+        <h2>每个业务痛点都对应一个可落地的数字化产品或数据能力</h2>
+        <p class="subtitle">Every business pain point maps to a practical digital product or data capability.</p>
+      </div>
+      <div class="content grid-2">
+        <div class="card">
+          <p class="headline">用户与教育问题<br><span class="en">Owner & education problems</span></p>
+          <table>
+            <tr><th>痛点</th><th>数字化需求</th></tr>
+            <tr><td>看不见虫就不驱</td><td>场景化科普内容、风险问卷</td></tr>
+            <tr><td>室内猫不用驱虫误区</td><td>室内猫专题、猫主人标签、内容自动触达</td></tr>
+            <tr><td>忘记上次和下次驱虫</td><td>驱虫日历、微信提醒、订阅提示</td></tr>
+            <tr><td>效果感知弱</td><td>寄生虫风险可视化、用药后教育</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <p class="headline">渠道与运营问题<br><span class="en">Channel & operation problems</span></p>
+          <table>
+            <tr><th>痛点</th><th>数字化需求</th></tr>
+            <tr><td>兽医推荐不一致</td><td>Vet Advisor、方案推荐、产品对比</td></tr>
+            <tr><td>电商复购断点</td><td>会员体系、优惠券规则、自动化复购</td></tr>
+            <tr><td>动销不透明</td><td>医院/经销/电商渠道看板</td></tr>
+            <tr><td>竞品变化快</td><td>价格、促销、内容声量监测雷达</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="content">
+        <div class="card teal">
+          <p class="headline">IT/Digital 北极星 / North-star metric</p>
+          <p>提升规律驱虫率与年度复购率：从“卖出一盒药”转向“经营一个宠物的预防健康周期”。</p>
+          <p class="en">Improve regular deworming and annual repurchase: from selling a pack to operating a pet prevention cycle.</p>
+        </div>
+      </div>
+      <div class="footer"><span>Translated from business friction into product requirements</span><span>08 / 12</span></div>
+    </section>
+
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Digital Product Opportunity Map</div>
+        <h2>五组数字化产品覆盖宠主、兽医、渠道、竞争情报和数据底座</h2>
+        <p class="subtitle">Five digital product groups cover pet owners, vets, channels, competitive intelligence and data foundation.</p>
+      </div>
+      <div class="content product-map">
+        <div class="product">
+          <h3>Pet Owner Hub<br>宠主端小程序</h3>
+          <span class="tag p0">P0</span>
+          <ul class="small">
+            <li>驱虫日历</li>
+            <li>室内猫教育</li>
+            <li>复购入口</li>
+            <li>会员权益</li>
+          </ul>
+        </div>
+        <div class="product">
+          <h3>Vet Advisor<br>兽医推荐助手</h3>
+          <span class="tag p1">P1</span>
+          <ul class="small">
+            <li>产品对比</li>
+            <li>场景方案</li>
+            <li>继续教育</li>
+            <li>推荐话术</li>
+          </ul>
+        </div>
+        <div class="product">
+          <h3>Channel Cockpit<br>渠道动销看板</h3>
+          <span class="tag p1">P1</span>
+          <ul class="small">
+            <li>医院覆盖</li>
+            <li>电商动销</li>
+            <li>经销库存</li>
+            <li>区域机会</li>
+          </ul>
+        </div>
+        <div class="product">
+          <h3>Competitor Radar<br>竞品雷达</h3>
+          <span class="tag p0">P0</span>
+          <ul class="small">
+            <li>价格监测</li>
+            <li>促销监测</li>
+            <li>内容声量</li>
+            <li>新品上架</li>
+          </ul>
+        </div>
+        <div class="product">
+          <h3>Data Foundation<br>数据底座</h3>
+          <span class="tag p0">P0</span>
+          <ul class="small">
+            <li>产品主数据</li>
+            <li>宠物标签</li>
+            <li>渠道映射</li>
+            <li>营销自动化</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content grid-2" style="margin-top: 4px;">
+        <div class="card soft">
+          <p class="headline">优先级原则 / Prioritization logic</p>
+          <p>P0 优先选择数据依赖低、业务价值高、能快速验证复购和监测价值的产品。</p>
+        </div>
+        <div class="card soft">
+          <p class="headline">试点产品 / Pilot products</p>
+          <p>建议优先围绕超可信和博来恩试点：一个代表犬用咀嚼片，一个代表猫用滴剂。</p>
+        </div>
+      </div>
+      <div class="footer"><span>All requested opportunity areas covered</span><span>09 / 12</span></div>
+    </section>
+
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Prioritization Matrix</div>
+        <h2>先做能快速闭环的数据产品，再做深度集成和 AI 个性化能力</h2>
+        <p class="subtitle">Start with fast closed-loop data products, then move to integrations and AI personalization.</p>
+      </div>
+      <div class="content">
+        <div class="axis">高业务价值 High value ↑</div>
+        <div class="matrix">
+          <div class="quad" style="background:#e8f7ef;">
+            <h3>P0 · 立即启动 / Start now</h3>
+            <span class="tag p0">驱虫提醒小程序</span>
+            <span class="tag p0">竞品雷达</span>
+            <span class="tag p0">宠主 CRM 标签</span>
+            <ul class="small">
+              <li>直接对应遗忘、复购和竞品响应。</li>
+              <li>可用轻量 MVP 快速验证。</li>
+            </ul>
+          </div>
+          <div class="quad" style="background:#fff7e8;">
+            <h3>P1 · 战略扩展 / Scale next</h3>
+            <span class="tag p1">Vet Advisor</span>
+            <span class="tag p1">渠道动销看板</span>
+            <span class="tag p1">电商复购自动化</span>
+            <ul class="small">
+              <li>价值高，但需要业务流程和数据源配合。</li>
+              <li>适合 3-6 个月启动试点。</li>
+            </ul>
+          </div>
+          <div class="quad">
+            <h3>P2 · 选择性试点 / Selective pilots</h3>
+            <span class="tag p2">O2O 接入</span>
+            <span class="tag p2">医院系统集成</span>
+            <span class="tag p2">AI 风险建议</span>
+            <ul class="small">
+              <li>需要外部合作和合规审查。</li>
+              <li>适合验证重点城市或重点医院。</li>
+            </ul>
+          </div>
+          <div class="quad">
+            <h3>P3 · 长期生态 / Long-term ecosystem</h3>
+            <span class="tag p3">全宠物健康平台</span>
+            <span class="tag p3">跨品类订阅</span>
+            <span class="tag p3">保险联动</span>
+            <ul class="small">
+              <li>愿景清晰，但不适合作为第一阶段 MVP。</li>
+              <li>待数据和用户关系成熟后推进。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="axis">低落地难度 Low complexity → 高落地难度 High complexity</div>
+      </div>
+      <div class="footer"><span>Prioritize value, speed and data learnings</span><span>10 / 12</span></div>
+    </section>
+
+    <section class="slide">
+      <div>
+        <div class="eyebrow">12-Month Roadmap</div>
+        <h2>三阶段路线图：先建底座和雷达，再做复购与渠道闭环，最后试点智能推荐</h2>
+        <p class="subtitle">Three phases: foundation and radar, repurchase and channel loop, then intelligent recommendation pilots.</p>
+      </div>
+      <div class="content roadmap">
+        <div class="phase">
+          <h3>0-3 个月<br><span class="en">Foundation MVP</span></h3>
+          <ul>
+            <li>统一产品主数据与竞品产品表。</li>
+            <li>上线竞品雷达 MVP：价格、促销、上新。</li>
+            <li>设计驱虫提醒 MVP：超可信/博来恩。</li>
+            <li>定义 CRM 标签：猫/狗、年龄、体重、渠道、周期。</li>
+          </ul>
+          <span class="tag p0">Owner: IT + Digital + Marketing</span>
+        </div>
+        <div class="phase">
+          <h3>3-6 个月<br><span class="en">Engagement & cockpit</span></h3>
+          <ul>
+            <li>上线宠主小程序或微信轻应用。</li>
+            <li>接入电商复购提醒和优惠券规则。</li>
+            <li>上线 Vet Advisor 内容库和推荐话术。</li>
+            <li>建立渠道动销看板第一版。</li>
+          </ul>
+          <span class="tag p1">Owner: Digital + Sales + Vet/Medical</span>
+        </div>
+        <div class="phase">
+          <h3>6-12 个月<br><span class="en">Closed loop & pilots</span></h3>
+          <ul>
+            <li>形成医院首购到电商复购闭环。</li>
+            <li>试点重点城市、重点医院和多宠家庭运营。</li>
+            <li>尝试 AI 个性化驱虫建议和风险提示。</li>
+            <li>把竞品雷达纳入月度业务决策节奏。</li>
+          </ul>
+          <span class="tag p2">Owner: Cross-functional squad</span>
+        </div>
+      </div>
+      <div class="footer"><span>Roadmap designed for IT/Digital execution</span><span>11 / 12</span></div>
+    </section>
+
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Next Actions</div>
+        <h2>建议立即组织一个跨职能 MVP 小组，把 P0 产品做成 90 天验证</h2>
+        <p class="subtitle">Create a cross-functional MVP squad and validate P0 products within 90 days.</p>
+      </div>
+      <div class="content grid-2">
+        <div class="card teal">
+          <p class="headline">90 天行动清单 / 90-day action list</p>
+          <ul>
+            <li>确认数据源：产品、渠道、电商、内容平台、竞品价格。</li>
+            <li>确定试点范围：超可信 + 博来恩，覆盖犬用和猫用场景。</li>
+            <li>完成小程序/轻应用原型：驱虫提醒、教育、复购入口。</li>
+            <li>搭建竞品雷达 MVP：价格、促销、新品、内容声量。</li>
+            <li>设定 KPI：提醒开启率、复购率、兽医使用率、雷达响应时效。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="headline">成功指标 / Success metrics</p>
+          <table>
+            <tr><th>指标 Metric</th><th>建议目标 Suggested target</th></tr>
+            <tr><td>提醒开启率 Reminder opt-in</td><td>30%+ MVP 用户</td></tr>
+            <tr><td>年度复购率 Annual repurchase</td><td>试点组提升 5-10 pct</td></tr>
+            <tr><td>兽医工具使用 Vet tool usage</td><td>重点医院月活跟踪</td></tr>
+            <tr><td>竞品监测时效 CI response</td><td>关键价格/促销 48 小时内发现</td></tr>
+            <tr><td>渠道可视化 Channel visibility</td><td>重点城市/渠道覆盖第一版</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="content">
+        <div class="card dark">
+          <p class="headline" style="color:white;">最终目标 / End state</p>
+          <p>把 BI 驱虫药业务从“产品组合优势”升级为“预防健康数字化运营优势”。</p>
+          <p class="en">Upgrade BI dewormer business from portfolio advantage to preventive-health digital operating advantage.</p>
+        </div>
+      </div>
+      <div class="footer"><span>Prepared for BI China IT/Digital discussion</span><span>12 / 12</span></div>
+    </section>
+  </main>
+</body>
+</html>
