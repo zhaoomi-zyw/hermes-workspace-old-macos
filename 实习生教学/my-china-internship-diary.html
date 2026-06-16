@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My China Internship Diary — A Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Slide wrapper ── */
+  .slide {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    position: relative;
+  }
+
+  .slide-inner {
+    max-width: 880px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* ── Slide progress dots ── */
+  .progress {
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    z-index: 100;
+  }
+  .progress a {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.12);
+    transition: background 0.3s, transform 0.3s;
+    text-decoration: none;
+  }
+  .progress a:hover { background: rgba(0,0,0,0.3); transform: scale(1.3); }
+  .progress a.active { background: #1a3a4a; }
+
+  /* ── Slide number badge ── */
+  .slide-num {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #bbb;
+    font-weight: 500;
+  }
+
+  /* ── Hero ── */
+  .slide-hero {
+    background: #0f1f2b;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0, 150, 200, 0.10) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(100, 200, 220, 0.06) 0%, transparent 50%);
+  }
+  .slide-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  }
+  .slide-hero .slide-inner { position: relative; z-index: 1; text-align: center; }
+
+  .hero-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(144, 210, 230, 0.6);
+    margin-bottom: 1.2rem;
+  }
+  .hero-title {
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title em { font-style: normal; color: #7ec8d8; }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    max-width: 560px;
+    margin: 1rem auto 2.2rem;
+    line-height: 1.7;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.4);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+  .hero-arrow {
+    display: inline-block;
+    margin-top: 3rem;
+    color: rgba(255,255,255,0.2);
+    font-size: 1.5rem;
+    animation: float 2.5s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+  /* ── Slide heading ── */
+  .slide-number {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #9ab0b8;
+    margin-bottom: 0.3rem;
+  }
+  .slide-heading {
+    font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: #0f1f2b;
+    margin-bottom: 0.15rem;
+  }
+  .slide-heading-de {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: #999;
+    font-style: italic;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0ddd6;
+  }
+
+  /* ── Body text ── */
+  .body p {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.7;
+  }
+  .body p:last-child { margin-bottom: 0; }
+
+  .body strong { color: #0f1f2b; font-weight: 600; }
+
+  /* ── Card grid ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    background: #fff;
+    border: 1px solid #e6e3dc;
+    border-radius: 10px;
+    padding: 1.25rem 1.4rem;
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.04); }
+
+  .card-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #5a8a9a;
+    margin-bottom: 0.3rem;
+  }
+  .card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0f1f2b;
+    margin-bottom: 0.3rem;
+  }
+  .card-text {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.55;
+  }
+
+  /* ── Accent box (insight callout) ── */
+  .accent-box {
+    background: #edf2f5;
+    border-left: 3px solid #2c7a8a;
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+  }
+  .accent-box p { font-size: 0.9rem; color: #1a2f3a; margin-bottom: 0.3rem; }
+  .accent-box p:last-child { margin-bottom: 0; }
+  .accent-box .de-note {
+    font-size: 0.8rem;
+    color: #777;
+    font-style: italic;
+    margin-top: 0.4rem;
+  }
+
+  /* ── Quote ── */
+  .quote {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin: 1.5rem 0;
+  }
+  .quote-text {
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: #1a3a4a;
+    font-style: italic;
+    line-height: 1.6;
+  }
+  .quote-text::before { content: '\201C'; }
+  .quote-text::after { content: '\201D'; }
+  .quote-attribution {
+    font-size: 0.78rem;
+    color: #999;
+    margin-top: 0.5rem;
+  }
+
+  /* ── Checklist ── */
+  .checklist { list-style: none; margin: 1.5rem 0 0; }
+  .checklist li {
+    position: relative;
+    padding: 0.8rem 0 0.8rem 2.2rem;
+    border-bottom: 1px solid #edebe6;
+    font-size: 0.92rem;
+    color: #333;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '\2610';
+    position: absolute;
+    left: 0;
+    top: 0.8rem;
+    font-size: 1.2rem;
+    color: #2c7a8a;
+  }
+  .checklist li .de-note {
+    display: block;
+    font-size: 0.78rem;
+    color: #999;
+    font-style: italic;
+    margin-top: 0.15rem;
+  }
+
+  /* ── Tool icon cards ── */
+  .tool-icon { font-size: 1.4rem; margin-bottom: 0.4rem; display: block; }
+
+  /* ── Footer slide ── */
+  .slide-footer {
+    background: #0f1f2b;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+  }
+  .slide-footer .slide-inner { max-width: 500px; }
+  .slide-footer p { font-size: 0.82rem; margin-bottom: 0.3rem; }
+  .slide-footer .footer-title { font-size: 1.2rem; color: rgba(255,255,255,0.7); font-weight: 500; margin-bottom: 0.5rem; }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .card-grid, .card-grid.three { grid-template-columns: 1fr; }
+    .slide { min-height: auto; padding: 3rem 1.2rem; }
+    .progress { display: none; }
+    .hero-meta { gap: 1rem; flex-direction: column; align-items: center; }
+    .slide-num { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ Progress dots ═══ -->
+<nav class="progress" aria-label="Slide navigation">
+  <a href="#slide-0" class="active" aria-label="Title"></a>
+  <a href="#slide-1" aria-label="First impression"></a>
+  <a href="#slide-2" aria-label="What I learned"></a>
+  <a href="#slide-3" aria-label="Cultural observations"></a>
+  <a href="#slide-4" aria-label="AI tools"></a>
+  <a href="#slide-5" aria-label="Next steps"></a>
+  <a href="#slide-6" aria-label="End"></a>
+</nav>
+
+<script>
+// Active dot tracking
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.progress a').forEach(a => a.classList.remove('active'));
+      const id = entry.target.id;
+      const dot = document.querySelector(`.progress a[href="#${id}"]`);
+      if (dot) dot.classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.slide[id]').forEach(s => observer.observe(s));
+</script>
+
+<!-- ════════════════════════ SLIDE 0 — HERO ════════════════════════ -->
+<section class="slide slide-hero" id="slide-0">
+  <div class="slide-num">Cover</div>
+  <div class="slide-inner">
+    <div class="hero-label">Internship Diary &middot; 实习日记</div>
+    <h1 class="hero-title">My <em>China</em> Internship Diary</h1>
+    <p class="hero-sub">
+      A high school student's summer in Shanghai &mdash; AI agents,<br>
+      e-scooters, and a world that moves at a different speed.
+    </p>
+    <div class="hero-meta">
+      <span>&#x1F3F4; Shanghai, China</span>
+      <span>&#x1F4C5; Summer 2025</span>
+      <span>&#x1F4AC; English &middot; Deutsch</span>
+    </div>
+    <div class="hero-arrow">&darr;</div>
+  </div>
+</section>
+
+<!-- ════════════════════════ SLIDE 1 — FIRST IMPRESSION ════════════════════════ -->
+<section class="slide" id="slide-1">
+  <div class="slide-num">01 / 06</div>
+  <div class="slide-inner">
+    <div class="slide-number">01</div>
+    <h2 class="slide-heading">First Impression</h2>
+    <div class="slide-heading-de">Erster Eindruck &mdash; Ankunft in Shanghai</div>
+
+    <div class="body">
+      <p>
+        The plane landed at Pudong, and the first thing that struck me was the <strong>sheer scale</strong> of the airport &mdash; a forty-minute walk just to reach baggage claim. That scale turned out to be the theme of the entire trip.
+      </p>
+      <p>
+        Stepping outside, everything felt <strong>purposefully fast</strong>. Electric scooters weaving silently through traffic, phones scanning QR codes for street food, a rhythm that makes European cities feel almost sleepy in comparison.
+      </p>
+    </div>
+
+    <div class="card-grid three">
+      <div class="card">
+        <div class="card-label">&#x1F4B3; Payments</div>
+        <div class="card-title">Cashless Everywhere</div>
+        <div class="card-text">WeChat Pay and Alipay accepted at every stall and shop. I barely touched cash the whole time.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">&#x1F6B5; Transport</div>
+        <div class="card-title">E-Scooter City</div>
+        <div class="card-text">Thousands of silent e-scooters weaving through traffic &mdash; feels chaotic, somehow works perfectly.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">&#x1F372; Food</div>
+        <div class="card-title">Global Hub</div>
+        <div class="card-text">Authentic Italian, Japanese, Mexican &mdash; everything. But xiaolongbao (soup dumplings) were the real highlight.</div>
+      </div>
+    </div>
+
+    <div class="accent-box">
+      <p><strong>Company environment:</strong> Modern office, professional team, genuinely welcoming. From day one I was included in real discussions &mdash; not treated like a "student to be tolerated."</p>
+      <p class="de-note">&#x1F1E9;&#x1F1EA; Modernes Büro, professionelles Team, ehrlich willkommen geheißen &mdash; von Tag eins an war ich Teil der echten Arbeit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ SLIDE 2 — WHAT I LEARNED ════════════════════════ -->
+<section class="slide" id="slide-2">
+  <div class="slide-num">02 / 06</div>
+  <div class="slide-inner">
+    <div class="slide-number">02</div>
+    <h2 class="slide-heading">What I Learned</h2>
+    <div class="slide-heading-de">Was ich gelernt habe &mdash; Arbeit &amp; Team</div>
+
+    <div class="body">
+      <p>
+        I worked in the IT &amp; AI team of a major pharmaceutical company. My project: <strong>researching what AI agents can do</strong> in a real business context &mdash; where they deliver value, where they fall short, and how a regulated industry like pharma can use them safely.
+      </p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">&#x1F916; Skill</div>
+        <div class="card-title">Talking to AI Agents</div>
+        <div class="card-text">I used <strong>Hermes Agent</strong> daily &mdash; learning prompt engineering, task decomposition, and how to validate outputs instead of trusting them blindly.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">&#x1F468;&#x200D;&#x1F4BB; Observation</div>
+        <div class="card-title">Chinese Work Culture</div>
+        <div class="card-text">Efficiency and rigour together. Meetings were focused, decisions quick, and every deliverable was double-checked. Nothing was done carelessly.</div>
+      </div>
+    </div>
+
+    <div class="quote">
+      <p class="quote-text">Talking to an AI agent is a skill you have to practise &mdash; just like learning a new language for a new world.</p>
+      <p class="quote-attribution">&mdash; The most practical takeaway from the internship</p>
+    </div>
+
+    <div class="accent-box">
+      <p><strong>Mindset shift:</strong> Back in Germany I was used to a more relaxed pace. Here I learned that speed and thoroughness don't have to be opposites. You can move fast and still be precise.</p>
+      <p class="de-note">&#x1F1E9;&#x1F1EA; Neue Erkenntnis: Schnelligkeit und Genauigkeit schlie&szlig;en sich nicht aus &mdash; beides gleichzeitig ist m&ouml;glich und das Ziel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ SLIDE 3 — CULTURAL OBSERVATIONS ════════════════════════ -->
+<section class="slide" id="slide-3">
+  <div class="slide-num">03 / 06</div>
+  <div class="slide-inner">
+    <div class="slide-number">03</div>
+    <h2 class="slide-heading">Cultural Observations</h2>
+    <div class="slide-heading-de">Kulturelle Beobachtungen &mdash; Leben in Shanghai</div>
+
+    <div class="body">
+      <p>A few weeks in Shanghai gave me a crash course in Chinese urban culture. Here are the things that stayed with me:</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">&#x23F0; Daily Life</div>
+        <div class="card-title">Pace of Living</div>
+        <div class="card-text">Everything moves faster &mdash; walking, eating, working. But it's not frantic; it's purposeful. People are in motion without being stressed.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">&#x1F310; Language</div>
+        <div class="card-title">English Works Here</div>
+        <div class="card-text">Getting around without Chinese was surprisingly easy. English signage, apps with English modes, and locals used to international visitors.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">&#x1F959; Food Culture</div>
+        <div class="card-title">Truly International</div>
+        <div class="card-text">Shanghai is a global food city. Every cuisine is authentic and widely available &mdash; the city lives up to its reputation as a world hub.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">&#x1F4F1; Digital Life</div>
+        <div class="card-title">Super-App World</div>
+        <div class="card-text">WeChat is not just messaging &mdash; it's payments, bookings, social media, work chat, all in one. Makes Europe's fragmented app ecosystem feel clunky.</div>
+      </div>
+    </div>
+
+    <div class="accent-box">
+      <p><strong>What surprised me most:</strong> How easy it was to adapt. I expected culture shock, but Shanghai is so international and well-connected that I felt comfortable within days.</p>
+      <p class="de-note">&#x1F1E9;&#x1F1EA; Gr&ouml;&szlig;te &Uuml;berraschung: Wie leicht die Eingew&ouml;hnung war. Shanghai ist so international, dass ich mich nach wenigen Tagen zuhause gef&uuml;hlt habe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ SLIDE 4 — AI TOOLS I TRIED ════════════════════════ -->
+<section class="slide" id="slide-4">
+  <div class="slide-num">04 / 06</div>
+  <div class="slide-inner">
+    <div class="slide-number">04</div>
+    <h2 class="slide-heading">AI Tools I Tried</h2>
+    <div class="slide-heading-de">KI-Tools, die ich ausprobiert habe</div>
+
+    <div class="body">
+      <p>
+        My main tool was <strong>Hermes Agent</strong> (open-source, by Nous Research) &mdash; I evaluated what a modern AI agent framework could do in a pharmaceutical business context.
+      </p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="tool-icon">&#x1F916;</span>
+        <div class="card-title">Hermes Agent</div>
+        <div class="card-text">Tested instruction following, tool use, document analysis. Learned how to design agent workflows for real business tasks.</div>
+      </div>
+      <div class="card">
+        <span class="tool-icon">&#x1F4DD;</span>
+        <div class="card-title">Prompt Engineering</div>
+        <div class="card-text">Breaking complex tasks into step-by-step agent instructions became second nature. Precision in prompts = quality in outputs.</div>
+      </div>
+      <div class="card">
+        <span class="tool-icon">&#x1F50D;</span>
+        <div class="card-title">LLM Evaluation</div>
+        <div class="card-text">Assessed models for pharma use cases &mdash; compliance, document summarisation, structured data extraction.</div>
+      </div>
+      <div class="card">
+        <span class="tool-icon">&#x2699;&#xFE0F;</span>
+        <div class="card-title">Workflow Design</div>
+        <div class="card-text">Mapped where AI agents add value in a regulated industry &mdash; and where human oversight stays essential.</div>
+      </div>
+    </div>
+
+    <div class="accent-box">
+      <p><strong>The balance I learned:</strong> AI handles the heavy lifting, humans do the final check. In pharma, accuracy and traceability matter more than speed. That balance &mdash; efficiency without blind trust &mdash; is the real skill I'm taking home.</p>
+      <p class="de-note">&#x1F1E9;&#x1F1EA; Das Gleichgewicht: KI macht die Vorarbeit, der Mensch pr&uuml;ft das Ergebnis. In der Pharmaindustrie z&auml;hlen Genauigkeit und Nachvollziehbarkeit mehr als Geschwindigkeit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ SLIDE 5 — NEXT STEPS ════════════════════════ -->
+<section class="slide" id="slide-5">
+  <div class="slide-num">05 / 06</div>
+  <div class="slide-inner">
+    <div class="slide-number">05</div>
+    <h2 class="slide-heading">What I Want to Learn Next</h2>
+    <div class="slide-heading-de">Was ich als N&auml;chstes lernen m&ouml;chte</div>
+
+    <div class="body">
+      <p>An internship doesn't answer everything &mdash; if anything, it opens new questions. Here's what I'm taking forward:</p>
+    </div>
+
+    <ul class="checklist">
+      <li>
+        <strong>Deploy an AI agent in a real production environment</strong>
+        <span class="de-note">Einen KI-Agenten in einer echten Produktionsumgebung einsetzen</span>
+      </li>
+      <li>
+        <strong>Learn Mandarin properly &mdash; beyond survival phrases</strong>
+        <span class="de-note">Richtig Chinesisch lernen &mdash; mehr als nur ein paar S&auml;tze</span>
+      </li>
+      <li>
+        <strong>Understand how pharma regulations and AI will converge</strong>
+        <span class="de-note">Verstehen, wie Pharmaregulierung und KI zusammenwachsen</span>
+      </li>
+      <li>
+        <strong>Build my own agent from scratch and open-source it</strong>
+        <span class="de-note">Meinen eigenen Agenten von Grund auf bauen und ver&ouml;ffentlichen</span>
+      </li>
+      <li>
+        <strong>Return to China for a longer stay &mdash; a semester or a full year</strong>
+        <span class="de-note">F&uuml;r einen l&auml;ngeren Aufenthalt nach China zur&uuml;ckkehren &mdash; ein Semester oder ein ganzes Jahr</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════════════════════ SLIDE 6 — CLOSING ════════════════════════ -->
+<section class="slide slide-footer" id="slide-6">
+  <div class="slide-num" style="color: rgba(255,255,255,0.2);">06 / 06</div>
+  <div class="slide-inner">
+    <p class="footer-title">Thank you &middot; 谢谢</p>
+    <p>My China Internship Diary &mdash; Shanghai, Summer 2025</p>
+    <p style="margin-top: 0.8rem;">Built with Hermes Agent &middot; Prompt by me &middot; Experience by me</p>
+    <p style="margin-top: 0.4rem; font-size: 0.7rem; color: rgba(255,255,255,0.3);">English &middot; Deutsch &middot; 中文</p>
+  </div>
+</section>
+
+</body>
+</html>
