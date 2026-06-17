@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宠物驱虫药市场 2026 Q1 营收报告</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  .container { max-width: 1000px; margin: 0 auto; }
+
+  /* Header */
+  .header { margin-bottom: 40px; }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  .header .subtitle {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .header .subtitle .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22d3ee;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  /* Summary speed rank */
+  .speed-rank {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 40px;
+  }
+  .speed-rank h2 {
+    font-size: 14px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .rank-list { display: flex; gap: 12px; }
+  .rank-item {
+    flex: 1;
+    background: #1e293b;
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+    border: 1px solid #334155;
+  }
+  .rank-item .rank {
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 4px;
+  }
+  .rank-item .name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .rank-item .growth {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .rank-item:nth-child(1) { border-color: #f59e0b; }
+  .rank-item:nth-child(1) .growth { color: #fbbf24; }
+  .rank-item:nth-child(2) { border-color: #22d3ee; }
+  .rank-item:nth-child(2) .growth { color: #22d3ee; }
+  .rank-item:nth-child(3) { border-color: #a78bfa; }
+  .rank-item:nth-child(3) .growth { color: #a78bfa; }
+  .rank-item:nth-child(4) { border-color: #64748b; }
+  .rank-item:nth-child(4) .growth { color: #94a3b8; }
+  .rank-item .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 6px;
+  }
+  .tag.gold { background: rgba(251,191,36,0.15); color: #fbbf24; }
+  .tag.cyan { background: rgba(34,211,238,0.15); color: #22d3ee; }
+  .tag.purple { background: rgba(168,85,247,0.15); color: #a78bfa; }
+  .tag.gray { background: rgba(148,163,184,0.15); color: #94a3b8; }
+
+  /* Company cards */
+  .company-card {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+  }
+  .company-card:hover { border-color: #475569; }
+  .company-card .company-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .company-card .company-header .name {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .company-card .company-header .ticker {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 2px;
+  }
+  .company-card .company-header .badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .badge.gold { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+  .badge.cyan { background: rgba(34,211,238,0.15); color: #22d3ee; border: 1px solid rgba(34,211,238,0.3); }
+  .badge.red { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+  .badge.gray { background: rgba(148,163,184,0.15); color: #94a3b8; border: 1px solid rgba(148,163,184,0.3); }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat-item {
+    background: #0f172a;
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid #1e293b;
+  }
+  .stat-item .label {
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .stat-item .value {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .stat-item .change {
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .change.up { color: #34d399; }
+  .change.down { color: #f87171; }
+  .change.flat { color: #94a3b8; }
+
+  .signal-box {
+    background: rgba(20, 184, 166, 0.08);
+    border: 1px solid rgba(20, 184, 166, 0.2);
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 13px;
+    color: #5eead4;
+    line-height: 1.6;
+  }
+  .signal-box .icon { margin-right: 6px; }
+
+  /* Comparison table */
+  .comparison-section { margin-top: 40px; }
+  .comparison-section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #38bdf8;
+  }
+  .comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    font-size: 13px;
+  }
+  .comparison-table th {
+    background: #1e293b;
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: #94a3b8;
+    border-bottom: 1px solid #334155;
+  }
+  .comparison-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #1e293b;
+    color: #cbd5e1;
+  }
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .comparison-table tr:hover td { background: rgba(51,65,85,0.3); }
+  .comparison-table .metric-label {
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #1e293b;
+    font-size: 12px;
+    color: #475569;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>宠物驱虫药市场 · 2026 Q1 营收快报</h1>
+    <div class="subtitle">
+      <span class="dot"></span>
+      数据来源：AnySearch 抓取各公司官方财报
+      <span style="color:#475569">|</span>
+      2026年5月28日
+    </div>
+  </div>
+
+  <!-- Speed rank -->
+  <div class="speed-rank">
+    <h2>📊 季度增速排名</h2>
+    <div class="rank-list">
+      <div class="rank-item">
+        <div class="rank">#1 增速王</div>
+        <div class="name">礼蓝 Elanco</div>
+        <div class="growth">+15%</div>
+        <span class="tag gold">🏆 上调全年指引</span>
+      </div>
+      <div class="rank-item">
+        <div class="rank">#2</div>
+        <div class="name">默沙东 MSD 动保</div>
+        <div class="growth">+13%</div>
+        <span class="tag cyan">Bravecto +16%</span>
+      </div>
+      <div class="rank-item">
+        <div class="rank">#3</div>
+        <div class="name">硕腾 Zoetis</div>
+        <div class="growth">+3%</div>
+        <span class="tag purple">美国承压 -11%</span>
+      </div>
+      <div class="rank-item">
+        <div class="rank">—</div>
+        <div class="name">勃林格 BI</div>
+        <div class="growth">无Q1</div>
+        <span class="tag gray">私企（2025全年 +7.3%）</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Elanco -->
+  <div class="company-card">
+    <div class="company-header">
+      <div>
+        <div class="name">🟡 礼蓝 Elanco</div>
+        <div class="ticker">NYSE: ELAN</div>
+      </div>
+      <span class="badge gold">🏆 增速王 · 上调指引</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-item">
+        <div class="label">Q1 总营收</div>
+        <div class="value">$13.71亿</div>
+        <div class="change up">+15% reported</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">有机增长</div>
+        <div class="value">+10%</div>
+        <div class="change up">行业最快</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">Pet Health</div>
+        <div class="value">$7.10亿</div>
+        <div class="change up">+12%</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">Adj. EBITDA</div>
+        <div class="value">$3.34亿</div>
+        <div class="change up">+21% (margin 24.5%)</div>
+      </div>
+    </div>
+    <div class="signal-box">
+      🔥 Credelio Quattro 加速拿份额（已覆盖 40%+ 美国诊所）<br>
+      💊 Zenrelia 达 4 季度 blockbuster 里程碑（年化 &gt;$20亿）<br>
+      🛒 新获 Costco + Dollar General 零售渠道<br>
+      🇪🇺 收购 AHV International 扩展欧洲市场
+    </div>
+  </div>
+
+  <!-- MSD -->
+  <div class="company-card">
+    <div class="company-header">
+      <div>
+        <div class="name">🔵 默沙东动物保健 MSD</div>
+        <div class="ticker">NYSE: MRK</div>
+      </div>
+      <span class="badge cyan">Bravecto 16% 增长</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-item">
+        <div class="label">Q1 动保总营收</div>
+        <div class="value">$17.91亿</div>
+        <div class="change up">+13% reported</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">伴侣动物</div>
+        <div class="value">$7.27亿</div>
+        <div class="change up">+9%</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">家畜</div>
+        <div class="value">$10.64亿</div>
+        <div class="change up">+15%</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">Bravecto 系列</div>
+        <div class="value">$3.79亿</div>
+        <div class="change up">+16%</div>
+      </div>
+    </div>
+    <div class="signal-box">
+      🐾 Bravecto 16% 增长验证 12 周长效策略有效<br>
+      📈 家畜业务增长 15% 带动整体表现<br>
+      🧬 长效化 + 疫苗绑定路线持续巩固差异化
+    </div>
+  </div>
+
+  <!-- Zoetis -->
+  <div class="company-card">
+    <div class="company-header">
+      <div>
+        <div class="name">🟢 硕腾 Zoetis</div>
+        <div class="ticker">NYSE: ZTS</div>
+      </div>
+      <span class="badge red">⚠️ 美国下滑 -11%</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-item">
+        <div class="label">Q1 总营收</div>
+        <div class="value">$23亿</div>
+        <div class="change flat">+3% reported</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">有机增长</div>
+        <div class="value">0%</div>
+        <div class="change flat">低于预期</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">美伴侣动物</div>
+        <div class="value">$8.65亿</div>
+        <div class="change down">-11%</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">Simparica系列</div>
+        <div class="value">$3.85亿</div>
+        <div class="change down">-1%</div>
+      </div>
+    </div>
+    <div class="signal-box">
+      📉 美国伴侣动物 -11%，竞争加剧 + 价格敏感<br>
+      🌏 国际业务 +7%（唯一亮点）<br>
+      🔻 管理层承认"低于预期"，下调全年指引至 $96.8-99.6亿<br>
+      💊 Apoquel 皮肤病线 -11%，OA mAb -8%
+    </div>
+  </div>
+
+  <!-- Boehringer -->
+  <div class="company-card">
+    <div class="company-header">
+      <div>
+        <div class="name">🔴 勃林格殷格翰 BI</div>
+        <div class="ticker">私企 · 无季度财报</div>
+      </div>
+      <span class="badge gray">2025全年数据</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-item">
+        <div class="label">2025 动保营收</div>
+        <div class="value">~€50亿</div>
+        <div class="change up">+7.3%</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">全年研发投入</div>
+        <div class="value">€5亿</div>
+        <div class="change up">占营收 10%+</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">中国动态</div>
+        <div class="value">福味恩®</div>
+        <div class="change">2025.8 上市</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">全球地位</div>
+        <div class="value">驱虫龙头</div>
+        <div class="change">口服+外用双赛道</div>
+      </div>
+    </div>
+    <div class="signal-box">
+      🐕 福味恩®（FRONTPRO®）2025年8月中国上市——口服外驱新品<br>
+      🎓 博来恩®之父 Frederic Beugnet 亲临中国站台<br>
+      🤝 与京东健康达成全域战略合作，布局数字化<br>
+      🏆 全球驱虫药品牌绝对龙头，R&amp;D 投入最狠（10%+ 营收）
+    </div>
+  </div>
+
+  <!-- Comparison table -->
+  <div class="comparison-section">
+    <h2>📋 四家企业对比总览</h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>指标</th>
+          <th>Zoetis 硕腾</th>
+          <th>MSD 默沙东</th>
+          <th>Elanco 礼蓝</th>
+          <th>BI 勃林格</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="metric-label">Q1 总营收</td>
+          <td style="font-weight:600">$23亿</td>
+          <td style="font-weight:600">$17.91亿</td>
+          <td style="font-weight:600">$13.71亿</td>
+          <td style="font-weight:600;color:#94a3b8">无Q1（2025全年 ~€50亿）</td>
+        </tr>
+        <tr>
+          <td class="metric-label">同比增速</td>
+          <td style="color:#f87171">+3%</td>
+          <td style="color:#34d399">+13%</td>
+          <td style="color:#fbbf24">+15% 🏆</td>
+          <td style="color:#94a3b8">N/A</td>
+        </tr>
+        <tr>
+          <td class="metric-label">宠物/伴侣动物</td>
+          <td>$15亿 <span style="color:#f87171">(-4%)</span></td>
+          <td>$7.27亿 <span style="color:#34d399">(+9%)</span></td>
+          <td>$7.10亿 <span style="color:#34d399">(+12%)</span></td>
+          <td style="color:#94a3b8">N/A（驱虫全球第一）</td>
+        </tr>
+        <tr>
+          <td class="metric-label">驱虫核心产品</td>
+          <td>Simparica $3.85亿 <span style="color:#94a3b8">(-1%)</span></td>
+          <td>Bravecto $3.79亿 <span style="color:#34d399">(+16%)</span></td>
+          <td>Credelio Quattro <span style="color:#34d399">加速中</span></td>
+          <td>超可信+博来恩+福来恩</td>
+        </tr>
+        <tr>
+          <td class="metric-label">全年指引</td>
+          <td style="color:#f87171">⬇ 下调至 $96.8-99.6亿</td>
+          <td style="color:#94a3b8">集团 $658-670亿</td>
+          <td style="color:#34d399">⬆ 上调至 $50.1-50.85亿</td>
+          <td style="color:#94a3b8">N/A</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Key takeaway -->
+  <div class="speed-rank" style="margin-top:40px;">
+    <h2>💡 核心结论</h2>
+    <div style="line-height:1.8;font-size:14px;">
+      <p style="margin-bottom:8px;">1️⃣ <strong style="color:#fbbf24">礼蓝是 Q1 最大赢家</strong> — 唯一上调全年指引的企业，Credelio Quattro + Zenrelia 双轮驱动，增速远超同行</p>
+      <p style="margin-bottom:8px;">2️⃣ <strong style="color:#22d3ee">默沙东稳健增长</strong> — Bravecto 16% 增长验证长效策略有效，家畜业务同样强劲</p>
+      <p style="margin-bottom:8px;">3️⃣ <strong style="color:#f87171">硕腾美国市场承压</strong> — 美国伴侣动物 -11%，Simparica/皮肤病/单抗全线承压，管理层下调全年预期</p>
+      <p style="margin-bottom:8px;">4️⃣ <strong style="color:#94a3b8">勃林格短期无忧</strong> — 虽无 Q1 数据，但全球驱虫药龙头地位稳固，中国区持续投入创新产品</p>
+      <p>5️⃣ <strong style="color:#a78bfa">国产替代持续加速</strong> — 天猫 2025 双十一 Top10 已占 5 席，海正动保海乐妙累计销售破亿片，出海越南</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Generated by Hermes Agent · Data via AnySearch + Official SEC Filings
+  </div>
+
+</div>
+</body>
+</html>

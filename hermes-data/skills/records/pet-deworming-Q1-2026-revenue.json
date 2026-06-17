@@ -1,0 +1,68 @@
+{
+  "report_title": "宠物驱虫药市场 2026年Q1 营收数据",
+  "report_date": "2026-05-28",
+  "data_source": "AnySearch batch_search + extract 抓取各公司官方财报",
+  "companies": {
+    "zoetis": {
+      "name": "Zoetis 硕腾 (NYSE: ZTS)",
+      "q1_2026_total_revenue": "23亿美元",
+      "q1_2026_growth": "+3% reported, 0% organic",
+      "companion_animal": "15亿美元 (-4%)",
+      "us_companion_animal": "8.65亿美元 (-11%)",
+      "international_companion_animal": "6.54亿美元 (+7%)",
+      "simparica_franchise": "3.85亿美元 (-1%)",
+      "dermatology_apoquel": "3.47亿美元 (-11%)",
+      "oa_pain_mabs": "1.40亿美元 (-8%)",
+      "livestock": "7.20亿美元 (+12%)",
+      "diagnostics": "1.13亿美元 (+10%)",
+      "adjusted_net_income": "6.46亿美元 (+2%)",
+      "adjusted_eps": "未披露具体数值",
+      "full_year_guidance": "96.8-99.6亿美元 (+2-5% organic)",
+      "key_signals": "美国伴侣动物承压(-11%)，竞争加剧+价格敏感；国际业务增长强劲(+7%)；Simparica整体微降(-1%)；管理层承认\"低于预期\"，下调全年指引",
+      "data_url": "https://www.fool.com/earnings/call-transcripts/2026/05/07/zoetis-zts-q1-2026-earnings-transcript/"
+    },
+    "merck_msd": {
+      "name": "Merck/MSD Animal Health 默沙东 (NYSE: MRK)",
+      "q1_2026_animal_health_revenue": "17.91亿美元",
+      "q1_2026_growth": "+13% reported, +6% ex-FX",
+      "livestock": "10.64亿美元 (+15% reported, +8% ex-FX)",
+      "companion_animal": "7.27亿美元 (+9% reported, +4% ex-FX)",
+      "bravecto_line": "3.79亿美元 (+16% reported, +9% ex-FX)",
+      "key_signals": "动保业务增速亮眼(13%)，Bravecto增长16%验证长效策略有效；家畜业务(15%)带动整体，宠物驱虫相对稳健",
+      "data_url": "https://www.merck.com/news/merck-co-inc-rahway-n-j-usa-announces-first-quarter-2026-financial-results-highlights-significant-regulatory-approvals-and-clinical-milestones/"
+    },
+    "elanco": {
+      "name": "Elanco 礼蓝 (NYSE: ELAN)",
+      "q1_2026_total_revenue": "13.71亿美元",
+      "q1_2026_growth": "+15% reported, +10% organic CC",
+      "pet_health": "7.10亿美元 (+12% reported, +7% organic CC)",
+      "farm_animal": "6.42亿美元 (+18% reported, +13% organic CC)",
+      "reported_net_income": "5700万美元 (-15%)",
+      "adjusted_net_income": "2.04亿美元 (+8%)",
+      "adjusted_ebitda": "3.34亿美元 (+21%, margin 24.5%)",
+      "adjusted_eps": "0.40美元 (+8%)",
+      "key_products": "Credelio Quattro市占率加速提升(已覆盖40%+美国诊所)；Zenrelia达4季度blockbuster(20亿美元+年化)；Befrena开始初期商业化",
+      "full_year_guidance_revised": "50.1-50.85亿美元 (上调), Adj EBITDA 9.75-10.05亿 (上调)",
+      "key_signals": "增速王！15%增长+10%有机CC远超同行；Zenrelia突破blockbuster里程碑；上调全年指引；新获Costco+Dollar General渠道；收购AHV International扩展欧洲",
+      "data_url": "https://www.prnewswire.com/news-releases/elanco-animal-health-reports-first-quarter-2026-results-302763339.html"
+    },
+    "boehringer_ingelheim": {
+      "name": "Boehringer Ingelheim 勃林格殷格翰",
+      "note": "私营企业，不公布季度财报",
+      "latest_available": "2025全年动保营收约50亿欧元(约55亿美元), +7.3%",
+      "rd_spend": "5亿欧元/年(占动保营收10%+)",
+      "key_products_china": "超可信(犬内外同驱口服)、博来恩(猫驱虫精华)、福味恩(口服外驱新品2025年8月上市)、福来恩(外用经典)",
+      "key_signals_2026": "新产品福味恩中国上市；博来恩之父Frederic Beugnet亲临中国站台；与京东健康合作数字化；持续领跑口服驱虫赛道"
+    }
+  },
+  "comparison_table": {
+    "heading": "2026年Q1 四家动保企业营收对比",
+    "metrics": [
+      {"metric": "总营收", "zoetis": "$23亿", "merck_ah": "$17.9亿", "elanco": "$13.7亿", "boehringer": "无Q1数据(2025全年~$55亿)"},
+      {"metric": "同比增速", "zoetis": "+3%", "merck_ah": "+13%", "elanco": "+15%", "boehringer": "N/A"},
+      {"metric": "宠物/伴侣动物", "zoetis": "$15亿(-4%)", "merck_ah": "$7.27亿(+9%)", "elanco_pet_health": "$7.1亿(+12%)", "boehringer": "N/A(全球驱虫药第一)"},
+      {"metric": "驱虫核心产品销售", "zoetis Simparica": "$3.85亿(-1%)", "merck Bravecto": "$3.79亿(+16%)", "elanco Credelio": "未单列(Quattro加速)", "boehringer": "N/A(超可信+博来恩+福来恩)"},
+      {"metric": "全年指引", "zoetis": "下调至$96.8-99.6亿(+2-5%)", "merck": "集团$658-670亿", "elanco": "上调至$50.1-50.85亿(+5-7%)", "boehringer": "N/A"}
+    ]
+  }
+}
