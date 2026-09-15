@@ -1,0 +1,47 @@
+{
+  "strategy_version": "SELL-POLICY-v1.0-20260914",
+  "migrations": [
+    {
+      "code": "sh600988",
+      "name": "赤峰黄金",
+      "lifecycle_from": "2026-09-02",
+      "cost": 44.735,
+      "qty": 200,
+      "peak_h_rebuilt": 47.63,
+      "peak_h_window": [
+        "2026-09-02 09:35:00",
+        "2026-09-14 15:00:00"
+      ],
+      "granularity": "5min(sina)",
+      "protection_active": false,
+      "profit_line": 0.0,
+      "hard_stop": 42.26,
+      "hard_stop_initial": 42.26,
+      "hard_stop_if_reset_by_merged_cost": 42.05,
+      "existing_live_watchdog_stop": 42.05,
+      "discrepancy_note": "现有实盘watchdog用42.05(按合并成本44.735×0.94); 按R6只升不降应为42.26(源自首买44.96×0.94)。差异0.21元, 需Omi确认采用哪个。",
+      "effective_exit": 42.26,
+      "gap": null,
+      "note": "H 由新浪5分钟K重建: 区间 2026-09-02 09:35:00~2026-09-14 15:00:00, H=47.63 (已观测最高价, 5分钟粒度, 非逐笔); S 按 R6 回放: 首买S=42.26 -> 加仓后 max(旧S, 44.735×0.94=42.05)=42.26"
+    },
+    {
+      "code": "sz002396",
+      "name": "星网锐捷",
+      "lifecycle_from": "2026-09-14",
+      "cost": 35.88,
+      "qty": 100,
+      "peak_h_rebuilt": 35.93,
+      "peak_h_window": [
+        "2026-09-14 10:05:00",
+        "2026-09-14 15:00:00"
+      ],
+      "granularity": "5min(sina)",
+      "protection_active": false,
+      "profit_line": 0.0,
+      "hard_stop": 33.73,
+      "effective_exit": 33.73,
+      "gap": null,
+      "note": "H 由新浪5分钟K重建: 区间 2026-09-14 10:05:00~2026-09-14 15:00:00, H=35.93 (已观测最高价, 5分钟粒度, 非逐笔)"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+PASS  1.指标不偷看未来   violations=[]
+PASS  trades.csv 有主场景交易   n=128
+PASS  2.买入当刻四条件真成立
+PASS  3.成本与硬止损口径一致
+PASS  8.整手/费用/成本公式
+PASS  7.单笔风险/单股市值上限
+PASS  4.保护只升不降/永久/H>=成本
+PASS  5.T+1: 无买入当日全额卖出
+PASS  6.再入场冷却>=2交易日/不重叠
+PASS  9.现金流水与净值对账   replayed_cash=5991.14 ledger_cash=5991.14
+PASS  10.重复日期/排序检查
+PASS  8b.同时仅一个待执行限价单   引擎结构: pending 为单变量, 且仅在 pending is None 时推荐
+
+12/12 checks passed

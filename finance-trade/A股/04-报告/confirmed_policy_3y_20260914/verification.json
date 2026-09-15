@@ -1,0 +1,67 @@
+{
+  "n_checks": 12,
+  "n_pass": 12,
+  "n_fail": 0,
+  "checks": [
+    {
+      "check": "1.指标不偷看未来",
+      "ok": true,
+      "detail": "violations=[]"
+    },
+    {
+      "check": "trades.csv 有主场景交易",
+      "ok": true,
+      "detail": "n=128"
+    },
+    {
+      "check": "2.买入当刻四条件真成立",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "3.成本与硬止损口径一致",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "8.整手/费用/成本公式",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "7.单笔风险/单股市值上限",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "4.保护只升不降/永久/H>=成本",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "5.T+1: 无买入当日全额卖出",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "6.再入场冷却>=2交易日/不重叠",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "9.现金流水与净值对账",
+      "ok": true,
+      "detail": "replayed_cash=5991.14 ledger_cash=5991.14"
+    },
+    {
+      "check": "10.重复日期/排序检查",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "8b.同时仅一个待执行限价单",
+      "ok": true,
+      "detail": "引擎结构: pending 为单变量, 且仅在 pending is None 时推荐"
+    }
+  ]
+}

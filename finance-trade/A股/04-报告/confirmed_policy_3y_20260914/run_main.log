@@ -1,0 +1,109 @@
+loading data ...
+calendar: 1043 days; backtest 2023-09-14 .. 2026-09-14 (726 days)
+== 主场景: 真实组合 (13,822.47 现金池, 即刻执行) ==
+  [portfolio_main] trades=128 closed=126 open=2 end_eq=12839.14
+== 执行延迟敏感性 (5 / 15 分钟) ==
+  [portfolio_delay5] trades=132 closed=130 open=2 end_eq=13961.07
+  [portfolio_delay15] trades=108 closed=106 open=2 end_eq=13981.74
+== 资金敏感性 100,000 ==
+  [portfolio_100k] trades=182 closed=179 open=3 end_eq=107774.44
+== 滑点敏感性 (0% / 0.2%) ==
+  [portfolio_slip0] trades=139 closed=136 open=3 end_eq=14682.6
+  [portfolio_slip2] trades=120 closed=118 open=2 end_eq=10969.28
+== 盘中最高/最低先后顺序敏感性 ==
+  [portfolio_intra_OLHC] trades=126 closed=124 open=2 end_eq=13271.41
+== 参数邻域脆弱性 ==
+  [nb_atr2] trades=178 closed=176 open=2 end_eq=13376.25
+  [nb_atr3] trades=103 closed=101 open=2 end_eq=15667.31
+  [nb_vol07] trades=118 closed=116 open=2 end_eq=13210.94
+== 12 只各自独立实验 (各 13,822.47) ==
+  [601138] 工业富联: trades=6 closed=6
+  [002156] 通富微电: trades=15 closed=15
+  [600487] 亨通光电: trades=11 closed=11
+  [603380] 易德龙: trades=19 closed=19
+  [600988] 赤峰黄金: trades=25 closed=24
+  [600460] 士兰微: trades=13 closed=13
+  [600522] 中天科技: trades=15 closed=15
+  [002396] 星网锐捷: trades=15 closed=14
+  [600219] 南山铝业: trades=11 closed=11
+  [000878] 云南铜业: trades=16 closed=15
+  [000938] 紫光股份: trades=23 closed=23
+  [600760] 中航沈飞: trades=7 closed=7
+== 基准: 买入持有 ==
+
+DONE. files written to /Users/omi/workspace/quant-backtest/results/confirmed_policy_3y_20260914
+{
+  "label": "portfolio_main",
+  "scenario": "同一现金池真实组合 / 主资金 13,822.47 / 即刻执行",
+  "init_cash": 13822.47,
+  "end_equity": 12839.14,
+  "total_return_pct": -7.114,
+  "annualized_pct": -2.4277,
+  "max_drawdown_pct": -23.7907,
+  "avg_exposure_pct": 36.556,
+  "max_exposure_pct": 96.229,
+  "days_flat_pct": 28.099,
+  "n_closed_trades": 126,
+  "n_open_positions": 2,
+  "n_wins": 57,
+  "n_losses": 69,
+  "win_rate_pct": 45.238,
+  "avg_pnl_per_trade": -7.28,
+  "avg_win": 209.98,
+  "avg_loss": -186.76,
+  "gross_profit": 11968.94,
+  "gross_loss": 12886.33,
+  "profit_factor": 0.9288,
+  "realized_pnl": -917.39,
+  "unrealized_pnl_open": -66.0,
+  "fee_total": 2096.93,
+  "slippage_cost_total": 1069.79,
+  "fee_pct_of_init": 15.1705,
+  "max_consecutive_losses": 9,
+  "top_trade_share_of_gross_pnl_pct": null,
+  "yearly_return_pct": {
+    "2023": -2.6558,
+    "2024": -14.1847,
+    "2025": 2.2347,
+    "2026": 8.762
+  },
+  "blocked": {
+    "cond_ma60": 206232,
+    "cond_atr_band": 89843,
+    "cooldown_block": 11415,
+    "cond_vol_ratio": 10619,
+    "size_cash": 2606,
+    "size_port_risk": 2283,
+    "size_single_risk": 1390,
+    "no_min_data": 387,
+    "recommended": 128,
+    "cond_vol_missing": 111
+  },
+  "open_positions": [
+    {
+      "stock": "002396",
+      "name": "星网锐捷",
+      "qty": 100,
+      "cost": 35.236,
+      "last_price": 34.82,
+      "unrealized_pnl": -41.6,
+      "unrealized_pct": -1.181,
+      "peak_h": 35.92,
+      "protection_active": false,
+      "exit_line": 33.12
+    },
+    {
+      "stock": "000878",
+      "name": "云南铜业",
+      "qty": 200,
+      "cost": 16.952,
+      "last_price": 16.83,
+      "unrealized_pnl": -24.4,
+      "unrealized_pct": -0.72,
+      "peak_h": 17.09,
+      "protection_active": false,
+      "exit_line": 15.93
+    }
+  ],
+  "end_cash": 5991.14
+}

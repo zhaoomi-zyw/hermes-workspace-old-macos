@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<title>积极版策略回测报告 · 止损 -7% vs -6%</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC",sans-serif;background:#FFFFFF;color:#333;padding:40px 24px;line-height:1.6}
+.wrap{max-width:920px;margin:0 auto}
+h1{color:#0A7A5E;font-size:26px;margin-bottom:6px}
+.sub{color:#888;font-size:13px;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px}
+.card{border:1px solid #e8e8e8;border-radius:12px;padding:20px;background:#FAF9F8}
+.card.old{border-left:5px solid #bbb}
+.card.new{border-left:5px solid #00E47C;background:#f4fdf9}
+.card h2{font-size:15px;margin-bottom:12px;color:#0A7A5E}
+.kv{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #eee;font-size:14px}
+.kv b{color:#0A7A5E}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+th,td{padding:9px 12px;text-align:right;border-bottom:1px solid #eee}
+th{background:#0A7A5E;color:#fff;font-weight:500}
+td:first-child,th:first-child{text-align:left}
+.up{color:#00A862;font-weight:600}
+.dn{color:#d33}
+.flat{color:#999}
+.win{background:#f4fdf9}
+.note{background:#FAF9F8;border-left:4px solid #0A7A5E;padding:14px 18px;border-radius:6px;font-size:13px;margin-top:24px;color:#555}
+h3{color:#0A7A5E;font-size:17px;margin:26px 0 10px}
+</style></head><body><div class="wrap">
+<h1>积极版策略 3年回测报告</h1>
+<div class="sub">止损档位对比 · -7%(旧) vs -6%(新) · 11只自选 · 起始10,000元 · 区间 2023-09-06~至今 · 左侧低吸</div>
+
+<div class="grid">
+<div class="card old">
+<h2>-7% 止损（旧）</h2>
+<div class="kv"><span>均累计收益</span><b>+321.6%</b></div>
+<div class="kv"><span>均年化</span><b>+58.9%</b></div>
+<div class="kv"><span>均最大回撤</span><b>-3.1%</b></div>
+<div class="kv"><span>均夏普</span><b>+1.90</b></div>
+<div class="kv"><span>总交易 / 胜率</span><b>115 / 43%</b></div>
+<div class="kv"><span>止损离场次数</span><b>63</b></div>
+<div class="kv"><span>平均持仓</span><b>28.0天</b></div>
+</div>
+<div class="card new">
+<h2>-6% 止损（新 · 2026-09-11）</h2>
+<div class="kv"><span>均累计收益</span><b>+344.5%</b></div>
+<div class="kv"><span>均年化</span><b>+61.5%</b></div>
+<div class="kv"><span>均最大回撤</span><b>-2.9%</b></div>
+<div class="kv"><span>均夏普</span><b>+1.97</b></div>
+<div class="kv"><span>总交易 / 胜率</span><b>124 / 40%</b></div>
+<div class="kv"><span>止损离场次数</span><b>73</b></div>
+<div class="kv"><span>平均持仓</span><b>25.2天</b></div>
+</div>
+</div>
+
+<h3>逐股累计收益对比</h3>
+<table>
+<tr><th>标的</th><th>-7% 旧</th><th>-6% 新</th><th>差异</th></tr>
+<tr><td>工业富联</td><td>+519.0%</td><td>+578.0%</td><td class="up">+59.0%</td></tr><tr><td>通富微电</td><td>+620.9%</td><td>+682.6%</td><td class="up">+61.7%</td></tr><tr><td>亨通光电</td><td>+366.1%</td><td>+367.8%</td><td class="up">+1.6%</td></tr><tr><td>易德龙</td><td>+263.0%</td><td>+263.6%</td><td class="up">+0.5%</td></tr><tr><td>赤峰黄金</td><td>+351.7%</td><td>+352.0%</td><td class="up">+0.3%</td></tr><tr><td>士兰微</td><td>+297.7%</td><td>+327.2%</td><td class="up">+29.5%</td></tr><tr><td>中天科技</td><td>+336.1%</td><td>+349.1%</td><td class="up">+13.0%</td></tr><tr><td>星网锐捷</td><td>+226.5%</td><td>+308.7%</td><td class="up">+82.2%</td></tr><tr><td>南山铝业</td><td>+29.0%</td><td>+29.0%</td><td class="flat">+0.0%</td></tr><tr><td>云南铜业</td><td>+129.5%</td><td>+130.8%</td><td class="up">+1.2%</td></tr><tr><td>中航沈飞</td><td>+398.5%</td><td>+401.0%</td><td class="up">+2.5%</td></tr>
+</table>
+
+<div class="note">
+<b>结论：-6% 收紧后整体更优。</b>均累计 >+23pp、夏普 1.90→1.97、回撤略降，11只全部改善或持平
+（星网+82pp / 通富+62pp / 工业富联+59pp 提升最大）。机制：单笔亏损更早截断，止损离场 63→73 次，
+平均持仓缩短 28→25 天，释放资金周转。<br><br>
+⚠️ 样本为11只偏强自选股、单一区间，存在过拟合风险；实盘若遇频繁假摔被洗，可再评估回调至 -7%。
+</div>
+</div></body></html>
