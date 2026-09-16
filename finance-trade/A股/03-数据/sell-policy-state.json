@@ -12,11 +12,12 @@
    "peak_h": 47.63,
    "peak_h_time": "2026-09-14 15:00:00",
    "protection_active": false,
-   "hard_stop": 43.26,
+   "hard_stop": 42.05,
    "profit_line": 0.0,
-   "quote_time": "20260916150946",
-   "quote_valid": true,
-   "quote_note": "",
+   "quote_time": "20260916155934",
+   "quote_valid": false,
+   "quote_note": "报价陈旧(超阈值)",
+   "actual_cost": 44.735,
    "pending_exit": null,
    "fired_events": {},
    "add_log": [
@@ -49,9 +50,10 @@
    "protection_active": true,
    "hard_stop": 33.73,
    "profit_line": 36.96,
-   "quote_time": "20260916150945",
-   "quote_valid": true,
-   "quote_note": "",
+   "quote_time": "20260916155909",
+   "quote_valid": false,
+   "quote_note": "报价陈旧(超阈值)",
+   "actual_cost": 35.88,
    "pending_exit": null,
    "fired_events": {},
    "add_log": [],
@@ -72,9 +74,10 @@
    "protection_active": false,
    "hard_stop": 41.82,
    "profit_line": 0.0,
-   "quote_time": "20260916150946",
-   "quote_valid": true,
-   "quote_note": "",
+   "quote_time": "20260916155949",
+   "quote_valid": false,
+   "quote_note": "报价陈旧(超阈值)",
+   "actual_cost": 44.49,
    "pending_exit": null,
    "fired_events": {},
    "add_log": [],
@@ -83,7 +86,7 @@
    "created_at": "2026-09-16T09:55:37"
   }
  },
- "updated_at": "2026-09-16T15:09:50",
+ "updated_at": "2026-09-16T18:41:36",
  "roll_meta": {
   "last_roll_date": "2026-09-16"
  }
