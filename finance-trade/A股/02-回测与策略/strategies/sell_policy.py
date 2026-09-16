@@ -59,9 +59,34 @@ class SellParams:
     profit_floor_pct: float = 0.03     # R4 保护线最低锁利 = C×1.03
     trail_from_peak_pct: float = 0.07  # R4 从高点回撤 7% → 保护线 = H×0.93
     price_decimals: int = 2            # 价格精度 (A股 0.01)
+    # ⚠️ R3/R4 总开关 (2026-09-16 Omi 裁决关闭)
+    #   True  = 规则原样(盈利保护生效)
+    #   False = 关闭盈利保护: 不再激活/更新保护线, 唯一退出线 = R1 硬止损
+    #   注: 仅关闭【保护线】; R1/R2/R5/R6/R7 全部保留不变。
+    protection_enabled: bool = True
 
 
-DEFAULT_PARAMS = SellParams()
+# 规则全量参数(盈利保护开启) —— 供【验收测试 / 回测对照 / 规则完整性】使用
+FULL_PARAMS = SellParams()
+
+# ── 保护开关的运行时覆盖 (SellParams 是 frozen, 无法改属性) ──
+#   None  = 按 params.protection_enabled (生产路径)
+#   True  = 强制开启(验收测试跑完整规则)
+#   False = 强制关闭
+_PROTECTION_OVERRIDE = None
+
+
+def _protection_on(params: SellParams) -> bool:
+    """盈利保护是否生效: 运行时覆盖优先, 否则取 params 字段。"""
+    if _PROTECTION_OVERRIDE is not None:
+        return bool(_PROTECTION_OVERRIDE)
+    return bool(getattr(params, "protection_enabled", True))
+
+# ⚠️ 生产参数 (2026-09-16 Omi 裁决: 关闭盈利保护)
+#   依据: v4 引擎消融 abl_no_protection +59.22% vs main +11.73%
+#   (但回撤 -44.53% vs -22.17%, 且为同段数据消融、未做前向验证 —— 已向用户明示)
+#   如需恢复盈利保护: 把下面改为 SellParams() 或 SellParams(protection_enabled=True)
+DEFAULT_PARAMS = SellParams(protection_enabled=False)
 
 # 兼容旧引用: 原先散落各处的默认数值集中于此
 LEGACY_NOTE = "旧 -7%/-5% 移动止损、固定止盈已停用; 统一为本模块 SELL-POLICY-v1.0"
@@ -156,6 +181,10 @@ def init_position(
 
 def _activate_and_update_lines(st: PositionState, params: SellParams) -> None:
     """R3/R4 依据当前 H 开启/更新盈利保护线 (就地修改)。"""
+    # ⚠️ 2026-09-16: 保护总开关关闭时 → 不激活、不更新(唯一退出线 = R1 硬止损)
+    # 已有 protection_active 的历史持仓: 一并按关闭处理(不新增线), 但保留字段供审计
+    if not _protection_on(params):
+        return
     # R3: H ≥ C×1.08 永久开启
     if not st.protection_active:
         if st.peak_h >= round_price(st.cost * (1 + params.profit_activate_pct), params):
@@ -520,8 +549,23 @@ def _st(cost, qty=100, **kw):
 
 
 def run_acceptance_tests(verbose: bool = True) -> bool:
-    """跑任务书 11 个验收场景, 全部通过返回 True。"""
-    P = DEFAULT_PARAMS
+    """跑任务书 11 个验收场景, 全部通过返回 True。
+
+    ⚠️ 本测试验证【完整规则】—— 因此临时强制开启盈利保护(改属性, 不改引用,
+       因模块函数的默认参数在定义时已绑定 DEFAULT_PARAMS 对象)。
+       生产是否启用由 DEFAULT_PARAMS.protection_enabled 决定。
+    """
+    global _PROTECTION_OVERRIDE
+    _saved = _PROTECTION_OVERRIDE
+    _PROTECTION_OVERRIDE = True          # 验收测试验证完整规则(含盈利保护)
+    try:
+        return _run_acceptance_tests_inner(verbose)
+    finally:
+        _PROTECTION_OVERRIDE = _saved
+
+
+def _run_acceptance_tests_inner(verbose: bool = True) -> bool:
+    P = FULL_PARAMS
     results = []
 
     def check(name, cond, detail=""):
