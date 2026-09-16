@@ -126,6 +126,8 @@ class PositionState:
     quote_time: str                    # 最近一次行情时间
     quote_valid: bool = True           # 报价是否新鲜有效
     quote_note: str = ""               # 报价无效原因
+    actual_cost: float = 0.0           # 【风控基准】实际买入均价(含买费, 不含卖出摊薄)
+                                       #   = 0 表示未设置 → 回退用 cost (向后兼容)
     pending_exit: Optional[dict] = None  # R7/R8 待退出事件 {event_id, reason, line, at, qty_sellable, qty_pending}
     fired_events: dict = field(default_factory=dict)  # 去重: event_id -> True
     add_log: list = field(default_factory=list)        # 加仓审计
@@ -134,6 +136,17 @@ class PositionState:
     created_at: str = field(default_factory=now_iso)
 
     # ---- 便捷属性 ----
+    def risk_cost(self) -> float:
+        """【风控基准成本】= 实际买入均价(含买费)。
+
+        2026-09-16 用户裁决 C: 券商的"摊薄成本"(把已实现亏损摊入剩余持仓)只用于
+        记账/盈亏展示, **止损与保护线一律基于实际买入均价**。
+        原因: 已实现盈亏已经落袋, 不应污染剩余持仓的风控线
+              (赤峰实例: 摊薄 46.023→止损43.26, 实际 44.735→止损42.05, 差1.21元)。
+        actual_cost<=0 时回退 cost, 保证历史状态兼容。
+        """
+        return self.actual_cost if self.actual_cost > 0 else self.cost
+
     def effective_exit_line(self) -> float:
         """R7 有效退出线 = 所有已启用止损/保护线中的最高值。"""
         lines = [self.hard_stop]
@@ -167,6 +180,7 @@ def init_position(
         code=code,
         name=name,
         cost=cost,
+        actual_cost=cost,                 # 建仓时两者一致
         total_qty=qty,
         sellable_qty=qty if sellable_qty is None else sellable_qty,
         today_new_qty=0 if today_new_qty is None else today_new_qty,
@@ -187,13 +201,13 @@ def _activate_and_update_lines(st: PositionState, params: SellParams) -> None:
         return
     # R3: H ≥ C×1.08 永久开启
     if not st.protection_active:
-        if st.peak_h >= round_price(st.cost * (1 + params.profit_activate_pct), params):
+        if st.peak_h >= round_price(st.risk_cost() * (1 + params.profit_activate_pct), params):
             st.protection_active = True
             st.profit_line = 0.0  # 下面统一计算
     if st.protection_active:
         cand = [
             st.profit_line if st.profit_line > 0 else 0.0,
-            round_price(st.cost * (1 + params.profit_floor_pct), params),
+            round_price(st.risk_cost() * (1 + params.profit_floor_pct), params),
             round_price(st.peak_h * (1 - params.trail_from_peak_pct), params),
         ]
         st.profit_line = round_price(max(cand))
@@ -323,6 +337,10 @@ def add_position(
     new_total = old_total + add_qty
     new_cost = round_cost((st.cost * old_total + round_price(add_price, params) * add_qty) / new_total)
     st.cost = new_cost
+    # 2026-09-16 裁决C: actual_cost 亦按【买入价】加权(与 cost 同式, 但不受卖出摊薄影响)
+    _old_actual = st.actual_cost if st.actual_cost > 0 else new_cost
+    st.actual_cost = round_cost(
+        (_old_actual * old_total + round_price(add_price, params) * add_qty) / new_total)
     st.total_qty = new_total
     st.today_new_qty += add_qty
     # 硬止损只升不降
@@ -394,7 +412,8 @@ def confirm_sell(
 
     # ---- R8.3 止损只升不降 ----
     if remain > 0 and basis == "dilute" and price is not None:
-        s_cand = round_price(st.cost * (1 - params.hard_stop_pct), params)
+        # 裁决C: 用风控基准成本(actual_cost)而非摊薄成本 → 减仓不改真实成本, 止损不上移
+        s_cand = round_price(st.risk_cost() * (1 - params.hard_stop_pct), params)
         st.hard_stop = round_price(max(st.hard_stop, s_cand), params)
 
     # 若待退出事件的 sellable 部分已清, 更新事件内剩余待退出数量
@@ -752,7 +771,22 @@ def _run_acceptance_tests_inner(verbose: bool = True) -> bool:
     check("场景12 R8后剩余数量正确", s.total_qty == 100, f"qty={s.total_qty}")
 
     # R8.3 止损只升不降: 摊薄推高成本 → 止损上移至 43.26
-    check("场景12 R8止损按R6上移(只升不降)", abs(s.hard_stop - 43.26) < 0.01, f"S={s.hard_stop}")
+    # 2026-09-16 裁决C: 摊薄只影响记账成本, 止损基于 actual_cost(实际买入均价) → 不上移
+    check("场景12 R8摊薄后 actual_cost 保持 44.735(风控基准)", abs(s.actual_cost - 44.735) < 0.005,
+          f"actual={s.actual_cost}")
+    check("场景12 R8止损不被摊薄推高(裁决C: 基于实际成本)", abs(s.hard_stop - 42.26) < 0.01,
+          f"S={s.hard_stop}(摊薄口径本应为43.26)")
+    check("场景12 R8风控成本≠记账成本(两者分离)", abs(s.cost - 46.023) < 0.005 and abs(s.actual_cost - 44.735) < 0.005,
+          f"cost={s.cost} actual={s.actual_cost}")
+
+    # 裁决C: 保护线也基于 actual_cost
+    s8 = init_position("t", "保护地板", 44.735, 200)
+    s8.hard_stop = 42.26
+    update_quote(s8, 48.5, quote_time="t1")          # H=48.5 ≥ 44.735×1.08=48.31 → 激活
+    _pl_before = s8.profit_line
+    confirm_sell(s8, 100, price=43.52, fees=7.22)
+    check("场景12 裁决C: 保护地板用实际成本(44.735×1.03=46.08)",
+          abs(s8.profit_line - _pl_before) < 0.01, f"P={s8.profit_line}")
 
     # R8.2 毛价法对照: 明确不扣费会偏
     s2 = init_position("t", "毛价法", 44.735, 200); s2.hard_stop = 42.26
