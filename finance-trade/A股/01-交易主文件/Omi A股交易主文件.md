@@ -132,6 +132,22 @@ updated: 2026-09-02
 
 **如何回退**：把 `DEFAULT_PARAMS` 改回 `SellParams()` 或 `SellParams(protection_enabled=True)` 即可（一行）。
 
+
+### 🔧 修复：事件日志噪音（2026-09-16）
+
+**问题**：`trading_execution_guard.py` 的 `hard_stop_check()` **无条件写 HARD_STOP 事件** →
+每次自测/未触发调用都记一条 → `trading-execution-events.jsonl` 单日积累 **270~540 条噪音**（累计 3,242 条，占总事件 95%）。
+
+**根因**：该函数的唯一调用点是 guard 自己的 `__main__` 自测（第366行），而**有 cron 的 agent 每次执行时会跑 `python trading_execution_guard.py`** → 每次产生一条假事件。
+
+**修复**：改为**仅在 `triggered=True` 时记录**（未触发不写，判定结果仍由调用方返回）。
+
+**清理**：3,237 条未触发记录已归档至 `~/.hermes/state/trading-execution-events.archived-2026-09-16.jsonl`，主日志保留 166 条（BUY_GATE / INTRADAY_TOUCH / 真触发）。
+
+**验证**：修复后跑 guard 自测 → `triggered: False` 且**不再新增事件**；`hard_stop=43.26 / cost=46.023`（正确读 sell-policy 真值）。
+
+**✅ 同期确认**：`INTRADAY_TOUCH` 日内触及提示**正常工作** —— 2026-09-16 13:00 对赤峰触发一次（line=43.26 / low=43.10）。
+
 ### 🟠 日内触及提示（2026-09-16 新增，已上线）
 
 **背景**：`evaluate_exit` **只用现价判定**触发；而条件单口径是"盘中触及即成交" → 会出现盲区。
