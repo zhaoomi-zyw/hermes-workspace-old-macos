@@ -85,8 +85,8 @@ def _protection_on(params: SellParams) -> bool:
 # ⚠️ 生产参数 (2026-09-16 Omi 裁决: 关闭盈利保护)
 #   依据: v4 引擎消融 abl_no_protection +59.22% vs main +11.73%
 #   (但回撤 -44.53% vs -22.17%, 且为同段数据消融、未做前向验证 —— 已向用户明示)
-#   如需恢复盈利保护: 把下面改为 SellParams() 或 SellParams(protection_enabled=True)
-DEFAULT_PARAMS = SellParams(protection_enabled=False)
+#   关闭盈利保护(如需): 把下面改为 SellParams(protection_enabled=False) —— 2026-09-16 曾短暂关闭, 当日恢复
+DEFAULT_PARAMS = SellParams(protection_enabled=True)   # 2026-09-16 用户裁决: R3+R4 全开(恢复盈利保护)
 
 # 兼容旧引用: 原先散落各处的默认数值集中于此
 LEGACY_NOTE = "旧 -7%/-5% 移动止损、固定止盈已停用; 统一为本模块 SELL-POLICY-v1.0"
