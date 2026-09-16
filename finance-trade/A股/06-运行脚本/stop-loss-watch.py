@@ -72,6 +72,53 @@ QUOTE_STALE_SECONDS = 180
 TOUCH_STATE_FILE = os.path.expanduser("~/.hermes/state/intraday-touch-alert.json")
 TOUCH_ALERT_ENABLED = True
 
+# ============================================================================
+# 退出线【上移】提醒 (2026-09-16 新增)
+#   目的: 保护线会随持仓最高价 H 抬升 (P = max(旧P, C*1.03, H*0.93))。
+#         系统知道新线, 但用户的券商【条件单】是静态的 → 不同步就会过早卖出。
+#   行为: 当有效退出线【上移】且幅度 >= 阈值时, 主动推送一次, 提示用户更新条件单。
+#   只提示, 不改判定、不触发卖出 (与 INTRADAY_TOUCH 同语义)。
+# ============================================================================
+LINE_NOTIFY_ENABLED = True
+LINE_NOTIFY_STATE_FILE = os.path.expanduser("~/.hermes/state/exit-line-notify.json")
+LINE_NOTIFY_MIN_PCT = 0.005   # 线变化 >= 0.5% 才推送(避免每一分钱都打扰)
+
+
+def _load_line_notify() -> dict:
+    if os.path.exists(LINE_NOTIFY_STATE_FILE):
+        try:
+            with open(LINE_NOTIFY_STATE_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
+
+def _save_line_notify(d: dict) -> None:
+    try:
+        os.makedirs(os.path.dirname(LINE_NOTIFY_STATE_FILE), exist_ok=True)
+        tmp = LINE_NOTIFY_STATE_FILE + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(d, f, ensure_ascii=False, indent=1)
+        os.replace(tmp, LINE_NOTIFY_STATE_FILE)
+    except Exception:
+        pass
+
+
+def build_line_update_alert(st, old_eff: float, new_eff: float, price: float,
+                            reason: str) -> str:
+    d = new_eff - old_eff
+    pct = (d / old_eff * 100) if old_eff else 0.0
+    return (
+        f"📈 退出线上移（请同步券商条件单）\n"
+        f"{st.name} {st.code}\n"
+        f"  旧退出线：{old_eff:.2f}\n"
+        f"  新退出线：{new_eff:.2f}   ({d:+.2f}, {pct:+.2f}%)\n"
+        f"  当前价　：{price:.2f}\n"
+        f"  原因　　：{reason}\n"
+        f"  → 建议把条件单从 {old_eff:.2f} 改为 {new_eff:.2f}"
+    )
+
 
 def load_touch_state() -> dict:
     try:
@@ -195,6 +242,9 @@ def main():
 
     alerts = []
     touch_alerts = []
+    line_alerts = []
+    linea_dirty = False
+    line_notify = _load_line_notify() if LINE_NOTIFY_ENABLED else {}
     touch_state = load_touch_state()
     today = now.strftime("%Y-%m-%d")
     if touch_state.get("_date") != today:
@@ -227,9 +277,43 @@ def main():
                 })
         # 待退出事件的"续报"(次一交易日可卖时)由日/盘中入口汇总, 此处不重复轰炸(R7/R8)
 
+        eff = st.effective_exit_line()   # 当前有效退出线(硬止损 与 保护线 取高)
+
+        # ── 退出线【上移】提醒: 保护线随 H 抬升时, 提示用户同步券商条件单 ──
+        if LINE_NOTIFY_ENABLED:
+            _rec = line_notify.get(code) or {}
+            _old = _rec.get("line")
+            _new = eff
+            if _old is None:
+                # 首次登记基线, 不推送
+                line_notify[code] = {"line": _new, "name": st.name,
+                                     "first_seen": now.strftime("%Y-%m-%d %H:%M")}
+                linea_dirty = True
+            elif _new > _old + 1e-9 and (_new - _old) / _old >= LINE_NOTIFY_MIN_PCT:
+                _p = sellp.DEFAULT_PARAMS
+                _floor = round(st.cost * (1 + _p.profit_floor_pct), 2)
+                _trail = round(st.peak_h * (1 - _p.trail_from_peak_pct), 2)
+                if _new >= _floor - 1e-9 and _floor >= _trail:
+                    _why = ("盈利保护·最低锁利兜底 (成本×%.2f = %.2f)"
+                            % (1 + _p.profit_floor_pct, _floor))
+                elif st.protection_active:
+                    _why = ("盈利保护·随最高价 H 抬升 (H %.2f×%.2f = %.2f)"
+                            % (st.peak_h, 1 - _p.trail_from_peak_pct, _trail))
+                elif _new > st.hard_stop + 1e-9:
+                    _why = "盈利保护线更新"
+                else:
+                    _why = "硬止损上移"
+                line_alerts.append(
+                    build_line_update_alert(st, _old, _new, q["price"], _why))
+                append_event({"event": "EXIT_LINE_UPDATE", "code": code,
+                              "name": st.name, "old_line": _old, "new_line": _new,
+                              "price": q["price"]})
+                line_notify[code] = {"line": _new, "name": st.name,
+                                     "notified_at": now.strftime("%Y-%m-%d %H:%M")}
+                linea_dirty = True
+
         # ── 日内低点提示 (只提示, 不判定, 每只每交易日一次) ──
         if TOUCH_ALERT_ENABLED and fresh and not ev and not touched.get(code):
-            eff = st.effective_exit_line()
             low = q.get("low")
             if low is not None and low <= eff and q["price"] > eff:
                 touched[code] = {"at": now.strftime("%H:%M"), "low": low,
@@ -241,6 +325,14 @@ def main():
 
         store.put(st)  # 原子持久化(含 H / 保护线 / 待退出)
 
+    if line_alerts:
+        if alerts or touch_alerts:
+            print()
+        print("⚠️ 退出线更新 (sell-policy)")
+        print("=" * 22)
+        print("\n\n".join(line_alerts))
+    if linea_dirty:
+        _save_line_notify(line_notify)
     if touch_alerts:
         save_touch_state(touch_state)
 
