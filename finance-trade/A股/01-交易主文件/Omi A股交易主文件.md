@@ -160,6 +160,37 @@ updated: 2026-09-02
 **验收**：30/30 通过｜备份 `sell_policy.py.bak_20260916_protection_on`
 **回退**：`DEFAULT_PARAMS = SellParams(protection_enabled=False)` 一行
 
+
+### 🔔 新增：退出线上移提醒（2026-09-16）
+
+**为什么需要**：盈利保护线是**动态的**（`P = max(旧P, C×1.03, H×0.93)`，随持仓最高价 H 抬升），
+但用户在券商的**条件单是静态的**。系统知道新线，却只在"已触发退出"时才推送 → **不同步就会过早卖出**。
+
+**实现**：`stop-loss-watch.py` 新增 `EXIT_LINE_UPDATE` 提示
+
+| 项 | 值 |
+|---|---|
+| 开关 | `LINE_NOTIFY_ENABLED = True` |
+| 触发条件 | 有效退出线**上移**且幅度 ≥ **0.5%**（`LINE_NOTIFY_MIN_PCT = 0.005`）|
+| 去重 | 每只每次线变更推一次（状态文件 `~/.hermes/state/exit-line-notify.json`，**不碰 sell-policy-state.json**）|
+| 首次运行 | 只登记基线，不推送 |
+| **不改变任何判定** | 不调 `fire_exit`、不写 `pending_exit`、不产生 `SELL_EXIT` |
+
+**推送样例**：
+```
+📈 退出线上移（请同步券商条件单）
+星网锐捷 sz002396
+  旧退出线：35.46
+  新退出线：36.96   (+1.50, +4.23%)
+  当前价　：38.83
+  原因　　：盈利保护·最低锁利兜底 (成本×1.03 = 36.96)
+  → 建议把条件单从 35.46 改为 36.96
+```
+原因分三类：**最低锁利兜底 / 随最高价H抬升 / 硬止损上移**
+
+**测试**：首次登记✓、无变化静默✓、线变化推送✓、重复不推✓、三类原因判定✓
+**备份**：`stop-loss-watch.py.bak_20260916_pre_linealert`
+
 ### 🔧 修复：事件日志噪音（2026-09-16）
 
 **问题**：`trading_execution_guard.py` 的 `hard_stop_check()` **无条件写 HARD_STOP 事件** →
