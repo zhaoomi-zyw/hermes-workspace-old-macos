@@ -353,11 +353,50 @@ def confirm_sell(
     *,
     price: Optional[float] = None,
     params: SellParams = DEFAULT_PARAMS,
+    basis: str = "dilute",
+    fees: float = 0.0,
 ) -> PositionState:
-    """R7/R8 确认卖出 qty 股。部分成交后更新剩余; 待退出状态继续有效。"""
+    """R8 确认卖出 qty 股（含主动减仓）。部分成交后更新剩余; 待退出状态继续有效。
+
+    R8 = 部分卖出 / 主动减仓（2026-09-16 用户裁决 B「允许，但须登记」）
+    ------------------------------------------------------------------
+    R8.2 【成本口径】默认 basis="dilute" = 券商摊薄口径（**按净收入**）:
+             净收入 = 卖出价×卖出股数 − fees(佣金/印花税/过户费)
+             新成本 = (原成本×原股数 − 净收入) / 剩余股数
+             ⚠️ 必须扣费: 实测赤峰 200股@44.735 卖100@43.52, fares≈7.22
+                毛价法→45.95(错), 净收入法→46.02 ✅ 与券商 46.023 吻合
+             ⚠️ 已实现亏损摊入剩余持仓 → 新成本【可能高于】原始买入均价。
+             basis="keep" 则保留原成本(旧行为, 仅数量变动)。
+         price 为 None 时无法摊薄 → 自动退化为 "keep"。
+    R8.3 【止损】按 R6 只升不降: S = max(旧S, 新成本×0.94)
+    R8.4 【保护线】只升不降, H 与 P 保留不重置。
+    R8.5 【登记】调用方须写 trade_journal(outcome=closed_partial) + 主文件。
+    R9  全部卖出请改用 confirm_clear()。
+
+    ⚠️ 副作用提示: 摊薄会把剩余持仓的止损线【推高】(例: 赤峰 44.735→46.023,
+       止损 42.26→43.26) → 更容易被扫出。这是用户已裁决接受的口径。
+    """
     qty = int(qty)
+    if qty <= 0 or qty > st.total_qty:
+        raise ValueError(f"confirm_sell: 非法数量 qty={qty}, total={st.total_qty}")
+
+    # ---- R8.2 成本摊薄 ----
+    old_qty, old_cost = st.total_qty, st.cost
+    remain = old_qty - qty
+    if basis == "dilute" and price is not None and remain > 0:
+        net = float(price) * qty - float(fees)          # R8.2 净收入(扣费)
+        new_cost = (old_cost * old_qty - net) / remain
+        st.cost = round_cost(new_cost)
+    # 完全卖出时不改成本, 由 confirm_clear 收尾
+
     st.sellable_qty = max(0, st.sellable_qty - qty)
-    st.total_qty = max(0, st.total_qty - qty)
+    st.total_qty = remain
+
+    # ---- R8.3 止损只升不降 ----
+    if remain > 0 and basis == "dilute" and price is not None:
+        s_cand = round_price(st.cost * (1 - params.hard_stop_pct), params)
+        st.hard_stop = round_price(max(st.hard_stop, s_cand), params)
+
     # 若待退出事件的 sellable 部分已清, 更新事件内剩余待退出数量
     if st.pending_exit:
         st.pending_exit["qty_sellable"] = st.sellable_qty
@@ -701,6 +740,56 @@ def _run_acceptance_tests_inner(verbose: bool = True) -> bool:
     backtest_evs = replay()   # 回测复用同一 evaluate_exit/fire_exit
     check("场景11 实盘与回测退出事件一致", live_evs == backtest_evs and len(live_evs) >= 1,
           f"事件={live_evs}")
+
+    # ---- 场景12: R8 部分卖出 / 主动减仓 (2026-09-16 用户裁决 B) ----
+    # R8.2 摊薄须【按净收入扣费】(实测赤峰: 毛价法45.95 错, 净收入法46.02 对)
+    s = init_position("sh600988", "赤峰黄金", 44.735, 200)
+    s.hard_stop = 42.26
+    _amt = 43.52 * 100
+    _fee = max(_amt * 0.00025, 5) + _amt * 0.0005 + _amt * 0.00001
+    confirm_sell(s, 100, price=43.52, fees=_fee)
+    check("场景12 R8摊薄(含费)复现实盘成本 46.023", abs(s.cost - 46.023) < 0.005, f"cost={s.cost}")
+    check("场景12 R8后剩余数量正确", s.total_qty == 100, f"qty={s.total_qty}")
+
+    # R8.3 止损只升不降: 摊薄推高成本 → 止损上移至 43.26
+    check("场景12 R8止损按R6上移(只升不降)", abs(s.hard_stop - 43.26) < 0.01, f"S={s.hard_stop}")
+
+    # R8.2 毛价法对照: 明确不扣费会偏
+    s2 = init_position("t", "毛价法", 44.735, 200); s2.hard_stop = 42.26
+    confirm_sell(s2, 100, price=43.52)
+    check("场景12 R8不扣费→得45.95(证明必须扣费)", abs(s2.cost - 45.95) < 0.01, f"cost={s2.cost}")
+
+    # R8 向后兼容: 不传 price → 只减数量, 成本不变
+    s3 = init_position("t", "兼容", 100.0, 200); s3.hard_stop = 94.0
+    confirm_sell(s3, 100)
+    check("场景12 R8兼容(不传price→成本不变)", s3.cost == 100.0 and s3.total_qty == 100)
+
+    # R8 basis="keep" → 保留原成本
+    s4 = init_position("t", "keep", 100.0, 200); s4.hard_stop = 94.0
+    confirm_sell(s4, 100, price=110.0, basis="keep")
+    check("场景12 R8 basis=keep 保留成本", s4.cost == 100.0)
+
+    # R8 盈利减仓 → 成本下降; 止损只升不降(保持94)
+    s5 = init_position("t", "盈利减仓", 100.0, 200); s5.hard_stop = 94.0
+    confirm_sell(s5, 100, price=120.0)
+    check("场景12 R8盈利减仓→成本下降", s5.cost == 80.0, f"cost={s5.cost}")
+    check("场景12 R8盈利减仓后止损不下降", s5.hard_stop == 94.0, f"S={s5.hard_stop}")
+
+    # R8 非法数量拦截
+    s6 = init_position("t", "卖超", 100.0, 100); s6.hard_stop = 94.0
+    try:
+        confirm_sell(s6, 200); _guarded = False
+    except ValueError:
+        _guarded = True
+    check("场景12 R8卖超被拦截", _guarded)
+
+    # R8.4 减仓不应重置保护线与 H
+    s7 = init_position("t", "保保护", 100.0, 200)
+    update_quote(s7, 120.0, quote_time="t1")          # H=120 → 保护激活, P=111.6
+    _pl, _h = s7.profit_line, s7.peak_h
+    confirm_sell(s7, 100, price=130.0)
+    check("场景12 R8减仓不重置保护线/H", s7.protection_active and s7.profit_line == _pl and s7.peak_h == _h,
+          f"P={s7.profit_line} H={s7.peak_h}")
 
     n_pass = sum(1 for _, ok, _ in results if ok)
     print(f"\n=== 验收: {n_pass}/{len(results)} 通过 ===")
