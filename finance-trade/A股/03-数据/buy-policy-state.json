@@ -1,0 +1,75 @@
+{
+ "version": "BUY-LOW-v1-20260915",
+ "pending": null,
+ "fired": {
+  "2026-09-16": [
+   "sh600760"
+  ]
+ },
+ "invalidated": {
+  "sz002396": {
+   "date": "2026-09-17",
+   "evidence": "②ATR区间不满足：(H20 41.95 − 现价 38.23)/ATR14 2.597 = 1.43 < 2.5 下限（§6收盘口径，①②不依赖盘中量比）"
+  }
+ },
+ "history": [
+  {
+   "ts": "2026-09-16T09:45:58",
+   "event": "alert_issued",
+   "code": "sh600760",
+   "sizing_mode": "manual",
+   "price": 44.61
+  },
+  {
+   "ts": "2026-09-16T10:15:03",
+   "event": "expired_needs_recheck",
+   "code": "sh600760"
+  },
+  {
+   "ts": "2026-09-17T09:45:59",
+   "event": "pending_carry_over",
+   "code": "sh600760",
+   "date": "2026-09-17"
+  },
+  {
+   "ts": "2026-09-17T10:00:02",
+   "event": "pending_carry_over",
+   "code": "sh600760",
+   "date": "2026-09-17"
+  },
+  {
+   "ts": "2026-09-17T10:15:06",
+   "event": "pending_carry_over",
+   "code": "sh600760",
+   "date": "2026-09-17"
+  },
+  {
+   "ts": "2026-09-17T10:20:23",
+   "event": "pending_released",
+   "code": "sh600760",
+   "reason": "用户确认已成交：2026-09-16 09:53 买入中航沈飞100股@44.44（当日09:45:56提醒，成交距提醒8分钟）",
+   "user": true
+  },
+  {
+   "ts": "2026-09-17T10:23:37",
+   "event": "position_exited",
+   "code": "sh600988"
+  },
+  {
+   "ts": "2026-09-17T10:23:37",
+   "event": "position_exited",
+   "code": "sz002396"
+  },
+  {
+   "ts": "2026-09-17T10:23:37",
+   "event": "signal_invalidated",
+   "code": "sz002396",
+   "date": "2026-09-17",
+   "evidence": "②ATR区间不满足：(H20 41.95 − 现价 38.23)/ATR14 2.597 = 1.43 < 2.5 下限（§6收盘口径，①②不依赖盘中量比）"
+  }
+ ],
+ "ever_exited": {
+  "sh600988": "2026-09-17",
+  "sz002396": "2026-09-17"
+ }
+}
