@@ -1,66 +1,6 @@
 {
  "strategy_version": "SELL-POLICY-v1.0-20260914",
  "positions": {
-  "sh600988": {
-   "lifecycle_id": "LC-sh600988-2026-09-02",
-   "code": "sh600988",
-   "name": "赤峰黄金",
-   "cost": 46.023,
-   "total_qty": 100,
-   "sellable_qty": 100,
-   "today_new_qty": 0,
-   "peak_h": 47.63,
-   "peak_h_time": "2026-09-14 15:00:00",
-   "protection_active": false,
-   "hard_stop": 42.05,
-   "profit_line": 0.0,
-   "quote_time": "20260916155934",
-   "quote_valid": false,
-   "quote_note": "报价陈旧(超阈值)",
-   "actual_cost": 44.735,
-   "pending_exit": null,
-   "fired_events": {},
-   "add_log": [
-    {
-     "at": "2026-09-14T22:05:20",
-     "entry_date": "2026-09-11",
-     "add_qty": 100,
-     "add_price": 44.41,
-     "old_cost": 44.96,
-     "old_total": 100,
-     "protection_active_before": false,
-     "peak_h_before": 44.96,
-     "activation_base_after_add": 44.41
-    }
-   ],
-   "migrated": true,
-   "migration_note": "H 由新浪5分钟K重建: 区间 2026-09-02 09:35:00~2026-09-14 15:00:00, H=47.63 (已观测最高价, 5分钟粒度, 非逐笔); S 按 R6 回放: 首买S=42.26 -> 加仓后 max(旧S, 44.735×0.94=42.05)=42.26",
-   "created_at": "2026-09-14T22:05:20"
-  },
-  "sz002396": {
-   "lifecycle_id": "LC-sz002396-2026-09-14",
-   "code": "sz002396",
-   "name": "星网锐捷",
-   "cost": 35.88,
-   "total_qty": 100,
-   "sellable_qty": 100,
-   "today_new_qty": 0,
-   "peak_h": 38.83,
-   "peak_h_time": "20260916131336",
-   "protection_active": true,
-   "hard_stop": 33.73,
-   "profit_line": 36.96,
-   "quote_time": "20260916155909",
-   "quote_valid": false,
-   "quote_note": "报价陈旧(超阈值)",
-   "actual_cost": 35.88,
-   "pending_exit": null,
-   "fired_events": {},
-   "add_log": [],
-   "migrated": true,
-   "migration_note": "H 由新浪5分钟K重建: 区间 2026-09-14 10:05:00~2026-09-14 15:00:00, H=35.93 (已观测最高价, 5分钟粒度, 非逐笔)",
-   "created_at": "2026-09-14T22:05:20"
-  },
   "sh600760": {
    "lifecycle_id": "LC-sh600760-2026-09-16",
    "code": "sh600760",
@@ -74,9 +14,9 @@
    "protection_active": false,
    "hard_stop": 41.82,
    "profit_line": 0.0,
-   "quote_time": "20260916155949",
-   "quote_valid": false,
-   "quote_note": "报价陈旧(超阈值)",
+   "quote_time": "20260917100902",
+   "quote_valid": true,
+   "quote_note": "",
    "actual_cost": 44.49,
    "pending_exit": null,
    "fired_events": {},
@@ -86,8 +26,8 @@
    "created_at": "2026-09-16T09:55:37"
   }
  },
- "updated_at": "2026-09-16T18:41:36",
+ "updated_at": "2026-09-17T10:09:07",
  "roll_meta": {
-  "last_roll_date": "2026-09-16"
+  "last_roll_date": "2026-09-17"
  }
 }
