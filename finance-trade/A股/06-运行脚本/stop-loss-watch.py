@@ -105,6 +105,52 @@ def _save_line_notify(d: dict) -> None:
         pass
 
 
+# ============================================================================
+# 反弹减仓参考位提醒 (2026-09-17 新增，Omi 批准)
+#   用途: 三只各1手→减仓=清仓。价位来自日K阻力(MA20/近10日高/前高/保护激活线)。
+#   行为: 现价 >= 某档目标位时推送一次(每档每只一次)，标注"主动减仓参考·非规则触发"。
+#   只提示，不判定、不调 fire_exit、不写 sell-policy-state.json。
+# ============================================================================
+REDUCE_ALERT_ENABLED = True
+REDUCE_TARGETS_FILE = os.path.expanduser("~/.hermes/state/reduce-targets.json")
+REDUCE_ALERT_STATE_FILE = os.path.expanduser("~/.hermes/state/reduce-target-alert.json")
+
+
+def _load_json(path: str, default: dict) -> dict:
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return default
+
+
+def _save_json(path: str, d: dict) -> None:
+    try:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(d, f, ensure_ascii=False, indent=1)
+        os.replace(tmp, path)
+    except Exception:
+        pass
+
+
+def build_reduce_alert(st, tier: dict, price: float, cost: float) -> str:
+    gain = (price / cost - 1) * 100 if cost else 0.0
+    return (
+        f"🎯 反弹减仓参考位触及（主动减仓·非规则触发）\n"
+        f"{st.name} {st.code}\n"
+        f"  现价　　：{price:.2f}\n"
+        f"  触及档位：第{tier['level']}档 {tier['price']:.2f}（{tier['label']}）\n"
+        f"  风控成本：{cost:.3f}　→　浮盈 {gain:+.2f}%\n"
+        f"  当前退出线：{st.effective_exit_line():.2f}（SELL-POLICY 规则线，未变）\n"
+        f"  ⚠️ 1手=清仓，卖出将登记为 R8 主动减仓\n"
+        f"  → 供决策参考，不是策略触发的卖出信号"
+    )
+
+
 def build_line_update_alert(st, old_eff: float, new_eff: float, price: float,
                             reason: str) -> str:
     d = new_eff - old_eff
@@ -245,6 +291,10 @@ def main():
     line_alerts = []
     linea_dirty = False
     line_notify = _load_line_notify() if LINE_NOTIFY_ENABLED else {}
+    reduce_alerts = []
+    reduce_dirty = False
+    reduce_targets = _load_json(REDUCE_TARGETS_FILE, {}) if REDUCE_ALERT_ENABLED else {}
+    reduce_fired = _load_json(REDUCE_ALERT_STATE_FILE, {"_fired": {}}).get("_fired", {})
     touch_state = load_touch_state()
     today = now.strftime("%Y-%m-%d")
     if touch_state.get("_date") != today:
@@ -312,6 +362,22 @@ def main():
                                      "notified_at": now.strftime("%Y-%m-%d %H:%M")}
                 linea_dirty = True
 
+        # ── 反弹减仓参考位（主动减仓 R8 参考·非规则触发）──
+        if REDUCE_ALERT_ENABLED and fresh:
+            _tgt = (reduce_targets.get("positions") or {}).get(code)
+            if _tgt and reduce_targets.get("enabled", True):
+                _rcost = _tgt.get("cost") or st.risk_cost()
+                for _tier in sorted(_tgt.get("tiers") or [], key=lambda x: x.get("level", 99)):
+                    _key = f"{code}:{_tier['level']}"
+                    if q["price"] >= float(_tier["price"]) and _key not in reduce_fired:
+                        reduce_alerts.append(build_reduce_alert(st, _tier, q["price"], _rcost))
+                        reduce_fired[_key] = {
+                            "at": now.strftime("%Y-%m-%d %H:%M"),
+                            "price": q["price"], "level": _tier["level"],
+                            "target": _tier["price"],
+                        }
+                        reduce_dirty = True
+
         # ── 日内低点提示 (只提示, 不判定, 每只每交易日一次) ──
         if TOUCH_ALERT_ENABLED and fresh and not ev and not touched.get(code):
             low = q.get("low")
@@ -333,6 +399,15 @@ def main():
         print("\n\n".join(line_alerts))
     if linea_dirty:
         _save_line_notify(line_notify)
+    if reduce_alerts:
+        if alerts or touch_alerts or line_alerts:
+            print()
+        print("🎯 反弹减仓参考位 (主动减仓·非规则触发)")
+        print("=" * 22)
+        print("\n\n".join(reduce_alerts))
+    if reduce_dirty:
+        _save_json(REDUCE_ALERT_STATE_FILE, {"_fired": reduce_fired,
+                                             "_updated": now.strftime("%Y-%m-%d %H:%M")})
     if touch_alerts:
         save_touch_state(touch_state)
 
