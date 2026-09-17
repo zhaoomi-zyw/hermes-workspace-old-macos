@@ -104,6 +104,41 @@ updated: 2026-09-02
 
 
 
+
+### 🔧 修复：低吸监控被 pending 卡死（2026-09-17）
+
+**症状**：低吸监控 cron 显示 `enabled=True`、`status=ok`、**每 15 分钟正常跑**，但**实际自 9/16 10:15 起没推过任何信号**。
+
+**根因**：`buy-policy-state.json` 残留一条 9/16 的待确认记录
+```json
+"pending": {"date":"2026-09-16","code":"sh600760","status":"needs_recheck","released":false}
+```
+`lowbuy-watch.py` 的逻辑：
+```python
+if BP.pending_active(st):
+    return          # ← pending 未释放 → 直接退出，不推任何信号
+```
+
+**时间线**：9/16 09:45:56 推送沈飞提醒 → **09:53 用户成交 @44.44** → 10:15 标记超时 → **无人调用 `release_pending` 确认成交** → 9/17 carry_over → **一直卡死**。
+
+**修复**：调 `release_pending(st, reason, confirmed_by_user=True)` 确认已成交 →
+`pending_active` 变为 **False**、`pending=None`、history 记 `pending_released`。
+
+**验证**：脚本已越过 pending 检查、`fetch_realtime` 取到 **12/12** 只行情 → **确在扫描**（无输出=当前无信号，非阻塞）。
+
+**⚠️ 教训（重要）**：
+> **提醒推送后若用户成交，必须调用 `release_pending` 释放** —— 否则低吸监控会**静默卡死**，
+> 而 cron 状态仍显示 `ok`，**从外表完全看不出异常**。排查手法：查 `buy-policy-state.json` 的 `pending.released`。
+
+**备份**：`buy-policy-state.json.bak_2026-09-17_release`
+
+### ⚠️ 遗留待办：清仓后「信号失效登记」无自动化
+
+`buy_policy.close_check_invalidated()`（§6：清仓后三条件至少一项不满足 → 登记失效，**否则不得买回**）
+**全仓 grep 无生产调用者，仅测试引用**。
+→ **今天清仓的赤峰黄金 / 星网锐捷尚未做失效登记**，若明日又满足三条件，监控会**直接推荐买回**。
+**计划**：收盘后（用收盘价口径）跑一次 `close_check_invalidated`，对满足失效条件的执行 `register_invalidation`。
+
 ### 🔴 持仓变更：赤峰/星网清仓（2026-09-17 10:07）
 
 **用户决定**：「不等了 先卖了」—— **两笔均为主动减仓（R8），非规则触发**。
