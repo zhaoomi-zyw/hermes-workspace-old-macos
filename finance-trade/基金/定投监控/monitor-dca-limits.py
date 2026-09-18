@@ -92,19 +92,24 @@ def main():
             elif lim == dca_amt:
                 problems.append(f"🟠 日限额{lim:.0f}元 = 你的{dca_amt}元（卡上限，一旦下调即失败）")
 
-        # 只在状态变化时提醒；首次建立基线
+        # ⭐ 按「问题指纹」去重：同一问题只推一次；问题消失后再出现则重新推。
+        #    （旧版按"限额数字变化"去重 → 暂停申购时数字仍是100 → 永远静默，是本次漏报的根因）
+        fingerprint = "|".join(sorted(problems)) if problems else "OK"
+        prev_fp = prev.get("fp")
         changed = (prev.get("buy") != buy) or (prev.get("dca") != dca) or (prev.get("limit") != lim)
+        cur["fp"] = fingerprint
         state[code] = cur
-        if prev and changed:
-            alerts.append(f"● {info['name']}（{code}）状态变化\n"
-                          f"   上次: 申购={prev.get('buy')} 定投={prev.get('dca')} 限额={prev.get('limit')}\n"
-                          f"   现在: 申购={buy} 定投={dca} 限额={lim}\n"
-                          f"   你的定投: {dca_amt}元/日\n"
-                          + ("\n".join("   " + p for p in problems) if problems else "   ✅ 你的额度仍可覆盖"))
-        elif not prev and problems:
-            alerts.append(f"● {info['name']}（{code}）首次登记即有问题\n"
-                          f"   申购={buy} 定投={dca} 限额={lim}｜你的定投 {dca_amt}元/日\n"
+
+        if problems and fingerprint != prev_fp:
+            head = "状态变化" if (prev and changed) else "检测到问题"
+            alerts.append(f"● {info['name']}（{code}）{head}\n"
+                          f"   申购={buy}｜赎回={red}｜定投={dca}｜日限额={lim}\n"
+                          f"   你的定投 {dca_amt} 元/日\n"
                           + "\n".join("   " + p for p in problems))
+        elif not problems and prev_fp not in (None, "OK"):
+            alerts.append(f"● {info['name']}（{code}）✅ 问题已解除\n"
+                          f"   申购={buy}｜定投={dca}｜日限额={lim}\n"
+                          f"   你的定投 {dca_amt} 元/日 可正常投")
 
     os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
     json.dump(state, open(STATE_FILE, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
