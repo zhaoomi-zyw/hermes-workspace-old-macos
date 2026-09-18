@@ -37,7 +37,7 @@ def fetch_realtime(codes):
     for line in raw.strip().split(";"):
         if "=" not in line:
             continue
-        key = line.split("=")[0].replace("v_", "")
+        key = line.split("=")[0].replace("v_", "").strip()   # ⚠️ 必须 strip：腾讯第2段起带换行符
         f = line.split("=", 1)[1].strip().strip('"').split("~")
         if len(f) < 40:
             continue
