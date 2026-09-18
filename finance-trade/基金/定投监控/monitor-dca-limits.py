@@ -25,9 +25,11 @@ import sys
 from datetime import datetime
 
 FUNDS = {
-    "018043": {"name": "天弘纳斯达克100指数(QDII)A",  "dca": 100},
+    # ⭐ 最终配置（2026-09-18 用户确认）：宝盈100 + 国泰100 + 华夏全球科技150 = 350元/日
+    # 天弘 018043 已由用户关闭定投（2026-09-18）→ 移出监控
+    "019736": {"name": "宝盈纳斯达克100指数发起(QDII)A", "dca": 100},
+    "160213": {"name": "国泰纳斯达克100指数", "dca": 100},
     "005698": {"name": "华夏全球科技先锋混合(QDII)A", "dca": 150},
-    "019736": {"name": "宝盈纳斯达克100指数发起(QDII)A", "dca": 200},
 }
 
 STATE_FILE = os.path.expanduser("~/.hermes/profiles/main/cron/state/dca_fund_limits.json")
@@ -48,6 +50,8 @@ def fetch_status(code):
     txt = re.sub(r"\s+", " ", txt)
 
     sub = re.search(r"申购状态\s*(\S+?)\s*赎回状态\s*(\S+?)\s*定投状态\s*(\S+)", txt)
+    if not sub:  # 部分老基金（如LOF）页面结构不同
+        sub = re.search(r"申购状态\s*(\S+?)\s*(?:赎回状态|定投状态)\s*(\S+?)\s*定投状态\s*(\S+)", txt)
     buy, red, dca = (sub.group(1), sub.group(2), sub.group(3)) if sub else (None, None, None)
 
     lim = None
@@ -117,7 +121,8 @@ def main():
     if alerts:
         print("💊 定投基金限额监控\n")
         print("\n\n".join(alerts))
-        print("\n合计日定投 450 元（天弘100 + 华夏全球科技150 + 宝盈200）")
+        acts = " + ".join(f"{v['name'].split('(')[0][:8]}{v['dca']}" for v in FUNDS.values())
+        print(f"\n登记日定投合计 {sum(v['dca'] for v in FUNDS.values())} 元/日（{acts}）")
 
 
 if __name__ == "__main__":
