@@ -1,118 +1,119 @@
 #!/usr/bin/env python3
-"""
-Monitor purchase limits for DCA funds.
-005698 华夏全球科技先锋QDII A — daily DCA 150元
-022979 华夏中证A500ETF联接A — daily DCA 150元
+# -*- coding: utf-8 -*-
+"""DCA 基金申购限额监控（实际持仓口径，2026-09-18 校准）
 
-Silent when limit unchanged. Alerts on change.
-Limit below 150元 = 🔴 CRITICAL (DCA would be blocked)
+以用户支付宝「我的定投」截图为准（2026-09-18 19:07 截图）：
+  018043 天弘纳斯达克100指数(QDII)A      日定投 100 元
+  005698 华夏全球科技先锋混合(QDII)A     日定投 150 元
+  019736 宝盈纳斯达克100指数发起(QDII)A  日定投 200 元
+  合计 450 元/日，均自 2026-09-21 起从建设银行储蓄卡(8564)扣款
+
+⚠️ 旧版盯的是 005698 + 022979（022979 已不在"进行中"列表，可能属"已暂停(3)"）。
+   本版以实际在投的 3 只为准。
+
+规则：
+  - 限额 < 日定投额          → 🔴 会被拒（扣款失败）
+  - 限额 == 日定投额         → 🟠 卡在上限（一旦下调即失败）
+  - 暂停申购 / 不支持定投     → 🔴 立即失败
+  - 限额未变                 → 静默（watchdog 模式）
 """
-import requests, re, json, os, sys
+import urllib.request
+import re
+import json
+import os
+import sys
 from datetime import datetime
 
 FUNDS = {
-    "005698": {"name": "华夏全球科技先锋QDII A", "dca": 150},
-    "022979": {"name": "华夏中证A500ETF联接A", "dca": 150},
+    "018043": {"name": "天弘纳斯达克100指数(QDII)A",  "dca": 100},
+    "005698": {"name": "华夏全球科技先锋混合(QDII)A", "dca": 150},
+    "019736": {"name": "宝盈纳斯达克100指数发起(QDII)A", "dca": 200},
 }
 
-STATE_DIR = os.path.expanduser("~/.hermes/profiles/main/cron/state")
-STATE_FILE = os.path.join(STATE_DIR, "dca_fund_limits.json")
+STATE_FILE = os.path.expanduser("~/.hermes/profiles/main/cron/state/dca_fund_limits.json")
 
-def fetch_limit(code):
-    """Fetch current purchase limit."""
+
+def fetch_status(code):
+    """返回 (申购状态, 赎回状态, 定投状态, 日限额元/None)。"""
+    url = f"https://fundf10.eastmoney.com/jjfl_{code}.html"
+    req = urllib.request.Request(url, headers={
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0"})
     try:
-        txt = requests.get(
-            f"https://fundf10.eastmoney.com/jjgg_{code}.html",
-            timeout=10,
-            headers={"User-Agent": "Mozilla/5.0"}
-        ).text
-        # Look for limit text
-        m = re.search(r'单日累计购买上限([\d.]+)万', txt)
-        if m:
-            return float(m.group(1)) * 10000
-        m = re.search(r'单日累计购买上限(\d+)元', txt)
-        if m:
-            return float(m.group(1))
-        if '开放申购' in txt and '暂停申购' not in txt:
-            return float('inf')  # No limit
-        if '暂停申购' in txt:
-            return 0  # Suspended
-    except:
-        return None
-    return float('inf')
+        html = urllib.request.urlopen(req, timeout=20).read().decode("utf-8", "ignore")
+    except Exception as e:
+        return (None, None, None, None)
+    txt = re.sub(r"<script.*?</script>", "", html, flags=re.S)
+    txt = re.sub(r"<[^>]+>", " ", txt)
+    txt = txt.replace("&nbsp;", " ")
+    txt = re.sub(r"\s+", " ", txt)
+
+    sub = re.search(r"申购状态\s*(\S+?)\s*赎回状态\s*(\S+?)\s*定投状态\s*(\S+)", txt)
+    buy, red, dca = (sub.group(1), sub.group(2), sub.group(3)) if sub else (None, None, None)
+
+    lim = None
+    m = re.search(r"日累计申购限额\s*([\d.]+)\s*元", txt)
+    if m:
+        lim = float(m.group(1))
+    elif "无限额" in txt:
+        lim = float("inf")
+    return (buy, red, dca, lim)
+
 
 def main():
-    state = {}
     try:
-        with open(STATE_FILE) as f:
-            state = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        pass
-    
-    changes = []
-    
+        state = json.load(open(STATE_FILE, encoding="utf-8"))
+    except Exception:
+        state = {}
+
+    alerts, silent = [], []
     for code, info in FUNDS.items():
-        old_limit = state.get(code)
-        new_limit = fetch_limit(code)
-        
-        if new_limit is None:
-            changes.append(f"⚠️ {info['name']}（{code}）：获取限额失败")
-            state[code] = None
+        buy, red, dca, lim = fetch_status(code)
+        prev = state.get(code, {})
+        if not isinstance(prev, dict):   # 兼容旧版 state（裸数字格式）
+            prev = {}
+        cur = {"buy": buy, "dca": dca, "limit": lim,
+               "last_checked": datetime.now().isoformat()}
+
+        if buy is None:
+            state[code] = cur
+            silent.append(f"{info['name']}: 取数失败")
             continue
-        
-        # Derive status class: 'ok' | 'low' | 'critical' | 'suspended'
-        if new_limit == 0:
-            new_status = "suspended"
-        elif new_limit != float('inf') and new_limit < info['dca']:
-            new_status = "critical"
-        elif new_limit != float('inf') and new_limit < info['dca'] * 2:
-            new_status = "low"
-        else:
-            new_status = "ok"
-        
-        old_status = state.get(f"{code}_status")
-        
-        # Notify only when limit value OR status actually changed
-        # Skip alert on first-ever run (no old_status) — just initialize silently
-        if old_status is not None and (old_limit != new_limit or old_status != new_status):
-            # Limit value change
-            if new_limit != old_limit:
-                old_str = f"{old_limit:,.0f}元" if old_limit != float('inf') else "开放申购"
-                new_str = f"{new_limit:,.0f}元" if new_limit != float('inf') else "开放申购"
-                if new_limit == 0:
-                    new_str = "暂停申购"
-                changes.append(f"🔔 {info['name']}（{code}）限额变更：{old_str} → {new_str}")
-            else:
-                # Same limit but status changed (e.g. from ok to low due to DCA amount change)
-                status_labels = {"suspended": "暂停申购", "critical": "低于定投额", "low": "接近定投额", "ok": "正常"}
-                changes.append(f"📌 {info['name']}（{code}）状态变化：{status_labels.get(old_status, '未知')} → {status_labels.get(new_status, '未知')}")
-            
-            # Additional severity alert
-            if new_status == "suspended":
-                changes.append(f"🔴 紧急：{info['name']}（{code}）已暂停申购，定投将中断！")
-            elif new_status == "critical":
-                changes.append(f"🔴 临界：{info['name']}（{code}）限额{new_limit:,.0f}元，低于日定投{info['dca']}元！")
-            elif new_status == "low":
-                changes.append(f"🟡 关注：{info['name']}（{code}）限额{new_limit:,.0f}元，接近日定投{info['dca']}元")
-        
-        # Store new limit and status
-        state[code] = new_limit
-        state[f"{code}_status"] = new_status
-    
-    # Save state
-    os.makedirs(STATE_DIR, exist_ok=True)
-    with open(STATE_FILE, "w") as f:
-        json.dump(state, f, indent=2)
-    
-    if changes:
-        print("📊 定投基金申购限额监控")
-        now = datetime.now().strftime("%Y-%m-%d %H:%M")
-        print(f"📅 {now}")
-        print()
-        for c in changes:
-            print(c)
-    else:
-        print("[SILENT]")  # No changes, suppress delivery
+
+        dca_amt = info["dca"]
+        problems = []
+
+        if buy and "暂停" in buy:
+            problems.append(f"🔴 申购已暂停 → {dca_amt}元/日定投会被拒")
+        if dca and "不支持" in dca:
+            problems.append("🔴 定投状态=不支持")
+        if lim is not None and lim != float("inf"):
+            if lim < dca_amt:
+                problems.append(f"🔴 日限额{lim:.0f}元 < 你的{dca_amt}元 → 会被拒")
+            elif lim == dca_amt:
+                problems.append(f"🟠 日限额{lim:.0f}元 = 你的{dca_amt}元（卡上限，一旦下调即失败）")
+
+        # 只在状态变化时提醒；首次建立基线
+        changed = (prev.get("buy") != buy) or (prev.get("dca") != dca) or (prev.get("limit") != lim)
+        state[code] = cur
+        if prev and changed:
+            alerts.append(f"● {info['name']}（{code}）状态变化\n"
+                          f"   上次: 申购={prev.get('buy')} 定投={prev.get('dca')} 限额={prev.get('limit')}\n"
+                          f"   现在: 申购={buy} 定投={dca} 限额={lim}\n"
+                          f"   你的定投: {dca_amt}元/日\n"
+                          + ("\n".join("   " + p for p in problems) if problems else "   ✅ 你的额度仍可覆盖"))
+        elif not prev and problems:
+            alerts.append(f"● {info['name']}（{code}）首次登记即有问题\n"
+                          f"   申购={buy} 定投={dca} 限额={lim}｜你的定投 {dca_amt}元/日\n"
+                          + "\n".join("   " + p for p in problems))
+
+    os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
+    json.dump(state, open(STATE_FILE, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+
+    if alerts:
+        print("💊 定投基金限额监控\n")
+        print("\n\n".join(alerts))
+        print("\n合计日定投 450 元（天弘100 + 华夏全球科技150 + 宝盈200）")
+
 
 if __name__ == "__main__":
     main()
