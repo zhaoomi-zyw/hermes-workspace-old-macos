@@ -109,8 +109,11 @@ def build_factors(code):
 
     # ---- 财务类（按公告日对齐）----
     fin = load_fin(code)
-    for fname in ("roe", "gross_margin", "net_margin", "np_yoy", "rev_yoy",
-                  "debt_ratio", "asset_turnover", "ocf_to_income", "np_cash_content"):
+    # 只对「文件里实际存在且非全空」的列构建因子（批量版减少了部分字段）
+    avail = set(fin[0].keys()) if fin else set()
+    for fname in [x for x in ("roe", "gross_margin", "net_margin", "np_yoy", "rev_yoy",
+                              "debt_ratio", "asset_turnover", "ocf_to_income", "np_cash_content")
+                  if x in avail]:
         arr = np.full(n, np.nan)
         for rec in fin:
             rep = rec.get("report") or ""
