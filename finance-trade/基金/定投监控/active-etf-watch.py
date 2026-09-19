@@ -99,7 +99,8 @@ def main():
             if x["f12"] in new_codes:
                 print(f"   ● {x['f12']}  {x['f14']}")
                 print(f"     现价 {x.get('f2')}  涨跌 {x.get('f3')}%  成交额 {(x.get('f6') or 0)/1e8:.3f}亿")
-        print("\n   → 可考虑在券商 App 搜索该代码确认可交易性")
+        print("\n   → 券商 App 搜索该代码确认可交易性")
+        print("   → 对比模板：Obsidian 04-Trading/主动管理ETF-18只对比模板.md")
     else:
         # 无新增主动ETF：仅当增强ETF数量明显变化时提示
         prev_enh = prev.get("enhanced_count", 0)
