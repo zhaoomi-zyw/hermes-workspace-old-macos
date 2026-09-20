@@ -1,0 +1,1578 @@
+{
+ "000001": {
+  "name": "平安银行",
+  "industry": "银行Ⅱ",
+  "region": "广东板块",
+  "float_shares": 19405684991.0,
+  "float_mv": 227046514394.69998,
+  "total_shares": 19405918198.0
+ },
+ "000002": {
+  "name": "万  科Ａ",
+  "industry": "房地产开发",
+  "region": "广东板块",
+  "float_shares": 9715113154.0,
+  "float_mv": 32254175671.28,
+  "total_shares": 11930709471.0
+ },
+ "000063": {
+  "name": "中兴通讯",
+  "industry": "通信设备",
+  "region": "广东板块",
+  "float_shares": 4027621232.0,
+  "float_mv": 130656032766.07999,
+  "total_shares": 4783534887.0
+ },
+ "000100": {
+  "name": "TCL科技",
+  "industry": "光学光电子",
+  "region": "广东板块",
+  "float_shares": 20114980236.0,
+  "float_mv": 100373751377.64,
+  "total_shares": 21946416151.0
+ },
+ "000157": {
+  "name": "中联重科",
+  "industry": "工程机械",
+  "region": "湖南板块",
+  "float_shares": 7070417363.0,
+  "float_mv": 43836587650.6,
+  "total_shares": 8648535236.0
+ },
+ "000166": {
+  "name": "申万宏源",
+  "industry": "证券Ⅱ",
+  "region": "新疆板块",
+  "float_shares": 22535507316.0,
+  "float_mv": 99156232190.40001,
+  "total_shares": 25039944560.0
+ },
+ "000301": {
+  "name": "东方盛虹",
+  "industry": "炼化及贸易",
+  "region": "江苏板块",
+  "float_shares": 6608373023.0,
+  "float_mv": 90402542954.64,
+  "total_shares": 6611232470.0
+ },
+ "000333": {
+  "name": "美的集团",
+  "industry": "白色家电",
+  "region": "广东板块",
+  "float_shares": 6885475415.0,
+  "float_mv": 581134125026.0,
+  "total_shares": 7629418902.0
+ },
+ "000338": {
+  "name": "潍柴动力",
+  "industry": "汽车零部件",
+  "region": "山东板块",
+  "float_shares": 4956392543.0,
+  "float_mv": 134962568945.89,
+  "total_shares": 8640220621.0
+ },
+ "000408": {
+  "name": "藏格矿业",
+  "industry": "农化制品",
+  "region": "青海板块",
+  "float_shares": 1568898254.0,
+  "float_mv": 113211698008.64,
+  "total_shares": 1568914754.0
+ },
+ "000425": {
+  "name": "徐工机械",
+  "industry": "工程机械",
+  "region": "江苏板块",
+  "float_shares": 8998084894.0,
+  "float_mv": 67035732460.3,
+  "total_shares": 11711210449.0
+ },
+ "000538": {
+  "name": "云南白药",
+  "industry": "中药Ⅱ",
+  "region": "云南板块",
+  "float_shares": 1784132393.0,
+  "float_mv": 91079958662.65,
+  "total_shares": 1784262603.0
+ },
+ "000568": {
+  "name": "泸州老窖",
+  "industry": "白酒Ⅱ",
+  "region": "四川板块",
+  "float_shares": 1471060137.0,
+  "float_mv": 105798645053.04001,
+  "total_shares": 1471901463.0
+ },
+ "000596": {
+  "name": "古井贡酒",
+  "industry": "白酒Ⅱ",
+  "region": "安徽板块",
+  "float_shares": 408600000.0,
+  "float_mv": 38318508000.0,
+  "total_shares": 528600000.0
+ },
+ "000617": {
+  "name": "中油资本",
+  "industry": "多元金融",
+  "region": "新疆板块",
+  "float_shares": 12642079079.0,
+  "float_mv": 86977504063.52,
+  "total_shares": 12642079079.0
+ },
+ "000625": {
+  "name": "长安汽车",
+  "industry": "乘用车",
+  "region": "重庆板块",
+  "float_shares": 8267021316.0,
+  "float_mv": 58861191769.92,
+  "total_shares": 9912905548.0
+ },
+ "000630": {
+  "name": "铜陵有色",
+  "industry": "工业金属",
+  "region": "安徽板块",
+  "float_shares": 11143001681.0,
+  "float_mv": 67860880237.29,
+  "total_shares": 13409471510.0
+ },
+ "000651": {
+  "name": "格力电器",
+  "industry": "白色家电",
+  "region": "广东板块",
+  "float_shares": 5512892991.0,
+  "float_mv": 212577153732.96002,
+  "total_shares": 5601405741.0
+ },
+ "000657": {
+  "name": "中钨高新",
+  "industry": "小金属",
+  "region": "海南板块",
+  "float_shares": 1453452007.0,
+  "float_mv": 89765195952.31999,
+  "total_shares": 2278584780.0
+ },
+ "000708": {
+  "name": "中信特钢",
+  "industry": "特钢Ⅱ",
+  "region": "湖北板块",
+  "float_shares": 5047136556.0,
+  "float_mv": 65612775228.0,
+  "total_shares": 5047159056.0
+ },
+ "000725": {
+  "name": "京东方Ａ",
+  "industry": "光学光电子",
+  "region": "北京板块",
+  "float_shares": 35367134117.0,
+  "float_mv": 209373433972.63998,
+  "total_shares": 37044328064.0
+ },
+ "000768": {
+  "name": "中航西飞",
+  "industry": "航空装备Ⅱ",
+  "region": "陕西板块",
+  "float_shares": 2776414009.0,
+  "float_mv": 62052853101.15,
+  "total_shares": 2780610135.0
+ },
+ "000776": {
+  "name": "广发证券",
+  "industry": "证券Ⅱ",
+  "region": "广东板块",
+  "float_shares": 5904049311.0,
+  "float_mv": 122745185175.69,
+  "total_shares": 7824845511.0
+ },
+ "000792": {
+  "name": "盐湖股份",
+  "industry": "农化制品",
+  "region": "青海板块",
+  "float_shares": 5291518096.0,
+  "float_mv": 130912157695.04,
+  "total_shares": 5291572541.0
+ },
+ "000807": {
+  "name": "云铝股份",
+  "industry": "工业金属",
+  "region": "云南板块",
+  "float_shares": 3467920301.0,
+  "float_mv": 94916978638.37001,
+  "total_shares": 3467957405.0
+ },
+ "000858": {
+  "name": "五 粮 液",
+  "industry": "白酒Ⅱ",
+  "region": "四川板块",
+  "float_shares": 3881513391.0,
+  "float_mv": 271705937370.0,
+  "total_shares": 3881608005.0
+ },
+ "000895": {
+  "name": "双汇发展",
+  "industry": "食品加工",
+  "region": "河南板块",
+  "float_shares": 3464212167.0,
+  "float_mv": 80681501369.43,
+  "total_shares": 3464661213.0
+ },
+ "000938": {
+  "name": "紫光股份",
+  "industry": "IT服务Ⅱ",
+  "region": "北京板块",
+  "float_shares": 2860072674.0,
+  "float_mv": 97099467282.3,
+  "total_shares": 2860079874.0
+ },
+ "000963": {
+  "name": "华东医药",
+  "industry": "化学制药",
+  "region": "浙江板块",
+  "float_shares": 1753013098.0,
+  "float_mv": 45753641857.8,
+  "total_shares": 1753736848.0
+ },
+ "000975": {
+  "name": "山金国际",
+  "industry": "贵金属",
+  "region": "内蒙古",
+  "float_shares": 2523214817.0,
+  "float_mv": 64367209981.670006,
+  "total_shares": 2772527436.0
+ },
+ "000977": {
+  "name": "浪潮信息",
+  "industry": "计算机设备",
+  "region": "山东板块",
+  "float_shares": 1466915664.0,
+  "float_mv": 105441897928.31999,
+  "total_shares": 1468476655.0
+ },
+ "000988": {
+  "name": "华工科技",
+  "industry": "自动化设备",
+  "region": "湖北板块",
+  "float_shares": 1004985657.0,
+  "float_mv": 108337453824.59999,
+  "total_shares": 1005502707.0
+ },
+ "000999": {
+  "name": "华润三九",
+  "industry": "中药Ⅱ",
+  "region": "广东板块",
+  "float_shares": 1662560811.0,
+  "float_mv": 39236435139.600006,
+  "total_shares": 1664217858.0
+ },
+ "001280": {
+  "name": "中国铀业",
+  "industry": "小金属",
+  "region": "北京板块",
+  "float_shares": 173727273.0,
+  "float_mv": 11083800017.4,
+  "total_shares": 2068181818.0
+ },
+ "001391": {
+  "name": "国货航",
+  "industry": "物流",
+  "region": "北京板块",
+  "float_shares": 1519354020.0,
+  "float_mv": 6107803160.4,
+  "total_shares": 12208881225.0
+ },
+ "001965": {
+  "name": "招商公路",
+  "industry": "铁路公路",
+  "region": "天津板块",
+  "float_shares": 6795094992.0,
+  "float_mv": 67407342320.64,
+  "total_shares": 6795094992.0
+ },
+ "001979": {
+  "name": "招商蛇口",
+  "industry": "房地产开发",
+  "region": "广东板块",
+  "float_shares": 8869713675.0,
+  "float_mv": 62708875682.25,
+  "total_shares": 9016032171.0
+ },
+ "002001": {
+  "name": "新 和 成",
+  "industry": "化学制品",
+  "region": "浙江板块",
+  "float_shares": 3036852928.0,
+  "float_mv": 79929969064.96,
+  "total_shares": 3073421680.0
+ },
+ "002027": {
+  "name": "分众传媒",
+  "industry": "广告营销",
+  "region": "上海板块",
+  "float_shares": 14442199726.0,
+  "float_mv": 67300650723.16,
+  "total_shares": 14442199726.0
+ },
+ "002028": {
+  "name": "思源电气",
+  "industry": "电网设备",
+  "region": "上海板块",
+  "float_shares": 610775161.0,
+  "float_mv": 84286972218.0,
+  "total_shares": 782573282.0
+ },
+ "002049": {
+  "name": "紫光国微",
+  "industry": "半导体",
+  "region": "河北板块",
+  "float_shares": 843119864.0,
+  "float_mv": 51666385265.92,
+  "total_shares": 843233676.0
+ },
+ "002050": {
+  "name": "三花智控",
+  "industry": "家电零部件Ⅱ",
+  "region": "浙江板块",
+  "float_shares": 3691044992.0,
+  "float_mv": 130330798667.52,
+  "total_shares": 4208013935.0
+ },
+ "002074": {
+  "name": "国轩高科",
+  "industry": "电池",
+  "region": "安徽板块",
+  "float_shares": 1736657690.0,
+  "float_mv": 45396232016.6,
+  "total_shares": 1814725342.0
+ },
+ "002142": {
+  "name": "宁波银行",
+  "industry": "银行Ⅱ",
+  "region": "浙江板块",
+  "float_shares": 6599384253.0,
+  "float_mv": 228668664366.44998,
+  "total_shares": 6603590792.0
+ },
+ "002179": {
+  "name": "中航光电",
+  "industry": "军工电子Ⅱ",
+  "region": "河南板块",
+  "float_shares": 2096422744.0,
+  "float_mv": 74464935866.88,
+  "total_shares": 2100246297.0
+ },
+ "002202": {
+  "name": "金风科技",
+  "industry": "风电设备",
+  "region": "新疆板块",
+  "float_shares": 3363505081.0,
+  "float_mv": 61215792474.2,
+  "total_shares": 4223788647.0
+ },
+ "002230": {
+  "name": "科大讯飞",
+  "industry": "软件开发",
+  "region": "安徽板块",
+  "float_shares": 2189966940.0,
+  "float_mv": 84269927851.2,
+  "total_shares": 2402079841.0
+ },
+ "002236": {
+  "name": "大华股份",
+  "industry": "计算机设备",
+  "region": "浙江板块",
+  "float_shares": 2391139515.0,
+  "float_mv": 37636535966.1,
+  "total_shares": 3269262074.0
+ },
+ "002241": {
+  "name": "歌尔股份",
+  "industry": "消费电子",
+  "region": "山东板块",
+  "float_shares": 3151501771.0,
+  "float_mv": 73524536317.43,
+  "total_shares": 3558062598.0
+ },
+ "002304": {
+  "name": "洋河股份",
+  "industry": "白酒Ⅱ",
+  "region": "江苏板块",
+  "float_shares": 1506409974.0,
+  "float_mv": 57333963610.44,
+  "total_shares": 1506445074.0
+ },
+ "002311": {
+  "name": "海大集团",
+  "industry": "饲料",
+  "region": "广东板块",
+  "float_shares": 1655415480.0,
+  "float_mv": 69494341850.4,
+  "total_shares": 1657010297.0
+ },
+ "002352": {
+  "name": "顺丰控股",
+  "industry": "物流",
+  "region": "广东板块",
+  "float_shares": 4799115259.0,
+  "float_mv": 147716767672.02002,
+  "total_shares": 5265308078.0
+ },
+ "002353": {
+  "name": "杰瑞股份",
+  "industry": "专用设备",
+  "region": "山东板块",
+  "float_shares": 691070465.0,
+  "float_mv": 87005771543.5,
+  "total_shares": 1023855833.0
+ },
+ "002371": {
+  "name": "北方华创",
+  "industry": "半导体",
+  "region": "北京板块",
+  "float_shares": 725085683.0,
+  "float_mv": 497778572236.33,
+  "total_shares": 725689200.0
+ },
+ "002384": {
+  "name": "东山精密",
+  "industry": "元件",
+  "region": "江苏板块",
+  "float_shares": 1386321723.0,
+  "float_mv": 271927005966.45,
+  "total_shares": 1831607532.0
+ },
+ "002415": {
+  "name": "海康威视",
+  "industry": "计算机设备",
+  "region": "浙江板块",
+  "float_shares": 9046093710.0,
+  "float_mv": 297978326807.39996,
+  "total_shares": 9164871550.0
+ },
+ "002422": {
+  "name": "科伦药业",
+  "industry": "化学制药",
+  "region": "四川板块",
+  "float_shares": 1298556616.0,
+  "float_mv": 51643596618.32001,
+  "total_shares": 1590781208.0
+ },
+ "002460": {
+  "name": "赣锋锂业",
+  "industry": "能源金属",
+  "region": "江西板块",
+  "float_shares": 1211369263.0,
+  "float_mv": 55965259950.600006,
+  "total_shares": 2096694404.0
+ },
+ "002463": {
+  "name": "沪电股份",
+  "industry": "元件",
+  "region": "江苏板块",
+  "float_shares": 1922851736.0,
+  "float_mv": 237472189396.0,
+  "total_shares": 1924363537.0
+ },
+ "002466": {
+  "name": "天齐锂业",
+  "industry": "能源金属",
+  "region": "四川板块",
+  "float_shares": 1475861414.0,
+  "float_mv": 63107834062.64,
+  "total_shares": 1713105208.0
+ },
+ "002475": {
+  "name": "立讯精密",
+  "industry": "消费电子",
+  "region": "广东板块",
+  "float_shares": 7327535288.0,
+  "float_mv": 396419659080.8,
+  "total_shares": 7740279792.0
+ },
+ "002493": {
+  "name": "荣盛石化",
+  "industry": "炼化及贸易",
+  "region": "浙江板块",
+  "float_shares": 9362198504.0,
+  "float_mv": 120304250776.4,
+  "total_shares": 9989442254.0
+ },
+ "002532": {
+  "name": "天山铝业",
+  "industry": "工业金属",
+  "region": "新疆板块",
+  "float_shares": 4106857452.0,
+  "float_mv": 52608843960.12,
+  "total_shares": 4628737415.0
+ },
+ "002558": {
+  "name": "巨人网络",
+  "industry": "游戏Ⅱ",
+  "region": "重庆板块",
+  "float_shares": 1900554471.0,
+  "float_mv": 47456845140.869995,
+  "total_shares": 1900561971.0
+ },
+ "002594": {
+  "name": "比亚迪",
+  "industry": "乘用车",
+  "region": "广东板块",
+  "float_shares": 3487068722.0,
+  "float_mv": 293959893264.6,
+  "total_shares": 9117197565.0
+ },
+ "002600": {
+  "name": "领益智造",
+  "industry": "消费电子",
+  "region": "广东板块",
+  "float_shares": 7200000669.0,
+  "float_mv": 90576008416.02,
+  "total_shares": 8120306431.0
+ },
+ "002602": {
+  "name": "世纪华通",
+  "industry": "游戏Ⅱ",
+  "region": "浙江板块",
+  "float_shares": 6796829127.0,
+  "float_mv": 99845419875.62999,
+  "total_shares": 7370682322.0
+ },
+ "002625": {
+  "name": "光启技术",
+  "industry": "航空装备Ⅱ",
+  "region": "广东板块",
+  "float_shares": 2154572262.0,
+  "float_mv": 59466194431.200005,
+  "total_shares": 2154587862.0
+ },
+ "002648": {
+  "name": "卫星化学",
+  "industry": "化学原料",
+  "region": "浙江板块",
+  "float_shares": 3366482485.0,
+  "float_mv": 89582098925.84999,
+  "total_shares": 3368645690.0
+ },
+ "002709": {
+  "name": "天赐材料",
+  "industry": "电池",
+  "region": "广东板块",
+  "float_shares": 1509011019.0,
+  "float_mv": 50340607593.84,
+  "total_shares": 2038561744.0
+ },
+ "002714": {
+  "name": "牧原股份",
+  "industry": "养殖业",
+  "region": "河南板块",
+  "float_shares": 3280499320.0,
+  "float_mv": 135648646882.0,
+  "total_shares": 5772996144.0
+ },
+ "002736": {
+  "name": "国信证券",
+  "industry": "证券Ⅱ",
+  "region": "广东板块",
+  "float_shares": 10241743060.0,
+  "float_mv": 100573916849.2,
+  "total_shares": 10241743060.0
+ },
+ "002837": {
+  "name": "英维克",
+  "industry": "专用设备",
+  "region": "广东板块",
+  "float_shares": 1134937948.0,
+  "float_mv": 71818873349.44,
+  "total_shares": 1278829492.0
+ },
+ "002916": {
+  "name": "深南电路",
+  "industry": "元件",
+  "region": "广东板块",
+  "float_shares": 664809450.0,
+  "float_mv": 255619233525.0,
+  "total_shares": 681166595.0
+ },
+ "002920": {
+  "name": "德赛西威",
+  "industry": "汽车零部件",
+  "region": "广东板块",
+  "float_shares": 596621794.0,
+  "float_mv": 50551764605.62,
+  "total_shares": 596809294.0
+ },
+ "002938": {
+  "name": "鹏鼎控股",
+  "industry": "元件",
+  "region": "广东板块",
+  "float_shares": 2310826265.0,
+  "float_mv": 207697064698.19998,
+  "total_shares": 2317536658.0
+ },
+ "003816": {
+  "name": "中国广核",
+  "industry": "电力",
+  "region": "广东板块",
+  "float_shares": 39335199032.0,
+  "float_mv": 166781243895.68002,
+  "total_shares": 50498824032.0
+ },
+ "300014": {
+  "name": "亿纬锂能",
+  "industry": "电池",
+  "region": "广东板块",
+  "float_shares": 2112982103.0,
+  "float_mv": 108945357230.68001,
+  "total_shares": 2173296935.0
+ },
+ "300015": {
+  "name": "爱尔眼科",
+  "industry": "医疗服务",
+  "region": "湖南板块",
+  "float_shares": 7957892308.0,
+  "float_mv": 63981454156.31999,
+  "total_shares": 9299564734.0
+ },
+ "300033": {
+  "name": "同花顺",
+  "industry": "软件开发",
+  "region": "浙江板块",
+  "float_shares": 438409939.0,
+  "float_mv": 90838539360.79999,
+  "total_shares": 752640000.0
+ },
+ "300059": {
+  "name": "东方财富",
+  "industry": "证券Ⅱ",
+  "region": "上海板块",
+  "float_shares": 13392365708.0,
+  "float_mv": 246017758055.96002,
+  "total_shares": 15822199875.0
+ },
+ "300122": {
+  "name": "智飞生物",
+  "industry": "生物制品",
+  "region": "重庆板块",
+  "float_shares": 1414306248.0,
+  "float_mv": 18032404662.0,
+  "total_shares": 2393789747.0
+ },
+ "300124": {
+  "name": "汇川技术",
+  "industry": "自动化设备",
+  "region": "广东板块",
+  "float_shares": 2412251079.0,
+  "float_mv": 126522569093.55,
+  "total_shares": 2709540303.0
+ },
+ "300251": {
+  "name": "光线传媒",
+  "industry": "影视院线",
+  "region": "北京板块",
+  "float_shares": 2753141609.0,
+  "float_mv": 30504809027.72,
+  "total_shares": 2933588432.0
+ },
+ "300274": {
+  "name": "阳光电源",
+  "industry": "光伏设备",
+  "region": "安徽板块",
+  "float_shares": 1587526674.0,
+  "float_mv": 139527719377.86002,
+  "total_shares": 2073211424.0
+ },
+ "300308": {
+  "name": "中际旭创",
+  "industry": "通信设备",
+  "region": "山东板块",
+  "float_shares": 1109937003.0,
+  "float_mv": 1028278937689.2899,
+  "total_shares": 1177909641.0
+ },
+ "300316": {
+  "name": "晶盛机电",
+  "industry": "光伏设备",
+  "region": "浙江板块",
+  "float_shares": 1231555433.0,
+  "float_mv": 52612048097.76,
+  "total_shares": 1309533797.0
+ },
+ "300394": {
+  "name": "天孚通信",
+  "industry": "通信设备",
+  "region": "江苏板块",
+  "float_shares": 1088388049.0,
+  "float_mv": 309820542028.34,
+  "total_shares": 1090825093.0
+ },
+ "300408": {
+  "name": "三环集团",
+  "industry": "元件",
+  "region": "广东板块",
+  "float_shares": 1869806217.0,
+  "float_mv": 244869822178.32,
+  "total_shares": 1996718571.0
+ },
+ "300413": {
+  "name": "芒果超媒",
+  "industry": "数字媒体",
+  "region": "湖南板块",
+  "float_shares": 1021699958.0,
+  "float_mv": 18472335240.64,
+  "total_shares": 1870720815.0
+ },
+ "300418": {
+  "name": "昆仑万维",
+  "industry": "数字媒体",
+  "region": "北京板块",
+  "float_shares": 1174457697.0,
+  "float_mv": 51429502551.63,
+  "total_shares": 1285034715.0
+ },
+ "300433": {
+  "name": "蓝思科技",
+  "industry": "消费电子",
+  "region": "湖南板块",
+  "float_shares": 4951837995.0,
+  "float_mv": 165787536072.59998,
+  "total_shares": 5278740870.0
+ },
+ "300442": {
+  "name": "润泽科技",
+  "industry": "通信服务",
+  "region": "河北板块",
+  "float_shares": 1636228373.0,
+  "float_mv": 103556893727.17,
+  "total_shares": 1641041973.0
+ },
+ "300450": {
+  "name": "先导智能",
+  "industry": "电池",
+  "region": "江苏板块",
+  "float_shares": 1559413913.0,
+  "float_mv": 50727734589.89,
+  "total_shares": 1674221434.0
+ },
+ "300476": {
+  "name": "胜宏科技",
+  "industry": "元件",
+  "region": "广东板块",
+  "float_shares": 865194945.0,
+  "float_mv": 196442512262.25,
+  "total_shares": 982784813.0
+ },
+ "300498": {
+  "name": "温氏股份",
+  "industry": "养殖业",
+  "region": "广东板块",
+  "float_shares": 5945879969.0,
+  "float_mv": 87939564741.51,
+  "total_shares": 6653929305.0
+ },
+ "300502": {
+  "name": "新易盛",
+  "industry": "通信设备",
+  "region": "四川板块",
+  "float_shares": 1254723748.0,
+  "float_mv": 558352067860.0,
+  "total_shares": 1394737276.0
+ },
+ "300628": {
+  "name": "亿联网络",
+  "industry": "通信设备",
+  "region": "福建板块",
+  "float_shares": 725870698.0,
+  "float_mv": 30094599139.08,
+  "total_shares": 1266918377.0
+ },
+ "300661": {
+  "name": "圣邦股份",
+  "industry": "半导体",
+  "region": "北京板块",
+  "float_shares": 601887527.0,
+  "float_mv": 75314186253.51,
+  "total_shares": 685634253.0
+ },
+ "300750": {
+  "name": "宁德时代",
+  "industry": "电池",
+  "region": "福建板块",
+  "float_shares": 4260601929.0,
+  "float_mv": 1286488752461.55,
+  "total_shares": 4627234532.0
+ },
+ "300760": {
+  "name": "迈瑞医疗",
+  "industry": "医疗器械",
+  "region": "广东板块",
+  "float_shares": 1210662145.0,
+  "float_mv": 189916570686.15,
+  "total_shares": 1211799431.0
+ },
+ "300803": {
+  "name": "指南针",
+  "industry": "软件开发",
+  "region": "北京板块",
+  "float_shares": 611879416.0,
+  "float_mv": 50174112112.0,
+  "total_shares": 616536061.0
+ },
+ "300832": {
+  "name": "新产业",
+  "industry": "医疗器械",
+  "region": "广东板块",
+  "float_shares": 683092288.0,
+  "float_mv": 33430536574.719997,
+  "total_shares": 785718785.0
+ },
+ "300866": {
+  "name": "安克创新",
+  "industry": "消费电子",
+  "region": "湖南板块",
+  "float_shares": 310662807.0,
+  "float_mv": 39451069860.93,
+  "total_shares": 589432137.0
+ },
+ "300896": {
+  "name": "爱美客",
+  "industry": "医疗美容",
+  "region": "北京板块",
+  "float_shares": 221012302.0,
+  "float_mv": 19773970659.94,
+  "total_shares": 302592061.0
+ },
+ "300999": {
+  "name": "金龙鱼",
+  "industry": "农产品加工",
+  "region": "上海板块",
+  "float_shares": 542647097.0,
+  "float_mv": 13566177425.0,
+  "total_shares": 5421591536.0
+ },
+ "301165": {
+  "name": "锐捷网络",
+  "industry": "通信设备",
+  "region": "福建板块",
+  "float_shares": 1113636363.0,
+  "float_mv": 130907954470.65,
+  "total_shares": 1113636363.0
+ },
+ "301236": {
+  "name": "软通动力",
+  "industry": "IT服务Ⅱ",
+  "region": "北京板块",
+  "float_shares": 867957357.0,
+  "float_mv": 32105742635.43,
+  "total_shares": 1035189280.0
+ },
+ "301269": {
+  "name": "华大九天",
+  "industry": "软件开发",
+  "region": "北京板块",
+  "float_shares": 547872923.0,
+  "float_mv": 48733296500.85,
+  "total_shares": 547874648.0
+ },
+ "301308": {
+  "name": "江波龙",
+  "industry": "半导体",
+  "region": "广东板块",
+  "float_shares": 281851892.0,
+  "float_mv": 97791332448.31999,
+  "total_shares": 459657599.0
+ },
+ "302132": {
+  "name": "中航成飞",
+  "industry": "航空装备Ⅱ",
+  "region": "陕西板块",
+  "float_shares": 586069499.0,
+  "float_mv": 34660150170.86,
+  "total_shares": 2672091376.0
+ },
+ "600000": {
+  "name": "浦发银行",
+  "industry": "银行Ⅱ",
+  "region": "上海板块",
+  "float_shares": 33305838300.0,
+  "float_mv": 302083953381.0,
+  "total_shares": 33305838300.0
+ },
+ "600009": {
+  "name": "上海机场",
+  "industry": "航空机场",
+  "region": "上海板块",
+  "float_shares": 2480218840.0,
+  "float_mv": 56251363291.2,
+  "total_shares": 2488313040.0
+ },
+ "600010": {
+  "name": "包钢股份",
+  "industry": "普钢",
+  "region": "内蒙古",
+  "float_shares": 31318211887.0,
+  "float_mv": 66394609200.44,
+  "total_shares": 45226032948.0
+ },
+ "600011": {
+  "name": "华能国际",
+  "industry": "电力",
+  "region": "河北板块",
+  "float_shares": 10997709919.0,
+  "float_mv": 74784427449.2,
+  "total_shares": 15698093359.0
+ },
+ "600015": {
+  "name": "华夏银行",
+  "industry": "银行Ⅱ",
+  "region": "北京板块",
+  "float_shares": 15387223983.0,
+  "float_mv": 95862405414.09001,
+  "total_shares": 15914928468.0
+ },
+ "600016": {
+  "name": "民生银行",
+  "industry": "银行Ⅱ",
+  "region": "北京板块",
+  "float_shares": 35462123213.0,
+  "float_mv": 122698946316.98,
+  "total_shares": 43782418502.0
+ },
+ "600018": {
+  "name": "上港集团",
+  "industry": "航运港口",
+  "region": "上海板块",
+  "float_shares": 23278320278.0,
+  "float_mv": 124771796690.08,
+  "total_shares": 23279960504.0
+ },
+ "600019": {
+  "name": "宝钢股份",
+  "industry": "普钢",
+  "region": "上海板块",
+  "float_shares": 21414095749.0,
+  "float_mv": 123345191514.23999,
+  "total_shares": 21782084749.0
+ },
+ "600023": {
+  "name": "浙能电力",
+  "industry": "电力",
+  "region": "浙江板块",
+  "float_shares": 13408732749.0,
+  "float_mv": 68116362364.92,
+  "total_shares": 13408732749.0
+ },
+ "600025": {
+  "name": "华能水电",
+  "industry": "电力",
+  "region": "云南板块",
+  "float_shares": 18631094257.0,
+  "float_mv": 180348992407.76,
+  "total_shares": 18631094257.0
+ },
+ "600026": {
+  "name": "中远海能",
+  "industry": "航运港口",
+  "region": "上海板块",
+  "float_shares": 3827991956.0,
+  "float_mv": 84483782468.92,
+  "total_shares": 5471214178.0
+ },
+ "600027": {
+  "name": "华电国际",
+  "industry": "电力",
+  "region": "山东板块",
+  "float_shares": 9215677327.0,
+  "float_mv": 44327407942.869995,
+  "total_shares": 11611774184.0
+ },
+ "600028": {
+  "name": "中国石化",
+  "industry": "炼化及贸易",
+  "region": "北京板块",
+  "float_shares": 94648218325.0,
+  "float_mv": 488384806557.0,
+  "total_shares": 120714479172.0
+ },
+ "600029": {
+  "name": "南方航空",
+  "industry": "航空机场",
+  "region": "广东板块",
+  "float_shares": 13476973184.0,
+  "float_mv": 66441477797.119995,
+  "total_shares": 18120970492.0
+ },
+ "600030": {
+  "name": "中信证券",
+  "industry": "证券Ⅱ",
+  "region": "广东板块",
+  "float_shares": 12176550974.0,
+  "float_mv": 323165662849.95996,
+  "total_shares": 15624272212.0
+ },
+ "600031": {
+  "name": "三一重工",
+  "industry": "工程机械",
+  "region": "北京板块",
+  "float_shares": 8474390037.0,
+  "float_mv": 151606837761.93,
+  "total_shares": 9195004437.0
+ },
+ "600036": {
+  "name": "招商银行",
+  "industry": "银行Ⅱ",
+  "region": "广东板块",
+  "float_shares": 20628944429.0,
+  "float_mv": 837328854373.1101,
+  "total_shares": 25219845601.0
+ },
+ "600039": {
+  "name": "四川路桥",
+  "industry": "基础建设",
+  "region": "四川板块",
+  "float_shares": 8695590645.0,
+  "float_mv": 75738594517.95001,
+  "total_shares": 8695590645.0
+ },
+ "600048": {
+  "name": "保利发展",
+  "industry": "房地产开发",
+  "region": "广东板块",
+  "float_shares": 11970443418.0,
+  "float_mv": 63682758983.76,
+  "total_shares": 11970443418.0
+ },
+ "600050": {
+  "name": "中国联通",
+  "industry": "通信服务",
+  "region": "北京板块",
+  "float_shares": 30990409152.0,
+  "float_mv": 130779526621.43999,
+  "total_shares": 31264425327.0
+ },
+ "600061": {
+  "name": "国投资本",
+  "industry": "多元金融",
+  "region": "上海板块",
+  "float_shares": 6394097773.0,
+  "float_mv": 39835229125.79,
+  "total_shares": 6394097773.0
+ },
+ "600066": {
+  "name": "宇通客车",
+  "industry": "商用车",
+  "region": "河南板块",
+  "float_shares": 2213939223.0,
+  "float_mv": 57584559190.23,
+  "total_shares": 2213939223.0
+ },
+ "600085": {
+  "name": "同仁堂",
+  "industry": "中药Ⅱ",
+  "region": "北京板块",
+  "float_shares": 1371470262.0,
+  "float_mv": 31845539483.64,
+  "total_shares": 1371470262.0
+ },
+ "600089": {
+  "name": "特变电工",
+  "industry": "电网设备",
+  "region": "新疆板块",
+  "float_shares": 5052792571.0,
+  "float_mv": 91607129312.23,
+  "total_shares": 5052792571.0
+ },
+ "600104": {
+  "name": "上汽集团",
+  "industry": "乘用车",
+  "region": "上海板块",
+  "float_shares": 11495277504.0,
+  "float_mv": 127597580294.4,
+  "total_shares": 11495277504.0
+ },
+ "600111": {
+  "name": "北方稀土",
+  "industry": "小金属",
+  "region": "内蒙古",
+  "float_shares": 3615065842.0,
+  "float_mv": 133251326936.12,
+  "total_shares": 3615065842.0
+ },
+ "600115": {
+  "name": "中国东航",
+  "industry": "航空机场",
+  "region": "上海板块",
+  "float_shares": 17024964893.0,
+  "float_mv": 58055130285.130005,
+  "total_shares": 22087736670.0
+ },
+ "600118": {
+  "name": "中国卫星",
+  "industry": "航天装备Ⅱ",
+  "region": "北京板块",
+  "float_shares": 1182489135.0,
+  "float_mv": 70476352446.0,
+  "total_shares": 1182489135.0
+ },
+ "600150": {
+  "name": "中国船舶",
+  "industry": "航海装备Ⅱ",
+  "region": "上海板块",
+  "float_shares": 7525621288.0,
+  "float_mv": 297036272237.36,
+  "total_shares": 7525621288.0
+ },
+ "600160": {
+  "name": "巨化股份",
+  "industry": "化学制品",
+  "region": "浙江板块",
+  "float_shares": 2699746081.0,
+  "float_mv": 93789178853.94,
+  "total_shares": 2699746081.0
+ },
+ "600176": {
+  "name": "中国巨石",
+  "industry": "玻璃玻纤",
+  "region": "浙江板块",
+  "float_shares": 3971587028.0,
+  "float_mv": 178800848000.56,
+  "total_shares": 4003136728.0
+ },
+ "600183": {
+  "name": "生益科技",
+  "industry": "元件",
+  "region": "广东板块",
+  "float_shares": 2411748857.0,
+  "float_mv": 347123012988.01,
+  "total_shares": 2429003670.0
+ },
+ "600188": {
+  "name": "兖矿能源",
+  "industry": "煤炭开采",
+  "region": "山东板块",
+  "float_shares": 5961352020.0,
+  "float_mv": 117319407753.59999,
+  "total_shares": 10036852020.0
+ },
+ "600196": {
+  "name": "复星医药",
+  "industry": "化学制药",
+  "region": "上海板块",
+  "float_shares": 2118488825.0,
+  "float_mv": 46670308814.75,
+  "total_shares": 2670429325.0
+ },
+ "600219": {
+  "name": "南山铝业",
+  "industry": "工业金属",
+  "region": "山东板块",
+  "float_shares": 11483701559.0,
+  "float_mv": 54892093452.020004,
+  "total_shares": 11483701559.0
+ },
+ "600221": {
+  "name": "海航控股",
+  "industry": "航空机场",
+  "region": "海南板块",
+  "float_shares": 42845514933.0,
+  "float_mv": 53128438516.92,
+  "total_shares": 43215632535.0
+ },
+ "600233": {
+  "name": "圆通速递",
+  "industry": "物流",
+  "region": "辽宁板块",
+  "float_shares": 3425113538.0,
+  "float_mv": 62782331151.53999,
+  "total_shares": 3425113538.0
+ },
+ "600276": {
+  "name": "恒瑞医药",
+  "industry": "化学制药",
+  "region": "江苏板块",
+  "float_shares": 6379002274.0,
+  "float_mv": 280101989851.33997,
+  "total_shares": 6637199874.0
+ },
+ "600309": {
+  "name": "万华化学",
+  "industry": "化学制品",
+  "region": "山东板块",
+  "float_shares": 3130471626.0,
+  "float_mv": 222733056189.90002,
+  "total_shares": 3130471626.0
+ },
+ "600346": {
+  "name": "恒力石化",
+  "industry": "炼化及贸易",
+  "region": "辽宁板块",
+  "float_shares": 7039099786.0,
+  "float_mv": 115582018486.12001,
+  "total_shares": 7039099786.0
+ },
+ "600362": {
+  "name": "江西铜业",
+  "industry": "工业金属",
+  "region": "江西板块",
+  "float_shares": 2075247405.0,
+  "float_mv": 91373143242.15001,
+  "total_shares": 3462729405.0
+ },
+ "600372": {
+  "name": "中航机载",
+  "industry": "航空装备Ⅱ",
+  "region": "北京板块",
+  "float_shares": 4838896630.0,
+  "float_mv": 55211810548.3,
+  "total_shares": 4838896630.0
+ },
+ "600406": {
+  "name": "国电南瑞",
+  "industry": "电网设备",
+  "region": "江苏板块",
+  "float_shares": 8008176162.0,
+  "float_mv": 176580284372.1,
+  "total_shares": 8031756156.0
+ },
+ "600415": {
+  "name": "小商品城",
+  "industry": "一般零售",
+  "region": "浙江板块",
+  "float_shares": 5483559226.0,
+  "float_mv": 64815670051.32,
+  "total_shares": 5483559226.0
+ },
+ "600426": {
+  "name": "华鲁恒升",
+  "industry": "农化制品",
+  "region": "山东板块",
+  "float_shares": 2749579013.0,
+  "float_mv": 53534303383.11,
+  "total_shares": 2749943015.0
+ },
+ "600436": {
+  "name": "片仔癀",
+  "industry": "中药Ⅱ",
+  "region": "福建板块",
+  "float_shares": 603317210.0,
+  "float_mv": 71378459115.1,
+  "total_shares": 603317210.0
+ },
+ "600438": {
+  "name": "通威股份",
+  "industry": "光伏设备",
+  "region": "四川板块",
+  "float_shares": 4501990940.0,
+  "float_mv": 51097597169.0,
+  "total_shares": 4501990940.0
+ },
+ "600460": {
+  "name": "士兰微",
+  "industry": "半导体",
+  "region": "浙江板块",
+  "float_shares": 1664071845.0,
+  "float_mv": 54531634360.65,
+  "total_shares": 1664071845.0
+ },
+ "600482": {
+  "name": "中国动力",
+  "industry": "其他电源设备Ⅱ",
+  "region": "河北板块",
+  "float_shares": 2268246368.0,
+  "float_mv": 77006964193.6,
+  "total_shares": 2268246368.0
+ },
+ "600489": {
+  "name": "中金黄金",
+  "industry": "贵金属",
+  "region": "北京板块",
+  "float_shares": 4847312564.0,
+  "float_mv": 116577867164.2,
+  "total_shares": 4847312564.0
+ },
+ "600515": {
+  "name": "海南机场",
+  "industry": "航空机场",
+  "region": "海南板块",
+  "float_shares": 9176012508.0,
+  "float_mv": 25234034397.0,
+  "total_shares": 11425309602.0
+ },
+ "600519": {
+  "name": "贵州茅台",
+  "industry": "白酒Ⅱ",
+  "region": "贵州板块",
+  "float_shares": 1250081601.0,
+  "float_mv": 1571502582249.1199,
+  "total_shares": 1250081601.0
+ },
+ "600522": {
+  "name": "中天科技",
+  "industry": "通信设备",
+  "region": "江苏板块",
+  "float_shares": 3412949652.0,
+  "float_mv": 122797928478.95999,
+  "total_shares": 3412949652.0
+ },
+ "600547": {
+  "name": "山东黄金",
+  "industry": "贵金属",
+  "region": "山东板块",
+  "float_shares": 3614443347.0,
+  "float_mv": 118445308481.19002,
+  "total_shares": 4609929525.0
+ },
+ "600549": {
+  "name": "厦门钨业",
+  "industry": "小金属",
+  "region": "福建板块",
+  "float_shares": 1553931980.0,
+  "float_mv": 78458025670.2,
+  "total_shares": 1587585826.0
+ },
+ "600570": {
+  "name": "恒生电子",
+  "industry": "软件开发",
+  "region": "浙江板块",
+  "float_shares": 1893647942.0,
+  "float_mv": 38157006031.299995,
+  "total_shares": 1893647942.0
+ },
+ "600584": {
+  "name": "长电科技",
+  "industry": "半导体",
+  "region": "江苏板块",
+  "float_shares": 1789414570.0,
+  "float_mv": 130627263610.0,
+  "total_shares": 1789414570.0
+ },
+ "600585": {
+  "name": "海螺水泥",
+  "industry": "水泥",
+  "region": "安徽板块",
+  "float_shares": 3977460044.0,
+  "float_mv": 67696369948.88,
+  "total_shares": 5277060044.0
+ },
+ "600588": {
+  "name": "用友网络",
+  "industry": "软件开发",
+  "region": "北京板块",
+  "float_shares": 3416997409.0,
+  "float_mv": 32324795489.140003,
+  "total_shares": 3416997409.0
+ },
+ "600600": {
+  "name": "青岛啤酒",
+  "industry": "非白酒",
+  "region": "山东板块",
+  "float_shares": 709125943.0,
+  "float_mv": 35498844706.58,
+  "total_shares": 1364195121.0
+ },
+ "600660": {
+  "name": "福耀玻璃",
+  "industry": "汽车零部件",
+  "region": "福建板块",
+  "float_shares": 2002986332.0,
+  "float_mv": 107520306301.76,
+  "total_shares": 2609743532.0
+ },
+ "600674": {
+  "name": "川投能源",
+  "industry": "电力",
+  "region": "四川板块",
+  "float_shares": 4874606828.0,
+  "float_mv": 76823803609.28,
+  "total_shares": 4874606828.0
+ },
+ "600690": {
+  "name": "海尔智家",
+  "industry": "白色家电",
+  "region": "山东板块",
+  "float_shares": 6178486925.0,
+  "float_mv": 127771109609.0,
+  "total_shares": 9303088164.0
+ },
+ "600741": {
+  "name": "华域汽车",
+  "industry": "汽车零部件",
+  "region": "上海板块",
+  "float_shares": 3152723984.0,
+  "float_mv": 46912532881.920006,
+  "total_shares": 3152723984.0
+ },
+ "600760": {
+  "name": "中航沈飞",
+  "industry": "航空装备Ⅱ",
+  "region": "山东板块",
+  "float_shares": 2829552651.0,
+  "float_mv": 124217361378.9,
+  "total_shares": 2834929431.0
+ },
+ "600795": {
+  "name": "国电电力",
+  "industry": "电力",
+  "region": "辽宁板块",
+  "float_shares": 17835619082.0,
+  "float_mv": 93815356371.31999,
+  "total_shares": 17835619082.0
+ },
+ "600803": {
+  "name": "新奥股份",
+  "industry": "燃气Ⅱ",
+  "region": "河北板块",
+  "float_shares": 3071726707.0,
+  "float_mv": 57349137619.69,
+  "total_shares": 3095185107.0
+ },
+ "600809": {
+  "name": "山西汾酒",
+  "industry": "白酒Ⅱ",
+  "region": "山西板块",
+  "float_shares": 1219964222.0,
+  "float_mv": 137489967819.4,
+  "total_shares": 1219964222.0
+ },
+ "600845": {
+  "name": "宝信软件",
+  "industry": "IT服务Ⅱ",
+  "region": "上海板块",
+  "float_shares": 2134054153.0,
+  "float_mv": 38348953129.409996,
+  "total_shares": 2857904137.0
+ },
+ "600875": {
+  "name": "东方电气",
+  "industry": "其他电源设备Ⅱ",
+  "region": "四川板块",
+  "float_shares": 2263366595.0,
+  "float_mv": 55271412249.9,
+  "total_shares": 3458360326.0
+ },
+ "600886": {
+  "name": "国投电力",
+  "industry": "电力",
+  "region": "北京板块",
+  "float_shares": 7454179797.0,
+  "float_mv": 106594771097.1,
+  "total_shares": 8004494262.0
+ },
+ "600887": {
+  "name": "伊利股份",
+  "industry": "饮料乳品",
+  "region": "内蒙古",
+  "float_shares": 6293929721.0,
+  "float_mv": 167418530578.6,
+  "total_shares": 6325360667.0
+ },
+ "600893": {
+  "name": "航发动力",
+  "industry": "航空装备Ⅱ",
+  "region": "陕西板块",
+  "float_shares": 2665124758.0,
+  "float_mv": 104446239266.01999,
+  "total_shares": 2665594238.0
+ },
+ "600900": {
+  "name": "长江电力",
+  "industry": "电力",
+  "region": "北京板块",
+  "float_shares": 24468217716.0,
+  "float_mv": 691716514831.32,
+  "total_shares": 24468217716.0
+ },
+ "600905": {
+  "name": "三峡能源",
+  "industry": "电力",
+  "region": "北京板块",
+  "float_shares": 28587650142.0,
+  "float_mv": 104344923018.3,
+  "total_shares": 28587650142.0
+ },
+ "600918": {
+  "name": "中泰证券",
+  "industry": "证券Ⅱ",
+  "region": "山东板块",
+  "float_shares": 4562824063.0,
+  "float_mv": 24867391143.350002,
+  "total_shares": 7918340996.0
+ },
+ "600919": {
+  "name": "江苏银行",
+  "industry": "银行Ⅱ",
+  "region": "江苏板块",
+  "float_shares": 18351324463.0,
+  "float_mv": 223335618714.71,
+  "total_shares": 18351324463.0
+ },
+ "600926": {
+  "name": "杭州银行",
+  "industry": "银行Ⅱ",
+  "region": "浙江板块",
+  "float_shares": 7249002548.0,
+  "float_mv": 124247903672.72,
+  "total_shares": 7249002548.0
+ },
+ "600930": {
+  "name": "华电新能",
+  "industry": "电力",
+  "region": "福建板块",
+  "float_shares": 10743195436.0,
+  "float_mv": 42650485880.920006,
+  "total_shares": 41714285714.0
+ },
+ "600938": {
+  "name": "中国海油",
+  "industry": "油气开采Ⅱ",
+  "region": "",
+  "float_shares": 2990000000.0,
+  "float_mv": 96576999999.99998,
+  "total_shares": 47529953984.0
+ },
+ "600941": {
+  "name": "中国移动",
+  "industry": "通信服务",
+  "region": "",
+  "float_shares": 902767867.0,
+  "float_mv": 87234458988.20999,
+  "total_shares": 21690937654.0
+ },
+ "600958": {
+  "name": "东方证券",
+  "industry": "证券Ⅱ",
+  "region": "上海板块",
+  "float_shares": 7469482864.0,
+  "float_mv": 65955533689.12,
+  "total_shares": 8496645292.0
+ },
+ "600989": {
+  "name": "宝丰能源",
+  "industry": "化学原料",
+  "region": "宁夏板块",
+  "float_shares": 7333360000.0,
+  "float_mv": 172993962400.0,
+  "total_shares": 7333360000.0
+ },
+ "600999": {
+  "name": "招商证券",
+  "industry": "证券Ⅱ",
+  "region": "广东板块",
+  "float_shares": 7422005272.0,
+  "float_mv": 130553072734.48,
+  "total_shares": 8696526806.0
+ },
+ "601006": {
+  "name": "大秦铁路",
+  "industry": "铁路公路",
+  "region": "山西板块",
+  "float_shares": 19862892778.0,
+  "float_mv": 93355596056.6,
+  "total_shares": 19862892778.0
+ },
+ "601009": {
+  "name": "南京银行",
+  "industry": "银行Ⅱ",
+  "region": "江苏板块",
+  "float_shares": 12363567245.0,
+  "float_mv": 145890093491.0,
+  "total_shares": 12363567245.0
+ }
+}
