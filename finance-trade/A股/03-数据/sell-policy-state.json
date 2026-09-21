@@ -14,7 +14,7 @@
    "protection_active": false,
    "hard_stop": 41.82,
    "profit_line": 0.0,
-   "quote_time": "20260917100902",
+   "quote_time": "20260921094825",
    "quote_valid": true,
    "quote_note": "",
    "actual_cost": 44.49,
@@ -24,10 +24,34 @@
    "migrated": false,
    "migration_note": "",
    "created_at": "2026-09-16T09:55:37"
+  },
+  "sh600988": {
+   "lifecycle_id": "LC-sh600988-2026-09-21",
+   "code": "sh600988",
+   "name": "赤峰黄金",
+   "cost": 44.19,
+   "total_qty": 100,
+   "sellable_qty": 100,
+   "today_new_qty": 0,
+   "peak_h": 44.3,
+   "peak_h_time": "20260921094825",
+   "protection_active": false,
+   "hard_stop": 41.54,
+   "profit_line": 0.0,
+   "quote_time": "20260921094825",
+   "quote_valid": true,
+   "quote_note": "",
+   "actual_cost": 44.19,
+   "pending_exit": null,
+   "fired_events": {},
+   "add_log": [],
+   "migrated": false,
+   "migration_note": "",
+   "created_at": "2026-09-21T09:48:01"
   }
  },
- "updated_at": "2026-09-17T10:09:07",
+ "updated_at": "2026-09-21T09:48:26",
  "roll_meta": {
-  "last_roll_date": "2026-09-17"
+  "last_roll_date": "2026-09-21"
  }
 }
