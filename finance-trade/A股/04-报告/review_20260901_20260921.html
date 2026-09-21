@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>复盘明细 · 2026-09-01 ~ 09-21 · 实盘操作 vs BUY-LOW-v1</title>
+<style>
+  :root{
+    --green:#0A7A5E; --neon:#00E47C; --light:#b8f5d4; --warm:#FAF9F8;
+    --ink:#333; --muted:#6b6b6b; --line:#e6e6e6; --red:#c0392b; --amber:#b8860b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:32px 20px 64px; background:#FFFFFF; color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:15px; line-height:1.72;
+  }
+  .wrap{max-width:1180px;margin:0 auto;}
+  header{border-bottom:3px solid var(--green);padding-bottom:18px;margin-bottom:28px;}
+  h1{font-size:26px;margin:0 0 8px;color:var(--green);letter-spacing:.3px;}
+  .sub{color:var(--muted);font-size:13.5px;}
+  h2{font-size:19px;color:var(--green);margin:40px 0 14px;padding-left:11px;border-left:5px solid var(--neon);}
+  h3{font-size:16px;color:var(--green);margin:26px 0 10px;}
+  .hero{
+    background:var(--warm);border:1px solid var(--line);border-left:6px solid var(--neon);
+    border-radius:8px;padding:20px 24px;margin:22px 0 30px;
+  }
+  .hero .big{font-size:19px;font-weight:700;color:var(--green);line-height:1.6;margin:0 0 6px;}
+  .hero .note{font-size:13.5px;color:var(--muted);margin:8px 0 0;}
+  table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:13.5px;}
+  th{background:var(--green);color:#fff;text-align:left;padding:10px 11px;font-weight:600;white-space:nowrap;}
+  td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tr:nth-child(even) td{background:var(--warm);}
+  .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .bad{color:var(--red);font-weight:600;}
+  .good{color:var(--green);font-weight:600;}
+  .warn{color:var(--amber);font-weight:600;}
+  .tag{display:inline-block;padding:1px 7px;border-radius:4px;font-size:11.5px;font-weight:600;line-height:1.7;}
+  .t-no{background:#fdecea;color:var(--red);}
+  .t-ok{background:var(--light);color:var(--green);}
+  .t-amber{background:#fdf5e3;color:var(--amber);}
+  .cards{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0 8px;}
+  .card{
+    flex:1 1 200px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--green);
+    border-radius:8px;padding:16px 18px;
+  }
+  .card .k{font-size:12.5px;color:var(--muted);margin-bottom:6px;}
+  .card .v{font-size:22px;font-weight:700;color:var(--green);font-variant-numeric:tabular-nums;}
+  .card.neg{border-top-color:var(--red);}
+  .card.neg .v{color:var(--red);}
+  code{background:var(--warm);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:12.5px;}
+  pre{
+    background:var(--warm);border:1px solid var(--line);border-radius:7px;padding:14px 16px;
+    overflow-x:auto;font-size:12.8px;line-height:1.65;margin:12px 0;
+  }
+  .rulebox{background:var(--warm);border:1px solid var(--line);border-radius:7px;padding:14px 18px;margin:12px 0 18px;font-size:13.5px;}
+  ul{margin:8px 0 14px;padding-left:22px;}
+  li{margin:5px 0;}
+  .foot{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);}
+  .hl{background:linear-gradient(transparent 62%, var(--light) 62%);font-weight:600;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>复盘明细 · 2026-09-01 ~ 09-21</h1>
+  <div class="sub">
+    实盘操作 vs <strong>BUY-LOW-v1-20260915</strong> 三条件逐日回放 ｜ 生成于 2026-09-21 ｜
+    标的：12 只自选股（自选口径）｜ 账户：国都证券 **5526
+  </div>
+</header>
+
+<div class="hero">
+  <p class="big">9/1 ~ 9/14 的 6 笔买入，BUY-LOW-v1 一笔都不会放行。<br>而这 6 笔构成本期全部已实现亏损。</p>
+  <p class="note">
+    已实现亏损 <strong class="bad">−955.14 元</strong>（7 笔已平仓）中，
+    <span class="hl">−1,075.5 元来自「规则不会放行的买入」</span>。
+    唯一符合规则的两笔买入（沈飞、赤峰）目前持有中。
+  </p>
+</div>
+
+<h2>一、三条件口径（回放所用）</h2>
+<div class="rulebox">
+  <strong>① 趋势</strong>：现价 &gt; MA60 且 MA60 &gt; 5 个交易日前 MA60<br>
+  <strong>② 位置</strong>：(H20 − 现价) / ATR14(Wilder) ∈ [2.5, 4.5]　　
+  <em>值越小＝离 20 日高点越近（追高区）</em><br>
+  <strong>③ 缩量</strong>：当日量 ÷ 前 5 日均量 &lt; 0.80
+  <div style="margin-top:9px;color:var(--muted);font-size:12.8px;">
+    ⚠️ 回放限制：③ 用「日线全天量比」近似线上的「同刻量比」；H20 已 <code>shift(1)</code> 防未来函数；时段限制（09:45–11:30）对日线回放不适用。
+  </div>
+</div>
+
+<h2>二、逐日回放：规则放行了什么</h2>
+<table>
+  <thead><tr>
+    <th>日期</th><th>三条件全满足</th><th>实盘操作</th><th style="width:150px;">一致性</th>
+  </tr></thead>
+  <tbody>
+    <tr><td>09-01</td><td>（无）</td><td>买星网锐捷 @40.59</td><td><span class="tag t-no">❌ 规则不放行</span></td></tr>
+    <tr><td>09-02</td><td>（无）</td><td>—</td><td>—</td></tr>
+    <tr><td>09-03</td><td>（无）</td><td>买紫光股份 @37.67</td><td><span class="tag t-no">❌ 规则不放行</span></td></tr>
+    <tr><td>09-04</td><td>（无）</td><td>—</td><td>—</td></tr>
+    <tr><td>09-07</td><td class="good">赤峰黄金 ✅</td><td>—</td><td><span class="tag t-amber">⚠️ 放行未买</span></td></tr>
+    <tr><td>09-08</td><td class="good">赤峰黄金 ✅</td><td>买云南铜业 200股 @18.31</td><td><span class="tag t-no">❌ 放行的是赤峰</span></td></tr>
+    <tr><td>09-09</td><td>（无）</td><td>—</td><td>—</td></tr>
+    <tr><td>09-10</td><td>（无）</td><td>买星网锐捷 @35.96</td><td><span class="tag t-no">❌ 规则不放行</span></td></tr>
+    <tr><td>09-11</td><td>（无）</td><td>加仓赤峰 @44.41</td><td><span class="tag t-no">❌ 规则不放行</span></td></tr>
+    <tr><td>09-14</td><td>（无）</td><td>买星网锐捷 @35.83</td><td><span class="tag t-no">❌ 量比0.80卡线</span></td></tr>
+    <tr><td>09-15</td><td class="good">中航沈飞 ✅</td><td>—</td><td><span class="tag t-amber">⚠️ 放行</span></td></tr>
+    <tr><td>09-16</td><td>（无）</td><td>买中航沈飞 @44.44</td><td><span class="tag t-amber">⚠️ 见口径说明</span></td></tr>
+    <tr><td>09-17</td><td class="good">中航沈飞 ✅</td><td>卖赤峰 @42.79 / 卖星网 @38.38</td><td>（卖出走 R8）</td></tr>
+    <tr><td>09-18</td><td>（无）</td><td>—</td><td>—</td></tr>
+    <tr><td>09-21</td><td class="good">赤峰黄金 ✅（监控推送）</td><td>买赤峰 @44.19</td><td><span class="tag t-ok">✅ 完全一致</span></td></tr>
+  </tbody>
+</table>
+
+<h2>三、逐笔明细（去重后 11 笔真实操作）</h2>
+<table>
+  <thead><tr>
+    <th>#</th><th>日期</th><th>操作</th><th>标的</th><th>价格</th><th>股数</th>
+    <th>BUY-LOW-v1 判定</th><th class="num">金额</th><th>说明</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>1</td><td>09-01 买</td><td>买入</td><td>星网锐捷 002396</td><td class="num">40.59</td><td class="num">100</td>
+      <td><span class="tag t-no">❌ 不符</span> ②值 0.23</td>
+      <td class="num bad">−212.00</td><td>9/2 卖 @38.47（−5.22%）｜8/31 涨停次日追入</td>
+    </tr>
+    <tr>
+      <td>2</td><td>09-03 买</td><td>买入</td><td>紫光股份 000938</td><td class="num">37.67</td><td class="num">100</td>
+      <td><span class="tag t-no">❌ 不符</span> ②值 1.57</td>
+      <td class="num bad">−227.00</td><td>9/4 卖 @35.40（−6.03%）｜旧「方案A回撤5%」口径</td>
+    </tr>
+    <tr>
+      <td>3</td><td>09-08 买</td><td>买入</td><td>云南铜业 000878</td><td class="num">18.31</td><td class="num">200</td>
+      <td><span class="tag t-no">❌ 不符</span> ②值 −0.20</td>
+      <td class="num bad">−220.00</td><td>9/11 卖 @17.21（−6.01%）｜②值为负＝已在 20 日高点之上 + 量比 1.71 放量</td>
+    </tr>
+    <tr>
+      <td>4</td><td>09-10 买</td><td>买入</td><td>星网锐捷 002396</td><td class="num">35.96</td><td class="num">100</td>
+      <td><span class="tag t-no">❌ 不符</span> ②值 2.29</td>
+      <td class="num bad">−216.00</td><td>9/11 卖 @33.80（−6.01%）｜差下限 0.21</td>
+    </tr>
+    <tr>
+      <td>5</td><td>09-11 买</td><td>加仓</td><td>赤峰黄金 600988</td><td class="num">44.41</td><td class="num">100</td>
+      <td><span class="tag t-no">❌ 不符</span> 量比 1.18</td>
+      <td class="num">—</td><td>①②满足、③放量｜并入下方卖出</td>
+    </tr>
+    <tr>
+      <td>6</td><td>09-14 买</td><td>买入</td><td>星网锐捷 002396</td><td class="num">35.83</td><td class="num">100</td>
+      <td><span class="tag t-no">❌ 不符</span> 量比 0.80</td>
+      <td class="num">—</td><td>量比恰好卡在阈值（规则要求 &lt;0.80）</td>
+    </tr>
+    <tr>
+      <td>7</td><td>09-16 卖</td><td>部分卖出</td><td>赤峰黄金 600988</td><td class="num">43.52</td><td class="num">100</td>
+      <td>主动减仓（非规则触发）</td>
+      <td class="num bad">−121.50</td><td>降集中度（−2.72%）</td>
+    </tr>
+    <tr>
+      <td>8</td><td>09-16 买</td><td>买入</td><td>中航沈飞 600760</td><td class="num">44.44</td><td class="num">100</td>
+      <td><span class="tag t-ok">✅ 符合</span></td>
+      <td class="num">持有中</td><td>监控 09:45:56 推送；退出线 41.82</td>
+    </tr>
+    <tr>
+      <td>9</td><td>09-17 卖</td><td>清仓</td><td>赤峰黄金 600988</td><td class="num">42.79</td><td class="num">100</td>
+      <td>R8 主动减仓</td>
+      <td class="num bad">−201.68</td><td>非规则触发（止损线 42.05，卖价高于线 0.74）</td>
+    </tr>
+    <tr>
+      <td>10</td><td>09-17 卖</td><td>清仓</td><td>星网锐捷 002396</td><td class="num">38.38</td><td class="num">100</td>
+      <td>R8 主动减仓</td>
+      <td class="num good">+243.04</td><td>9/16 涨停后兑现（+6.97%）</td>
+    </tr>
+    <tr>
+      <td>11</td><td>09-21 买</td><td>买入</td><td>赤峰黄金 600988</td><td class="num">44.19</td><td class="num">100</td>
+      <td><span class="tag t-ok">✅ 符合</span></td>
+      <td class="num">持有中</td><td>监控 09:45:26 推送；退出线 41.54</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>四、统计</h2>
+<div class="cards">
+  <div class="card neg"><div class="k">❌ 规则不会放行的买入</div><div class="v">5 笔</div><div class="k" style="margin-top:6px;">−1,075.5 元</div></div>
+  <div class="card"><div class="k">✅ 符合规则的买入</div><div class="v">2 笔</div><div class="k" style="margin-top:6px;">持有中（沈飞、赤峰）</div></div>
+  <div class="card"><div class="k">主动减仓实现（R8）</div><div class="v">2 笔</div><div class="k" style="margin-top:6px;">+41.36 元<br>星网 +243.04 / 赤峰 −201.68</div></div>
+  <div class="card neg"><div class="k">已平仓合计</div><div class="v">7 笔</div><div class="k" style="margin-top:6px;">−955.14 元</div></div>
+</div>
+
+<h3>⭐ 最讽刺的一点：9/8 那天</h3>
+<pre>赤峰黄金 9/8   现价 44.20   MA60 37.58   ②值 3.04 ✓   量比 0.78 ✓   → ✅ 全满足
+云南铜业 9/8   现价 18.32   MA60 16.36   ②值 −0.20 ❌  量比 1.71 ❌   → 全不满足（实际买入）</pre>
+<p style="margin-top:-6px;">
+  同一时刻，规则能区分「该买的」和「想买的」。如果当时已有今天这套低吸监控，
+  推给你的会是 <strong>赤峰 44.20</strong>，而不是实际买入的 <strong>云南 18.31 × 200 股</strong>。
+</p>
+
+<h2>五、五笔被拦的原因（对照）</h2>
+<pre>09-01  星网锐捷   ②值  0.23  ← 距 20 日高点仅 0.23 个 ATR（贴最高点）
+09-03  紫光股份   ②值  1.57  ← 回调不充分（高波动股，旧口径 5% 回撤＝半山腰）
+09-08  云南铜业   ②值 −0.20  ← 负值＝已在 20 日最高点之上 + 量比 1.71 放量
+09-10  星网锐捷   ②值  2.29  ← 差门槛 0.21（要求 ≥2.5）
+09-11  赤峰黄金   量比  1.18  ← ①②满足，③放量（要求 &lt;0.80）
+09-14  星网锐捷   量比  0.80  ← 恰好卡在阈值上</pre>
+<p>
+  <strong>条件②（防追高）与③（防情绪高点）如果更早上线，这 5 笔一笔都不会发生。</strong>
+</p>
+
+<h2>六、⚠️ 局限（必须同时讲清）</h2>
+<table>
+  <thead><tr><th style="width:210px;">局限</th><th>影响</th></tr></thead>
+  <tbody>
+    <tr><td>③ 用日线全天量比近似</td><td>线上是「同刻量比」→ 09-14 差 0.001、09-16 日线不符但线上确实推送 → <strong>个别判定会变</strong></td></tr>
+    <tr><td>样本仅 21 天</td><td><strong>极短</strong>，不能据此断言新策略整体更优</td></tr>
+    <tr><td>事后视角</td><td>回放本身无未来函数（H20 已 shift），但解读时已知结果，存在归因偏差风险</td></tr>
+    <tr><td>未计算机会成本</td><td>只对比「买没买」，未算「不买这 5 笔、资金闲置」的收益</td></tr>
+    <tr><td>单一市场环境</td><td>2026-09 上中旬为特定行情，不可外推</td></tr>
+  </tbody>
+</table>
+<div class="rulebox">
+  <strong>因此结论应表述为：</strong><br>
+  ✅ 「在本期内，BUY-LOW-v1 拦下的正是亏的那些」<br>
+  ❌ 不能说「新策略已被证明更优」（21 天太短）
+</div>
+
+<h2>七、数据来源与复现</h2>
+<ul>
+  <li>交易流水：<code>quant-backtest/trade_journal.json</code>（T-025 ~ T-036）</li>
+  <li>回放脚本：<code>quant-backtest/factor_ic/replay_202609.py</code></li>
+  <li>原始输出：<code>results/factor_ic_20260918/universe/replay_202609.txt</code></li>
+  <li>持仓/资金真值：<code>~/Documents/macos hermes/04-Trading/Omi A股交易主文件.md</code> §一</li>
+  <li>复现命令：<code>python3 factor_ic/replay_202609.py</code></li>
+</ul>
+
+<div class="foot">
+  ⚠️ 本报告为<b>复盘研究</b>，不构成任何买卖建议；不改变任何线上规则、监控或提醒范围。<br>
+  ⚠️ 回放使用日线近似口径，与线上「同刻量比」存在差异，个别笔次判定可能不同。<br>
+  生成时间：2026-09-21 ｜ 账户：国都证券 **5526 ｜ 策略：BUY-LOW-v1-20260915
+</div>
+
+</div>
+</body>
+</html>
