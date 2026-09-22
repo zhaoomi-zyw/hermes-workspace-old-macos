@@ -29,6 +29,16 @@ WATCHLIST = {
 }
 
 
+def _load_holdings():
+    """读当前持仓（sell-policy-state 权威）→ 用于标注「持仓股不加仓」"""
+    try:
+        import json as _j
+        sp = _j.load(open(os.path.expanduser("~/.hermes/state/sell-policy-state.json"), encoding="utf-8"))
+        return {c: (p.get("name"), p.get("total_qty")) for c, p in (sp.get("positions") or {}).items()}
+    except Exception:
+        return {}
+
+
 def _http(url, timeout=20):
     return urllib.request.urlopen(
         urllib.request.Request(url, headers={"Referer": "http://finance.qq.com"}),
@@ -113,6 +123,7 @@ def main():
             t = BP.trend_ok(price, ma60, ma60_5)
             a, _ = BP.atr_band_ok(price, h20, atr, ma60)
             dev = BP.atr_deviation(price, h20, atr)
+            HELD = _load_holdings()
             vr, vdet, vconf = BP.same_time_vol_ratio(fetch_min5(code), now)
             v = BP.vol_ratio_ok(vr, vconf) if vconf else False
             ok = bool(t and a and v)
@@ -123,8 +134,12 @@ def main():
                 miss.append("②")
             if not v:
                 miss.append("③")
-            rows.append((name, price, ma60, dev, vr, vconf, (t, a, v), "、".join(miss) or "无(全满足)"))
-            if ok:
+            _held = code in HELD
+            _tag = "、".join(miss) if miss else "无(全满足)"
+            if _held:
+                _tag += "  ⚠️持仓·不加仓"
+            rows.append((name, price, ma60, dev, vr, vconf, (t, a, v), _tag))
+            if ok and not _held:
                 lo, hi = BP.allowed_price_range(h20, atr, ma60)
                 hits.append((name, code, price, ma60, dev, vr, lo, hi))
         except Exception as e:
