@@ -35,6 +35,113 @@ FUNDS = {
 STATE_FILE = os.path.expanduser("~/.hermes/profiles/main/cron/state/dca_fund_limits.json")
 
 
+# ============ 公告监控（2026-09-22 新增，用户批准）============
+# 背景：国泰 160213 于 2026-09-22 07:40 发布「暂停申购、定期定额投资」公告，
+#       但「交易状态」字段要到 9/28 才变 → 只查状态字段会漏报 6 天。
+#       本模块直接查公告栏 + 抓 PDF 正文的「暂停起始日」，实现前瞻预警。
+ANN_KEYWORDS = ["暂停申购", "暂停定期定额", "暂停大额申购", "限制大额",
+                "暂停转换", "恢复申购", "恢复定期定额", "暂停赎回"]
+ANN_RECENT_DAYS = 30          # 只关注最近 N 天发布的公告（避免历史公告刷屏）
+
+
+def _clean(s):
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", s)).strip()
+
+
+def fetch_announcements(code):
+    """抓基金详情页公告栏 → [(mmdd, title, url)]，只返回含关键词的。"""
+    url = f"https://fund.eastmoney.com/{code}.html"
+    req = urllib.request.Request(url, headers={
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0",
+        "Referer": "https://fund.eastmoney.com/"})
+    try:
+        html = urllib.request.urlopen(req, timeout=25).read().decode("utf-8", "ignore")
+    except Exception:
+        return []
+    out = []
+    for row in re.findall(r"<tr[\s\S]{0,1200}?</tr>", html):
+        txt = _clean(row)
+        if len(txt) < 15 or "公告" not in txt:
+            continue
+        if not any(k in txt for k in ["暂停", "恢复", "限额", "定期定额", "申购"]):
+            continue
+        ds = re.findall(r"(\d{2}-\d{2})", row)
+        lk = re.search(r'href="([^"]*news[^"]*)"', row)
+        title = re.sub(r"^\s*\d+\s+\d+\s+公告\s*", "", txt)
+        title = re.sub(r"基金资讯.*$", "", title).strip()
+        if not any(k in title for k in ANN_KEYWORDS):
+            continue
+        out.append((ds[0] if ds else None, title[:130], lk.group(1) if lk else None))
+    return out
+
+
+def extract_effective_date(url):
+    """从公告正文抓 暂停/恢复 起始日。返回 dict。"""
+    try:
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0",
+            "Referer": "https://fund.eastmoney.com/"})
+        raw = urllib.request.urlopen(req, timeout=25).read().decode("utf-8", "ignore")
+    except Exception:
+        return {}
+    txt = _clean(raw.replace("&nbsp;", " "))
+    txt = re.sub(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])", "", txt)
+    res = {}
+    pats = [
+        ("暂停申购起始日", r"暂停申购业务起始日\s*(20\d\d\s*年\s*\d{1,2}\s*月\s*\d{1,2}\s*日)"),
+        ("暂停定投起始日", r"暂停定期定额投资业务起始日\s*(20\d\d\s*年\s*\d{1,2}\s*月\s*\d{1,2}\s*日)"),
+        ("最后可投时点", r"如投资者于(20\d\d\s*年\s*\d{1,2}\s*月\s*\d{1,2}\s*日\s*\d{1,2}\s*点)"),
+        ("公告送出日期", r"公告送出日期[：:]\s*(20\d\d\s*年\s*\d{1,2}\s*月\s*\d{1,2}\s*日)"),
+        ("恢复起始日", r"自\s*(20\d\d\s*年\s*\d{1,2}\s*月\s*\d{1,2}\s*日)\s*起恢复"),
+    ]
+    for label, pat in pats:
+        m = re.search(pat, txt)
+        if m:
+            res[label] = re.sub(r"\s+", "", m.group(1))
+    return res
+
+
+def check_announcements(code, info, prev):
+    """检查公告 → (告警文本 or None, 新指纹)。"""
+    anns = fetch_announcements(code)
+    if not anns:
+        return None, prev.get("ann_fp")
+    now_md = datetime.now()
+    today = now_md.date()
+    fresh = []
+    for mmdd, title, url in anns:
+        if not mmdd:
+            continue
+        try:
+            mo, dy = int(mmdd[:2]), int(mmdd[3:])
+            d = datetime(now_md.year, mo, dy).date()
+            if (today - d).days > ANN_RECENT_DAYS:
+                continue
+        except Exception:
+            continue
+        fresh.append((mmdd, title, url))
+    if not fresh:
+        return None, prev.get("ann_fp")
+
+    fp = "|".join(sorted(f"{a[0]}::{a[1][:40]}" for a in fresh))
+    if fp == prev.get("ann_fp"):
+        return None, fp          # 已推过 → 静默
+
+    lines = []
+    for mmdd, title, url in fresh[:2]:
+        lines.append(f"   📢 [{mmdd}] {title}")
+        if url:
+            eff = extract_effective_date(url)
+            for k, v in eff.items():
+                lines.append(f"        ★ {k} = {v}")
+    dca_amt = info["dca"]
+    if dca_amt > 0:
+        lines.append(f"   ⚠️ 你的定投 {dca_amt} 元/日 → 请提前安排（暂停后申请会被拒）")
+    else:
+        lines.append("   ℹ️ 该基金当前不在你的定投计划中（dca=0），仅作监控")
+    return "\n".join(lines), fp
+
+
 def fetch_status(code):
     """返回 (申购状态, 赎回状态, 定投状态, 日限额元/None)。"""
     url = f"https://fundf10.eastmoney.com/jjfl_{code}.html"
@@ -98,6 +205,10 @@ def main():
 
         # ⭐ 按「问题指纹」去重：同一问题只推一次；问题消失后再出现则重新推。
         #    （旧版按"限额数字变化"去重 → 暂停申购时数字仍是100 → 永远静默，是本次漏报的根因）
+        # ⭐ 公告监控（独立于状态字段，提前预警）
+        ann_msg, ann_fp = check_announcements(code, info, prev)
+        cur["ann_fp"] = ann_fp
+
         fingerprint = "|".join(sorted(problems)) if problems else "OK"
         prev_fp = prev.get("fp")
         changed = (prev.get("buy") != buy) or (prev.get("dca") != dca) or (prev.get("limit") != lim)
@@ -106,10 +217,18 @@ def main():
 
         if problems and fingerprint != prev_fp:
             head = "状态变化" if (prev and changed) else "检测到问题"
-            alerts.append(f"● {info['name']}（{code}）{head}\n"
-                          f"   申购={buy}｜赎回={red}｜定投={dca}｜日限额={lim}\n"
-                          f"   你的定投 {dca_amt} 元/日\n"
-                          + "\n".join("   " + p for p in problems))
+            block = (f"● {info['name']}（{code}）{head}\n"
+                     f"   申购={buy}｜赎回={red}｜定投={dca}｜日限额={lim}\n"
+                     f"   你的定投 {dca_amt} 元/日\n"
+                     + "\n".join("   " + p for p in problems))
+            if ann_msg:
+                block += "\n" + ann_msg
+            alerts.append(block)
+        elif ann_msg:
+            # 状态字段还没变，但公告已出 → 单独预警（这正是本次漏报的场景）
+            alerts.append(f"● {info['name']}（{code}）📢 公告预警（状态字段尚未更新）\n"
+                          f"   当前：申购={buy}｜定投={dca}｜日限额={lim}\n"
+                          + ann_msg)
         elif not problems and prev_fp not in (None, "OK"):
             alerts.append(f"● {info['name']}（{code}）✅ 问题已解除\n"
                           f"   申购={buy}｜定投={dca}｜日限额={lim}\n"
