@@ -1,30 +1,6 @@
 {
  "strategy_version": "SELL-POLICY-v1.0-20260914",
  "positions": {
-  "sh600760": {
-   "lifecycle_id": "LC-sh600760-2026-09-16",
-   "code": "sh600760",
-   "name": "中航沈飞",
-   "cost": 44.49,
-   "total_qty": 100,
-   "sellable_qty": 100,
-   "today_new_qty": 0,
-   "peak_h": 44.99,
-   "peak_h_time": "20260916095546",
-   "protection_active": false,
-   "hard_stop": 41.82,
-   "profit_line": 0.0,
-   "quote_time": "20260921094825",
-   "quote_valid": true,
-   "quote_note": "",
-   "actual_cost": 44.49,
-   "pending_exit": null,
-   "fired_events": {},
-   "add_log": [],
-   "migrated": false,
-   "migration_note": "",
-   "created_at": "2026-09-16T09:55:37"
-  },
   "sh600988": {
    "lifecycle_id": "LC-sh600988-2026-09-21",
    "code": "sh600988",
@@ -38,7 +14,7 @@
    "protection_active": false,
    "hard_stop": 41.54,
    "profit_line": 0.0,
-   "quote_time": "20260921094825",
+   "quote_time": "20260922094124",
    "quote_valid": true,
    "quote_note": "",
    "actual_cost": 44.19,
@@ -50,8 +26,8 @@
    "created_at": "2026-09-21T09:48:01"
   }
  },
- "updated_at": "2026-09-21T09:48:26",
+ "updated_at": "2026-09-22T09:41:35",
  "roll_meta": {
-  "last_roll_date": "2026-09-21"
+  "last_roll_date": "2026-09-22"
  }
 }
