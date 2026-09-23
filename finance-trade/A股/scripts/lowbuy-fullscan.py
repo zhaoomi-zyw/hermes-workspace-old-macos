@@ -7,6 +7,15 @@
 
 ⚠️ 判定一律调用 buy_policy 的权威函数，不自行实现阈值逻辑。
    数据源：腾讯实时行情 + 日K（前复权）+ 5分钟K。
+
+⚠️ ③缩量的 as-of 语义（2026-09-23 修正说明）
+   same_time_vol_ratio(min5, now) 的基准时点取 `now`：
+     · 盘中运行  → 分子/分母都是「至 now 的同刻累计」= 真正同刻口径 ✅
+     · 盘后运行  → now 落在 15:00 后，分子/分母双双退化为「全天」，
+                  等价于 vol_ratio_close 的全天口径 → 不是同刻口径 ⚠️
+   本脚本盘后运行时会显式把③标为「盘后不可判」，并另列全天口径供参考，
+   避免给出「看似通过」的误导值。（实证：云南铜业 2026-09-23 同刻 11:30=0.967❌
+   而全天=0.659✅，同一数据结论相反。）
 """
 import os
 import sys
@@ -38,6 +47,8 @@ WATCHLIST = {
     #    参考：云南白药↔同仁堂 +0.76、↔片仔癀 +0.56 → 「中药」内部高度同质，故只入 1 只
     #    财务(2026中报)：毛利/ROE 见主文件 §二；ATR ~1.28%（池内最低波动）
     "sz000538": "云南白药",
+    # ⭐ 2026-09-22 加入（第17只）—— 半导体材料，一级缺口；单股上限例外(一手7107=净值52%)
+    "sz300054": "鼎龙股份",
 }
 
 
@@ -102,10 +113,14 @@ def main():
     now = datetime.datetime.now()
     today = now.strftime("%Y-%m-%d")
     in_sess = BP.in_session(BP.now_hhmm(now))
+    # ⭐ ③缩量的 as-of 模式：盘中 = 同刻口径（有效）；盘后 = 全天口径（非"同刻"，仅参考）
+    vol_same_time = in_sess
 
     lines = [f"📊 低吸三条件全量扫描  {now:%Y-%m-%d %H:%M}",
              f"策略 {BP.POLICY_VERSION}｜时段内 {'✅' if in_sess else '⚠️否（结论仅供参考）'}",
-             f"范围 {len(WATCHLIST)} 只自选股", ""]
+             f"范围 {len(WATCHLIST)} 只自选股",
+             (f"③口径：同刻（as-of {now:%H:%M}）" if vol_same_time
+              else "③口径：⚠️ 盘后——无「同刻」可言，③不可判；下表另列「全天口径」仅供参考"), ""]
 
     try:
         rt = fetch_realtime(list(WATCHLIST.keys()))
@@ -120,7 +135,7 @@ def main():
     for code, name in WATCHLIST.items():
         q = rt.get(code)
         if not q:
-            rows.append((name, None, None, None, None, None, None, "无行情"))
+            rows.append((name, None, None, None, None, None, None, "无行情", None))
             continue
         price = q["price"]
         try:
@@ -136,42 +151,56 @@ def main():
             a, _ = BP.atr_band_ok(price, h20, atr, ma60)
             dev = BP.atr_deviation(price, h20, atr)
             HELD = _load_holdings()
-            vr, vdet, vconf = BP.same_time_vol_ratio(fetch_min5(code), now)
-            v = BP.vol_ratio_ok(vr, vconf) if vconf else False
+            _m5 = fetch_min5(code)
+            vr, vdet, vconf = BP.same_time_vol_ratio(_m5, now)
+            # ⭐ 盘后：同刻口径无意义 → 不参与判定，另取全天口径作参考
+            vr_close = None
+            if vol_same_time:
+                v = BP.vol_ratio_ok(vr, vconf) if vconf else False
+            else:
+                v = None                              # 不可判
+                _vc, _vd, _vcc = BP.vol_ratio_close(_m5, today)
+                vr_close = _vc if _vcc else None
             ok = bool(t and a and v)
             miss = []
             if not t:
                 miss.append("①")
             if not a:
                 miss.append("②")
-            if not v:
+            if v is False:
                 miss.append("③")
+            elif v is None:
+                miss.append("③?")
             _held = code in HELD
             _tag = "、".join(miss) if miss else "无(全满足)"
             if _held:
                 _tag += "  ⚠️持仓·不加仓"
-            rows.append((name, price, ma60, dev, vr, vconf, (t, a, v), _tag))
-            if ok and not _held:
+            rows.append((name, price, ma60, dev, vr, vconf, (t, a, v), _tag, vr_close))
+            if ok and not _held and vol_same_time:
                 lo, hi = BP.allowed_price_range(h20, atr, ma60)
                 hits.append((name, code, price, ma60, dev, vr, lo, hi))
         except Exception as e:
-            rows.append((name, price, None, None, None, None, None, f"计算异常:{type(e).__name__}"))
+            rows.append((name, price, None, None, None, None, None, f"计算异常:{type(e).__name__}", None))
 
-    lines.append("逐只明细（①趋势 ②位置 ③缩量）")
-    lines.append("名称        现价    MA60   偏离  量比   ①②③  卡点")
-    for name, price, ma60, dev, vr, vconf, flags, miss in rows:
+    lines.append("逐只明细（①趋势 ②位置 ③缩量）" + ("" if vol_same_time
+                 else "  ⚠️ ③为盘后口径，不可判；括号内为全天参考值"))
+    lines.append("名称        现价    MA60   偏离  量比(③)  ①②③  卡点")
+    for name, price, ma60, dev, vr, vconf, flags, miss, vr_close in rows:
         if price is None:
             lines.append(f"{name:<10} 无数据")
             continue
         fl = flags if flags else (None, None, None)
-        s = "".join("✅" if x else ("⏳" if x is False and vconf is False else "❌")
-                    for x in fl) if all(x is not None for x in fl) else "—"
-        lines.append("{:<10}{:>7.2f}{:>8}{:>7}{:>7}  {:<6}{}".format(
+        # ①② 恒可判；③ 盘中可判 / 盘后不可判（None → 显示 —）
+        s = "".join("✅" if x is True else ("—" if x is None else "❌") for x in fl)
+        if vol_same_time:
+            voltxt = (f"{vr:.2f}" if vr is not None else "n/a")
+        else:
+            voltxt = ("不可判" + (f"({vr_close:.2f}全天)" if vr_close is not None else ""))
+        lines.append("{:<10}{:>7.2f}{:>8}{:>7}{:>9}  {:<6}{}".format(
             name, price,
             f"{ma60:.2f}" if ma60 else "-",
             f"{dev:.2f}" if dev is not None else "-",
-            (f"{vr:.2f}" if vr is not None else "n/a"),
-            s, miss))
+            voltxt, s, miss))
 
     lines.append("")
     if hits:
