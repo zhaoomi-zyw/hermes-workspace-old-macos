@@ -359,6 +359,7 @@ def load_account():
         acc["source"] = a.get("source")
     except Exception as e:
         acc["warnings"].append(f"账户文件不可读: {e}")
+    holdings_read_ok = False
     try:
         with open(SELL_STATE_FILE) as f:
             sp = json.load(f)
@@ -366,13 +367,19 @@ def load_account():
             acc["holdings"][code] = (p.get("name", code),
                                      int(p.get("total_qty") or 0),
                                      float(p.get("cost") or 0.0))
+        holdings_read_ok = True
     except Exception as e:
         acc["warnings"].append(f"卖出状态文件不可读: {e}")
     if acc["cash"] is None:
         acc["cash"] = FALLBACK_CASH
         acc["stale"] = True
         acc["warnings"].append(f"现金回退内置常量 {FALLBACK_CASH}(可能过期)")
-    if not acc["holdings"]:
+    # 2026-10-09 修复：只有【读取失败】才回退过期硬编码持仓。
+    # 原实现用 `if not acc["holdings"]`，把「空仓」误当成「读取失败」，
+    # 于是空仓时凭空返回 FALLBACK_HOLDINGS 里的赤峰/星网 →
+    # lowbuy-watch.py 判「已持仓（不加仓）」静默跳过这 2 只
+    # （实测 2026-09-24~10-09 共 6 个交易日误跳过 496 次）。
+    if not acc["holdings"] and not holdings_read_ok:
         acc["holdings"] = dict(FALLBACK_HOLDINGS)
         acc["stale"] = True
         acc["warnings"].append("持仓回退内置常量(可能过期)")
