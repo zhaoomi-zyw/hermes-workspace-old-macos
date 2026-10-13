@@ -23,18 +23,18 @@
       "schedule_display": "0 20 * * 5",
       "repeat": {
         "times": null,
-        "completed": 16
+        "completed": 19
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-05-30T21:26:14.616903+08:00",
-      "next_run_at": "2026-09-25T20:00:00+08:00",
-      "last_run_at": "2026-09-18T21:03:06.048545+08:00",
+      "next_run_at": "2026-10-16T20:00:00+08:00",
+      "last_run_at": "2026-10-09T20:02:56.324551+08:00",
       "last_status": "ok",
       "last_error": null,
-      "last_delivery_error": null,
+      "last_delivery_error": "live adapter send failed: iLink sendmessage rate limited; cooldown active for 30.0s; live adapter delivery to weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat failed: iLink sendmessage rate limited; cooldown active for 30.0s; delivery error: Weixin send failed: iLink sendmessage rate limited; cooldown active for 30.0s (target weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat)",
       "deliver": "weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
       "origin": null,
       "enabled_toolsets": null,
@@ -63,15 +63,15 @@
       "schedule_display": "0 7,21 * * *",
       "repeat": {
         "times": null,
-        "completed": 196
+        "completed": 240
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-06-15T13:25:50.420693+08:00",
-      "next_run_at": "2026-09-21T21:00:00+08:00",
-      "last_run_at": "2026-09-21T07:00:57.927644+08:00",
+      "next_run_at": "2026-10-13T21:00:00+08:00",
+      "last_run_at": "2026-10-13T07:00:58.763220+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -103,18 +103,18 @@
       "schedule_display": "30 7 * * *",
       "repeat": {
         "times": null,
-        "completed": 86
+        "completed": 108
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-06-27T10:05:53.268821+08:00",
-      "next_run_at": "2026-09-22T07:30:00+08:00",
-      "last_run_at": "2026-09-21T08:05:07.823678+08:00",
+      "next_run_at": "2026-10-14T07:30:00+08:00",
+      "last_run_at": "2026-10-13T07:31:00.223023+08:00",
       "last_status": "ok",
       "last_error": null,
-      "last_delivery_error": "live adapter send failed: iLink sendmessage rate limited; cooldown active for 30.0s; live adapter delivery to weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat failed: iLink sendmessage rate limited; cooldown active for 30.0s; delivery error: Weixin send failed: iLink sendmessage rate limited; cooldown active for 30.0s (target weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat)",
+      "last_delivery_error": null,
       "deliver": "weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
       "origin": {
         "platform": "webui",
@@ -174,7 +174,7 @@
     {
       "id": "6258267cf112",
       "name": "每日分析报告(查真实持仓)",
-      "prompt": "今天是 {{#date:YYYY年M月D日}}。先判断：若非交易日(周末/节假日)直接输出\"今日非交易日，跳过分析\"并结束。\n\n【⚠️第一步(强制)：read_file 读取真实持仓】/Users/omi/Documents/macos hermes/04-Trading/Omi A股交易主文件.md 获取真实持仓/交易历史/现金，禁止编造。主文件是唯一权威，下述硬编码为过期提示，以主文件为准。\n\n【⚠️第二步(强制)：read_file 读统一卖出状态】/Users/omi/.hermes/state/sell-policy-state.json —— 持仓退出线唯一权威(SELL-POLICY-v1.0-20260914)。用每只持仓的 hard_stop/profit_line/peak_h/protection_active 判断，不要用本提示词/记忆旧值。\n\n【统一卖出规则 SELL-POLICY-v1.0-20260914(2026-09-14启用)】①硬止损=成本×0.94；②持仓后最高价H≥成本×1.08→永久开保护；③保护线P=max(旧P,成本×1.03,H×0.93)只升不降；④有效退出线=已启用线最高；⑤MA60仅趋势提示不独立触发。\n\n【买入规则 BUY-LOW-v1-manual-20260916(2026-09-16启用，唯一依据 /Users/omi/workspace/quant-backtest/strategies/buy_policy.py)】三条件须同时满足：①价>最近已完成日MA60 且 MA60>5个交易日前MA60；②2.5≤(H20−价)/ATR14≤4.5 且 价>MA60；③当日同刻累计量/前5交易日同刻均量<0.80(缺失=无法确认=不放行)。⛔DSA与MA5仅作参考，不得作为买入门槛/否决条件/排序条件；⛔不得使用\"放量突破/右侧追入\"等旧口径。持仓股不加仓。时段09:45-11:30 / 13:00-14:45。\n\n【⛔数量由用户自行决定(2026-09-16)】不得输出最大股数/可买股数/建议股数/资金缺口/风险预算/单手成本/净资产推算；不得声称资金是否足够、不得建议融资；**现金不足、净资产未知、不足一手都不影响信号有效性**。只写三条件依据与价格区间。\n\n【持仓(2026-09-14实盘，退出线以状态文件为准)】持仓2只(具体看主文件)：赤峰黄金600988 200股@44.735(硬止损42.26、未开保护)；星网锐捷002396 100股@35.880(2026-09-14买回，硬止损33.73、未开保护)。现金1287.47元｜总资产13866.52元｜**仓位90.7%已超纪律上限(正常市≤75%/弱市≤60%)，需在报告中提示**。\n\n【自选股12只】易德龙、赤峰黄金、士兰微、中天科技、通富微电、工业富联、亨通光电、星网锐捷、南山铝业600219、云南铜业000878、中航沈飞600760、紫光股份000938(暂停交易仅跟踪)。\n\n【任务1-持仓分析】对2只持仓逐只：现价/浮盈亏金额/是否触及有效退出线(现价 vs hard_stop/profit_line)——未触及明确\"按统一策略继续持有，MA60仅提示不触发\"。\n\n【任务2-自选股信号】对12只用腾讯实时价做日终DSA信号(仅参考)。买入判定**只按 BUY-LOW-v1 三条件**(①价>MA60且MA60>5日前MA60 ②2.5≤(H20−价)/ATR14≤4.5且价>MA60 ③当日同刻量/前5日同刻均量<0.80)，三条件全满足才报低吸信号。⛔禁止把DSA级别/MA5接近度当作门槛或否决条件；⛔禁止用\"距MA60太远/60日位置偏高/放量突破\"等策略外或旧口径否决或推荐；⛔禁止给出任何买入数量建议。\n\n【任务3-纪律跟踪】留意\"同一标的止损后短期内以更高价买回\"的情形(如星网锐捷9/11止损33.80→9/14买回35.88)，若出现应在复盘中如实指出(纪律灰色地带，非禁止但要提示风险)，不美化。\n\n【任务4-复盘+纪律】对照主文件交易历史做当日复盘。纪律：涨停次日不追/破MA60不接刀。\n\n【输出格式】简洁微信文本，先持仓后自选，含现价/浮盈亏/关键位/信号/操作建议。数据来自腾讯实时接口注入的context，勿用搜索。",
+      "prompt": "今天是 {{#date:YYYY年M月D日}}。先判断：若非交易日(周末/节假日)直接输出\"今日非交易日，跳过分析\"并结束。\n\n【⚠️第一步(强制)：read_file 读取真实持仓】/Users/omi/Documents/macos hermes/04-Trading/Omi A股交易主文件.md 获取真实持仓/交易历史/现金，禁止编造。主文件是唯一权威，下述硬编码为过期提示，以主文件为准。\n\n【⚠️第二步(强制)：read_file 读统一卖出状态】/Users/omi/.hermes/state/sell-policy-state.json —— 持仓退出线唯一权威(SELL-POLICY-v1.0-20260914)。用每只持仓的 hard_stop/profit_line/peak_h/protection_active 判断，不要用本提示词/记忆旧值。\n\n【统一卖出规则 SELL-POLICY-v1.0-20260914(2026-09-14启用)】①硬止损=成本×0.94；②持仓后最高价H≥成本×1.08→永久开保护；③保护线P=max(旧P,成本×1.03,H×0.93)只升不降；④有效退出线=已启用线最高；⑤MA60仅趋势提示不独立触发。\n\n【买入规则 BUY-LOW-v1-manual-20260916(2026-09-16启用，唯一依据 /Users/omi/workspace/quant-backtest/strategies/buy_policy.py)】三条件须同时满足：①价>最近已完成日MA60 且 MA60>5个交易日前MA60；②2.5≤(H20−价)/ATR14≤4.5 且 价>MA60；③当日同刻累计量/前5交易日同刻均量<0.80(缺失=无法确认=不放行)。⛔DSA与MA5仅作参考，不得作为买入门槛/否决条件/排序条件；⛔不得使用\"放量突破/右侧追入\"等旧口径。持仓股不加仓。时段09:45-11:30 / 13:00-14:45。\n\n【⛔数量由用户自行决定(2026-09-16)】不得输出最大股数/可买股数/建议股数/资金缺口/风险预算/单手成本/净资产推算；不得声称资金是否足够、不得建议融资；**现金不足、净资产未知、不足一手都不影响信号有效性**。只写三条件依据与价格区间。\n\n【持仓(2026-09-14实盘，退出线以状态文件为准)】持仓2只(具体看主文件)：赤峰黄金600988 200股@44.735(硬止损42.26、未开保护)；星网锐捷002396 100股@35.880(2026-09-14买回，硬止损33.73、未开保护)。现金1287.47元｜总资产13866.52元｜**仓位90.7%已超纪律上限(正常市≤75%/弱市≤60%)，需在报告中提示**。\n\n【自选股17只（以主文件§二为准，勿凭记忆）】工业富联、通富微电、士兰微、易德龙、星网锐捷、锐捷网络301165、紫光股份000938(暂停交易仅跟踪)、亨通光电、中天科技、鼎龙股份300054、赤峰黄金、南山铝业600219、云南铜业000878、中航沈飞600760、恒瑞医药600276、海思科002653、云南白药000538。\n\n【任务1-持仓分析】对2只持仓逐只：现价/浮盈亏金额/是否触及有效退出线(现价 vs hard_stop/profit_line)——未触及明确\"按统一策略继续持有，MA60仅提示不触发\"。\n\n【任务2-自选股信号】对17只用腾讯实时价做日终DSA信号(仅参考)。买入判定**只按 BUY-LOW-v1 三条件**(①价>MA60且MA60>5日前MA60 ②2.5≤(H20−价)/ATR14≤4.5且价>MA60 ③当日同刻量/前5日同刻均量<0.80)，三条件全满足才报低吸信号。⛔禁止把DSA级别/MA5接近度当作门槛或否决条件；⛔禁止用\"距MA60太远/60日位置偏高/放量突破\"等策略外或旧口径否决或推荐；⛔禁止给出任何买入数量建议。\n\n【任务3-纪律跟踪】留意\"同一标的止损后短期内以更高价买回\"的情形(如星网锐捷9/11止损33.80→9/14买回35.88)，若出现应在复盘中如实指出(纪律灰色地带，非禁止但要提示风险)，不美化。\n\n【任务4-复盘+纪律】对照主文件交易历史做当日复盘。纪律：涨停次日不追/破MA60不接刀。\n\n【输出格式】简洁微信文本，先持仓后自选，含现价/浮盈亏/关键位/信号/操作建议。数据来自腾讯实时接口注入的context，勿用搜索。",
       "skills": [
         "anysearch"
       ],
@@ -195,18 +195,18 @@
       "schedule_display": "30 18 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 65
+        "completed": 81
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-07-04T11:01:37.299499+08:00",
-      "next_run_at": "2026-09-21T18:30:00+08:00",
-      "last_run_at": "2026-09-18T18:18:36.670080+08:00",
+      "next_run_at": "2026-10-13T18:30:00+08:00",
+      "last_run_at": "2026-10-12T18:31:17.838894+08:00",
       "last_status": "ok",
       "last_error": null,
-      "last_delivery_error": null,
+      "last_delivery_error": "live adapter send failed: iLink sendmessage rate limited; cooldown active for 30.0s; live adapter delivery to weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat failed: iLink sendmessage rate limited; cooldown active for 30.0s; delivery error: Weixin send failed: iLink sendmessage rate limited; cooldown active for 30.0s (target weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat)",
       "deliver": "weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
       "origin": {
         "platform": "webui",
@@ -225,7 +225,7 @@
     {
       "id": "51814bf28ed7",
       "name": "每小时监控",
-      "prompt": "现在是整点(盘中)，A股盘中监控助手。你的任务：盘中实时监控，输出简洁微信提醒。\n\n【⚠️第一步(强制)：read_file 读统一卖出状态】/Users/omi/.hermes/state/sell-policy-state.json —— 持仓退出线唯一权威(SELL-POLICY-v1.0-20260914)。用每只持仓的 hard_stop/profit_line/peak_h/protection_active 判断离场，不要用本提示词/记忆旧值。\n\n【统一卖出规则 SELL-POLICY-v1.0-20260914】①硬止损=成本×0.94；②H≥成本×1.08开保护；③P=max(旧P,成本×1.03,H×0.93)只升不降；④有效退出线=已启用线最高；⑤MA60仅趋势提示不独立触发。\n\n【买入规则 BUY-LOW-v1-manual-20260916(2026-09-16启用，唯一依据 /Users/omi/workspace/quant-backtest/strategies/buy_policy.py)】三条件须同时满足：①价>最近已完成日MA60 且 MA60>5个交易日前MA60；②2.5≤(H20−价)/ATR14≤4.5 且 价>MA60；③当日同刻累计量/前5交易日同刻均量<0.80(缺失=无法确认=不放行)。⛔DSA与MA5仅作参考，不得作为买入门槛/否决条件/排序条件；⛔不得使用\"放量突破/右侧追入\"等旧口径。持仓股不加仓。时段09:45-11:30 / 13:00-14:45；提醒15分钟有效。\n\n【⛔数量由用户自行决定(2026-09-16)】不得输出最大股数/可买股数/建议股数/资金缺口/风险预算/单手成本/净资产推算；不得声称资金是否足够、不得建议融资；**现金不足、净资产未知、不足一手都不影响信号有效性**。只写三条件依据与价格区间。\n\n【⚠️DSA必须当场实时计算，禁止\"等晨报确认\"】每只股的DSA级别必须你自己用实时价+日线数据当场算出(5维)，仅作参考展示。日线数据读 /Users/omi/workspace/quant-backtest/data/{代码}_{名称}.csv，实时价用注入的腾讯行情。\n\n【持仓(2026-09-14实盘，退出线以状态文件为准)】持仓2只：赤峰黄金600988 200股@44.735(硬止损42.26、未开保护)；星网锐捷002396 100股@35.880(硬止损33.73、未开保护)。现金1287.47元｜总资产13866.52元｜仓位90.7%(已超纪律上限)。\n\n【自选12只监控】易德龙/赤峰/士兰微/中天/通富/工业富联/亨通/星网/南山600219/云南000878/中航沈飞600760/紫光000938(暂停交易仅跟踪)。\n\n【任务】按 BUY-LOW-v1 三条件检查各只是否满足(给现价/距允许区间)。持仓股(赤峰/星网)触及有效退出线或放量异动重点提。无特殊信号则简短\"持仓正常，无异常信号\"。价格用注入context，勿搜索。",
+      "prompt": "现在是整点(盘中)，A股盘中监控助手。你的任务：盘中实时监控，输出简洁微信提醒。\n\n【⚠️第一步(强制)：read_file 读统一卖出状态】/Users/omi/.hermes/state/sell-policy-state.json —— 持仓退出线唯一权威(SELL-POLICY-v1.0-20260914)。用每只持仓的 hard_stop/profit_line/peak_h/protection_active 判断离场，不要用本提示词/记忆旧值。\n\n【统一卖出规则 SELL-POLICY-v1.0-20260914】①硬止损=成本×0.94；②H≥成本×1.08开保护；③P=max(旧P,成本×1.03,H×0.93)只升不降；④有效退出线=已启用线最高；⑤MA60仅趋势提示不独立触发。\n\n【买入规则 BUY-LOW-v1-manual-20260916(2026-09-16启用，唯一依据 /Users/omi/workspace/quant-backtest/strategies/buy_policy.py)】三条件须同时满足：①价>最近已完成日MA60 且 MA60>5个交易日前MA60；②2.5≤(H20−价)/ATR14≤4.5 且 价>MA60；③当日同刻累计量/前5交易日同刻均量<0.80(缺失=无法确认=不放行)。⛔DSA与MA5仅作参考，不得作为买入门槛/否决条件/排序条件；⛔不得使用\"放量突破/右侧追入\"等旧口径。持仓股不加仓。时段09:45-11:30 / 13:00-14:45；提醒15分钟有效。\n\n【⛔数量由用户自行决定(2026-09-16)】不得输出最大股数/可买股数/建议股数/资金缺口/风险预算/单手成本/净资产推算；不得声称资金是否足够、不得建议融资；**现金不足、净资产未知、不足一手都不影响信号有效性**。只写三条件依据与价格区间。\n\n【⚠️DSA必须当场实时计算，禁止\"等晨报确认\"】每只股的DSA级别必须你自己用实时价+日线数据当场算出(5维)，仅作参考展示。日线数据读 /Users/omi/workspace/quant-backtest/data/{代码}_{名称}.csv，实时价用注入的腾讯行情。\n\n【持仓(2026-09-14实盘，退出线以状态文件为准)】持仓2只：赤峰黄金600988 200股@44.735(硬止损42.26、未开保护)；星网锐捷002396 100股@35.880(硬止损33.73、未开保护)。现金1287.47元｜总资产13866.52元｜仓位90.7%(已超纪律上限)。\n\n【自选股17只（以主文件§二为准，勿凭记忆）】工业富联、通富微电、士兰微、易德龙、星网锐捷、锐捷网络301165、紫光股份000938(暂停交易仅跟踪)、亨通光电、中天科技、鼎龙股份300054、赤峰黄金、南山铝业600219、云南铜业000878、中航沈飞600760、恒瑞医药600276、海思科002653、云南白药000538。\n\n【任务】按 BUY-LOW-v1 三条件检查各只是否满足(给现价/距允许区间)。持仓股(赤峰/星网)触及有效退出线或放量异动重点提。无特殊信号则简短\"持仓正常，无异常信号\"。价格用注入context，勿搜索。",
       "skills": [
         "anysearch"
       ],
@@ -248,15 +248,15 @@
       "schedule_display": "3 10,11,12,13,14 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 264
+        "completed": 345
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-07-08T10:00:14.389742+08:00",
-      "next_run_at": "2026-09-21T10:03:00+08:00",
-      "last_run_at": "2026-09-18T14:04:59.012715+08:00",
+      "next_run_at": "2026-10-13T11:03:00+08:00",
+      "last_run_at": "2026-10-13T10:08:42.593808+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -276,7 +276,7 @@
     {
       "id": "91df35c579fb",
       "name": "收盘前检查(积极版)",
-      "prompt": "今天是{{#date:YYYY年M月D日}}，收盘前最后检查。若非交易日(周末/节假日)直接输出\"今日非交易日，跳过\"结束。\n\n【⚠️第一步(强制)：read_file 读真实持仓】/Users/omi/Documents/macos hermes/04-Trading/Omi A股交易主文件.md。禁止编造持仓。以下硬编码为过期提示，以主文件为准。\n\n【⚠️第二步(强制)：read_file 读统一卖出状态】/Users/omi/.hermes/state/sell-policy-state.json —— 持仓退出线唯一权威(SELL-POLICY-v1.0-20260914)。用每只持仓的 hard_stop/profit_line/peak_h/protection_active 判断，不要用本提示词/记忆旧值。\n\n【统一卖出规则 SELL-POLICY-v1.0-20260914】①硬止损=成本×0.94；②H≥成本×1.08开保护；③P=max(旧P,成本×1.03,H×0.93)只升不降；④有效退出线=已启用线最高；⑤MA60仅趋势提示不独立触发。\n\n【买入规则 BUY-LOW-v1-manual-20260916(2026-09-16启用，唯一依据 /Users/omi/workspace/quant-backtest/strategies/buy_policy.py)】三条件须同时满足：①价>最近已完成日MA60 且 MA60>5个交易日前MA60；②2.5≤(H20−价)/ATR14≤4.5 且 价>MA60；③当日同刻累计量/前5交易日同刻均量<0.80(缺失=无法确认=不放行)。⛔DSA与MA5仅作参考，不得作为买入门槛/否决条件/排序条件；⛔不得使用\"放量突破/右侧追入\"等旧口径。持仓股不加仓。时段09:45-11:30 / 13:00-14:45；提醒15分钟有效。\n\n【⛔数量由用户自行决定(2026-09-16)】不得输出最大股数/可买股数/建议股数/资金缺口/风险预算/单手成本/净资产推算；不得声称资金是否足够、不得建议融资；**现金不足、净资产未知、不足一手都不影响信号有效性**。只写三条件依据与价格区间。\n\n【⚠️DSA必须当场实时计算】每只股DSA级别必须自己用实时价+日线当场算(5维)，仅作参考，不能写\"需晨报确认\"。日线读 /Users/omi/workspace/quant-backtest/data/{代码}_{名称}.csv，实时价用注入的腾讯行情。\n\n【持仓(2026-09-14实盘，退出线以状态文件为准)】持仓2只：赤峰黄金600988 200股@44.735(硬止损42.26、未开保护)；星网锐捷002396 100股@35.880(9/14买回,硬止损33.73、未开保护)。现金1287.47元｜总资产13866.52元｜**仓位90.7%超纪律上限**。\n\n【自选12只】易德龙/赤峰/士兰微/中天/通富/工业富联/亨通/星网/南山600219/云南000878/中航沈飞600760/紫光000938(暂停交易仅跟踪)。\n\n【输出】1.持仓2只(赤峰/星网)现价/浮盈亏/是否触及有效退出线(现价 vs hard_stop/profit_line)——未触及明确\"持有\"。2.自选12只收盘快照：现价/涨跌/实时DSA级别(参考)/按 BUY-LOW-v1 三条件的判定(逐项✓/✗)。3.任一持仓触及退出线明确警示。价格用注入的腾讯实时context，勿搜索。",
+      "prompt": "今天是{{#date:YYYY年M月D日}}，收盘前最后检查。若非交易日(周末/节假日)直接输出\"今日非交易日，跳过\"结束。\n\n【⚠️第一步(强制)：read_file 读真实持仓】/Users/omi/Documents/macos hermes/04-Trading/Omi A股交易主文件.md。禁止编造持仓。以下硬编码为过期提示，以主文件为准。\n\n【⚠️第二步(强制)：read_file 读统一卖出状态】/Users/omi/.hermes/state/sell-policy-state.json —— 持仓退出线唯一权威(SELL-POLICY-v1.0-20260914)。用每只持仓的 hard_stop/profit_line/peak_h/protection_active 判断，不要用本提示词/记忆旧值。\n\n【统一卖出规则 SELL-POLICY-v1.0-20260914】①硬止损=成本×0.94；②H≥成本×1.08开保护；③P=max(旧P,成本×1.03,H×0.93)只升不降；④有效退出线=已启用线最高；⑤MA60仅趋势提示不独立触发。\n\n【买入规则 BUY-LOW-v1-manual-20260916(2026-09-16启用，唯一依据 /Users/omi/workspace/quant-backtest/strategies/buy_policy.py)】三条件须同时满足：①价>最近已完成日MA60 且 MA60>5个交易日前MA60；②2.5≤(H20−价)/ATR14≤4.5 且 价>MA60；③当日同刻累计量/前5交易日同刻均量<0.80(缺失=无法确认=不放行)。⛔DSA与MA5仅作参考，不得作为买入门槛/否决条件/排序条件；⛔不得使用\"放量突破/右侧追入\"等旧口径。持仓股不加仓。时段09:45-11:30 / 13:00-14:45；提醒15分钟有效。\n\n【⛔数量由用户自行决定(2026-09-16)】不得输出最大股数/可买股数/建议股数/资金缺口/风险预算/单手成本/净资产推算；不得声称资金是否足够、不得建议融资；**现金不足、净资产未知、不足一手都不影响信号有效性**。只写三条件依据与价格区间。\n\n【⚠️DSA必须当场实时计算】每只股DSA级别必须自己用实时价+日线当场算(5维)，仅作参考，不能写\"需晨报确认\"。日线读 /Users/omi/workspace/quant-backtest/data/{代码}_{名称}.csv，实时价用注入的腾讯行情。\n\n【持仓(2026-09-14实盘，退出线以状态文件为准)】持仓2只：赤峰黄金600988 200股@44.735(硬止损42.26、未开保护)；星网锐捷002396 100股@35.880(9/14买回,硬止损33.73、未开保护)。现金1287.47元｜总资产13866.52元｜**仓位90.7%超纪律上限**。\n\n【自选股17只（以主文件§二为准，勿凭记忆）】工业富联、通富微电、士兰微、易德龙、星网锐捷、锐捷网络301165、紫光股份000938(暂停交易仅跟踪)、亨通光电、中天科技、鼎龙股份300054、赤峰黄金、南山铝业600219、云南铜业000878、中航沈飞600760、恒瑞医药600276、海思科002653、云南白药000538。\n\n【输出】1.持仓2只(赤峰/星网)现价/浮盈亏/是否触及有效退出线(现价 vs hard_stop/profit_line)——未触及明确\"持有\"。2.自选17只收盘快照：现价/涨跌/实时DSA级别(参考)/按 BUY-LOW-v1 三条件的判定(逐项✓/✗)。3.任一持仓触及退出线明确警示。价格用注入的腾讯实时context，勿搜索。",
       "skills": [
         "anysearch"
       ],
@@ -297,18 +297,18 @@
       "schedule_display": "57 14 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 52
+        "completed": 68
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-07-08T10:00:18.597024+08:00",
-      "next_run_at": "2026-09-21T14:57:00+08:00",
-      "last_run_at": "2026-09-18T14:58:23.220630+08:00",
+      "next_run_at": "2026-10-13T14:57:00+08:00",
+      "last_run_at": "2026-10-12T14:58:56.278231+08:00",
       "last_status": "ok",
       "last_error": null,
-      "last_delivery_error": null,
+      "last_delivery_error": "live adapter send failed: iLink sendmessage rate limited; cooldown active for 30.0s; live adapter delivery to weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat failed: iLink sendmessage rate limited; cooldown active for 30.0s; delivery error: Weixin send failed: iLink sendmessage rate limited; cooldown active for 30.0s (target weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat)",
       "deliver": "weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
       "origin": {
         "platform": "weixin",
@@ -325,7 +325,7 @@
     {
       "id": "0d1bb1811d94",
       "name": "每日晨间DSA分析 9:20",
-      "prompt": "今天是{{#date:YYYY年M月D日}}。先判断：若非交易日(周末/节假日)输出\"今日非交易日，跳过\"结束。\n\n【⚠️第一步(强制)：read_file 读真实持仓】/Users/omi/Documents/macos hermes/04-Trading/Omi A股交易主文件.md 获取真实持仓/现金/交易历史，禁止编造。以下硬编码为过期提示，以主文件为准。\n\n【⚠️第二步(强制)：read_file 读统一卖出状态】/Users/omi/.hermes/state/sell-policy-state.json —— 这是持仓退出线的唯一权威(策略版本 SELL-POLICY-v1.0-20260914)。用其中每只持仓的 hard_stop(硬止损)/profit_line(盈利保护线)/peak_h(持仓后最高价H)/protection_active 作为离场判断依据，不要用本提示词或记忆里的旧数值。\n\n【统一卖出规则 SELL-POLICY-v1.0-20260914】①硬止损=成本×0.94，盘中触及即退出；②持仓后最高价H≥成本×1.08→永久开启盈利保护；③保护线P=max(旧P, 成本×1.03, H×0.93)，只升不降；④有效退出线=所有已启用线中最高值；⑤MA60仅趋势提示，不独立触发卖出。\n\n【买入规则 BUY-LOW-v1-manual-20260916(2026-09-16启用，唯一依据 /Users/omi/workspace/quant-backtest/strategies/buy_policy.py)】三条件须同时满足：①价>最近已完成日MA60 且 MA60>5个交易日前MA60；②2.5≤(H20−价)/ATR14≤4.5 且 价>MA60；③当日同刻累计量/前5交易日同刻均量<0.80(缺失=无法确认=不放行)。⛔DSA与MA5仅作参考，不得作为买入门槛/否决条件/排序条件；⛔不得使用\"放量突破/右侧追入\"等旧口径。持仓股不加仓。时段09:45-11:30 / 13:00-14:45；提醒15分钟有效。\n\n【⛔数量由用户自行决定(2026-09-16)】不得输出最大股数/可买股数/建议股数/资金缺口/风险预算/单手成本/净资产推算；不得声称资金是否足够、不得建议融资；**现金不足、净资产未知、不足一手都不影响信号有效性**。提醒只写三条件依据与价格区间(允许区间/参考限价)。\n\n【持仓(2026-09-14实盘，退出线以状态文件为准)】持仓2只：赤峰黄金600988 200股@44.735(硬止损42.26、未开保护)；星网锐捷002396 100股@35.880(9/14买回,硬止损33.73、未开保护)。现金1287.47元｜总资产13866.52元｜**仓位90.7%已超纪律上限(正常市≤75%)**——输出时提示集中度风险(这是组合纪律提示，不是买入数量限制)。\n\n【自选12只】易德龙/赤峰/士兰微/中天/通富/工业富联/亨通/星网/南山600219/云南000878/中航沈飞600760/紫光000938(暂停交易仅跟踪)。\n\n【任务】用注入的腾讯实时价给每只今日DSA信号(仅参考)+支撑/压力+按 BUY-LOW-v1 三条件的三项判定结果(逐项✓/✗)。DSA必须当场用实时价+日线实时算，禁止写\"等晨报确认\"。持仓股按统一模块给离场建议(现价 vs 有效退出线；未开保护时说明\"仅硬止损生效, MA60仅提示\")。价格用context，勿搜索。输出简洁微信文本。",
+      "prompt": "今天是{{#date:YYYY年M月D日}}。先判断：若非交易日(周末/节假日)输出\"今日非交易日，跳过\"结束。\n\n【⚠️第一步(强制)：read_file 读真实持仓】/Users/omi/Documents/macos hermes/04-Trading/Omi A股交易主文件.md 获取真实持仓/现金/交易历史，禁止编造。以下硬编码为过期提示，以主文件为准。\n\n【⚠️第二步(强制)：read_file 读统一卖出状态】/Users/omi/.hermes/state/sell-policy-state.json —— 这是持仓退出线的唯一权威(策略版本 SELL-POLICY-v1.0-20260914)。用其中每只持仓的 hard_stop(硬止损)/profit_line(盈利保护线)/peak_h(持仓后最高价H)/protection_active 作为离场判断依据，不要用本提示词或记忆里的旧数值。\n\n【统一卖出规则 SELL-POLICY-v1.0-20260914】①硬止损=成本×0.94，盘中触及即退出；②持仓后最高价H≥成本×1.08→永久开启盈利保护；③保护线P=max(旧P, 成本×1.03, H×0.93)，只升不降；④有效退出线=所有已启用线中最高值；⑤MA60仅趋势提示，不独立触发卖出。\n\n【买入规则 BUY-LOW-v1-manual-20260916(2026-09-16启用，唯一依据 /Users/omi/workspace/quant-backtest/strategies/buy_policy.py)】三条件须同时满足：①价>最近已完成日MA60 且 MA60>5个交易日前MA60；②2.5≤(H20−价)/ATR14≤4.5 且 价>MA60；③当日同刻累计量/前5交易日同刻均量<0.80(缺失=无法确认=不放行)。⛔DSA与MA5仅作参考，不得作为买入门槛/否决条件/排序条件；⛔不得使用\"放量突破/右侧追入\"等旧口径。持仓股不加仓。时段09:45-11:30 / 13:00-14:45；提醒15分钟有效。\n\n【⛔数量由用户自行决定(2026-09-16)】不得输出最大股数/可买股数/建议股数/资金缺口/风险预算/单手成本/净资产推算；不得声称资金是否足够、不得建议融资；**现金不足、净资产未知、不足一手都不影响信号有效性**。提醒只写三条件依据与价格区间(允许区间/参考限价)。\n\n【持仓(2026-09-14实盘，退出线以状态文件为准)】持仓2只：赤峰黄金600988 200股@44.735(硬止损42.26、未开保护)；星网锐捷002396 100股@35.880(9/14买回,硬止损33.73、未开保护)。现金1287.47元｜总资产13866.52元｜**仓位90.7%已超纪律上限(正常市≤75%)**——输出时提示集中度风险(这是组合纪律提示，不是买入数量限制)。\n\n【自选股17只（以主文件§二为准，勿凭记忆）】工业富联、通富微电、士兰微、易德龙、星网锐捷、锐捷网络301165、紫光股份000938(暂停交易仅跟踪)、亨通光电、中天科技、鼎龙股份300054、赤峰黄金、南山铝业600219、云南铜业000878、中航沈飞600760、恒瑞医药600276、海思科002653、云南白药000538。\n\n【任务】用注入的腾讯实时价给每只今日DSA信号(仅参考)+支撑/压力+按 BUY-LOW-v1 三条件的三项判定结果(逐项✓/✗)。DSA必须当场用实时价+日线实时算，禁止写\"等晨报确认\"。持仓股按统一模块给离场建议(现价 vs 有效退出线；未开保护时说明\"仅硬止损生效, MA60仅提示\")。价格用context，勿搜索。输出简洁微信文本。",
       "skills": [
         "a-share-quant-backtest",
         "anysearch"
@@ -347,15 +347,15 @@
       "schedule_display": "25 9 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 45
+        "completed": 62
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-07-22T09:35:20.057844+08:00",
-      "next_run_at": "2026-09-21T09:25:00+08:00",
-      "last_run_at": "2026-09-18T09:27:03.938447+08:00",
+      "next_run_at": "2026-10-14T09:25:00+08:00",
+      "last_run_at": "2026-10-13T09:26:24.965306+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -369,9 +369,9 @@
     {
       "id": "e128a5971108",
       "name": "美股每日晨间分析 8:20",
-      "prompt": "今天是{{#date:YYYY年M月D日}}。请完成美股隔夜收盘分析，纯文本格式（不要加粗/标题/Markdown），适合微信阅读。\n\n【数据来源 —— 严禁搜索美股行情】\n本次运行的 script 已注入【直连腾讯行情】的美股隔夜真实数据（道指/纳指/标普/纳指100 + 芯片股/AI巨头/中概/能源）。\n⚠️ 点位与涨跌【直接引用注入数据】，禁止用 anysearch 或其它方式重新搜索覆盖 —— 搜索美股新闻曾触发内容风控导致本任务失败（2026-09-17）。\n\n【⚠️ 操作提示前必须：读取真实持仓】\n涉及\"操作提示/Omi当前持仓\"时，必须先用 read_file 读取 /Users/omi/Documents/macos hermes/04-Trading/Omi A股交易主文件.md 获取真实持仓。禁止凭空编造持仓股或现金数。若读取不到则明确说明。\n\n【任务】\n1. 引用注入数据给出三大指数（+纳指100）点位与涨跌幅、关键个股表现（芯片/AI巨头/中概/能源分组）。\n2. 用【本地逻辑】给出对 A 股自选12只的传导（不需要搜索）：\n   - AI算力/半导体 → 工业富联/通富微电/士兰微/紫光/易德龙/星网锐捷\n   - 光通信 → 亨通光电/中天科技\n   - 有色黄金 → 赤峰黄金（+云南铜业/南山铝业）\n   - 军工 → 中航沈飞（通常无直接关联，如无则明确标注）\n3. 操作提示基于主文件的【真实持仓】，禁止编造。\n\n【输出格式】\n【美股收盘】三大指数各一行\n【科技股表现】分组列出涨跌幅\n【中概股】一行\n【对A股影响】2-3行\n【操作提示】基于真实持仓给方向提示\n",
+      "prompt": "今天是{{#date:YYYY年M月D日}}。请完成美股隔夜收盘分析，纯文本格式（不要加粗/标题/Markdown），适合微信阅读。\n\n【数据来源 —— 严禁搜索美股行情】\n本次运行的 script 已注入【直连腾讯行情】的美股隔夜真实数据（道指/纳指/标普/纳指100 + 芯片股/AI巨头/中概/能源）。\n⚠️ 点位与涨跌【直接引用注入数据】，禁止用 anysearch 或其它方式重新搜索覆盖 —— 搜索美股新闻曾触发内容风控导致本任务失败（2026-09-17）。\n\n【⚠️ 操作提示前必须：读取真实持仓】\n涉及\"操作提示/Omi当前持仓\"时，必须先用 read_file 读取 /Users/omi/Documents/macos hermes/04-Trading/Omi A股交易主文件.md 获取真实持仓。禁止凭空编造持仓股或现金数。若读取不到则明确说明。\n\n【任务】\n1. 引用注入数据给出三大指数（+纳指100）点位与涨跌幅、关键个股表现（芯片/AI巨头/中概/能源分组）。\n2. 用【本地逻辑】给出对 A 股自选17只的传导（不需要搜索）：\n   - AI算力/半导体 → 工业富联/通富微电/士兰微/紫光/易德龙/星网锐捷\n   - 光通信 → 亨通光电/中天科技\n   - 有色黄金 → 赤峰黄金（+云南铜业/南山铝业）\n   - 军工 → 中航沈飞（通常无直接关联，如无则明确标注）\n3. 操作提示基于主文件的【真实持仓】，禁止编造。\n\n【输出格式】\n【美股收盘】三大指数各一行\n【科技股表现】分组列出涨跌幅\n【中概股】一行\n【对A股影响】2-3行\n【操作提示】基于真实持仓给方向提示\n",
       "skills": [],
-      "skill": "anysearch",
+      "skill": null,
       "model": "deepseek-flash",
       "provider": "deepseek",
       "provider_snapshot": null,
@@ -388,18 +388,18 @@
       "schedule_display": "20 8 * * *",
       "repeat": {
         "times": null,
-        "completed": 50
+        "completed": 72
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-08-04T20:07:49.261289+08:00",
-      "next_run_at": "2026-09-22T08:20:00+08:00",
-      "last_run_at": "2026-09-21T08:20:23.499125+08:00",
+      "next_run_at": "2026-10-14T08:20:00+08:00",
+      "last_run_at": "2026-10-13T08:20:19.167065+08:00",
       "last_status": "ok",
       "last_error": null,
-      "last_delivery_error": "live adapter send failed: iLink sendmessage rate limited; cooldown active for 30.0s; live adapter delivery to weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat failed: iLink sendmessage rate limited; cooldown active for 30.0s; delivery error: Weixin send failed: iLink sendmessage rate limited; cooldown active for 30.0s (target weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat)",
+      "last_delivery_error": null,
       "deliver": "weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
       "origin": {
         "platform": "webui",
@@ -436,15 +436,15 @@
       "schedule_display": "5 19 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 36
+        "completed": 52
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-08-06T21:59:48.789063+08:00",
-      "next_run_at": "2026-09-21T19:05:00+08:00",
-      "last_run_at": "2026-09-18T19:06:04.004627+08:00",
+      "next_run_at": "2026-10-13T19:05:00+08:00",
+      "last_run_at": "2026-10-12T19:05:15.378485+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -484,15 +484,15 @@
       "schedule_display": "* 9-11,13-14 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 3926
+        "completed": 8799
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-08-11T18:24:27.870817+08:00",
-      "next_run_at": "2026-09-21T09:03:00+08:00",
-      "last_run_at": "2026-09-21T09:02:15.962172+08:00",
+      "next_run_at": "2026-10-13T10:39:00+08:00",
+      "last_run_at": "2026-10-13T10:38:37.442787+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -564,7 +564,7 @@
     {
       "id": "9bb6c99d8d19",
       "name": "自选股DSA买入信号监控",
-      "prompt": "自选股DSA买入信号监控（no_agent watchdog）。脚本在交易时段每15分钟扫全部12只自选股，用腾讯实时接口判DSA买入信号（缩量回踩支撑企稳SIG-001 或 放量突破压力SIG-002 或 低吸候选），出现信号才输出提醒推送微信；无信号则静默。空仓状态，信号出现时按一手试探规则(SIG-010)提示建仓。",
+      "prompt": "自选股DSA买入信号监控（no_agent watchdog）。脚本在交易时段每15分钟扫全部17只自选股，用腾讯实时接口判DSA买入信号（缩量回踩支撑企稳SIG-001 或 放量突破压力SIG-002 或 低吸候选），出现信号才输出提醒推送微信；无信号则静默。空仓状态，信号出现时按一手试探规则(SIG-010)提示建仓。",
       "skills": [],
       "skill": null,
       "model": null,
@@ -818,8 +818,8 @@
     },
     {
       "id": "00403614e1b5",
-      "name": "天弘纳指100额度监控",
-      "prompt": "天弘纳斯达克100指数(QDII)A(018043) 每日申购额度监控（no_agent watchdog）。脚本每天检查单日申购上限，额度变化时才推微信；无变化静默。",
+      "name": "纳指100(NDX)QDII定投额度【线索提醒·每日2次】(东财口径·支付宝待核实)",
+      "prompt": "纳指100(NDX)QDII 定投额度【线索提醒】监控（no_agent watchdog，脚本 nasdaq-qdii-dca-watch.py，ALERT_MODE=lead_alert，FETCH_GATE_ENABLED=False）。\n\n范围（2026-09-27 用户确认，严格限缩）：**只监控实际跟踪纳斯达克100指数(NDX)的 QDII 人民币 A 类场外基金与 ETF 联接A**。筛选规则：①名称含\"纳斯达克100/纳指100\" ②QDII/海外 ③A类人民币、场外（剔除 C/D/E/F/I 类、美元份额、场内ETF） ④**核验基金\"跟踪标的\"必须为纳斯达克100**（来源：https://fundf10.eastmoney.com/jbgk_<code>.html 的跟踪标的字段）。名称含纳斯达克但标的为其他主题指数者一律排除（已排除 017091 纳斯达克科技市值加权、017894 纳斯达克生物科技）。核验失败或名单异常偏少时整次刷新作废、沿用缓存名单，绝不静默缩容。\n\n达标触发（东财基金层面口径）：定投状态=支持 且 日累计申购限额 ≥50 元（含恰好50）且 申购未暂停。\n\n投递：微信线索提醒，标题与正文必须显著标注\"线索提醒／东财基金层面口径，尚未验证支付宝渠道；请到支付宝定投设置页亲自核实50元是否可设\"；禁用\"支付宝已开放\"\"可在支付宝定投50元\"等表述（脚本内置断言自检）。同一基金同一轮只提醒一次，额度收紧后再开放才重新提醒。\n\n调度：*/10 * * * *（24 小时每 10 分钟，每个 tick 均真实抓取；保留基金间 0.5 秒节流、同基金最小取数间隔、失败重试退避、同轮去重）。周期性扫描无法保证 23:51–23:59 发生的变化一定在同一自然日通知，最大扫描延迟约 10 分钟，数据源更新可能再增加延迟。\n\n边界：只查询与提醒；不申购、不设置定投、不付款、不改动用户现有定投计划。",
       "skills": [],
       "skill": null,
       "model": null,
@@ -827,7 +827,7 @@
       "provider_snapshot": null,
       "model_snapshot": null,
       "base_url": null,
-      "script": "monitor-tianhong-nasdaq-limit.py",
+      "script": "nasdaq-qdii-dca-watch.py",
       "no_agent": true,
       "monitor_script": null,
       "monitor_url": null,
@@ -835,21 +835,21 @@
       "context_from": null,
       "schedule": {
         "kind": "cron",
-        "expr": "0 21 * * *",
-        "display": "0 21 * * *"
+        "expr": "30 6,16 * * *",
+        "display": "30 6,16 * * *"
       },
-      "schedule_display": "0 21 * * *",
+      "schedule_display": "30 6,16 * * *",
       "repeat": {
         "times": null,
-        "completed": 17
+        "completed": 296
       },
-      "enabled": false,
-      "state": "paused",
-      "paused_at": "2026-09-21T09:01:41.921629+08:00",
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-09-04T11:52:16.114357+08:00",
-      "next_run_at": "2026-09-21T21:00:00+08:00",
-      "last_run_at": "2026-09-20T21:00:26.612139+08:00",
+      "next_run_at": "2026-10-13T16:30:00+08:00",
+      "last_run_at": "2026-10-13T06:31:05.234564+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -920,8 +920,8 @@
     },
     {
       "id": "8b7a57537834",
-      "name": "自选股低吸监控(BUY-LOW-v1-manual 数量自主)",
-      "prompt": "自选股左侧低吸监控（no_agent watchdog，脚本 lowbuy-watch.py）。规则版本 BUY-LOW-v1-manual-20260916，唯一依据 /Users/omi/workspace/quant-backtest/strategies/buy_policy.py（SIZING_MODE=manual）。三条件同时满足才推送：①价>最近已完成日MA60 且 MA60>5交易日前MA60；②2.5≤(H20−价)/ATR14≤4.5 且 价>MA60；③当日同刻累计量/前5交易日同刻均量<0.80（数据缺失=无法确认=不放行）。DSA/MA5 仅参考，不作门槛。持仓股不报买入（不加仓）。按 MA60 相比5交易日前涨幅% 降序，只提醒第一个。时段 09:45-11:30 与 13:00-14:45；提醒15分钟有效；单一待确认+当日同股去重。⛔数量由用户自行决定：不算最大股数、不设单笔2%/组合4%/单股35%/现金/净资产/不足一手门槛，提醒内不得出现股数/资金缺口/风险预算/单手成本，不得声称资金足够或建议融资。未触发则空输出静默。数据：腾讯实时+新浪5分钟K，不使用搜索。",
+      "name": "自选股低吸监控(BUY-LOW-v1.2 数量自主)",
+      "prompt": "自选股左侧低吸监控（no_agent watchdog，脚本 lowbuy-watch.py）。规则版本 BUY-LOW-v1.2-20260922（叠加层），基线 BUY-LOW-v1-20260915 + 数量模式 BUY-LOW-v1-manual-20260916；条件真源 /Users/omi/workspace/quant-backtest/strategies/buy_policy.py（SIZING_MODE=manual）。\n\n时段（硬门）：仅交易日 09:45–11:30 与 13:00–14:45 连续竞价时段；09:00–09:44、11:35–12:59、14:50 后一律不发低吸信号。调度为每 5 分钟，时段过滤在脚本内执行。\n\n同时满足才推送：\n①日线趋势：现价 > 最近完成交易日 MA60，且 MA60 > 5 个完成交易日前 MA60；\n②ATR 回调：2.5 ≤ (H20 − 现价)/ATR14 ≤ 4.5（ATR14 = Wilder 口径，H20 = 近 20 个完成交易日最高价）；\n③同刻缩量：当日累计量 / 前 5 个完成交易日同时刻累计量均量，严格 < 0.70（对齐只用已完成的 5 分钟 bar，未完成 bar 不计入；样本不足或无法确认 = 不放行）；\n⑤相对强度：个股近 20 个完成交易日收益 ≥ 沪深300 同期收益（同日对齐，基准缺日 = 不放行）；\n⑥开盘跳空门槛：当日开盘 ≤ 前一交易日收盘 × 1.015，不满足则该股当天不发提醒。\n\n市场状态（沪深300，上一完整交易日收盘后计算、次日生效）：弱市 = 连续 3 日每日满足 {收盘<MA60、MA20≤5日前MA20、距近60日最高收盘回撤≥8%} 中至少 2 项；恢复正常需连续 3 日 {收盘>MA20 且 MA20>5日前MA20}。正常市提示新增总仓位上限 75%/单只目标 25%，弱市提示 60%/20%，仅作提醒不替用户决定数量。\n\n跳过：已有持仓（不加仓）、清仓后仍在防买回期(§6 未登记信号失效)的股票。多候选按 20 日相对沪深300收益降序，只把第 1 名作为可执行提醒，其余仅标注为未获选候选、不单独推送。\n\n去重：15 分钟有效期 + 持久化状态 + 原子锁；同一股票同一轮不重复推送，过期后需重新核验仍合格才可再提醒。脚本异常、行情缺失、同刻基准不足 => 不发买入提醒并写日志（~/.hermes/state/lowbuy-watch.log）。\n\n⛔ 边界：只发微信提醒，不自动下单；数量由用户自行决定（manual 数量模式，不计算最大股数、不做资金/风险预算预占）。不改卖出策略（退出与止损仍由 strategies/sell_policy.py + stop-loss-watch.py 负责）。提醒不等于成交。",
       "skills": [],
       "skill": null,
       "model": null,
@@ -937,21 +937,21 @@
       "context_from": null,
       "schedule": {
         "kind": "cron",
-        "expr": "*/15 9-14 * * 1-5",
-        "display": "*/15 9-14 * * 1-5"
+        "expr": "*/5 9-11,13-14 * * 1-5",
+        "display": "*/5 9-11,13-14 * * 1-5"
       },
-      "schedule_display": "*/15 9-14 * * 1-5",
+      "schedule_display": "*/5 9-11,13-14 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 141
+        "completed": 1048
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-09-11T09:45:07.228714+08:00",
-      "next_run_at": "2026-09-21T09:15:00+08:00",
-      "last_run_at": "2026-09-21T09:00:15.590805+08:00",
+      "next_run_at": "2026-10-13T10:40:00+08:00",
+      "last_run_at": "2026-10-13T10:35:40.482866+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -1022,165 +1022,6 @@
       "fire_claim": null
     },
     {
-      "id": "45118317fa6e",
-      "name": "[一次性] 赤峰§6失效登记-收盘口径",
-      "prompt": "任务：为赤峰黄金(sh600988)完成 §6「清仓后信号失效登记」的收盘口径判定。\n\n背景：赤峰黄金于 2026-09-17 10:07 清仓（主动减仓）。当日盘中已判定 ①趋势、②ATR区间均满足，\n仅剩 ③缩量 需用收盘口径判定。中航沈飞无关，星网锐捷已登记失效。\n\n执行步骤（用 Python，路径 /Users/omi/workspace/quant-backtest/strategies）：\n\n1. 抓赤峰黄金 sh600988 的**5分钟K线**（近 6 个交易日）与**日K**（160根）。\n   腾讯5分钟K线接口示例：https://web.ifzq.gtimg.cn/appstock/app/kline/mkline?param=sh600988,m5,,320\n   日K：https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600988,day,,,160,qfq\n   注意腾讯返回可能是 JSON。\n\n2. import buy_policy as BP，构造 min5 = [{\"dt\": datetime, \"day\": \"YYYY-MM-DD\", \"volume\": 股}]。\n\n3. 调 `BP.vol_ratio_close(min5, \"YYYY-MM-DD\")` 取当日全天量比（前5交易日全天均量基准）。\n   若返回 confirmed=False（基准不足）→ 报告\"无法确认\"，不要强行判定。\n\n4. 再调 `BP.close_check_invalidated(price, ma60_now, ma60_5ago, h20_val, atr, vol_ratio_c, vol_confirmed)`：\n   - price=当日收盘价；ma60_now/ma60_5ago 用 BP.ma60_series(closes)；h20_val=BP.h20(highs)；atr=BP.atr14_wilder(rows)\n\n5. **若 inv=True**（至少一项不满足）→ 调 `BP.register_invalidation(st, \"sh600988\", 当日日期, 证据文字)` 并 `BP.save_state(st)`。\n   **若 inv=False**（三条件仍全部满足）→ **不登记**（按§6规则，信号仍有效则应保持阻断买回），只报告。\n\n6. 先备份 /Users/omi/.hermes/state/buy-policy-state.json（如 .bak_YYYY-MM-DD_se06_cf）。\n\n输出（纯文本、简洁、微信可读）：\n- 赤峰三项判定结果（①②已知满足，③给出量比数值与是否满足）\n- 是否登记失效的结论 + 理由\n- 登记后的 state 内容（invalidated / ever_exited）\n\n⚠️ 禁止编造数据；接口失败就如实说明失败原因，不要臆造数字。",
-      "skills": [],
-      "skill": null,
-      "model": null,
-      "provider": null,
-      "provider_snapshot": "deepseek",
-      "model_snapshot": "deepseek-flash",
-      "base_url": null,
-      "script": null,
-      "no_agent": false,
-      "monitor_script": null,
-      "monitor_url": null,
-      "monitor_state": null,
-      "context_from": null,
-      "schedule": {
-        "kind": "once",
-        "run_at": "2026-09-17T15:05:00+08:00",
-        "display": "once at 2026-09-17 15:05"
-      },
-      "schedule_display": "once at 2026-09-17 15:05",
-      "repeat": {
-        "times": 1,
-        "completed": 1
-      },
-      "enabled": false,
-      "state": "completed",
-      "paused_at": null,
-      "paused_reason": null,
-      "created_at": "2026-09-17T10:23:48.014450+08:00",
-      "next_run_at": null,
-      "last_run_at": "2026-09-17T15:06:00.034697+08:00",
-      "last_status": "ok",
-      "last_error": null,
-      "last_delivery_error": null,
-      "failure_streak": 0,
-      "deliver": "weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
-      "origin": {
-        "platform": "weixin",
-        "chat_id": "o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
-        "chat_name": null,
-        "thread_id": null,
-        "user_id": "o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
-        "scope_id": null
-      },
-      "enabled_toolsets": [
-        "terminal",
-        "files"
-      ],
-      "workdir": null,
-      "run_claim": null,
-      "fire_claim": null
-    },
-    {
-      "id": "e0d370fc1d56",
-      "name": "[一次性] 9:45 低吸三条件全量扫描",
-      "prompt": "",
-      "skills": [],
-      "skill": null,
-      "model": null,
-      "provider": null,
-      "provider_snapshot": null,
-      "model_snapshot": null,
-      "base_url": null,
-      "script": "lowbuy-fullscan.py",
-      "no_agent": true,
-      "monitor_script": null,
-      "monitor_url": null,
-      "monitor_state": null,
-      "context_from": null,
-      "schedule": {
-        "kind": "once",
-        "run_at": "2026-09-18T09:45:30+08:00",
-        "display": "once at 2026-09-18 09:45"
-      },
-      "schedule_display": "once at 2026-09-18 09:45",
-      "repeat": {
-        "times": 1,
-        "completed": 1
-      },
-      "enabled": false,
-      "state": "completed",
-      "paused_at": null,
-      "paused_reason": null,
-      "created_at": "2026-09-18T09:26:51.835558+08:00",
-      "next_run_at": null,
-      "last_run_at": "2026-09-18T09:46:05.863802+08:00",
-      "last_status": "ok",
-      "last_error": null,
-      "last_delivery_error": null,
-      "failure_streak": 0,
-      "deliver": "weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
-      "origin": {
-        "platform": "weixin",
-        "chat_id": "o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
-        "chat_name": null,
-        "thread_id": null,
-        "user_id": "o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
-        "scope_id": null
-      },
-      "enabled_toolsets": null,
-      "workdir": null,
-      "run_claim": null,
-      "fire_claim": null
-    },
-    {
-      "id": "fa4ea6e4f722",
-      "name": "[一次性] 9/21 早 定投状态确认（天弘是否恢复）",
-      "prompt": "",
-      "skills": [],
-      "skill": null,
-      "model": null,
-      "provider": null,
-      "provider_snapshot": null,
-      "model_snapshot": null,
-      "base_url": null,
-      "script": "dca-status-snapshot.py",
-      "no_agent": true,
-      "monitor_script": null,
-      "monitor_url": null,
-      "monitor_state": null,
-      "context_from": null,
-      "schedule": {
-        "kind": "once",
-        "run_at": "2026-09-21T08:00:00+08:00",
-        "display": "once at 2026-09-21 08:00"
-      },
-      "schedule_display": "once at 2026-09-21 08:00",
-      "repeat": {
-        "times": 1,
-        "completed": 1
-      },
-      "enabled": false,
-      "state": "completed",
-      "paused_at": null,
-      "paused_reason": null,
-      "created_at": "2026-09-18T19:17:16.887509+08:00",
-      "next_run_at": null,
-      "last_run_at": "2026-09-21T08:00:07.561525+08:00",
-      "last_status": "ok",
-      "last_error": null,
-      "last_delivery_error": "live adapter send failed: iLink sendmessage rate limited; cooldown active for 30.0s; live adapter delivery to weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat failed: iLink sendmessage rate limited; cooldown active for 30.0s; delivery error: Weixin send failed: iLink sendmessage rate limited; cooldown active for 30.0s (target weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat)",
-      "failure_streak": 0,
-      "deliver": "weixin:o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
-      "origin": {
-        "platform": "weixin",
-        "chat_id": "o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
-        "chat_name": null,
-        "thread_id": null,
-        "user_id": "o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
-        "scope_id": null
-      },
-      "enabled_toolsets": null,
-      "workdir": null,
-      "run_claim": null,
-      "fire_claim": null
-    },
-    {
       "id": "0dfdec81a83f",
       "name": "主动管理ETF 发行/上市监控",
       "prompt": "",
@@ -1205,16 +1046,16 @@
       "schedule_display": "0 18 * * 1-5",
       "repeat": {
         "times": null,
-        "completed": 0
+        "completed": 16
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-09-19T09:03:06.558531+08:00",
-      "next_run_at": "2026-09-21T18:00:00+08:00",
-      "last_run_at": null,
-      "last_status": null,
+      "next_run_at": "2026-10-13T18:00:00+08:00",
+      "last_run_at": "2026-10-12T18:01:03.271505+08:00",
+      "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
       "failure_streak": 0,
@@ -1228,8 +1069,60 @@
         "scope_id": null
       },
       "enabled_toolsets": null,
-      "workdir": null
+      "workdir": null,
+      "fire_claim": null
+    },
+    {
+      "id": "29f8fbbabfa2",
+      "name": "微信预热窗口实验(06:50×2天)",
+      "prompt": "微信 iLink 主动推送「预热窗口」实验：清晨做一次预热发送（成功发 2 条），随后观察当天有内容推送（07:30 余额 / 08:20 晨报 / 14:58 收盘前检查 / 18:31 每日分析 / 19:05 DSA）在不同时间距离上是否送达，以测出预热窗口长度。结果写 ~/.hermes/state/weixin-token-experiment.jsonl。deliver=local 不推送。",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "provider_snapshot": null,
+      "model_snapshot": null,
+      "base_url": null,
+      "script": "weixin-token-experiment.sh",
+      "no_agent": true,
+      "monitor_script": null,
+      "monitor_url": null,
+      "monitor_state": null,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "50 6 * * *",
+        "display": "50 6 * * *"
+      },
+      "schedule_display": "50 6 * * *",
+      "repeat": {
+        "times": 2,
+        "completed": 1
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-10-12T18:38:33.730149+08:00",
+      "next_run_at": "2026-10-14T06:50:00+08:00",
+      "last_run_at": "2026-10-13T06:50:58.908721+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "failure_streak": 0,
+      "deliver": "local",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
+        "chat_name": null,
+        "thread_id": null,
+        "user_id": "o9cq80_QqkAnltK8A4P60TrUwZGk@im.wechat",
+        "scope_id": null
+      },
+      "enabled_toolsets": null,
+      "workdir": null,
+      "fire_claim": null
     }
   ],
-  "updated_at": "2026-09-21T09:02:15.963328+08:00"
+  "updated_at": "2026-10-13T10:38:37.444027+08:00"
 }
