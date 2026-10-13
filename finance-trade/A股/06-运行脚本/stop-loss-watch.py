@@ -46,6 +46,10 @@ def _load(path: str, name: str):
     return m
 
 
+# 证据状态模块 (2026-09-24 新增) —— "取证失败"必须可观测, 不得静默
+_ES_PATH = os.path.join(_HERE, "evidence_status.py")
+ES = _load(_ES_PATH, "evidence_status")
+
 # 统一卖出策略模块 (唯一权威)
 _SELL_POLICY_PATH = os.environ.get(
     "SELL_POLICY_PATH",
@@ -281,10 +285,18 @@ def main():
         return  # 无持仓 → 静默
 
     codes = list(positions.keys())
+    # ── 证据取证 (2026-09-24): 风控链路不得静默失败 ──────────────────────
+    # 原文缺陷: `except Exception: return` → 持仓股取数失败时完全无痕,
+    #   用户以为"没触发退出线", 实际是"根本没在监控"。
+    ev_run = ES.Run(script="stop-loss-watch", now=now, expected_total=len(codes))
     try:
         quotes = fetch_quotes(codes)
-    except Exception:
-        return  # 抓取失败静默(不误报, 不丢状态)
+    except Exception as e:  # noqa: BLE001
+        ev_run.fail_batch(f"{type(e).__name__}: {e}")
+        _need, _txt, _reason = ev_run.finish(critical_codes=set(codes), critical=True)
+        if _need and _txt:
+            print(_txt)
+        return  # 仍不误报, 但"取证失败"已落盘且连续N次会告警
 
     alerts = []
     touch_alerts = []
@@ -306,8 +318,16 @@ def main():
             continue
         q = quotes.get(code)
         if not q:
+            ev_run.add(code, st.name, ES.MISSING, "报价源未返回该代码")
             continue
         fresh = _quote_fresh(q["ytime"], now)
+        if not fresh:
+            ev_run.add(code, st.name, ES.STALE,
+                       f"报价时间 {q.get('ytime')} 超新鲜度阈值 {QUOTE_STALE_SECONDS}s")
+        elif float(q.get("price") or 0) <= 0:
+            ev_run.add(code, st.name, ES.INVALID_PRICE, f"price={q.get('price')}")
+        else:
+            ev_run.add(code, st.name, ES.AVAILABLE)
         # 用有效报价更新状态(含 H); 无效报价不更新、不关保护(R7)
         if fresh:
             sellp.update_quote(st, q["price"], quote_time=q["ytime"],
@@ -420,6 +440,20 @@ def main():
             print()
         print("=" * 22)
         print("\n\n".join(touch_alerts))
+
+    # ── 取证告警 (2026-09-24): 连续 N 次取证失败 / 恢复 时输出 ──────────
+    _need, _txt, _reason = ev_run.finish(critical_codes=set(codes), critical=True)
+    if _need and _txt:
+        if alerts or touch_alerts or line_alerts or reduce_alerts:
+            print()
+        print(_txt)
+    if ev_run.degraded:
+        append_event({"event": "EVIDENCE_DEGRADED", "script": "stop-loss-watch",
+                      "reason": _reason,
+                      "degraded": [{"code": e["code"], "name": e["name"],
+                                    "state": e["state"], "detail": e["detail"]}
+                                   for e in ev_run.degraded],
+                      "total": len(ev_run.entries)})
     # 无事件 → 空 stdout → 静默
 
 
