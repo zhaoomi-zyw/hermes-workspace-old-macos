@@ -1,33 +1,23 @@
 {
  "strategy_version": "SELL-POLICY-v1.0-20260914",
- "positions": {
-  "sh600988": {
-   "lifecycle_id": "LC-sh600988-2026-09-21",
+ "positions": {},
+ "updated_at": "2026-10-13T09:30:20",
+ "roll_meta": {
+  "last_roll_date": "2026-10-13"
+ },
+ "closed_history": [
+  {
    "code": "sh600988",
    "name": "赤峰黄金",
-   "cost": 44.19,
-   "total_qty": 100,
-   "sellable_qty": 100,
-   "today_new_qty": 0,
-   "peak_h": 44.3,
-   "peak_h_time": "20260921094825",
-   "protection_active": false,
-   "hard_stop": 41.54,
-   "profit_line": 0.0,
-   "quote_time": "20260922094124",
-   "quote_valid": true,
-   "quote_note": "",
-   "actual_cost": 44.19,
-   "pending_exit": null,
-   "fired_events": {},
-   "add_log": [],
-   "migrated": false,
-   "migration_note": "",
-   "created_at": "2026-09-21T09:48:01"
+   "lifecycle_id": "LC-sh600988-2026-09-21",
+   "closed_at": "2026-09-24",
+   "exit_price": 41.53,
+   "qty": 100,
+   "fees": 7.12,
+   "net_pnl": -273.12,
+   "net_pnl_pct": -6.02,
+   "trigger": "R1硬止损(退出线41.54)",
+   "note": "09:30 日内最低41.50≤41.54 触线；09:40:41 用户卖出；09:41:36 系统触发并推送"
   }
- },
- "updated_at": "2026-09-22T09:41:35",
- "roll_meta": {
-  "last_roll_date": "2026-09-22"
- }
+ ]
 }
