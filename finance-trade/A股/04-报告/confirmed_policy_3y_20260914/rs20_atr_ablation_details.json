@@ -1,0 +1,25 @@
+{
+  "arms": {
+    "A_base": {
+      "n_trades": 124,
+      "n_orders_placed": null,
+      "block_counts": {}
+    },
+    "B_base_rs20": {
+      "n_trades": 107,
+      "n_orders_placed": null,
+      "block_counts": {}
+    },
+    "C_no_atr": {
+      "n_trades": 217,
+      "n_orders_placed": null,
+      "block_counts": {}
+    },
+    "D_no_atr_rs20": {
+      "n_trades": 191,
+      "n_orders_placed": null,
+      "block_counts": {}
+    }
+  },
+  "frozen_gate_ok": true
+}
